@@ -1,0 +1,174 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/fonts/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)\\.(css|js|svg|woff2|woff|ttf|png|jpg|jpeg|webp|avif|ico)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)\\.html",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/score-your-content",
+      "destination": "/demo",
+      "permanent": true
+    },
+    {
+      "source": "/platform",
+      "destination": "/vizit-next-gen-platform",
+      "permanent": true
+    },
+    {
+      "source": "/api",
+      "destination": "/vizit-api",
+      "permanent": true
+    },
+    {
+      "source": "/partners",
+      "destination": "/partner-ecosystem",
+      "permanent": true
+    },
+    {
+      "source": "/support",
+      "destination": "/customer-support",
+      "permanent": true
+    },
+    {
+      "source": "/case-study",
+      "destination": "/case-studies",
+      "permanent": true
+    },
+    {
+      "source": "/resources/case-studies",
+      "destination": "/case-studies",
+      "permanent": true
+    },
+    {
+      "source": "/resources/case-studies/:slug",
+      "destination": "/:slug-case-study",
+      "permanent": true
+    },
+    {
+      "source": "/case-study/central-garden",
+      "destination": "/central-garden-case-study",
+      "permanent": true
+    },
+    {
+      "source": "/case-study/ghirardelli",
+      "destination": "/ghirardelli-case-study",
+      "permanent": true
+    },
+    {
+      "source": "/case-study/mars-petcare",
+      "destination": "/mars-petcare-case-study",
+      "permanent": true
+    },
+    {
+      "source": "/case-study/moen",
+      "destination": "/moen-case-study",
+      "permanent": true
+    },
+    {
+      "source": "/case-study/worlds-largest-beauty-company",
+      "destination": "/beauty-case-study",
+      "permanent": true
+    },
+    {
+      "source": "/case-study/purina",
+      "destination": "/purina-case-study",
+      "permanent": true
+    },
+    {
+      "source": "/blog-article",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug"
+        }
+      ],
+      "destination": "/blog/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/:path(.+)\\.html",
+      "destination": "/:path",
+      "permanent": true
+    },
+    {
+      "source": "/js/:path((?!.*\\.js$).*)",
+      "destination": "/:path",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/vizit-site.html"
+    },
+    {
+      "source": "/index.html",
+      "destination": "/vizit-site.html"
+    },
+    {
+      "source": "/((?!assets/|fonts/).*)",
+      "destination": "/vizit-site.html"
+    }
+  ]
+}
