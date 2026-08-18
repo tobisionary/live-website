@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perceptual AI | The AI That Predicts Shopper Choice</title>
+  <meta name="description" content="Vizit's Perceptual AI is the breakthrough technology behind Visual Intelligence. AI that predicts how specific audiences respond to visuals at first impression.">
+  <link rel="stylesheet" href="ci-styles.css">
+  <link rel="stylesheet" href="vizit-theme.css">
+  <link rel="stylesheet" href="vizit-elevate.css">
+  <script src="vizit-nav.js" defer></script>
+  <script src="vizit-footer.js" defer></script>
+<style>
+  /* Grouped nesting stack (light) — mirrors Platform page structure */
+  .pai-stack { display: flex; flex-direction: column; gap: 0; max-width: 880px; margin-top: var(--space-6); }
+  .pai-stack .phase {
+    position: relative; border: 1px solid var(--border);
+    border-left: 3px solid var(--c, #8aa0c4);
+    background: #fff; padding: 1.05rem 1.2rem 1.2rem;
+  }
+  .pai-stack .ph-label {
+    display: flex; align-items: center; gap: 9px;
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--c, #6b7f9c); margin-bottom: 0.85rem;
+  }
+  .pai-stack .ph-label .pn {
+    width: 19px; height: 19px; border-radius: 999px; border: 1px solid var(--c, #8aa0c4);
+    display: grid; place-items: center; font-size: 9.5px;
+  }
+  .pai-stack .ph-nodes { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; }
+  .pai-stack .node {
+    border: 1px solid var(--border); border-top: 2px solid var(--c, #8aa0c4);
+    background: var(--surface); padding: 12px 14px;
+  }
+  .pai-stack .node .nt { font-family: var(--font-display); font-size: 1.05rem; color: var(--blue-1000); letter-spacing: -0.01em; }
+  .pai-stack .node .ns { font-size: 0.82rem; color: var(--color-600); line-height: 1.4; margin-top: 4px; }
+  .pai-stack .node.here {
+    border: 1.5px solid var(--accent); border-top: 2px solid var(--accent);
+    background: var(--accent-soft);
+    box-shadow: 0 0 0 4px rgba(1,116,217,0.12);
+  }
+  .pai-stack .node.here .badge {
+    display: inline-block; margin-left: 8px; vertical-align: middle;
+    font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.1em; text-transform: uppercase;
+    background: var(--accent); color: #fff; padding: 2px 6px;
+  }
+  .pai-stack .conn {
+    align-self: center; display: inline-flex; align-items: center; gap: 8px;
+    color: var(--muted); font-size: 12px; padding: 7px 0;
+    font-family: var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .pai-stack .conn .ar { font-size: 15px; color: var(--color-400); }
+  .pai-stack .payoff {
+    margin-top: 2px; border: 1px solid var(--blue-100);
+    background: linear-gradient(90deg, rgba(1,116,217,0.12), rgba(1,116,217,0.04));
+    padding: 1.15rem 1.3rem; display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+  }
+  .pai-stack .payoff .pt { font-family: var(--font-display); font-size: 1.4rem; color: var(--blue-1000); letter-spacing: -0.02em; }
+  .pai-stack .payoff .ps { font-size: 0.9rem; color: var(--color-600); }
+</style>
+</head>
+<body>
+
+<vizit-nav data-current="platform"></vizit-nav>
+
+<!-- P1 — HERO -->
+<section class="tech-hero" data-screen-label="01 Hero">
+  <div class="container">
+    <span class="eyebrow">Perceptual AI</span>
+    <h1 class="display" style="max-width:16ch;">See your product exactly the way your <em>shopper</em> does.</h1>
+    <p class="subhead" style="margin-top:var(--space-5);">Perceptual AI is the class of artificial intelligence trained to predict how people respond to visual content — the breakthrough that makes Visual Intelligence possible at scale.</p>
+    <div class="tech-callout"><p>Vizit was named <em>Computer Vision Company of the Year</em> — recognized for pioneering Perceptual AI and Visual Intelligence in commerce.</p></div>
+  </div>
+</section>
+
+<!-- P2 — THE BREAKTHROUGH -->
+<section class="panel panel--dark" data-screen-label="02 Breakthrough">
+  <div class="container">
+    <span class="eyebrow on-dark" style="display:block;margin-bottom:var(--space-4);">The breakthrough invention</span>
+    <h2 class="display on-dark" style="max-width:22ch;">The first AI engineered to predict and quantify human <em>first impressions</em>.</h2>
+    <p class="subhead on-dark" style="margin-top:var(--space-5);">The most critical moment in commerce has always been invisible. Perceptual AI makes it computable.</p>
+  </div>
+</section>
+
+<!-- P3 — WHY DIFFERENT -->
+<section class="panel" data-screen-label="03 Why different">
+  <div class="container">
+    <span class="eyebrow" style="display:block;margin-bottom:var(--space-4);">Why Vizit is different</span>
+    <h2 class="display" style="max-width:22ch;">Most AI understands images. Vizit understands <em>what they do to people</em>.</h2>
+    <p class="subhead" style="margin-top:var(--space-5);">Traditional <a href="blog.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px;">computer vision</a> sees what's in an image. <a href="blog.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px;">Generative AI</a> creates new ones. None of them model the moment that determines whether the image influences a shopper to choose a product.</p>
+    <div class="cmp3">
+      <div class="c"><span class="k">Detection AI</span><p>Sees what's in the image.</p></div>
+      <div class="c"><span class="k">Generative AI</span><p>Creates new images.</p></div>
+      <div class="c hl"><span class="k">Perceptual AI</span><p>Predicts how a specific audience will respond.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- P4 — EIGHT PRIMITIVES -->
+<section class="panel panel--paper" data-screen-label="04 Eight primitives">
+  <div class="container">
+    <span class="eyebrow" style="display:block;margin-bottom:var(--space-4);">A decade of original invention</span>
+    <h2 class="display">Eight capabilities that <em>didn't exist</em> before Vizit built them.</h2>
+    <p class="subhead" style="margin-top:var(--space-5);">Each one patented. Each one a piece of how Vizit reads what makes shoppers buy.</p>
+    <div class="numbered">
+      <div class="item"><span class="no">1</span><div><h4>Audience-Differentiated Content Response Modeling</h4><p>Proving that different audiences respond to the same content in measurably different ways.</p></div></div>
+      <div class="item"><span class="no">2</span><div><h4>Synthetic Shopper Audience Generation</h4><p>An AI built to see your product exactly the way your specific customer does. <a href="Synthetic Audiences.html">Learn about Synthetic Shopper Audiences →</a></p></div></div>
+      <div class="item"><span class="no">3</span><div><h4>Predictive Image Scoring</h4><p>A single <a href="Vizit Score.html">0–100 score</a> predicting an image's conversion power before it is ever published.</p></div></div>
+      <div class="item"><span class="no">4</span><div><h4>Visual Element Performance Attribution</h4><p>Exactly which visual triggers are hurting performance, and precisely what to change.</p></div></div>
+      <div class="item"><span class="no">5</span><div><h4>Category Conversion Benchmarks</h4><p>Dynamic benchmarks defining what wins in your category right now — the basis of the Content Conversion Standard.</p></div></div>
+      <div class="item"><span class="no">6</span><div><h4>Product Page Visual Scoring</h4><p>The entire PDP scored as a single object, making catalog-wide governance possible.</p></div></div>
+      <div class="item"><span class="no">7</span><div><h4>Performance-Driven Content Generation</h4><p>Generative AI that creates only the variants proven to convert.</p></div></div>
+      <div class="item"><span class="no">8</span><div><h4>Image-Performance-Driven Discovery</h4><p>Visual scores that determine what gets recommended — by retailer algorithms, AI shopping agents, and discovery systems.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- P5 — THE DATA -->
+<section class="panel panel--dark" data-screen-label="05 Visual Conversion Graph">
+  <div class="container">
+    <span class="eyebrow on-dark" style="display:block;margin-bottom:var(--space-4);">The Visual Conversion Graph</span>
+    <h2 class="display on-dark" style="max-width:18ch;">100M+ images. 10T+ retail performance data points. <em>Zero shortcuts.</em></h2>
+    <p class="subhead on-dark" style="margin-top:var(--space-5);">Generic AI trains on public data. Vizit trains on a trillion Visual Triggers tied to real purchase decisions.</p>
+    <div style="margin-top:var(--space-6);">
+      <a class="btn btn-on-dark btn-lg" href="Visual Conversion Graph.html">Explore the Visual Conversion Graph <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- P6 — FROM PERCEPTION TO REVENUE -->
+<section class="panel" data-screen-label="06 Perception to revenue">
+  <div class="container">
+    <span class="eyebrow" style="display:block;margin-bottom:var(--space-4);">From perception to predictable revenue</span>
+    <h2 class="display" style="max-width:22ch;">Perceptual AI turned the most critical moment in commerce into a <em>science</em>.</h2>
+    <p class="subhead" style="margin-top:var(--space-5);">Before Perceptual AI, the workflow was publish, measure, react. Now quality is verified before publication — and every shopper lands on content built to win.</p>
+    <div class="tech-callout"><p>Every 10-point gain in Vizit Score unlocks an average <em>+4% lift</em> in relative conversion rate.</p></div>
+    <div class="pai-stack">
+      <div class="phase" style="--c:#8aa0c4;">
+        <div class="ph-label"><span class="pn">1</span><span>The foundation · what it learns from</span></div>
+        <div class="ph-nodes">
+          <div class="node"><div class="nt">Visual Conversion Graph</div><div class="ns">100M+ product images, 10T+ retail performance data points.</div></div>
+          <div class="node"><div class="nt">Synthetic Shopper Audiences</div><div class="ns">Who's looking — modeled by category and market.</div></div>
+        </div>
+      </div>
+      <div class="conn"><span>trains</span><span class="ar">&#8595;</span></div>
+      <div class="phase" style="--c:#0174d9;">
+        <div class="ph-label"><span class="pn">2</span><span>The science</span></div>
+        <div class="ph-nodes">
+          <div class="node here"><div class="nt">Perceptual AI <span class="badge">You are here</span></div><div class="ns">Predicts how a specific audience responds at first impression.</div></div>
+        </div>
+      </div>
+      <div class="conn"><span>produces</span><span class="ar">&#8595;</span></div>
+      <div class="phase" style="--c:#3e86e6;">
+        <div class="ph-label"><span class="pn">3</span><span>The read</span></div>
+        <div class="ph-nodes">
+          <div class="node"><div class="nt">Visual Intelligence</div><div class="ns">A precise read of what will convert, and why.</div></div>
+        </div>
+      </div>
+      <div class="conn"><span>expressed as</span><span class="ar">&#8595;</span></div>
+      <div class="phase" style="--c:#35b7ec;">
+        <div class="ph-label"><span class="pn">4</span><span>The measure</span></div>
+        <div class="ph-nodes">
+          <div class="node"><div class="nt">Vizit Score</div><div class="ns">Conversion power, 0&ndash;100 against the Content Conversion Standard.</div></div>
+        </div>
+      </div>
+      <div class="conn"><span>serving</span><span class="ar">&#8595;</span></div>
+      <div class="payoff"><span class="pt">Ecommerce systems &amp; retailers</span><span class="ps">Every shopper lands on content built to win.</span></div>
+    </div>
+    <div class="tech-callout" style="background:var(--paper);border-left-color:var(--blue-1000);margin-top:var(--space-7);">
+      <p style="font-family:var(--font-sans);font-size:var(--text-md);font-style:normal;"><strong style="font-weight:600;">The Science Behind the System.</strong> A briefing on the neuroscience of visual decision-making and the invention of Perceptual AI. <a href="The Computability of Human Perception.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px;">Read: The Computability of Human Perception →</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="panel panel--paper" data-screen-label="07 FAQ">
+  <div class="container faq-grid">
+    <div>
+      <span class="eyebrow">Frequently asked</span>
+      <h2 class="display" style="margin-top:var(--space-4);">Perceptual AI, <em>explained</em>.</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary><span class="plus" aria-hidden="true">+</span>What is Perceptual AI?</summary>
+        <div class="answer">Perceptual AI is a class of artificial intelligence trained to predict how a specific human audience will respond to visual content at the moment of first perception. Unlike computer vision (which identifies image contents) or generative AI (which creates images), Perceptual AI models the behavioral response: whether a shopper will choose a product based on what they see.</div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="plus" aria-hidden="true">+</span>How is Perceptual AI different from computer vision?</summary>
+        <div class="answer">Computer vision answers "what is in this image?" Perceptual AI answers "how will this audience respond to this image?" The training objective is behavioral, grounded in real shopping behavior. Computer vision operates before the decision moment; Perceptual AI predicts the decision itself.</div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="plus" aria-hidden="true">+</span>Who invented Perceptual AI?</summary>
+        <div class="answer">Perceptual AI was invented by Jehan Hamedi, founder of Vizit. Vizit holds 45+ patents in the field, and was named Computer Vision Company of the Year by the AI Breakthrough Awards out of 5,000 global nominations for its pioneering work in Perceptual AI and visual intelligence.</div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="plus" aria-hidden="true">+</span>What is Perceptual AI used for?</summary>
+        <div class="answer">Primarily ecommerce conversion optimization: scoring product images for predicted purchase likelihood. The underlying capability also applies to retail media, advertising, AI shopping agents, packaging design, and any context where visual content influences behavioral outcomes.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+
+
+<vizit-footer></vizit-footer>
+
+</body>
+</html>

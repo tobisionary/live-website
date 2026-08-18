@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Vizit Score™ | The Product Image Conversion Standard</title>
+  <meta name="description" content="The only conversion power standard trained on how human shoppers actually choose products online. An 80+ Vizit Score ranks your asset in the top 20% of its category for conversion likelihood.">
+  <link rel="stylesheet" href="ci-styles.css">
+  <link rel="stylesheet" href="vizit-theme.css">
+  <link rel="stylesheet" href="vizit-elevate.css">
+  <script src="vizit-nav.js" defer></script>
+  <script src="vizit-footer.js" defer></script>
+  <style>
+    /* ════════════ BUTTONS → homepage black pill ════════════ */
+    .btn { border-radius: 999px !important; }
+    .btn-primary, a.btn-primary {
+      background: #0a0e14 !important; color: #fff !important;
+      border: none !important; box-shadow: none !important; border-radius: 999px !important;
+    }
+    .btn-primary:hover { background: #20262f !important; transform: none !important; box-shadow: none !important; }
+    /* On dark surfaces, invert to a white pill so it stays visible (homepage behavior) */
+    .btn-on-dark, a.btn-on-dark {
+      background: #fff !important; color: #0a0e14 !important;
+      border: none !important; border-radius: 999px !important;
+    }
+    .btn-on-dark:hover { background: #e8eaed !important; color: #0a0e14 !important; transform: none !important; }
+    .btn-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: var(--text-sm); font-weight: 500; color: var(--blue-1000);
+      border-bottom: 1px solid currentColor; padding-bottom: 2px;
+      transition: gap var(--duration) var(--ease), color var(--duration) var(--ease);
+    }
+    .btn-link:hover { gap: 14px; color: var(--accent); }
+    .panel--dark .btn-link, .final .btn-link { color: #fff; }
+
+    /* ════════════ SECTION SCAFFOLD ════════════ */
+    .vs-grid { display: grid; gap: var(--space-8); align-items: center; }
+    .vs-2col { grid-template-columns: 1.05fr 0.95fr; }
+    .vs-2col-rev { grid-template-columns: 0.95fr 1.05fr; }
+    @media (max-width: 920px) { .vs-2col, .vs-2col-rev { grid-template-columns: 1fr; gap: var(--space-7); } }
+    .vs-prose { max-width: 56ch; }
+    .vs-prose p { font-size: 1.0625rem; line-height: 1.62; color: var(--color-800); margin: 0 0 var(--space-4); }
+    .vs-prose p:last-child { margin: 0; }
+    .panel--dark .vs-prose p { color: rgba(255,255,255,0.80); }
+
+    /* ════════════ HERO ════════════ */
+    .vs-hero { padding: var(--space-9) 0 var(--space-8); }
+    .vs-hero h1 { max-width: 15ch; }
+
+    .vs-define { margin: var(--space-5) 0 0; padding: var(--space-6); background: var(--accent-soft); border-left: 3px solid var(--accent); }
+    .vs-define .k { font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: var(--space-3); }
+    .vs-define p { font-family: var(--font-display); font-size: clamp(1.2rem, 2vw, 1.55rem); line-height: 1.3; letter-spacing: -0.02em; color: var(--blue-1000); margin: 0; }
+    .vs-define p em { font-style: normal; color: var(--accent); }
+    .vs-define.dark { background: var(--paper); border-left-color: var(--blue-1000); }
+    .vs-define.dark .k { color: var(--blue-1000); }
+    .vs-kicker { font-family: var(--font-display); font-style: normal; font-size: clamp(1.25rem,2.4vw,1.85rem); color: var(--blue-1000); letter-spacing: -0.02em; margin-top: var(--space-6); max-width: 24ch; }
+
+    /* ── Score gauge card (hero visual) ── */
+    .gauge-card {
+      background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg);
+      box-shadow: 0 30px 60px -32px rgba(0,33,61,0.28); padding: var(--space-6);
+      display: flex; flex-direction: column; gap: var(--space-5);
+    }
+    .gauge-top { display: flex; align-items: center; gap: var(--space-5); }
+    .gauge {
+      --val: 87; --deg: calc(var(--val) * 3.6deg);
+      width: 132px; height: 132px; border-radius: 50%; flex: 0 0 auto; position: relative;
+      background: conic-gradient(var(--blue-base) var(--deg), var(--color-100) 0);
+    }
+    .gauge::after {
+      content: ""; position: absolute; inset: 12px; background: #fff; border-radius: 50%;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .gauge .read { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 2; }
+    .gauge .read .n { font-family: var(--font-display); font-size: 2.6rem; line-height: 1; letter-spacing: -0.03em; color: var(--blue-1000); }
+    .gauge .read .o { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; color: var(--muted); margin-top: 2px; }
+    .gauge-meta .badge { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--blue-base); background: var(--accent-soft); border: 1px solid var(--blue-100); padding: 5px 10px; border-radius: 999px; }
+    .gauge-meta .badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--blue-base); box-shadow: 0 0 0 3px rgba(1,116,217,0.18); }
+    .gauge-meta h3 { font-family: var(--font-display); font-weight: 400; font-size: 1.4rem; letter-spacing: -0.02em; color: var(--blue-1000); margin: var(--space-3) 0 4px; }
+    .gauge-meta .sub { font-size: var(--text-sm); color: var(--color-600); margin: 0; }
+    .gauge-img { position: relative; aspect-ratio: 16/9; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border); background: linear-gradient(135deg, var(--blue-0), #fff); }
+    .ph-stripe::after { content: ""; position: absolute; inset: 0; background-image: repeating-linear-gradient(45deg, rgba(1,116,217,0.06) 0 1px, transparent 1px 9px); }
+    .ph-label { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 2; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-600); text-align: center; padding: var(--space-4); }
+    .gauge-bars { display: grid; gap: 10px; }
+    .gbar { display: grid; grid-template-columns: 92px 1fr 34px; align-items: center; gap: var(--space-3); }
+    .gbar .gl { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+    .gbar .gt { height: 7px; border-radius: 999px; background: var(--color-100); overflow: hidden; }
+    .gbar .gf { height: 100%; border-radius: 999px; background: var(--blue-base); }
+    .gbar .gv { font-family: var(--font-mono); font-size: 11px; color: var(--blue-1000); text-align: right; }
+
+    /* ════════════ P2 — STANDARD (dark, split) ════════════ */
+    .seal {
+      width: min(360px, 80%); aspect-ratio: 1; margin: 0 auto; position: relative; border-radius: 50%;
+      background: radial-gradient(circle at 50% 38%, rgba(52,160,254,0.22), transparent 60%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .seal .ring { position: absolute; inset: 0; border-radius: 50%; border: 1px solid rgba(255,255,255,0.18); }
+    .seal .ring.r2 { inset: 22px; border-style: dashed; border-color: rgba(52,160,254,0.4); }
+    .seal .ticks { position: absolute; inset: 6px; border-radius: 50%; -webkit-mask: radial-gradient(circle, transparent 0 calc(50% - 9px), #000 calc(50% - 9px) calc(50% - 3px), transparent calc(50% - 3px)); mask: radial-gradient(circle, transparent 0 calc(50% - 9px), #000 calc(50% - 9px) calc(50% - 3px), transparent calc(50% - 3px)); background: repeating-conic-gradient(rgba(255,255,255,0.35) 0deg 0.6deg, transparent 0.6deg 6deg); }
+    .seal .core { text-align: center; z-index: 2; }
+    .seal .core .big { font-family: var(--font-display); font-size: clamp(3.5rem, 8vw, 6rem); line-height: 0.9; color: #fff; letter-spacing: -0.04em; }
+    .seal .core .lab { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue-200); margin-top: var(--space-3); }
+
+    /* ════════════ P3 — TRAPPED REVENUE (split) ════════════ */
+    .vs-trapped { margin-top: var(--space-5); padding: var(--space-5) var(--space-6); background: var(--paper); border: 1px solid rgba(0,0,0,0.06); border-radius: var(--radius-md); }
+    .vs-trapped .t { font-family: var(--font-display); font-size: var(--text-md); color: var(--blue-1000); margin: 0; line-height: 1.4; }
+    .vs-trapped .t strong { font-weight: 600; }
+    .rev-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--space-6); box-shadow: 0 24px 50px -34px rgba(0,33,61,0.25); }
+    .rev-card .rh { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: var(--space-5); }
+    .rev-card .rh .lab { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); }
+    .rev-card .rh .amt { font-family: var(--font-display); font-size: 2.1rem; letter-spacing: -0.03em; color: var(--blue-1000); }
+    .rev-card .rh .amt em { font-style: normal; color: var(--accent); }
+    .rev-row { display: grid; grid-template-columns: 1fr 56px; align-items: center; gap: var(--space-4); padding: 9px 0; }
+    .rev-row .name { font-size: var(--text-sm); color: var(--color-700); }
+    .rev-row .bar { grid-column: 1 / -1; height: 9px; border-radius: 999px; background: var(--color-100); overflow: hidden; margin-top: -4px; }
+    .rev-row .fill { height: 100%; border-radius: 999px; }
+    .rev-row .sc { font-family: var(--font-mono); font-size: 12px; font-weight: 500; text-align: right; }
+    .fill.red { background: var(--risk-red); } .fill.amber { background: var(--risk-amber); }
+    .fill.blue { background: var(--blue-300); } .fill.cyan { background: var(--blue-base); }
+    .sc.red { color: var(--risk-red); } .sc.amber { color: #b07a14; }
+    .sc.blue { color: var(--blue-600); } .sc.cyan { color: var(--blue-base); }
+
+    /* ════════════ P4 — 80+ STANDARD (paper, asymmetric) ════════════ */
+    .std-mark { text-align: center; }
+    .std-mark .num { font-family: var(--font-display); font-size: clamp(6rem, 16vw, 11rem); line-height: 0.82; letter-spacing: -0.05em; color: var(--blue-1000); }
+    .std-mark .num em { font-style: normal; color: var(--accent); }
+    .std-mark .cap { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue-600); margin-top: var(--space-4); }
+    .vs-std { display: grid; gap: var(--space-5); }
+    .vs-std .row { padding-bottom: var(--space-5); border-bottom: 1px solid var(--border); }
+    .vs-std .row:last-child { border-bottom: 0; padding-bottom: 0; }
+    .vs-std .lab { display: block; font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue-600); margin-bottom: var(--space-2); }
+    .vs-std .val { font-size: 1.0625rem; line-height: 1.5; color: var(--color-800); }
+    .vs-std .val strong { color: var(--blue-1000); font-weight: 600; }
+
+    /* ════════════ P5 — SCORING ARCHITECTURE (tabs + visual) ════════════ */
+    .vs-tabs { margin-top: var(--space-7); display: grid; grid-template-columns: 0.9fr 1.1fr; gap: var(--space-7); align-items: start; }
+    @media (max-width: 920px) { .vs-tabs { grid-template-columns: 1fr; gap: var(--space-6); } }
+    .vs-tabs input { position: absolute; opacity: 0; pointer-events: none; }
+    .vs-tablist { display: flex; flex-direction: column; gap: var(--space-2); }
+    .vs-tablist label {
+      cursor: pointer; padding: 16px 18px; font-family: var(--font-display); font-size: 1.15rem; letter-spacing: -0.01em;
+      color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.16); border-radius: var(--radius-md);
+      transition: all var(--duration) var(--ease); display: flex; align-items: center; justify-content: space-between;
+    }
+    .vs-tablist label .ar { opacity: 0; transition: opacity var(--duration) var(--ease), transform var(--duration) var(--ease); }
+    .vs-tablist label:hover { color: #fff; border-color: var(--blue-300); }
+    #vt-pdp:checked ~ .vs-tabwrap .vs-tablist label[for="vt-pdp"],
+    #vt-hero:checked ~ .vs-tabwrap .vs-tablist label[for="vt-hero"],
+    #vt-image:checked ~ .vs-tabwrap .vs-tablist label[for="vt-image"],
+    #vt-carousel:checked ~ .vs-tabwrap .vs-tablist label[for="vt-carousel"] { background: #fff; color: var(--blue-1000); border-color: #fff; }
+    #vt-pdp:checked ~ .vs-tabwrap .vs-tablist label[for="vt-pdp"] .ar,
+    #vt-hero:checked ~ .vs-tabwrap .vs-tablist label[for="vt-hero"] .ar,
+    #vt-image:checked ~ .vs-tabwrap .vs-tablist label[for="vt-image"] .ar,
+    #vt-carousel:checked ~ .vs-tabwrap .vs-tablist label[for="vt-carousel"] .ar { opacity: 1; }
+    .vs-tabwrap { display: contents; }
+    .vs-tabpanel { display: none; }
+    .vs-tabpanel .pv { position: relative; aspect-ratio: 4/3; border-radius: var(--radius-md); overflow: hidden; border: 1px solid rgba(255,255,255,0.16); background: linear-gradient(135deg, rgba(52,160,254,0.14), rgba(255,255,255,0.02)); margin-bottom: var(--space-5); }
+    .vs-tabpanel .pv::after { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px); background-size: 32px 32px; }
+    .vs-tabpanel .pv .pl { position: absolute; inset: 0; z-index: 2; display: flex; align-items: center; justify-content: center; text-align: center; padding: var(--space-5); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-200); }
+    .vs-tabpanel h3 { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.5rem,3vw,2.1rem); line-height: 1.1; letter-spacing: -0.025em; color: #fff; margin: 0 0 var(--space-4); }
+    .vs-tabpanel p { font-size: var(--text-md); line-height: 1.55; color: var(--blue-100); margin: 0; }
+    #vt-pdp:checked ~ .vs-tabwrap #vp-pdp,
+    #vt-hero:checked ~ .vs-tabwrap #vp-hero,
+    #vt-image:checked ~ .vs-tabwrap #vp-image,
+    #vt-carousel:checked ~ .vs-tabwrap #vp-carousel { display: block; }
+
+    /* ════════════ P6 — SCORE LADDER + TIERS ════════════ */
+    .ladder { margin: var(--space-7) 0 var(--space-8); }
+    .ladder-track { height: 22px; border-radius: 999px; overflow: hidden; display: flex; }
+    .ladder-track span { display: block; height: 100%; }
+    .lt-red { width: 39%; background: var(--risk-red); }
+    .lt-amber { width: 20%; background: var(--risk-amber); }
+    .lt-blue { width: 20%; background: var(--blue-300); }
+    .lt-cyan { width: 21%; background: var(--blue-base); }
+    .ladder-scale { display: flex; justify-content: space-between; margin-top: 10px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; color: var(--muted); }
+    .ladder-flag { position: relative; margin-top: var(--space-5); }
+    .ladder-flag .pin { position: absolute; left: 84%; transform: translateX(-50%); text-align: center; }
+    .ladder-flag .pin .v { font-family: var(--font-display); font-size: 1.6rem; color: var(--blue-base); letter-spacing: -0.02em; }
+    .ladder-flag .pin .t { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue-600); }
+
+    .vs-tiers-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-7); margin-top: var(--space-7); }
+    @media (max-width: 860px) { .vs-tiers-grid { grid-template-columns: 1fr; gap: var(--space-6); } }
+    .vs-tiers h4 { font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin: 0 0 var(--space-4); }
+    .vs-tier { display: grid; grid-template-columns: 84px 1fr; gap: var(--space-4); padding: var(--space-4) var(--space-5); border: 1px solid var(--border); border-top: none; align-items: start; }
+    .vs-tier:first-of-type { border-top: 1px solid var(--border); border-radius: var(--radius-md) var(--radius-md) 0 0; }
+    .vs-tier:last-of-type { border-radius: 0 0 var(--radius-md) var(--radius-md); }
+    @media (max-width: 680px) { .vs-tier { grid-template-columns: 1fr; gap: var(--space-2); } }
+    .vs-tier .range { font-family: var(--font-mono); font-size: var(--text-sm); color: var(--blue-1000); font-weight: 500; }
+    .vs-tier .name { display: flex; align-items: center; gap: 8px; font-weight: 600; color: var(--blue-1000); margin-bottom: 4px; }
+    .vs-tier .name .dot { width: 10px; height: 10px; border-radius: 999px; flex: 0 0 auto; }
+    .vs-tier .desc { font-size: var(--text-sm); color: var(--color-700); line-height: 1.5; }
+    .dot.red { background: var(--risk-red); } .dot.amber { background: var(--risk-amber); }
+    .dot.blue { background: var(--blue-300); } .dot.cyan { background: var(--blue-base); box-shadow: 0 0 0 3px rgba(1,116,217,0.18); }
+    .vs-tier.ready { background: var(--accent-soft); border-color: var(--blue-100); }
+
+    /* ════════════ FINAL CTA ════════════ */
+    .final-split { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: var(--space-8); align-items: center; text-align: left; }
+    @media (max-width: 920px) { .final-split { grid-template-columns: 1fr; text-align: center; gap: var(--space-7); } }
+    .final-split .final-ctas { justify-content: flex-start; }
+    @media (max-width: 920px) { .final-split .final-ctas { justify-content: center; } }
+    .final-gauge { justify-self: end; }
+    @media (max-width: 920px) { .final-gauge { justify-self: center; } }
+    .final-gauge .gauge { --val: 92; width: 200px; height: 200px; }
+    .final-gauge .gauge::after { inset: 16px; background: var(--blue-1000); }
+    .final-gauge .gauge { background: conic-gradient(var(--blue-300) var(--deg), rgba(255,255,255,0.12) 0); }
+    .final-gauge .gauge .read .n { color: #fff; font-size: 3.6rem; }
+    .final-gauge .gauge .read .o { color: var(--blue-200); }
+    .final-cap { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-200); text-align: center; margin-top: var(--space-4); }
+  </style>
+</head>
+<body>
+
+<vizit-nav data-current="platform"></vizit-nav>
+
+<!-- P1 — WHAT IS VISUAL CONVERSION -->
+<section class="vs-hero" data-screen-label="01 Visual Conversion">
+  <div class="container">
+    <div class="vs-grid vs-2col">
+      <div>
+        <h1 class="display">The industry debates it. <em>We measured it.</em></h1>
+        <p style="margin-top:var(--space-4);font-size:var(--text-md);color:var(--accent);font-weight:600;">The Vizit Score measures one thing: the conversion power of your content.</p>
+        <div class="vs-prose" style="margin-top:var(--space-5);">
+          <p>Ask ten commerce leaders what makes product content high quality and you'll get ten different answers. Aesthetics. Compliance. Outcomes. All of them are partially right. None of them start with the shopper.</p>
+        </div>
+        <div class="vs-define">
+          <span class="k">Conversion power</span>
+          <p>An effective image is one that makes a shopper <em>want to buy</em> — the probability they choose your product over competing ones the instant they see it.</p>
+        </div>
+        <div class="vs-define dark">
+          <span class="k">The Vizit Score</span>
+          <p>A <em>0–100 predictive rating</em> of an image's or PDP's conversion power, benchmarked against its category.</p>
+        </div>
+        <p class="vs-kicker">Quality isn't subjective. It was just unmeasured.</p>
+      </div>
+
+      <!-- Score gauge visual -->
+      <div class="gauge-card">
+        <div class="gauge-top">
+          <div class="gauge">
+            <div class="read"><span class="n">87</span><span class="o">/ 100</span></div>
+          </div>
+          <div class="gauge-meta">
+            <span class="badge"><span class="dot"></span>Vizit Certified</span>
+            <h3>Vizit Score</h3>
+            <p class="sub">Hair Care · Mobile search grid</p>
+          </div>
+        </div>
+        <div class="gauge-img ph-stripe">
+          <span class="ph-label">[ Product image / PDP screenshot ]</span>
+        </div>
+        <div class="gauge-bars">
+          <div class="gbar"><span class="gl">Pack clarity</span><span class="gt"><span class="gf" style="width:92%;"></span></span><span class="gv">92</span></div>
+          <div class="gbar"><span class="gl">Hero impact</span><span class="gt"><span class="gf" style="width:84%;"></span></span><span class="gv">84</span></div>
+          <div class="gbar"><span class="gl">Claim hierarchy</span><span class="gt"><span class="gf" style="width:79%;"></span></span><span class="gv">79</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- P2 — THE CONTENT CONVERSION STANDARD -->
+<section class="panel panel--dark" data-screen-label="02 The standard">
+  <div class="container">
+    <div class="vs-grid vs-2col-rev">
+      <!-- Seal visual -->
+      <div class="seal" id="stdSeal">
+        <div class="ring"></div>
+        <div class="ticks"></div>
+        <div class="ring r2"></div>
+        <div class="core">
+          <div class="big">80<span style="color:var(--blue-300);">+</span></div>
+          <div class="lab">Vizit Certified</div>
+        </div>
+      </div>
+      <div>
+        <h2 class="display on-dark" style="max-width:20ch;">Commerce never had a conversion standard for content. <em>Until Vizit.</em></h2>
+        <p class="subhead on-dark" style="margin-top:var(--space-5);">The first objective standard in commerce for the only question that matters: is your product ready to be chosen?</p>
+        <p class="subhead on-dark" style="margin-top:var(--space-4);max-width:46ch;">Cross the 80-point threshold and an asset earns the Vizit Certified mark — proven to win the first-impression moment in its category.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- P3 — TRAPPED REVENUE -->
+<section class="panel" data-screen-label="03 Trapped revenue">
+  <div class="container">
+    <div class="vs-grid vs-2col">
+      <div>
+        <h2 class="display" style="max-width:16ch;">Every 10 points unlocks an average <em>4% conversion lift</em>.</h2>
+        <p class="subhead" style="margin-top:var(--space-5);">Find your trapped revenue — and capture it SKU by SKU.</p>
+        <div class="vs-trapped">
+          <p class="t"><strong>Trapped revenue:</strong> the conversion value locked inside your catalog by low-scoring assets.</p>
+        </div>
+        <div style="margin-top:var(--space-6);">
+          <a class="btn btn-primary btn-lg" href="#">Calculate your revenue opportunity <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <!-- Revenue diagnostic visual -->
+      <div class="rev-card">
+        <div class="rh">
+          <span class="lab">Trapped revenue · sample catalog</span>
+          <span class="amt"><em>$2.4M</em></span>
+        </div>
+        <div class="rev-row"><span class="name">Hydrate Shampoo 400ml</span><span class="sc red">31</span><span class="bar"><span class="fill red" style="width:31%;"></span></span></div>
+        <div class="rev-row"><span class="name">Repair Conditioner 400ml</span><span class="sc amber">52</span><span class="bar"><span class="fill amber" style="width:52%;"></span></span></div>
+        <div class="rev-row"><span class="name">Curl Defining Cream</span><span class="sc blue">68</span><span class="bar"><span class="fill blue" style="width:68%;"></span></span></div>
+        <div class="rev-row"><span class="name">Scalp Serum 100ml</span><span class="sc cyan">88</span><span class="bar"><span class="fill cyan" style="width:88%;"></span></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- P4 — PREDICTIVE CONVERSION SCORING / 80+ STANDARD -->
+<section class="panel panel--paper" data-screen-label="04 80+ standard">
+  <div class="container">
+    <div class="vs-grid vs-2col-rev">
+      <!-- 80+ mark -->
+      <div class="std-mark">
+        <div class="num">80<em>+</em></div>
+        <div class="cap">Top 20% of category</div>
+      </div>
+      <div>
+        <h2 class="display" style="max-width:20ch;">Predict the conversion power of any asset — <em>before you spend a dollar on media</em>.</h2>
+        <p class="subhead" style="margin-top:var(--space-5);">The only conversion power score trained on how human shoppers actually decide — not proxies like attention or memorability.</p>
+        <div class="vs-std" style="margin-top:var(--space-7);">
+          <div class="row">
+            <span class="lab">The 80+ Standard · Image Scores</span>
+            <span class="val">An <strong>80+ Vizit Score</strong> ranks your asset in the <strong>top 20%</strong> of its category for conversion likelihood.</span>
+          </div>
+          <div class="row">
+            <span class="lab">The 80+ Standard · Product Page Scores</span>
+            <span class="val">Brands that move low-scoring PDPs to the Vizit-Certified (80+) standard generate an average <strong>16.5% lift</strong> in conversion.</span>
+          </div>
+        </div>
+        <div style="margin-top:var(--space-7);display:flex;flex-wrap:wrap;gap:var(--space-5);align-items:center;">
+          <a class="btn btn-primary btn-lg" href="demo.html">Get your Vizit Score <span class="arrow">→</span></a>
+          <a class="btn-link" href="#">See what high scores mean for your catalog →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- P5 — SCORING ARCHITECTURE (tabs) -->
+<section class="panel panel--dark" data-screen-label="05 Scoring architecture">
+  <div class="container">
+    <h2 class="display on-dark" style="max-width:20ch;">Every visual moment scored. <em>From search grid to cart.</em></h2>
+    <p class="subhead on-dark" style="margin-top:var(--space-5);max-width:52ch;">Four dimensions. One diagnosis. Exactly where you're losing the shopper.</p>
+
+    <div class="vs-tabs">
+      <input type="radio" name="vstab" id="vt-pdp" checked>
+      <input type="radio" name="vstab" id="vt-hero">
+      <input type="radio" name="vstab" id="vt-image">
+      <input type="radio" name="vstab" id="vt-carousel">
+      <div class="vs-tabwrap">
+        <div class="vs-tablist" role="tablist">
+          <label for="vt-pdp">Product Page Score <span class="ar">→</span></label>
+          <label for="vt-hero">Hero Score <span class="ar">→</span></label>
+          <label for="vt-image">Image Score <span class="ar">→</span></label>
+          <label for="vt-carousel">Carousel Score <span class="ar">→</span></label>
+        </div>
+        <div class="vs-tabpanels">
+          <div class="vs-tabpanel" id="vp-pdp">
+            <div class="pv"><span class="pl">[ Visual: full PDP scored as one ]</span></div>
+            <h3>Vizit Product Page Score</h3>
+            <p>The holistic page-level metric. Predicts the total conversion power of the complete product experience — hero image, carousel, lifestyle shots, and more — scored as one.</p>
+          </div>
+          <div class="vs-tabpanel" id="vp-hero">
+            <div class="pv"><span class="pl">[ Visual: hero in a search grid ]</span></div>
+            <h3>Vizit Hero Score</h3>
+            <p>Measures the ability of your primary image to dominate the crowded search grid and earn the initial click.</p>
+          </div>
+          <div class="vs-tabpanel" id="vp-image">
+            <div class="pv"><span class="pl">[ Visual: single asset vs. category ]</span></div>
+            <h3>Vizit Image Score</h3>
+            <p>Predicts the conversion power of any individual visual asset, benchmarked against the category. An 80+ score ranks it in the top 20% of its category for conversion likelihood.</p>
+          </div>
+          <div class="vs-tabpanel" id="vp-carousel">
+            <div class="pv"><span class="pl">[ Visual: secondary image gallery ]</span></div>
+            <h3>Vizit Carousel Score</h3>
+            <p>Evaluates the product story, asset mix, and persuasive power of your secondary image gallery.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- P6 — SCORE LADDER + TIERS -->
+<section class="panel" data-screen-label="06 Conversion tiers">
+  <div class="container">
+    <h2 class="display" style="max-width:18ch;">Every workflow. <em>One conversion standard.</em></h2>
+    <p class="subhead" style="margin-top:var(--space-5);max-width:54ch;">Embed the Vizit Score into every workflow — from creative to PIM — so no asset reaches shoppers without being conversion-ready.</p>
+
+    <!-- Score ladder visual -->
+    <div class="ladder">
+      <div class="ladder-track">
+        <span class="lt-red"></span><span class="lt-amber"></span><span class="lt-blue"></span><span class="lt-cyan"></span>
+      </div>
+      <div class="ladder-scale"><span>0</span><span>40</span><span>60</span><span>80</span><span>100</span></div>
+      <div class="ladder-flag"><div class="pin"><div class="v">80+</div><div class="t">Vizit Certified</div></div></div>
+    </div>
+
+    <div class="vs-tiers-grid">
+      <div class="vs-tiers">
+        <h4>PDP &amp; Catalog Status</h4>
+        <div class="vs-tier">
+          <span class="range">0–39</span>
+          <div><div class="name"><span class="dot red"></span>High Conversion Risk</div><div class="desc">Vizit AI predicts many shoppers will leave this page without buying, based on what converts in this category.</div></div>
+        </div>
+        <div class="vs-tier">
+          <span class="range">40–59</span>
+          <div><div class="name"><span class="dot amber"></span>At Risk</div><div class="desc">Vizit AI predicts this page is underperforming against conversion standards in this category.</div></div>
+        </div>
+        <div class="vs-tier">
+          <span class="range">60–79</span>
+          <div><div class="name"><span class="dot blue"></span>Competitive</div><div class="desc">Vizit AI predicts this page converts at a competitive rate — but is not yet Vizit Certified.</div></div>
+        </div>
+        <div class="vs-tier ready">
+          <span class="range">80+</span>
+          <div><div class="name"><span class="dot cyan"></span>Vizit Certified</div><div class="desc">Vizit AI predicts this page will win shoppers at first impression. You've met the Vizit Standard for this category.</div></div>
+        </div>
+      </div>
+
+      <div class="vs-tiers">
+        <h4>Individual Asset Status</h4>
+        <div class="vs-tier">
+          <span class="range">0–39</span>
+          <div><div class="name"><span class="dot red"></span>Underperforming</div><div class="desc">Significantly below category benchmarks. This image is losing shoppers.</div></div>
+        </div>
+        <div class="vs-tier">
+          <span class="range">40–59</span>
+          <div><div class="name"><span class="dot amber"></span>At Risk</div><div class="desc">Below the conversion standard for your category. This image is leaving revenue at risk.</div></div>
+        </div>
+        <div class="vs-tier">
+          <span class="range">60–79</span>
+          <div><div class="name"><span class="dot blue"></span>Competitive</div><div class="desc">Meets the category standard — but not yet Vizit Certified. This image holds its own without winning.</div></div>
+        </div>
+        <div class="vs-tier ready">
+          <span class="range">80+</span>
+          <div><div class="name"><span class="dot cyan"></span>Vizit Certified</div><div class="desc">Meets the Vizit Standard. This image is proven to win shoppers at first impression.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- P7 — FINAL CTA -->
+<section class="final" data-screen-label="07 Final CTA">
+  <div class="container">
+    <div class="final-inner final-split">
+      <div>
+        <h2 class="display on-dark" style="max-width:14ch;">The score that thinks like a <em>shopper</em>.</h2>
+        <p class="subhead on-dark" style="max-width:48ch;">The Vizit Score is the direct output of our Perceptual AI — the only content scoring standard built on real human purchase decisions.</p>
+        <div class="final-ctas">
+          <a class="btn btn-on-dark btn-lg" href="demo.html">Get your Vizit Score <span class="arrow">→</span></a>
+        </div>
+      </div>
+      <div class="final-gauge">
+        <div class="gauge">
+          <div class="read"><span class="n">92</span><span class="o">/ 100</span></div>
+        </div>
+        <div class="final-cap">Vizit Certified</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="panel" data-screen-label="08 FAQ">
+  <div class="container faq-grid">
+    <div>
+      <h2 class="display">The Vizit Score, <em>explained</em>.</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary><span class="plus" aria-hidden="true">+</span>What is the Vizit Score?</summary>
+        <div class="answer">The Vizit Score is a 0–100 predictive rating of a product image's or PDP's conversion power, benchmarked against its category. An 80+ score ranks an asset in the top 20% of its category for conversion likelihood — that's the Vizit Certified threshold, the standard the world's best commerce teams brief to, approve against, and syndicate by.</div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="plus" aria-hidden="true">+</span>What is a good Vizit Score?</summary>
+        <div class="answer">80 or above. At 80+, an asset is predicted to win the first-impression moment against the majority of competing products in its category. Brands that move low-scoring PDPs on Vizit to an 80+ score see an average 16.5% conversion lift.</div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="plus" aria-hidden="true">+</span>Is the Vizit Score the same for every shopper audience?</summary>
+        <div class="answer">No. Vizit Scores are audience- and category-specific. The same image scores differently depending on who's looking at it and what it's competing against. This is a core patent held by Vizit.</div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="plus" aria-hidden="true">+</span>How much does conversion improve with a higher Vizit Score?</summary>
+        <div class="answer">Conversion lift scales with the Vizit Score. On average, every 10-point increase unlocks up to a 4% relative conversion rate improvement.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<vizit-footer></vizit-footer>
+
+<style>
+.gauge-card{ box-shadow:0 0 70px -14px rgba(1,116,217,.55) !important; border-color:rgba(52,160,254,.4) !important; }
+.gauge-card .gauge .read .n{ font-variant-numeric:tabular-nums; }
+@keyframes vgPulse{0%,100%{box-shadow:0 0 70px -14px rgba(1,116,217,.55)}50%{box-shadow:0 0 90px -10px rgba(1,116,217,.75)}}
+@media (prefers-reduced-motion: no-preference){ .gauge-card{ animation:vgPulse 5s ease-in-out infinite; } }
+</style>
+<script>
+(function(){
+  var n=document.querySelector('.gauge-card .gauge .read .n');
+  var bars=[].slice.call(document.querySelectorAll('.gauge-card .gf'));
+  if(!n) return;
+  var target=parseInt(n.textContent,10)||87;
+  var widths=bars.map(function(b){return b.style.width;});
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  n.textContent='0'; bars.forEach(function(b){b.style.width='0%'; b.style.transition='width 1.2s cubic-bezier(.2,.6,.2,1)';});
+  var done=false;
+  new IntersectionObserver(function(es,io){es.forEach(function(e){
+    if(e.isIntersecting&&!done){done=true;
+      var v=0;var t=setInterval(function(){v+=2;if(v>=target){v=target;clearInterval(t);}n.textContent=v;},18);
+      setTimeout(function(){bars.forEach(function(b,i){b.style.width=widths[i];});},250);
+      io.disconnect();
+    }});},{threshold:.4}).observe(n);
+})();
+</script>
+</body>
+</html>

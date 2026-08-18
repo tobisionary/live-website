@@ -4,11 +4,10 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Vizit | The Agentic Platform for Content Optimization</title>
-<link rel="icon" type="image/png" href="assets/favicon.png">
 <meta name="description" content="Vizit optimizes your product content for one thing: conversion — so the traffic you already paid for turns into revenue. Trusted by the world's leading brands." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="css/colors-and-type.css" />
+<link rel="stylesheet" href="colors_and_type.css" />
 <style id="home-headline-font">
   :root{ --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
   .display, .headline{ font-weight: 600 !important; letter-spacing: -0.03em; }
@@ -987,7 +986,7 @@
     overflow: hidden;
   }
   @media (max-width: 900px) {
-    .case-stats { grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+    .case-stats { grid-template-columns: 1fr; gap: var(--space-5); }
     .case-cta { margin-top: var(--space-5); }
     .case-photo { margin-top: var(--space-5); }
   }
@@ -2020,7 +2019,7 @@
     .nav-item .chev,.nav__item .chev{display:none}
   }
 </style>
-<link rel="stylesheet" href="css/vizit-theme.css">
+<link rel="stylesheet" href="vizit-theme.css">
 <style id="dark-hero">
   /* ═══════════ DARK HERO + LOGO RIBBON ═══════════ */
   .hero {
@@ -2693,9 +2692,9 @@
     .ripple-stage { min-height: 300px; }
   }
 </style>
-<script src="js/vizit-nav.js" defer></script>
-  <script src="js/vizit-footer.js" defer></script>
-<script src="js/image-slot.js" defer></script>
+<script src="vizit-nav.js" defer></script>
+  <script src="vizit-footer.js" defer></script>
+<script src="image-slot.js" defer></script>
 <style id="ptabs-style">
   /* ═══ #platform — big visual on top, horizontal tab row below ═══ */
   .ptabs {
@@ -2837,21 +2836,9 @@
   .cs-ph::after{content:"";position:absolute;inset:0;border-radius:10px;background:radial-gradient(60% 60% at 50% 40%, rgba(80,160,255,.14), transparent 70%)}
   @keyframes csScroll{from{transform:rotateX(28deg) rotateZ(-8deg) translateY(0)}to{transform:rotateX(28deg) rotateZ(-8deg) translateY(calc(-50% - 13px))}}
   @media (prefers-reduced-motion:reduce){ .cs-lane{ animation:none; } }
-  @media (max-width:1100px){
-    .cost-stream{right:-34%;width:130%;-webkit-mask-image:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.55) 34%,#000 60%);mask-image:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.55) 34%,#000 60%)}
-    .cs-lane{opacity:.4}
-  }
+  @media (max-width:1100px){ .cost-stream{ display:none; } }
 </style>
 <link id="gfont-Inter" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Vizit">
-<meta property="og:title" content="Vizit | The Agentic Platform for Content Optimization">
-<meta property="og:image" content="https://vizit.com/assets/og-cover.jpg">
-<meta property="og:image:width" content="1600">
-<meta property="og:image:height" content="1000">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Vizit | The Agentic Platform for Content Optimization">
-<meta name="twitter:image" content="https://vizit.com/assets/og-cover.jpg">
 </head>
 <body style="font-size: 24px">
 
@@ -2934,7 +2921,7 @@
 </style>
 <div class="announce-bar" role="region" aria-label="Announcement" style="background-color: #0673D9; height: 44px">
   <span><strong>Vizit Next Gen</strong> is out</span>
-  <a href="vizit-next-gen-platform.html">Learn more <span class="arr" aria-hidden="true">→</span></a>
+  <a href="#platform">Learn more <span class="arr" aria-hidden="true">→</span></a>
   <button type="button" class="announce-close" aria-label="Dismiss announcement" style="border-radius: 1585px">
     <svg viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 1L13 13M13 1L1 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
   </button>
@@ -3135,8 +3122,8 @@
       </h1>
       <p class="subhead hero-sub reveal" style="max-width: 52ch">Vizit scores, optimizes, and generates content to maximize revenue with every shopper that lands on your page.</p>
       <div class="hero-cta reveal">
-        <a class="btn btn-primary btn-spot" id="heroPrimaryBtn" href="demo.html" style="border-radius: 999px"><span class="bs-label">Score your content</span></a>
-        <a class="btn-ghost-hero" href="vizit-next-gen-platform.html">Learn more about Next Gen Platform <span class="gh-arr" aria-hidden="true">→</span></a>
+        <a class="btn btn-primary btn-spot" id="heroPrimaryBtn" href="Score Your Content.html" style="border-radius: 999px"><span class="bs-label">Score your content</span></a>
+        <a class="btn-ghost-hero" href="Vizit Next Gen Platform.html">Learn more about Next Gen Platform <span class="gh-arr" aria-hidden="true">→</span></a>
       </div>
       <div class="hero-monitor" id="heroMonitor">
         <div class="hs-tabs" id="hsTabs" role="tablist" aria-label="Platform screens">
@@ -3147,10 +3134,10 @@
         </div>
         <div class="hero-slider" id="heroSlider">
           <div class="hs-track" id="hsTrack">
-            <div class="hs-slide"><img fetchpriority="high" decoding="async" src="assets/img/pp-page-2x.webp" alt="Product page performance and optimization plan in Vizit" width="2880" height="1646"></div>
-            <div class="hs-slide"><img loading="lazy" decoding="async" src="assets/img/image-details-page-spark-images-2x.webp" alt="Spark image variants generated and scored in Vizit" width="2880" height="1646"></div>
-            <div class="hs-slide"><img loading="lazy" decoding="async" src="assets/img/image-details-page-analysis-2x.webp" alt="Hero score with mobile and agent readiness checks in Vizit" width="2880" height="1646"></div>
-            <div class="hs-slide"><img loading="lazy" decoding="async" src="assets/img/library-products-tab-1440w-2x.webp" alt="Catalog of product pages with live scores in Vizit" width="2880" height="1646"></div>
+            <div class="hs-slide"><img src="uploads/pp_page_2x.webp" alt="Product page performance and optimization plan in Vizit" width="2880" height="1646"></div>
+            <div class="hs-slide"><img src="uploads/image_details_page_spark_images_2x.webp" alt="Spark image variants generated and scored in Vizit" width="2880" height="1646"></div>
+            <div class="hs-slide"><img src="uploads/image_details_page_analysis_2x.webp" alt="Hero score with mobile and agent readiness checks in Vizit" width="2880" height="1646"></div>
+            <div class="hs-slide"><img src="uploads/library_products_tab_1440w__2x.webp" alt="Catalog of product pages with live scores in Vizit" width="2880" height="1646"></div>
           </div>
           <button class="hs-arrow prev" id="hsPrev" aria-label="Previous screen">&#8592;</button>
           <button class="hs-arrow next" id="hsNext" aria-label="Next screen">&#8594;</button>
@@ -3181,7 +3168,7 @@
 })();
 </script>
 <section class="logo-band" aria-label="Trusted by leading brands">
-  <div class="lb-track"><div class="lb-set"><a href="https://www.nestle.com" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/img/nestle.webp" alt="Nestlé" width="262" height="72"></a><a href="https://www.loreal.com" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/img/loreal.webp" alt="L'Oréal" width="398" height="72"></a><a href="https://www.mars.com" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/img/mars.webp" alt="Mars" width="252" height="72"></a><a href="https://www.colgatepalmolive.com" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/img/colgate-palmolive.webp" alt="Colgate-Palmolive" width="594" height="86"></a><a href="https://www.mondelezinternational.com" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="assets/img/mondelez.webp" alt="Mondelēz" width="301" height="72"></a></div><div class="lb-set" aria-hidden="true"><a href="https://www.nestle.com" target="_blank" rel="noopener" tabindex="-1"><img loading="lazy" decoding="async" src="assets/img/nestle.webp" alt="" width="262" height="72"></a><a href="https://www.loreal.com" target="_blank" rel="noopener" tabindex="-1"><img loading="lazy" decoding="async" src="assets/img/loreal.webp" alt="" width="398" height="72"></a><a href="https://www.mars.com" target="_blank" rel="noopener" tabindex="-1"><img loading="lazy" decoding="async" src="assets/img/mars.webp" alt="" width="252" height="72"></a><a href="https://www.colgatepalmolive.com" target="_blank" rel="noopener" tabindex="-1"><img loading="lazy" decoding="async" src="assets/img/colgate-palmolive.webp" alt="" width="594" height="86"></a><a href="https://www.mondelezinternational.com" target="_blank" rel="noopener" tabindex="-1"><img loading="lazy" decoding="async" src="assets/img/mondelez.webp" alt="" width="301" height="72"></a></div></div>
+  <div class="lb-track"><div class="lb-set"><a href="https://www.nestle.com" target="_blank" rel="noopener"><img src="uploads/nestle.webp" alt="Nestlé" width="262" height="72"></a><a href="https://www.loreal.com" target="_blank" rel="noopener"><img src="uploads/loreal.webp" alt="L'Oréal" width="398" height="72"></a><a href="https://www.mars.com" target="_blank" rel="noopener"><img src="uploads/mars.webp" alt="Mars" width="252" height="72"></a><a href="https://www.colgatepalmolive.com" target="_blank" rel="noopener"><img src="uploads/colgate palmolive.webp" alt="Colgate-Palmolive" width="594" height="86"></a><a href="https://www.mondelezinternational.com" target="_blank" rel="noopener"><img src="uploads/mondelez.webp" alt="Mondelēz" width="301" height="72"></a></div><div class="lb-set" aria-hidden="true"><a href="https://www.nestle.com" target="_blank" rel="noopener" tabindex="-1"><img src="uploads/nestle.webp" alt="" width="262" height="72"></a><a href="https://www.loreal.com" target="_blank" rel="noopener" tabindex="-1"><img src="uploads/loreal.webp" alt="" width="398" height="72"></a><a href="https://www.mars.com" target="_blank" rel="noopener" tabindex="-1"><img src="uploads/mars.webp" alt="" width="252" height="72"></a><a href="https://www.colgatepalmolive.com" target="_blank" rel="noopener" tabindex="-1"><img src="uploads/colgate palmolive.webp" alt="" width="594" height="86"></a><a href="https://www.mondelezinternational.com" target="_blank" rel="noopener" tabindex="-1"><img src="uploads/mondelez.webp" alt="" width="301" height="72"></a></div></div>
 </section>
 <style id="logo-band-style">
   .logo-band{background:transparent;padding:110px 0 36px;overflow:hidden;position:relative}
@@ -3218,38 +3205,38 @@
 <section class="cost" id="cost">
   <div class="cost-stream" aria-hidden="true">
     <div class="cs-lane" style="left: 107px">
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-1-85ead9bd.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-2-5668efb2.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-3-903c5dc9.png" alt="" loading="lazy"></div></div>
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-4-c7e8e18b.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-6-c4743ed9.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-7-d5e0e52c.png" alt="" loading="lazy"></div></div>
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-8-00ec5be6.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-9-62d420a2.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-10-17900ef3.png" alt="" loading="lazy"></div></div>
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-11.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-12.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-13.png" alt="" loading="lazy"></div></div>
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-14.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-15.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-16.png" alt="" loading="lazy"></div></div>
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-17.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-18.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-19.png" alt="" loading="lazy"></div></div>
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-20.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-21.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-22.png" alt="" loading="lazy"></div></div>
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-23.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-24.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image.png" alt="" loading="lazy"></div></div>
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-1-85ead9bd.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-2-5668efb2.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-3-903c5dc9.png" alt="" loading="lazy"></div></div>
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-4-c7e8e18b.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-6-c4743ed9.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-7-d5e0e52c.png" alt="" loading="lazy"></div></div>
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-8-00ec5be6.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-9-62d420a2.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-10-17900ef3.png" alt="" loading="lazy"></div></div>
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-11.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-12.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-13.png" alt="" loading="lazy"></div></div>
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-14.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-15.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-16.png" alt="" loading="lazy"></div></div>
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-17.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-18.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-19.png" alt="" loading="lazy"></div></div>
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-20.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-21.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-22.png" alt="" loading="lazy"></div></div>
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-23.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-24.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image.png" alt="" loading="lazy"></div></div>
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-1-85ead9bd.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-2-5668efb2.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-3-903c5dc9.png" alt="" loading="lazy"></div></div>
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-4-c7e8e18b.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-6-c4743ed9.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-7-d5e0e52c.png" alt="" loading="lazy"></div></div>
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-8-00ec5be6.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-9-62d420a2.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-10-17900ef3.png" alt="" loading="lazy"></div></div>
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-11.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-12.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-13.png" alt="" loading="lazy"></div></div>
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-14.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-15.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-16.png" alt="" loading="lazy"></div></div>
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-17.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-18.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-19.png" alt="" loading="lazy"></div></div>
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-20.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-21.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-22.png" alt="" loading="lazy"></div></div>
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-23.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-24.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image.png" alt="" loading="lazy"></div></div>
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-1-85ead9bd.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-2-5668efb2.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-3-903c5dc9.png" alt="" loading="lazy"></div></div>
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-4-c7e8e18b.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-6-c4743ed9.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-7-d5e0e52c.png" alt="" loading="lazy"></div></div>
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-8-00ec5be6.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-9-62d420a2.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-10-17900ef3.png" alt="" loading="lazy"></div></div>
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-11.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-12.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-13.png" alt="" loading="lazy"></div></div>
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-14.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-15.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-16.png" alt="" loading="lazy"></div></div>
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-17.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-18.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-19.png" alt="" loading="lazy"></div></div>
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-20.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-21.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-22.png" alt="" loading="lazy"></div></div>
-      <div class="cs-row"><div class="cs-ph"><img decoding="async" src="assets/img/source-image-23.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image-24.png" alt="" loading="lazy"></div><div class="cs-ph"><img decoding="async" src="assets/img/source-image.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image-1-85ead9bd.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-2-5668efb2.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-3-903c5dc9.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image-4-c7e8e18b.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-6-c4743ed9.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-7-d5e0e52c.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image-8-00ec5be6.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-9-62d420a2.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-10-17900ef3.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image-11.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-12.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-13.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image-14.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-15.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-16.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image-17.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-18.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-19.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image-20.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-21.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-22.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image-23.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-24.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-25.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image-26.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-27.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-28.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image-29.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-30.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-31.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image-32.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-33.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-34.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image-35.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-1-85ead9bd.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image-2-5668efb2.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-3-903c5dc9.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-4-c7e8e18b.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image-6-c4743ed9.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-7-d5e0e52c.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-8-00ec5be6.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image-9-62d420a2.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-10-17900ef3.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-11.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image-12.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-13.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-14.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image-15.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-16.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-17.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image-18.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-19.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-20.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image-21.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-22.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-23.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image-24.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-25.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-26.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image-27.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-28.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-29.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image-30.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-31.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-32.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image-33.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-34.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-35.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-1-85ead9bd.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-2-5668efb2.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image-3-903c5dc9.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-4-c7e8e18b.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-6-c4743ed9.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image-7-d5e0e52c.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-8-00ec5be6.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-9-62d420a2.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image-10-17900ef3.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-11.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-12.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image-13.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-14.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-15.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image-16.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-17.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-18.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image-19.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-20.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-21.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image-22.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-23.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-24.png" alt="" loading="lazy"></div></div>
+      <div class="cs-row"><div class="cs-ph"><img src="uploads/source image-25.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-26.png" alt="" loading="lazy"></div><div class="cs-ph"><img src="uploads/source image-27.png" alt="" loading="lazy"></div></div>
     </div>
   </div>
   <div class="wrap" style="text-align: left; padding: 0 clamp(24px, 5vw, 64px)">
@@ -3486,9 +3473,9 @@
 
     <div class="pi-cases-wrap">
     <div class="pi-cases" id="piCases">
-      <a class="pi-case cs2" href="mars-petcare-case-study.html">
-        <div class="cs2-media"><img loading="lazy" decoding="async" src="assets/img/mars-case-study.png" alt="Mars Petcare case study"></div>
-        <img loading="lazy" decoding="async" class="cs2-logo" src="assets/img/mars.webp" alt="Mars">
+      <a class="pi-case cs2" href="Mars Petcare Case Study.html">
+        <div class="cs2-media"><img src="uploads/mars case study.png" alt="Mars Petcare case study"></div>
+        <img class="cs2-logo" src="uploads/mars.webp" alt="Mars">
         <div class="cs2-body">
           <div class="cs2-stat">+30%</div>
           <div class="cs2-label">Conversion uplift in ordered units</div>
@@ -3496,9 +3483,9 @@
           <span class="cs2-link">Read the story →</span>
         </div>
       </a>
-      <a class="pi-case cs2" href="purina-case-study.html">
-        <div class="cs2-media"><img loading="lazy" decoding="async" src="assets/img/purina-cs.png" alt="Purina product imagery scored in Vizit"></div>
-        <img loading="lazy" decoding="async" class="cs2-logo" src="assets/img/pasted-1785253840012-0.png" alt="Purina" style="height:30px">
+      <a class="pi-case cs2" href="Purina Case Study.html">
+        <div class="cs2-media"><img src="uploads/PURINA CS.png" alt="Purina product imagery scored in Vizit"></div>
+        <img class="cs2-logo" src="uploads/pasted-1785253840012-0.png" alt="Purina" style="height:30px">
         <div class="cs2-body">
           <div class="cs2-stat">+9.44%</div>
           <div class="cs2-label">Conversion rate improvement in 6 weeks</div>
@@ -3506,9 +3493,9 @@
           <span class="cs2-link">Read the story →</span>
         </div>
       </a>
-      <a class="pi-case cs2" href="beauty-case-study.html">
-        <div class="cs2-media"><img loading="lazy" decoding="async" src="assets/img/loreal-cs.png" alt="Beauty product imagery scored in Vizit"></div>
-        <img loading="lazy" decoding="async" class="cs2-logo" src="assets/img/pasted-1785254859893-0.png" alt="L'Oréal" style="height:34px">
+      <a class="pi-case cs2" href="Beauty Case Study.html">
+        <div class="cs2-media"><img src="uploads/loreal cs.png" alt="Beauty product imagery scored in Vizit"></div>
+        <img class="cs2-logo" src="uploads/pasted-1785254859893-0.png" alt="L'Oréal" style="height:34px">
         <div class="cs2-body">
           <div class="cs2-stat">+17.2%</div>
           <div class="cs2-label">Add-to-cart rate from one optimized hero image</div>
@@ -3517,7 +3504,7 @@
         </div>
       </a>
     </div>
-    <div class="pi-cases-cta"><a class="btn btn-primary" href="case-studies.html">View all case studies</a></div>
+    <div class="pi-cases-cta"><a class="btn btn-primary" href="Case Studies.html">View all case studies</a></div>
     </div>
 
     </div>
@@ -3526,7 +3513,7 @@
 
   </div>
 </section>
-<script src="js/image-slot.js" defer></script>
+<script src="image-slot.js" defer></script>
 
 
 
@@ -3595,7 +3582,7 @@
     <div class="ci-stack">
       <h2 class="display" style="margin-top: var(--space-4);">The agentic content optimization platform</h2>
       <p class="subhead" style="margin-top: var(--space-6); font-family: Inter; width: 680px">
-        <a href="vizit-next-gen-platform.html" style="color: var(--accent); text-decoration: none; text-underline-offset: 3px; text-decoration-thickness: 1.5px;">Vizit Agents</a> score all your product content, diagnose what's<br>costing you conversion, and fix it before you lose the sale.
+        <a href="Vizit Next Gen Platform.html" style="color: var(--accent); text-decoration: none; text-underline-offset: 3px; text-decoration-thickness: 1.5px;">Vizit Agents</a> score all your product content, diagnose what's<br>costing you conversion, and fix it before you lose the sale.
       </p>
       <div style="margin-top: var(--space-6);">
         <a class="btn btn-primary" href="#standard">See the platform in action</a>
@@ -3608,7 +3595,7 @@
       <div class="ao-center">
         <div class="ao-card">
           <div class="ao-card-top">
-            <div class="ao-photo"><img loading="lazy" decoding="async" src="assets/img/81ppeyqlinl-ac-sx679.png" alt="Vizzy V-Shaped Chips, Party Size" / width="445" height="445"></div>
+            <div class="ao-photo"><img src="uploads/81PPeYqLInL._AC_SX679_.png" alt="Vizzy V-Shaped Chips, Party Size" / width="445" height="445"></div>
             <div class="ao-info">
               <h3 class="ao-title">Vizzy V-Shaped Chips</h3>
               <div class="ao-sub">Party Size · 12½ oz</div>
@@ -3667,7 +3654,7 @@
     <h2 class="headline stack-head" style="margin-top: var(--space-4); max-width: 24ch">
       <span style="letter-spacing: -1.6123px;">The agentic content optimization platform</span>
     </h2>
-    <p class="subhead" style="margin: var(--space-5) auto 0; max-width: 60ch; width: 100%">
+    <p class="subhead" style="margin-top: var(--space-5); max-width: 60ch; width: 1172px">
       Vizit tells you what a shopper will decide in that half-second.<br>Exactly what to change.<br>Before you spend a dollar sending them there.
     </p>
 
@@ -3703,27 +3690,27 @@
       <div class="ptab-panels">
         <div class="ptab-panel active" role="tabpanel" id="ptab-panel-1" aria-labelledby="ptab-1">
           <div class="ptab-visual" style="--g1: #b9c6f7; --g2: #dfe6fb; --g3: #9db1f0;"><div class="ptab-orbs" aria-hidden="true"><i></i><i></i><i></i></div>
-            <img loading="lazy" decoding="async" class="ptab-shot" src="assets/img/expose-conversion.webp" alt="Catalog live scores in Vizit">
+            <img class="ptab-shot" src="uploads/expose conversion.webp" alt="Catalog live scores in Vizit">
           </div>
         </div>
         <div class="ptab-panel" role="tabpanel" id="ptab-panel-2" aria-labelledby="ptab-2" hidden>
           <div class="ptab-visual" style="--g1: #c8bdf6; --g2: #e8e2fc; --g3: #a99af0;"><div class="ptab-orbs" aria-hidden="true"><i></i><i></i><i></i></div>
-            <img loading="lazy" decoding="async" class="ptab-shot" src="assets/img/pp-page-1-5x.webp" alt="Product page optimization plan in Vizit">
+            <img class="ptab-shot" src="uploads/pp_page_1_5x.webp" alt="Product page optimization plan in Vizit">
           </div>
         </div>
         <div class="ptab-panel" role="tabpanel" id="ptab-panel-3" aria-labelledby="ptab-3" hidden>
           <div class="ptab-visual" style="--g1: #aed3f5; --g2: #ddeefb; --g3: #86b9ee;"><div class="ptab-orbs" aria-hidden="true"><i></i><i></i><i></i></div>
-            <img loading="lazy" decoding="async" class="ptab-shot" src="assets/img/group-1-1-5x.webp" alt="Category explorer in Vizit">
+            <img class="ptab-shot" src="uploads/group_1_1_5x.webp" alt="Category explorer in Vizit">
           </div>
         </div>
         <div class="ptab-panel" role="tabpanel" id="ptab-panel-4" aria-labelledby="ptab-4" hidden>
           <div class="ptab-visual" style="--g1: #b4c2f2; --g2: #e3e9fb; --g3: #8fa4ec;"><div class="ptab-orbs" aria-hidden="true"><i></i><i></i><i></i></div>
-            <img loading="lazy" decoding="async" class="ptab-shot" src="assets/img/image-details-page-spark-images.webp" alt="Spark images in Vizit">
+            <img class="ptab-shot" src="uploads/image_details_page_spark_images.webp" alt="Spark images in Vizit">
           </div>
         </div>
         <div class="ptab-panel" role="tabpanel" id="ptab-panel-5" aria-labelledby="ptab-5" hidden>
           <div class="ptab-visual" style="--g1: #c3b8f4; --g2: #e6f0fb; --g3: #97a9ef;"><div class="ptab-orbs" aria-hidden="true"><i></i><i></i><i></i></div>
-            <img loading="lazy" decoding="async" class="ptab-shot" src="assets/img/opportunity-analysis-all-brands-1-5x.webp" alt="Opportunity reporting in Vizit">
+            <img class="ptab-shot" src="uploads/opportunity_analysis_all_brands_1_5x.webp" alt="Opportunity reporting in Vizit">
           </div>
         </div>
       </div>
@@ -3797,7 +3784,7 @@
     <div class="case-card">
       <div class="case-copy">
         <div class="case-head-row">
-          <img loading="lazy" decoding="async" class="case-logo" src="assets/img/mars.webp" alt="Mars" width="252" height="72">
+          <img class="case-logo" src="uploads/mars.webp" alt="Mars" width="252" height="72">
         </div>
         <h2 class="headline case-head">
           The right visual change drives <em>outsized</em> conversion gains.
@@ -3812,10 +3799,10 @@
             <span>faster content development time</span>
           </div>
         </div>
-        <a class="btn btn-primary case-cta" href="mars-petcare-case-study.html">Read the Mars Petcare story <span class="arrow">→</span></a>
+        <a class="btn btn-primary case-cta" href="Mars Petcare Case Study.html">Read the Mars Petcare story <span class="arrow">→</span></a>
       </div>
       <div class="case-photo">
-        <img loading="lazy" decoding="async" src="assets/img/mars-case-study.png" alt="Mars Petcare — pet parent with dog reviewing scored product imagery in Vizit" width="1796" height="1686">
+        <img src="uploads/mars case study.png" alt="Mars Petcare — pet parent with dog reviewing scored product imagery in Vizit" width="1796" height="1686">
       </div>
     </div>
   </div>
@@ -3891,30 +3878,30 @@
           <h3>Overall Computer Vision <em>Company of the Year</em></h3>
           <p>Vizit was named Overall Computer Vision Company of the Year at the AI Breakthrough Awards, recognized alongside NVIDIA, Meta, Microsoft, and Databricks from more than <b>5,000+ global nominations</b>.</p>
           <div class="aw2-peers">
-            <img loading="lazy" decoding="async" src="assets/awards/nvidia.png" alt="NVIDIA" width="192" height="62">
-            <img loading="lazy" decoding="async" src="assets/awards/meta.png" alt="Meta" width="168" height="64">
-            <img loading="lazy" decoding="async" src="assets/awards/microsoft.png" alt="Microsoft" width="192" height="64">
-            <img loading="lazy" decoding="async" src="assets/awards/databricks.png" alt="Databricks" width="180" height="64">
+            <img src="assets/awards/nvidia.png" alt="NVIDIA" width="192" height="62">
+            <img src="assets/awards/meta.png" alt="Meta" width="168" height="64">
+            <img src="assets/awards/microsoft.png" alt="Microsoft" width="192" height="64">
+            <img src="assets/awards/databricks.png" alt="Databricks" width="180" height="64">
           </div>
         </div>
         <div class="aw2-badge">
-          <img loading="lazy" decoding="async" src="assets/awards/ai-breakthrough.png" alt="AI Breakthrough Awards — Overall Computer Vision Company of the Year 2025" width="382" height="376">
+          <img src="assets/awards/ai-breakthrough.png" alt="AI Breakthrough Awards — Overall Computer Vision Company of the Year 2025" width="382" height="376">
         </div>
       </div>
 
       <div class="aw2-grid">
         <div class="aw2-card reveal">
-          <span class="src"><img loading="lazy" decoding="async" src="assets/awards/the-lead.png" alt="The Lead · Leading 100" width="230" height="82"></span>
+          <span class="src"><img src="assets/awards/the-lead.png" alt="The Lead · Leading 100" width="230" height="82"></span>
           <h4>The Leading 100</h4>
           <p>Named to The Lead's Leading 100 list of the most innovative companies.</p>
         </div>
         <div class="aw2-card reveal">
-          <span class="src"><img loading="lazy" decoding="async" src="assets/awards/cb-insights.png" alt="CB Insights" width="232" height="54"></span>
+          <span class="src"><img src="assets/awards/cb-insights.png" alt="CB Insights" width="232" height="54"></span>
           <h4>Retail Tech 100</h4>
           <p>Recognized by CB Insights as one of the most promising retail technology companies.</p>
         </div>
         <div class="aw2-card reveal">
-          <span class="src"><img loading="lazy" decoding="async" src="assets/awards/business-insider.png" alt="Business Insider" width="196" height="66"></span>
+          <span class="src"><img src="assets/awards/business-insider.png" alt="Business Insider" width="196" height="66"></span>
           <h4>Business Insider Top 15</h4>
           <p>Featured among promising tech startups.</p>
         </div>
@@ -4063,7 +4050,7 @@ body{ background:#ffffff; }
 <!-- FOOTER -->
 <vizit-footer></vizit-footer>
 
-<script src="js/image-slot.js" defer></script>
+<script src="image-slot.js" defer></script>
 <script>
 (function(){
   var el=document.getElementById('hsNum'); if(!el) return;
@@ -4694,6 +4681,5 @@ body{ background:#ffffff; }
 .hero .btn-primary::before, .calc-cta .btn-primary::before, .calc-cta .btn-ghost::before, .case-card .btn-primary::before, .btn-ghost-hero::before{ content:none !important; }
 .hero .btn-spot:hover, .hero .btn-spot:hover .bs-label{ color:#ffffff !important; }
 </style>
-<script id="img-preload">addEventListener("load",function(){var f=function(){document.querySelectorAll('img[loading="lazy"]').forEach(function(i){i.loading="eager"})};(window.requestIdleCallback||function(c){setTimeout(c,600)})(f,{timeout:1500})})</script>
 </body>
 </html>

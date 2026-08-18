@@ -71,68 +71,68 @@
       "permanent": true
     },
     {
-      "source": "/vizit-next-gen-platform",
-      "destination": "/platform",
+      "source": "/platform",
+      "destination": "/vizit-next-gen-platform",
       "permanent": true
     },
     {
-      "source": "/vizit-api",
-      "destination": "/api",
+      "source": "/api",
+      "destination": "/vizit-api",
       "permanent": true
     },
     {
-      "source": "/partner-ecosystem",
-      "destination": "/partners",
+      "source": "/partners",
+      "destination": "/partner-ecosystem",
       "permanent": true
     },
     {
-      "source": "/customer-support",
-      "destination": "/support",
+      "source": "/support",
+      "destination": "/customer-support",
       "permanent": true
     },
     {
-      "source": "/case-studies",
-      "destination": "/case-study",
+      "source": "/case-study",
+      "destination": "/case-studies",
       "permanent": true
     },
     {
       "source": "/resources/case-studies",
-      "destination": "/case-study",
+      "destination": "/case-studies",
       "permanent": true
     },
     {
       "source": "/resources/case-studies/:slug",
-      "destination": "/case-study/:slug",
+      "destination": "/:slug-case-study",
       "permanent": true
     },
     {
-      "source": "/central-garden-case-study",
-      "destination": "/case-study/central-garden",
+      "source": "/case-study/central-garden",
+      "destination": "/central-garden-case-study",
       "permanent": true
     },
     {
-      "source": "/ghirardelli-case-study",
-      "destination": "/case-study/ghirardelli",
+      "source": "/case-study/ghirardelli",
+      "destination": "/ghirardelli-case-study",
       "permanent": true
     },
     {
-      "source": "/mars-petcare-case-study",
-      "destination": "/case-study/mars-petcare",
+      "source": "/case-study/mars-petcare",
+      "destination": "/mars-petcare-case-study",
       "permanent": true
     },
     {
-      "source": "/moen-case-study",
-      "destination": "/case-study/moen",
+      "source": "/case-study/moen",
+      "destination": "/moen-case-study",
       "permanent": true
     },
     {
-      "source": "/beauty-case-study",
-      "destination": "/case-study/worlds-largest-beauty-company",
+      "source": "/case-study/worlds-largest-beauty-company",
+      "destination": "/beauty-case-study",
       "permanent": true
     },
     {
-      "source": "/purina-case-study",
-      "destination": "/case-study/purina",
+      "source": "/case-study/purina",
+      "destination": "/purina-case-study",
       "permanent": true
     },
     {

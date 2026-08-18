@@ -1,0 +1,99 @@
+# Images that need to be restored to `uploads/`
+
+95 files. Filenames must match exactly; drop them into `uploads/` and the pages reconnect with no code changes.
+
+- `1.webp` — vizit-next-gen-platform.html, vizit-site.html
+- `2.webp` — vizit-next-gen-platform.html, vizit-site.html
+- `3.webp` — vizit-next-gen-platform.html, vizit-site.html
+- `81ppeyqlinl-ac-sx679.png` — index.html, vizit-site.html
+- `colgate-palmolive.webp` — index.html, vizit-site.html
+- `ddf-g-90.png` — vizit-next-gen-platform.html, vizit-site.html
+- `ddf.webp` — vizit-next-gen-platform.html, vizit-site.html
+- `expose-conversion.webp` — index.html, vizit-site.html
+- `gen-1.png` — vizit-next-gen-platform.html, vizit-site.html
+- `gen-2.png` — vizit-next-gen-platform.html, vizit-site.html
+- `gen-3.png` — vizit-next-gen-platform.html, vizit-site.html
+- `gen-4.png` — vizit-next-gen-platform.html, vizit-site.html
+- `gen-5.png` — vizit-next-gen-platform.html, vizit-site.html
+- `gen-6.png` — vizit-next-gen-platform.html, vizit-site.html
+- `gen-card.png` — vizit-next-gen-platform.html, vizit-site.html
+- `girar-cs.png` — case-studies.html, ghirardelli-case-study.html, vizit-site.html
+- `group-1-1-5x.webp` — index.html, vizit-site.html
+- `hero-image-2f78562d.webp` — vizit-next-gen-platform.html, vizit-site.html
+- `hero-image-breadown.webp` — vizit-next-gen-platform.html, vizit-site.html
+- `hero-image.webp` — vizit-next-gen-platform.html, vizit-site.html
+- `idea-1.png` — vizit-next-gen-platform.html, vizit-site.html
+- `idea-2.png` — vizit-next-gen-platform.html, vizit-site.html
+- `idea-3.png` — vizit-next-gen-platform.html, vizit-site.html
+- `idea-card.png` — vizit-next-gen-platform.html, vizit-site.html
+- `image-1.webp` — vizit-next-gen-platform.html, vizit-site.html
+- `image-2.webp` — vizit-next-gen-platform.html, vizit-site.html
+- `image-details-page-analysis-2x.webp` — index.html, vizit-site.html
+- `image-details-page-spark-images-2x.webp` — index.html, vizit-site.html
+- `image-details-page-spark-images.webp` — index.html, vizit-site.html
+- `image-score.webp` — vizit-next-gen-platform.html, vizit-site.html
+- `library-products-tab-1440w-2x.webp` — index.html, vizit-site.html
+- `loreal-cs.png` — beauty-case-study.html, case-studies.html, index.html, vizit-site.html
+- `loreal.webp` — index.html, vizit-site.html
+- `mars-case-study.png` — case-studies.html, index.html, mars-petcare-case-study.html, vizit-site.html
+- `mars.webp` — case-studies.html, index.html, mars-petcare-case-study.html, vizit-site.html
+- `moen-cs.png` — case-studies.html, moen-case-study.html, vizit-site.html
+- `mondelez.webp` — index.html, vizit-site.html
+- `nestle.webp` — index.html, vizit-site.html
+- `opportunity-analysis-all-brands-1-5x.webp` — index.html, vizit-site.html
+- `pasted-1785253310409-0.png` — case-studies.html, moen-case-study.html, vizit-site.html
+- `pasted-1785253335061-0.png` — case-studies.html, ghirardelli-case-study.html, vizit-site.html
+- `pasted-1785253453176-0.png` — central-garden-case-study.html, vizit-site.html
+- `pasted-1785253840012-0.png` — case-studies.html, index.html, purina-case-study.html, vizit-site.html
+- `pasted-1785254859893-0.png` — beauty-case-study.html, case-studies.html, index.html, vizit-site.html
+- `pdp-score-2.webp` — vizit-next-gen-platform.html, vizit-site.html
+- `pdp-score.webp` — vizit-next-gen-platform.html, vizit-site.html
+- `pdp.webp` — vizit-next-gen-platform.html, vizit-site.html
+- `platform-screen-image.webp` — vizit-next-gen-platform.html, vizit-site.html
+- `platform-screen.webp` — vizit-next-gen-platform.html, vizit-site.html
+- `pp-page-1-5x.webp` — index.html, vizit-site.html
+- `pp-page-2x.webp` — index.html, vizit-site.html
+- `product-list-header.webp` — vizit-next-gen-platform.html, vizit-site.html
+- `product-list-item.webp` — vizit-next-gen-platform.html, vizit-site.html
+- `product-list-item2.webp` — vizit-next-gen-platform.html, vizit-site.html
+- `product-list-item3.webp` — vizit-next-gen-platform.html, vizit-site.html
+- `product-list-item4.webp` — vizit-next-gen-platform.html, vizit-site.html
+- `product-list-item5.webp` — vizit-next-gen-platform.html, vizit-site.html
+- `product-list-item6.webp` — vizit-next-gen-platform.html, vizit-site.html
+- `purina-cs.png` — case-studies.html, index.html, purina-case-study.html, vizit-site.html
+- `reporting-image.webp` — vizit-next-gen-platform.html, vizit-site.html
+- `source-image-1-85ead9bd.png` — index.html, vizit-site.html
+- `source-image-10-17900ef3.png` — index.html, vizit-site.html
+- `source-image-11.png` — index.html, vizit-site.html
+- `source-image-12.png` — index.html, vizit-site.html
+- `source-image-13.png` — index.html, vizit-site.html
+- `source-image-14.png` — index.html, vizit-site.html
+- `source-image-15.png` — index.html, vizit-site.html
+- `source-image-16.png` — index.html, vizit-site.html
+- `source-image-17.png` — index.html, vizit-site.html
+- `source-image-18.png` — index.html, vizit-site.html
+- `source-image-19.png` — index.html, vizit-site.html
+- `source-image-2-5668efb2.png` — index.html, vizit-site.html
+- `source-image-20.png` — index.html, vizit-site.html
+- `source-image-21.png` — index.html, vizit-site.html
+- `source-image-22.png` — index.html, vizit-site.html
+- `source-image-23.png` — index.html, vizit-site.html
+- `source-image-24.png` — index.html, vizit-site.html
+- `source-image-25.png` — index.html, vizit-site.html
+- `source-image-26.png` — index.html, vizit-site.html
+- `source-image-27.png` — index.html, vizit-site.html
+- `source-image-28.png` — index.html, vizit-site.html
+- `source-image-29.png` — index.html, vizit-site.html
+- `source-image-3-903c5dc9.png` — index.html, vizit-site.html
+- `source-image-30.png` — index.html, vizit-site.html
+- `source-image-31.png` — index.html, vizit-site.html
+- `source-image-32.png` — index.html, vizit-site.html
+- `source-image-33.png` — index.html, vizit-site.html
+- `source-image-34.png` — index.html, vizit-site.html
+- `source-image-35.png` — index.html, vizit-site.html
+- `source-image-4-c7e8e18b.png` — index.html, vizit-site.html
+- `source-image-6-c4743ed9.png` — index.html, vizit-site.html
+- `source-image-7-d5e0e52c.png` — index.html, vizit-site.html
+- `source-image-8-00ec5be6.png` — index.html, vizit-site.html
+- `source-image-9-62d420a2.png` — index.html, vizit-site.html
+- `source-image.png` — index.html, vizit-site.html

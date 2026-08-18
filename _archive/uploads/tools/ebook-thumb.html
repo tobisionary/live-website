@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>ebook thumb</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+html,body{margin:0;background:#333}
+.cover{width:1200px;height:750px;background:linear-gradient(150deg,var(--blue-1000) 0%,#00213d 55%,#013560 100%);color:white;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:64px 72px;box-sizing:border-box;font-family:var(--font-sans)}
+.cover::before{content:"";position:absolute;inset:0;background:radial-gradient(55% 70% at 82% 18%,rgba(1,116,217,0.45),transparent 65%),radial-gradient(40% 55% at 8% 92%,rgba(52,160,254,0.18),transparent 60%)}
+.cover::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.05) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:linear-gradient(135deg,black 10%,transparent 70%);mask-image:linear-gradient(135deg,black 10%,transparent 70%)}
+.top{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:flex-start}
+.eyebrow{font-family:var(--font-mono);font-size:15px;letter-spacing:0.22em;text-transform:uppercase;color:var(--blue-300)}
+.eyebrow small{display:block;margin-top:8px;color:rgba(255,255,255,0.55);font-size:12px;letter-spacing:0.2em}
+.logo{height:26px;filter:brightness(0) invert(1)}
+.mid{position:relative;z-index:1}
+.mid h1{font-family:var(--font-display);font-weight:600;font-size:64px;line-height:1.04;letter-spacing:-0.03em;margin:0 0 22px;max-width:15ch}
+.mid h1 em{font-style:normal;color:var(--blue-300)}
+.mid p{font-size:21px;line-height:1.45;color:rgba(255,255,255,0.72);margin:0;max-width:52ch}
+.bottom{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:flex-end}
+.shortlist{display:flex;gap:14px;align-items:flex-end}
+.slcard{width:120px;border-radius:10px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);padding:12px;display:flex;flex-direction:column;gap:10px;backdrop-filter:blur(2px)}
+.slcard .ph{height:56px;border-radius:6px;background:linear-gradient(135deg,rgba(52,160,254,0.5),rgba(255,255,255,0.12))}
+.slcard .score{font-family:var(--font-mono);font-size:13px;letter-spacing:0.08em;display:flex;justify-content:space-between;align-items:center}
+.slcard .score b{font-family:var(--font-display);font-weight:500;font-size:22px}
+.slcard.win .score b{color:#7be3a8}
+.slcard.drop{opacity:0.45}
+.slcard.drop .ph{background:rgba(255,255,255,0.10)}
+.slcard.drop .score b{color:#ff9d8a}
+.sllbl{font-family:var(--font-mono);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:10px}
+.pages{font-family:var(--font-mono);font-size:13px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.55);text-align:right}
+</style></head><body>
+<div class="cover" id="cover">
+  <div class="top">
+    <div class="eyebrow">Research report · 2026<small>The state of agentic shopping</small></div>
+    <img class="logo" src="../assets/logo-black.svg" alt="Vizit">
+  </div>
+  <div class="mid">
+    <h1>Agentic shopping: how <em>AI agents</em> discover and recommend products</h1>
+    <p>Why your product images are the most important signal you are not optimizing.</p>
+  </div>
+  <div class="bottom">
+    <div>
+      <div class="sllbl">Agent shortlist · 3 of 6 shown</div>
+      <div class="shortlist">
+        <div class="slcard win"><div class="ph"></div><div class="score"><span>IMG</span><b>92</b></div></div>
+        <div class="slcard win" style="opacity:0.85"><div class="ph"></div><div class="score"><span>IMG</span><b>88</b></div></div>
+        <div class="slcard drop"><div class="ph"></div><div class="score"><span>DROP</span><b>71</b></div></div>
+      </div>
+    </div>
+    <div class="pages">17 pages · Free PDF</div>
+  </div>
+</div>
+</body></html>
