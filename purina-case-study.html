@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
 <head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Purina | Vizit Case Study</title>
@@ -111,6 +113,15 @@
     .statband .stat{border-left:none;padding-left:0}
   }
 </style>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vizit">
+<meta property="og:title" content="Purina | Vizit Case Study">
+<meta property="og:image" content="https://vizit.com/assets/og-cover.jpg">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="1000">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Purina | Vizit Case Study">
+<meta name="twitter:image" content="https://vizit.com/assets/og-cover.jpg">
 </head>
 <body>
 <vizit-nav></vizit-nav>
@@ -120,13 +131,13 @@
     <nav class="crumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><a href="case-studies.html">Case studies</a><span>/</span><span>Purina</span></nav>
     <div class="cs-hero-grid">
       <div>
-        <div style="margin-bottom:26px;display:flex;align-items:center;gap:18px;flex-wrap:wrap"><img class="logo" src="assets/img/pasted-1785253840012-0.png" alt="Purina" style="height:36px;width:auto;filter:brightness(0)"><span class="cs-tag">Case study</span></div>
+        <div style="margin-bottom:26px;display:flex;align-items:center;gap:18px;flex-wrap:wrap"><img fetchpriority="high" decoding="async" class="logo" src="assets/img/pasted-1785253840012-0.png" alt="Purina" style="height:36px;width:auto;filter:brightness(0)"><span class="cs-tag">Case study</span></div>
         <h1>Purina improved conversion rates by 9.44% in 6 weeks.</h1>
         <p class="lead">A controlled study of Vizit Score&ndash;based image reordering: the optimized group converted higher, the control group didn't move.</p>
         <div class="meta"><span>5 min read</span><span>&middot;</span><span>Pet care</span><span>&middot;</span><span>6-week study</span></div>
       </div>
       <div class="cs-hero-media">
-        <img src="assets/img/purina-cs.png" alt="Purina product imagery scored in Vizit">
+        <img loading="lazy" decoding="async" src="assets/img/purina-cs.png" alt="Purina product imagery scored in Vizit">
       </div>
     </div>
   </div>
@@ -196,5 +207,6 @@
   });
 })();
 </script>
+<script id="img-preload">addEventListener("load",function(){var f=function(){document.querySelectorAll('img[loading="lazy"]').forEach(function(i){i.loading="eager"})};(window.requestIdleCallback||function(c){setTimeout(c,600)})(f,{timeout:1500})})</script>
 </body>
 </html>

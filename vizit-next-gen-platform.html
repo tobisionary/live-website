@@ -224,7 +224,18 @@
   .offer-cta{margin-top:32px}
   a{color:var(--accent,#0174d9)}
   a:hover{color:var(--blue-1000,#00213d)}
+  html,body{overflow-x:clip}
+  @media(max-width:900px){main section{overflow-x:clip}.offer-media{max-width:100%}.pdp-card,.img-card{right:0}.pdps-panel{right:0}}
 </style>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vizit">
+<meta property="og:title" content="The Vizit Platform | The Agentic Platform for Content Optimization">
+<meta property="og:image" content="https://vizit.com/assets/og-cover.jpg">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="1000">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Vizit Platform | The Agentic Platform for Content Optimization">
+<meta name="twitter:image" content="https://vizit.com/assets/og-cover.jpg">
 </head>
 <body>
 
@@ -243,14 +254,14 @@
       <h1>Win every moment<br>your <em>product is seen.</em></h1>
       <p class="hero__sub">Everyone else optimizes content to get your product found, seen, or made faster. Vizit optimizes to get it bought.</p>
       <div class="hero__ctas">
-        <a href="score-your-content.html" class="btn btn--primary">Score your content</a>
+        <a href="demo.html" class="btn btn--primary">Score your content</a>
       </div>
     </div>
 
-    <img class="hero-shot reveal" src="assets/img/hero-image.webp" alt="The Vizit platform on a laptop">
+    <img fetchpriority="high" decoding="async" class="hero-shot reveal" src="assets/img/hero-image.webp" alt="The Vizit platform on a laptop">
   </div>
 </section>
-<script src="js/image-slot.js"></script>
+<script defer src="js/image-slot.js"></script>
 
 <!-- MID-PAGE SECTION NAV -->
 <nav class="subnav" aria-label="Platform sections">
@@ -282,7 +293,7 @@
   <div class="container">
     <div class="section-head reveal"><h2 class="headline">Know the conversion power of every product page and asset.</h2><p class="subhead">Every image in your catalog is scored against the Content Conversion Standard — the industry's first benchmark for whether content will make a shopper buy.</p></div>
     <div class="offer-grid reveal">
-    <div class="offer-media"><div id="offer-score-1" class="catalog-anim active"><img class="cat-row" src="assets/img/product-list-header.webp" alt="Catalog table header"><img class="cat-row" src="assets/img/product-list-item.webp" alt="Scored product row"><img class="cat-row" src="assets/img/product-list-item2.webp" alt="Scored product row"><img class="cat-row" src="assets/img/product-list-item3.webp" alt="Scored product row"><img class="cat-row" src="assets/img/product-list-item4.webp" alt="Scored product row"><img class="cat-row" src="assets/img/product-list-item5.webp" alt="Scored product row"><img class="cat-row" src="assets/img/product-list-item6.webp" alt="Scored product row"></div><div id="offer-score-2" class="pdp-anim"><div class="pdp-stage"><img class="pdp-base" src="assets/img/platform-screen.webp" alt="Product page with images"><div class="pdp-score" style="left:3.5%;top:31.4%;width:27%;height:4.9%;--d:.4s"><span class="pn">83</span><span class="pb"><i style="--w:83%"></i></span></div><div class="pdp-score" style="left:6%;top:70.7%;width:27%;height:5.5%;--d:.9s"><span class="pn">96</span><span class="pb"><i style="--w:96%"></i></span></div><div class="pdp-score" style="left:36.4%;top:70.7%;width:27%;height:5.5%;--d:1.2s"><span class="pn">94</span><span class="pb"><i style="--w:94%"></i></span></div><div class="pdp-score" style="left:67%;top:70.7%;width:27%;height:5.5%;--d:1.5s"><span class="pn">93</span><span class="pb"><i style="--w:93%"></i></span></div><img class="pdp-card" src="assets/img/pdp-score.webp" alt="Product Page Score 88"></div></div><div id="offer-score-3" class="pdp-anim"><div class="img-stage"><img class="pdp-base" src="assets/img/platform-screen-image.webp" alt="Product image in platform"><img class="img-card" src="assets/img/image-score.webp" alt="Vizit Score 94 — Very high"></div></div></div>
+    <div class="offer-media"><div id="offer-score-1" class="catalog-anim active"><img loading="lazy" decoding="async" class="cat-row" src="assets/img/product-list-header.webp" alt="Catalog table header"><img loading="lazy" decoding="async" class="cat-row" src="assets/img/product-list-item.webp" alt="Scored product row"><img loading="lazy" decoding="async" class="cat-row" src="assets/img/product-list-item2.webp" alt="Scored product row"><img loading="lazy" decoding="async" class="cat-row" src="assets/img/product-list-item3.webp" alt="Scored product row"><img loading="lazy" decoding="async" class="cat-row" src="assets/img/product-list-item4.webp" alt="Scored product row"><img loading="lazy" decoding="async" class="cat-row" src="assets/img/product-list-item5.webp" alt="Scored product row"><img loading="lazy" decoding="async" class="cat-row" src="assets/img/product-list-item6.webp" alt="Scored product row"></div><div id="offer-score-2" class="pdp-anim"><div class="pdp-stage"><img loading="lazy" decoding="async" class="pdp-base" src="assets/img/platform-screen.webp" alt="Product page with images"><div class="pdp-score" style="left:3.5%;top:31.4%;width:27%;height:4.9%;--d:.4s"><span class="pn">83</span><span class="pb"><i style="--w:83%"></i></span></div><div class="pdp-score" style="left:6%;top:70.7%;width:27%;height:5.5%;--d:.9s"><span class="pn">96</span><span class="pb"><i style="--w:96%"></i></span></div><div class="pdp-score" style="left:36.4%;top:70.7%;width:27%;height:5.5%;--d:1.2s"><span class="pn">94</span><span class="pb"><i style="--w:94%"></i></span></div><div class="pdp-score" style="left:67%;top:70.7%;width:27%;height:5.5%;--d:1.5s"><span class="pn">93</span><span class="pb"><i style="--w:93%"></i></span></div><img loading="lazy" decoding="async" class="pdp-card" src="assets/img/pdp-score.webp" alt="Product Page Score 88"></div></div><div id="offer-score-3" class="pdp-anim"><div class="img-stage"><img loading="lazy" decoding="async" class="pdp-base" src="assets/img/platform-screen-image.webp" alt="Product image in platform"><img loading="lazy" decoding="async" class="img-card" src="assets/img/image-score.webp" alt="Vizit Score 94 — Very high"></div></div></div>
     <div class="offer-copy">
       <ul class="offer-feats">
         <li><span class="ft">Upload and score entire catalogs</span><div class="fd"><p>Score every product in your catalog at scale.</p></div></li>
@@ -301,7 +312,7 @@
   <div class="container">
     <div class="section-head reveal"><h2 class="headline">See exactly why a product page is losing conversion.</h2><p class="subhead">Vizit diagnoses every image and PDP through your shopper's eyes — surfacing the specific visual blockers hurting conversion and the revenue they're leaking.</p></div>
     <div class="offer-grid reveal">
-    <div class="offer-media"><div id="offer-insights-2" class="pdp-anim active"><div class="pdps-stage"><img class="pdps-main" src="assets/img/pdp.webp" alt="Product page with scored images"><img class="pdps-panel" src="assets/img/pdp-score-2.webp" alt="PDP score breakdown: carousel 86, hero 98, diverse assets, 7 of 7"></div></div><div id="offer-insights-3" class="pdp-anim"><div class="hio-stage"><img class="hio-hero" src="assets/img/hero-image-2f78562d.webp" alt="Hero image scored 76"><img class="hio-panel" src="assets/img/hero-image-breadown.webp" alt="Hero image diagnostic breakdown"></div></div><div id="offer-insights-1" class="pdp-anim"><div class="vs-stage"><img class="vs-lose" src="assets/img/image-1.webp" alt="Low-scoring image — 27"><img class="vs-win" src="assets/img/image-2.webp" alt="High-scoring image — 96"></div></div></div>
+    <div class="offer-media"><div id="offer-insights-2" class="pdp-anim active"><div class="pdps-stage"><img loading="lazy" decoding="async" class="pdps-main" src="assets/img/pdp.webp" alt="Product page with scored images"><img loading="lazy" decoding="async" class="pdps-panel" src="assets/img/pdp-score-2.webp" alt="PDP score breakdown: carousel 86, hero 98, diverse assets, 7 of 7"></div></div><div id="offer-insights-3" class="pdp-anim"><div class="hio-stage"><img loading="lazy" decoding="async" class="hio-hero" src="assets/img/hero-image-2f78562d.webp" alt="Hero image scored 76"><img loading="lazy" decoding="async" class="hio-panel" src="assets/img/hero-image-breadown.webp" alt="Hero image diagnostic breakdown"></div></div><div id="offer-insights-1" class="pdp-anim"><div class="vs-stage"><img loading="lazy" decoding="async" class="vs-lose" src="assets/img/image-1.webp" alt="Low-scoring image — 27"><img loading="lazy" decoding="async" class="vs-win" src="assets/img/image-2.webp" alt="High-scoring image — 96"></div></div></div>
     <div class="offer-copy">
       <ul class="offer-feats">
         <li><span class="ft">Discover PDP level conversion opportunities</span><div class="fd"><p>Find your biggest conversion opportunities and how to improve them.</p></div></li>
@@ -320,7 +331,7 @@
   <div class="container">
     <div class="section-head reveal"><h2 class="headline">Discover what converts in your category.</h2><p class="subhead">Vizit maps the visual landscape of any product category. Pinpoint the triggers that earn shopper choice - and the gaps your competitors are exploiting.</p></div>
     <div class="offer-grid reveal">
-    <div class="offer-media"><div id="offer-research-1" class="pdp-anim active"><div class="exp-stage"><img class="exp-grid" src="assets/img/ddf.webp" alt="Browse by product category"><span class="exp-hit"></span><span class="exp-ring"></span><span class="exp-cursor"></span><img class="exp-cat" src="assets/img/ddf-g-90.png" alt="Dry Dog Food top-performing creative"></div></div><div id="offer-research-2" class="pdp-anim"><div class="am-stage"><img class="am-f1" src="assets/img/1.webp" alt="Optimal asset mix with two missing assets"><img class="am-f2" src="assets/img/2.webp" alt="Lifestyle asset added"><img class="am-f3" src="assets/img/3.webp" alt="Product facts asset added"><span class="am-slot"></span><span class="am-slot two"></span><span class="am-btn">Add missing assets</span><span class="am-cursor"></span></div></div><image-slot id="offer-research-3" shape="rounded" radius="16">Research · creative briefs — drop screenshot here</image-slot></div>
+    <div class="offer-media"><div id="offer-research-1" class="pdp-anim active"><div class="exp-stage"><img loading="lazy" decoding="async" class="exp-grid" src="assets/img/ddf.webp" alt="Browse by product category"><span class="exp-hit"></span><span class="exp-ring"></span><span class="exp-cursor"></span><img loading="lazy" decoding="async" class="exp-cat" src="assets/img/ddf-g-90.png" alt="Dry Dog Food top-performing creative"></div></div><div id="offer-research-2" class="pdp-anim"><div class="am-stage"><img loading="lazy" decoding="async" class="am-f1" src="assets/img/1.webp" alt="Optimal asset mix with two missing assets"><img loading="lazy" decoding="async" class="am-f2" src="assets/img/2.webp" alt="Lifestyle asset added"><img loading="lazy" decoding="async" class="am-f3" src="assets/img/3.webp" alt="Product facts asset added"><span class="am-slot"></span><span class="am-slot two"></span><span class="am-btn">Add missing assets</span><span class="am-cursor"></span></div></div><image-slot id="offer-research-3" shape="rounded" radius="16">Research · creative briefs — drop screenshot here</image-slot></div>
     <div class="offer-copy">
       <ul class="offer-feats">
         <li><span class="ft">Explore top-performing creative</span><div class="fd"><p>See which visual styles, claims, and layouts consistently drive conversion in your category.</p></div></li>
@@ -338,7 +349,7 @@
   <div class="container">
     <div class="section-head reveal"><h2 class="headline">One click to fix the content that's losing revenue.</h2><p class="subhead">Vizit Spark transforms low-scoring images into Vizit-certified, ready-to-syndicate assets using our proprietary generative engine — no reshoots, no agency rounds.</p></div>
     <div class="offer-grid reveal">
-    <div class="offer-media"><div id="offer-spark-1" class="pdp-anim active"><div class="gen-stage"><div class="gen-grid"><img src="assets/img/gen-1.png" alt="Generated asset scored 97" style="--d:2.9s"><img src="assets/img/gen-2.png" alt="Generated asset scored 98" style="--d:3.2s"><img src="assets/img/gen-3.png" alt="Generated asset scored 94" style="--d:3.5s"><img src="assets/img/gen-4.png" alt="Generated asset scored 90" style="--d:3.8s"><img src="assets/img/gen-5.png" alt="Generated asset scored 87" style="--d:4.1s"><img src="assets/img/gen-6.png" alt="Generated asset scored 88" style="--d:4.4s"></div><div class="gen-card"><img src="assets/img/gen-card.png" alt="Original image scored 13"><span class="gen-btn">Generate images</span></div><span class="gen-cursor"></span></div></div><div id="offer-spark-2" class="pdp-anim"><div class="gen-stage"><div class="idea-list"><img src="assets/img/idea-1.png" alt="Recommendation: background cleanup" style="--d:2.9s"><img src="assets/img/idea-2.png" alt="Recommendation: product separation" style="--d:3.4s"><img src="assets/img/idea-3.png" alt="Recommendation: composition balance" style="--d:3.9s"></div><div class="gen-card"><img src="assets/img/idea-card.png" alt="Original image scored 13"><span class="gen-btn">Generate ideas</span></div><span class="gen-cursor"></span></div></div><image-slot id="offer-spark-3" shape="rounded" radius="16">Spark · syndicate-ready output — drop screenshot here</image-slot></div>
+    <div class="offer-media"><div id="offer-spark-1" class="pdp-anim active"><div class="gen-stage"><div class="gen-grid"><img loading="lazy" decoding="async" src="assets/img/gen-1.png" alt="Generated asset scored 97" style="--d:2.9s"><img loading="lazy" decoding="async" src="assets/img/gen-2.png" alt="Generated asset scored 98" style="--d:3.2s"><img loading="lazy" decoding="async" src="assets/img/gen-3.png" alt="Generated asset scored 94" style="--d:3.5s"><img loading="lazy" decoding="async" src="assets/img/gen-4.png" alt="Generated asset scored 90" style="--d:3.8s"><img loading="lazy" decoding="async" src="assets/img/gen-5.png" alt="Generated asset scored 87" style="--d:4.1s"><img loading="lazy" decoding="async" src="assets/img/gen-6.png" alt="Generated asset scored 88" style="--d:4.4s"></div><div class="gen-card"><img loading="lazy" decoding="async" src="assets/img/gen-card.png" alt="Original image scored 13"><span class="gen-btn">Generate images</span></div><span class="gen-cursor"></span></div></div><div id="offer-spark-2" class="pdp-anim"><div class="gen-stage"><div class="idea-list"><img loading="lazy" decoding="async" src="assets/img/idea-1.png" alt="Recommendation: background cleanup" style="--d:2.9s"><img loading="lazy" decoding="async" src="assets/img/idea-2.png" alt="Recommendation: product separation" style="--d:3.4s"><img loading="lazy" decoding="async" src="assets/img/idea-3.png" alt="Recommendation: composition balance" style="--d:3.9s"></div><div class="gen-card"><img loading="lazy" decoding="async" src="assets/img/idea-card.png" alt="Original image scored 13"><span class="gen-btn">Generate ideas</span></div><span class="gen-cursor"></span></div></div><image-slot id="offer-spark-3" shape="rounded" radius="16">Spark · syndicate-ready output — drop screenshot here</image-slot></div>
     <div class="offer-copy">
       <ul class="offer-feats">
         <li><span class="ft">Gen AI image optimization</span><div class="fd"><p>Turn a 52 into a 90+ in seconds, guided by conversion data.</p></div></li>
@@ -356,7 +367,7 @@
   <div class="container">
     <div class="section-head reveal"><h2 class="headline">Prove the lift. Track every point of impact.</h2><p class="subhead">Always-on reporting connects content improvements to business outcomes — so every team sees the revenue that better content recovers.</p></div>
     <div class="offer-grid reveal">
-    <div class="offer-media"><div id="offer-reporting-1" class="pdp-anim active"><div class="rep-stage"><div class="rep-clip rep-top"><img src="assets/img/reporting-image.webp" alt="Opportunity reporting summary"></div><div class="rep-clip rep-row rep-r1" style="--d:.5s"><img src="assets/img/reporting-image.webp" alt="SparkleNest UltraFoam — score 18, $230,300 revenue potential"></div><div class="rep-clip rep-row rep-r2" style="--d:1.1s"><img src="assets/img/reporting-image.webp" alt="SparkleNest PowerShine — score 54, $140,150 revenue potential"></div><div class="rep-clip rep-row rep-r3" style="--d:1.7s"><img src="assets/img/reporting-image.webp" alt="PureViva Clean Gen — score 63, $81,453 revenue potential"></div></div></div><image-slot id="offer-reporting-2" shape="rounded" radius="16">Reporting · conversion impact — drop screenshot here</image-slot><image-slot id="offer-reporting-3" shape="rounded" radius="16">Reporting · executive views — drop screenshot here</image-slot></div>
+    <div class="offer-media"><div id="offer-reporting-1" class="pdp-anim active"><div class="rep-stage"><div class="rep-clip rep-top"><img loading="lazy" decoding="async" src="assets/img/reporting-image.webp" alt="Opportunity reporting summary"></div><div class="rep-clip rep-row rep-r1" style="--d:.5s"><img loading="lazy" decoding="async" src="assets/img/reporting-image.webp" alt="SparkleNest UltraFoam — score 18, $230,300 revenue potential"></div><div class="rep-clip rep-row rep-r2" style="--d:1.1s"><img loading="lazy" decoding="async" src="assets/img/reporting-image.webp" alt="SparkleNest PowerShine — score 54, $140,150 revenue potential"></div><div class="rep-clip rep-row rep-r3" style="--d:1.7s"><img loading="lazy" decoding="async" src="assets/img/reporting-image.webp" alt="PureViva Clean Gen — score 63, $81,453 revenue potential"></div></div></div><image-slot id="offer-reporting-2" shape="rounded" radius="16">Reporting · conversion impact — drop screenshot here</image-slot><image-slot id="offer-reporting-3" shape="rounded" radius="16">Reporting · executive views — drop screenshot here</image-slot></div>
     <div class="offer-copy">
       <ul class="offer-feats">
         <li class="active static"><span class="ft">Know which PDPs to optimize first</span><div class="fd"><p>Rank every product by its potential conversion and revenue impact.</p></div></li>
@@ -370,7 +381,7 @@
 
 <vizit-footer></vizit-footer>
 
-<script src="js/page.js"></script>
+<script defer src="js/page.js"></script>
 <script>
 (function(){
   document.querySelectorAll('section.offer').forEach(function(sec){
@@ -474,5 +485,6 @@ vizit-nav.nav-scrolled{background:rgba(0,0,0,.45) !important;border-bottom-color
   els.forEach(function(e){io.observe(e);});
 })();
 </script>
+<script id="img-preload">addEventListener("load",function(){var f=function(){document.querySelectorAll('img[loading="lazy"]').forEach(function(i){i.loading="eager"})};(window.requestIdleCallback||function(c){setTimeout(c,600)})(f,{timeout:1500})})</script>
 </body>
 </html>

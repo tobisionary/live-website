@@ -10,7 +10,7 @@
    Run it by pasting into the assistant's script runner (helpers: readFile, saveFile,
    ls, replaceText, log).                                                             */
 
-const ROOT = ['index.html','vizit-next-gen-platform.html','vizit-api.html','partner-ecosystem.html','case-studies.html','beauty-case-study.html','central-garden-case-study.html','ghirardelli-case-study.html','mars-petcare-case-study.html','moen-case-study.html','purina-case-study.html','blog.html','blog-article.html','customer-support.html','score-your-content.html','privacy-policy.html','terms-of-service.html'];
+const ROOT = ['index.html','vizit-next-gen-platform.html','vizit-api.html','partner-ecosystem.html','case-studies.html','beauty-case-study.html','central-garden-case-study.html','ghirardelli-case-study.html','mars-petcare-case-study.html','moen-case-study.html','purina-case-study.html','blog.html','blog-article.html','customer-support.html','demo.html','privacy-policy.html','terms-of-service.html'];
 
 const SOL = (await ls('solutions')).filter(f => f.endsWith('.html'));
 const CSSF = {}, JSF = {}, routes = {}, notes = [];

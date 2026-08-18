@@ -33,7 +33,7 @@ Edit the source page (`vizit-api.html`, `solutions/hero-images.html`, `js/blog-d
 
 ## Routes
 
-index · vizit-next-gen-platform · vizit-api · partner-ecosystem · case-studies · beauty / central-garden / ghirardelli / mars-petcare / moen / purina case studies · blog · blog-article · customer-support · score-your-content · privacy-policy · terms-of-service · 11 `solutions/*` pages (`content-quality-scorecarding` is an alias of `content-scorecarding`).
+index · vizit-next-gen-platform · vizit-api · partner-ecosystem · case-studies · beauty / central-garden / ghirardelli / mars-petcare / moen / purina case studies · blog · blog-article · customer-support · demo · privacy-policy · terms-of-service · 11 `solutions/*` pages (`content-quality-scorecarding` is an alias of `content-scorecarding`).
 
 ## One tradeoff
 

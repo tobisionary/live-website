@@ -813,6 +813,15 @@
   .toast .ico { width: 16px; height: 16px; flex-shrink: 0; color: var(--blue-300); }
   .toast.error .ico { color: #ed5a5a; }
 </style>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vizit">
+<meta property="og:title" content="Vizit · Insights CMS (Internal)">
+<meta property="og:image" content="https://vizit.com/assets/og-cover.jpg">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="1000">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Vizit · Insights CMS (Internal)">
+<meta name="twitter:image" content="https://vizit.com/assets/og-cover.jpg">
 </head>
 <body>
 
@@ -837,7 +846,7 @@
   <!-- Sidebar -->
   <aside class="side">
     <div class="side-brand">
-      <img src="assets/logo-black.svg" alt="Vizit" />
+      <img fetchpriority="high" decoding="async" src="assets/logo-black.svg" alt="Vizit" />
       <span class="tag">CMS</span>
     </div>
 
@@ -1179,7 +1188,7 @@
   </div>
 </aside>
 
-<script src="js/blog-data.js"></script>
+<script defer src="js/blog-data.js"></script>
 <script>
   // ─────────────────────────────────────────────
   // CSV upload + table render + edit drawer
@@ -2396,5 +2405,6 @@
     window.VizitBlog.onChange(renderTable);
   })();
 </script>
+<script id="img-preload">addEventListener("load",function(){var f=function(){document.querySelectorAll('img[loading="lazy"]').forEach(function(i){i.loading="eager"})};(window.requestIdleCallback||function(c){setTimeout(c,600)})(f,{timeout:1500})})</script>
 </body>
 </html>

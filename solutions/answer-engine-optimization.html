@@ -293,6 +293,15 @@
     margin-right: 4px;
   }
 </style>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vizit">
+<meta property="og:title" content="AI Shopping Optimization | Get More Traffic From Rufus, Sparky, and ChatGPT">
+<meta property="og:image" content="https://vizit.com/assets/og-cover.jpg">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="1000">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI Shopping Optimization | Get More Traffic From Rufus, Sparky, and ChatGPT">
+<meta name="twitter:image" content="https://vizit.com/assets/og-cover.jpg">
 </head>
 <body>
 
@@ -309,7 +318,7 @@
         <h1 class="display">You optimized your text for AI. But the algorithms are judging your <em>images</em> too.</h1>
         <p class="subhead">Brands are racing on AEO, schema, and structured data. But multimodal algorithms don't just read your listings — they judge your images. And if those images aren't built for that moment, your products don't get chosen. Vizit Agents keep your imagery scoring for both shoppers and algorithms.</p>
         <div class="cta-row">
-          <a class="btn btn-primary btn-lg" href="../score-your-content.html">See how Vizit wins AI discovery <span class="arrow">→</span></a>
+          <a class="btn btn-primary btn-lg" href="../demo.html">See how Vizit wins AI discovery <span class="arrow">→</span></a>
         </div>
       </div>
       <div class="reveal" aria-label="How humans see a product image vs. how AI sees it">
@@ -323,7 +332,7 @@
             <div class="panes">
               <div class="ai-pane human-view">
                 <span class="lab">How humans see it</span>
-                <div class="frame"><img src="../assets/products/vizzy.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;padding:10%;box-sizing:border-box;z-index:1;"></div>
+                <div class="frame"><img fetchpriority="high" decoding="async" src="../assets/products/vizzy.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;padding:10%;box-sizing:border-box;z-index:1;"></div>
                 <div class="signals">
                   <span>Shape</span><span>Color</span><span>Mood</span>
                 </div>
@@ -331,7 +340,7 @@
               <div class="ai-pane ai-view">
                 <span class="lab">How AI sees it</span>
                 <div class="frame">
-                  <img src="../assets/products/vizzy.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;padding:10%;box-sizing:border-box;">
+                  <img loading="lazy" decoding="async" src="../assets/products/vizzy.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;padding:10%;box-sizing:border-box;">
                   <div class="bbox product" style="z-index:2;"><span class="lbl">product · 0.96</span></div>
                   <div class="bbox brand" style="z-index:2;"><span class="lbl">brand · 0.82</span></div>
                 </div>
@@ -538,7 +547,7 @@
       <h2 class="display">Find out which products AI is <em>passing over</em>, and why.</h2>
       <p class="subhead">Most brands don't know which products are losing ground to AI shopping systems. Vizit scores the same visual signals that determine whether human shoppers stop or scroll, identifies which images are failing, and tells you what to fix.</p>
       <div class="cta-row" style="margin-top: var(--space-6);">
-        <a class="btn btn-primary btn-lg" href="../score-your-content.html">Let's talk <span class="arrow">→</span></a>
+        <a class="btn btn-primary btn-lg" href="../demo.html">Let's talk <span class="arrow">→</span></a>
       </div>
     </div>
   </div>
@@ -592,7 +601,7 @@
     <h2 class="display on-dark reveal">In AI discovery, the image is <em>the answer</em>.</h2>
     <p class="subhead on-dark reveal">Multimodal agents don't just read your text. Vizit optimizes the visual signals that decide whether you're recommended — or invisible.</p>
     <div class="cta-row reveal">
-      <a class="btn btn-on-dark btn-lg" href="../score-your-content.html">Audit my visual AEO <span class="arrow">→</span></a>
+      <a class="btn btn-on-dark btn-lg" href="../demo.html">Audit my visual AEO <span class="arrow">→</span></a>
       <a class="btn btn-ghost" style="color:var(--blue-200);" href="../vizit-next-gen-platform.html">See the platform</a>
     </div>
   </div>
@@ -611,5 +620,6 @@
   })();
 </script>
 
+<script id="img-preload">addEventListener("load",function(){var f=function(){document.querySelectorAll('img[loading="lazy"]').forEach(function(i){i.loading="eager"})};(window.requestIdleCallback||function(c){setTimeout(c,600)})(f,{timeout:1500})})</script>
 </body>
 </html>

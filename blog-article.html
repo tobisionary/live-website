@@ -774,6 +774,15 @@
 <link rel="stylesheet" href="css/vizit-theme.css">
 <script src="js/vizit-nav.js" defer></script>
   <script src="js/vizit-footer.js" defer></script>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vizit">
+<meta property="og:title" content="How we built the Content Conversion Standard | Vizit Insights">
+<meta property="og:image" content="https://vizit.com/assets/og-cover.jpg">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="1000">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How we built the Content Conversion Standard | Vizit Insights">
+<meta name="twitter:image" content="https://vizit.com/assets/og-cover.jpg">
 </head>
 <body>
 
@@ -1072,7 +1081,7 @@
 <!-- FOOTER -->
 <vizit-footer></vizit-footer>
 
-<script src="js/blog-data.js"></script>
+<script defer src="js/blog-data.js"></script>
 <script>
   // ─────────────────────────────────────────────
   // Hydrate article from ?slug= URL parameter
@@ -1471,5 +1480,6 @@
   } catch (e) {}
 })();
 </script>
+<script id="img-preload">addEventListener("load",function(){var f=function(){document.querySelectorAll('img[loading="lazy"]').forEach(function(i){i.loading="eager"})};(window.requestIdleCallback||function(c){setTimeout(c,600)})(f,{timeout:1500})})</script>
 </body>
 </html>

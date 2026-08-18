@@ -335,6 +335,15 @@
     .stat-strip.mandate .stat:first-child { border-top: none; padding-top: var(--space-5); }
   }
 </style>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vizit">
+<meta property="og:title" content="Image Accessibility Testing for Ecommerce | WCAG 2.2 AA &amp; APCA">
+<meta property="og:image" content="https://vizit.com/assets/og-cover.jpg">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="1000">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Image Accessibility Testing for Ecommerce | WCAG 2.2 AA &amp; APCA">
+<meta name="twitter:image" content="https://vizit.com/assets/og-cover.jpg">
 </head>
 <body>
 
@@ -352,7 +361,7 @@
         <h1 class="display">If they can't read it, they won't <em>buy</em> it.</h1>
         <p class="subhead">Vizit's AI automatically tests every digital shelf asset for visual clarity and glance-readability on mobile — ensuring everything is readable, compliant, and built to convert on every screen. Vizit Agents run these checks continuously across your entire catalog.</p>
         <div class="cta-row">
-          <a class="btn btn-primary btn-lg" href="../score-your-content.html">Test my hero images <span class="arrow">→</span></a>
+          <a class="btn btn-primary btn-lg" href="../demo.html">Test my hero images <span class="arrow">→</span></a>
         </div>
       </div>
       <div class="reveal" aria-label="On-image text contrast diagnostic with heatmap tags">
@@ -583,7 +592,7 @@
       <div class="badge-inline" style="margin-top: var(--space-5);">Included in your Vizit subscription</div>
 
       <div class="cta-row" style="margin-top: var(--space-5);">
-        <a class="btn btn-primary btn-lg" href="../score-your-content.html">Run an accessibility audit <span class="arrow">→</span></a>
+        <a class="btn btn-primary btn-lg" href="../demo.html">Run an accessibility audit <span class="arrow">→</span></a>
       </div>
     </div>
   </div>
@@ -633,7 +642,7 @@
     <h2 class="display on-dark reveal">Compliant. Readable. <em>Converting</em>.</h2>
     <p class="subhead on-dark reveal">Test every hero and carousel image against WCAG 2.2 AA and APCA — automatically, at catalog scale, before publication.</p>
     <div class="cta-row reveal">
-      <a class="btn btn-on-dark btn-lg" href="../score-your-content.html">Run an accessibility audit <span class="arrow">→</span></a>
+      <a class="btn btn-on-dark btn-lg" href="../demo.html">Run an accessibility audit <span class="arrow">→</span></a>
       <a class="btn btn-ghost" style="color:var(--blue-200);" href="../vizit-next-gen-platform.html">See the platform</a>
     </div>
   </div>
@@ -652,5 +661,6 @@
   })();
 </script>
 
+<script id="img-preload">addEventListener("load",function(){var f=function(){document.querySelectorAll('img[loading="lazy"]').forEach(function(i){i.loading="eager"})};(window.requestIdleCallback||function(c){setTimeout(c,600)})(f,{timeout:1500})})</script>
 </body>
 </html>

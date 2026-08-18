@@ -298,6 +298,15 @@
   <link rel="stylesheet" href="css/vizit-elevate.css">
 <script src="js/vizit-nav.js" defer></script>
   <script src="js/vizit-footer.js" defer></script>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vizit">
+<meta property="og:title" content="Request a demo · Vizit">
+<meta property="og:image" content="https://vizit.com/assets/og-cover.jpg">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="1000">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Request a demo · Vizit">
+<meta name="twitter:image" content="https://vizit.com/assets/og-cover.jpg">
 </head>
 <body>
 
@@ -336,7 +345,7 @@
             <span><strong>A working session.</strong> Run by someone who's implemented Vizit at brands like yours.</span>
           </li>
         </ul>
-        <div class="demo-shelf reveal"><img src="assets/img/cta-shelf.png" alt="Product shelf scored with Vizit" loading="lazy"></div>
+        <div class="demo-shelf reveal"><img decoding="async" src="assets/img/cta-shelf.png" alt="Product shelf scored with Vizit" loading="lazy"></div>
       </div>
 
       <aside class="form-card" id="form">
@@ -406,5 +415,6 @@
   })();
 </script>
 
+<script id="img-preload">addEventListener("load",function(){var f=function(){document.querySelectorAll('img[loading="lazy"]').forEach(function(i){i.loading="eager"})};(window.requestIdleCallback||function(c){setTimeout(c,600)})(f,{timeout:1500})})</script>
 </body>
 </html>

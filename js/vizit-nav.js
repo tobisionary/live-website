@@ -98,7 +98,7 @@
     }
   ];
 
-  var CTA = { href: 'score-your-content.html', label: 'Score your content' };
+  var CTA = { href: 'demo.html', label: 'Score your content' };
   var LOGIN = { href: 'https://app.vizit.com/login', label: 'Sign in' };
 
   // Display order of the top-level tabs (carries across every page).
@@ -307,7 +307,7 @@
             // mobile accordion handled below
             var open = item.classList.contains('vz-mobile-open');
             closeMobile(item);
-            if (!open) item.classList.add('vz-mobile-open');
+            item.classList.toggle('vz-mobile-open', !open);
             return;
           }
           e.preventDefault();
@@ -338,8 +338,11 @@
       });
 
       // Click outside closes any open desktop panel.
+      function closeFlyout() {
+        if (toggle && links) { toggle.setAttribute('aria-expanded', 'false'); links.classList.remove('vz-open'); }
+      }
       document.addEventListener('click', function (e) {
-        if (!self.contains(e.target)) closeAll();
+        if (!self.contains(e.target)) { closeAll(); closeFlyout(); closeMobile(); }
       });
 
       // Esc closes everything and returns focus to the active trigger.
@@ -347,6 +350,7 @@
         if (e.key === 'Escape') {
           var openItem = self.querySelector('.vz-nav-item.vz-open');
           closeAll();
+          closeFlyout(); closeMobile();
           if (openItem) {
             var t = openItem.querySelector('.vz-nav-trigger');
             if (t) t.focus();

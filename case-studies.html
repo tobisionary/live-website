@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
 <head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Case Studies | Vizit</title>
@@ -85,6 +87,15 @@
 
   @media (max-width:900px){.case-grid{grid-template-columns:1fr}}
 </style>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vizit">
+<meta property="og:title" content="Case Studies | Vizit">
+<meta property="og:image" content="https://vizit.com/assets/og-cover.jpg">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="1000">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Case Studies | Vizit">
+<meta name="twitter:image" content="https://vizit.com/assets/og-cover.jpg">
 </head>
 <body>
 <vizit-nav></vizit-nav>
@@ -103,8 +114,8 @@
   <div class="wrap">
     <div class="case-grid">
       <a class="cs-card" href="mars-petcare-case-study.html">
-        <div class="csx-media"><img src="assets/img/mars-case-study.png" alt="Mars Petcare case study"></div>
-        <img class="csx-logo" src="assets/img/mars.webp" alt="Mars">
+        <div class="csx-media"><img fetchpriority="high" decoding="async" src="assets/img/mars-case-study.png" alt="Mars Petcare case study"></div>
+        <img loading="lazy" decoding="async" class="csx-logo" src="assets/img/mars.webp" alt="Mars">
         <div class="csx-body">
           <div class="csx-stat">+30%</div>
           <div class="csx-label">Conversion uplift in ordered units</div>
@@ -113,8 +124,8 @@
         </div>
       </a>
       <a class="cs-card" href="beauty-case-study.html">
-        <div class="csx-media"><img src="assets/img/loreal-cs.png" alt="Beauty product imagery scored in Vizit"></div>
-        <img class="csx-logo" src="assets/img/pasted-1785254859893-0.png" alt="L'Oréal" style="height:34px">
+        <div class="csx-media"><img loading="lazy" decoding="async" src="assets/img/loreal-cs.png" alt="Beauty product imagery scored in Vizit"></div>
+        <img loading="lazy" decoding="async" class="csx-logo" src="assets/img/pasted-1785254859893-0.png" alt="L'Oréal" style="height:34px">
         <div class="csx-body">
           <div class="csx-stat">+17.2%</div>
           <div class="csx-label">Add-to-cart rate from one optimized hero image</div>
@@ -123,8 +134,8 @@
         </div>
       </a>
       <a class="cs-card" href="moen-case-study.html">
-        <div class="csx-media"><img src="assets/img/moen-cs.png" alt="Moen product imagery scored in Vizit"></div>
-        <img class="csx-logo" src="assets/img/pasted-1785253310409-0.png" alt="Moen">
+        <div class="csx-media"><img loading="lazy" decoding="async" src="assets/img/moen-cs.png" alt="Moen product imagery scored in Vizit"></div>
+        <img loading="lazy" decoding="async" class="csx-logo" src="assets/img/pasted-1785253310409-0.png" alt="Moen">
         <div class="csx-body">
           <div class="csx-stat">+25%</div>
           <div class="csx-label">Increase in ecommerce conversion rates</div>
@@ -133,8 +144,8 @@
         </div>
       </a>
       <a class="cs-card" href="ghirardelli-case-study.html">
-        <div class="csx-media"><img src="assets/img/girar-cs.png" alt="Ghirardelli imagery scored in Vizit"></div>
-        <img class="csx-logo" src="assets/img/pasted-1785253335061-0.png" alt="Ghirardelli" style="height:40px">
+        <div class="csx-media"><img loading="lazy" decoding="async" src="assets/img/girar-cs.png" alt="Ghirardelli imagery scored in Vizit"></div>
+        <img loading="lazy" decoding="async" class="csx-logo" src="assets/img/pasted-1785253335061-0.png" alt="Ghirardelli" style="height:40px">
         <div class="csx-body">
           <div class="csx-stat">+10%</div>
           <div class="csx-label">Average conversion rate lift on Amazon</div>
@@ -144,8 +155,8 @@
       </a>
       
       <a class="cs-card" href="purina-case-study.html">
-        <div class="csx-media"><img src="assets/img/purina-cs.png" alt="Purina product imagery scored in Vizit"></div>
-        <img class="csx-logo" src="assets/img/pasted-1785253840012-0.png" alt="Purina" style="height:30px">
+        <div class="csx-media"><img loading="lazy" decoding="async" src="assets/img/purina-cs.png" alt="Purina product imagery scored in Vizit"></div>
+        <img loading="lazy" decoding="async" class="csx-logo" src="assets/img/pasted-1785253840012-0.png" alt="Purina" style="height:30px">
         <div class="csx-body">
           <div class="csx-stat">+9.44%</div>
           <div class="csx-label">Conversion rate improvement in 6 weeks</div>
@@ -174,5 +185,6 @@
   });
 })();
 </script>
+<script id="img-preload">addEventListener("load",function(){var f=function(){document.querySelectorAll('img[loading="lazy"]').forEach(function(i){i.loading="eager"})};(window.requestIdleCallback||function(c){setTimeout(c,600)})(f,{timeout:1500})})</script>
 </body>
 </html>
