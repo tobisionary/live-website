@@ -264,7 +264,11 @@
     return (
       '<div class="vz-nav-inner">' +
         '<a href="' + resolve('index.html') + '" class="vz-nav-logo" aria-label="Vizit home">' + LOGO_SVG + '</a>' +
-        '<div class="vz-nav-links" id="vz-nav-links">' + linksHTML + '</div>' +
+        '<div class="vz-nav-links" id="vz-nav-links">' + linksHTML +
+          '<div class="vz-nav-mobile-actions">' +
+            '<a href="' + LOGIN.href + '" class="vz-nav-mobile-login">' + esc(LOGIN.label) + '</a>' +
+          '</div>' +
+        '</div>' +
         '<div class="vz-nav-right">' +
           '<a href="' + LOGIN.href + '" class="vz-nav-login">' + esc(LOGIN.label) + '</a>' +
           '<a href="' + resolve(CTA.href) + '" class="vz-nav-cta">' + esc(CTA.label) + '</a>' +
@@ -304,10 +308,11 @@
         if (!trigger) return;
         trigger.addEventListener('click', function (e) {
           if (isMobile()) {
-            // mobile accordion handled below
-            var open = item.classList.contains('vz-mobile-open');
+            // mobile accordion — collapse siblings, then toggle this one
+            var openM = item.classList.contains('vz-mobile-open');
             closeMobile(item);
-            item.classList.toggle('vz-mobile-open', !open);
+            item.classList.toggle('vz-mobile-open', !openM);
+            trigger.setAttribute('aria-expanded', String(!openM));
             return;
           }
           e.preventDefault();
@@ -324,7 +329,10 @@
 
       function closeMobile(except) {
         megaItems.forEach(function (it) {
-          if (it !== except) it.classList.remove('vz-mobile-open');
+          if (it === except) return;
+          it.classList.remove('vz-mobile-open');
+          var t = it.querySelector('.vz-nav-trigger');
+          if (t) t.setAttribute('aria-expanded', 'false');
         });
       }
 
@@ -333,14 +341,21 @@
         var a = e.target.closest('a[href]');
         if (a && a.getAttribute('href') !== '#') {
           closeAll();
-          if (toggle) { toggle.setAttribute('aria-expanded', 'false'); links.classList.remove('vz-open'); }
+          closeMobile();
+          closeFlyout();
         }
       });
 
-      // Click outside closes any open desktop panel.
-      function closeFlyout() {
-        if (toggle && links) { toggle.setAttribute('aria-expanded', 'false'); links.classList.remove('vz-open'); }
+      // Single owner of mobile-flyout state: visibility, aria, and scroll lock.
+      // Locking <html> keeps the page behind the sheet from scrolling under it.
+      function setFlyout(open) {
+        if (!toggle || !links) return;
+        toggle.setAttribute('aria-expanded', String(open));
+        toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        links.classList.toggle('vz-open', open);
+        document.documentElement.classList.toggle('vz-nav-locked', open);
       }
+      function closeFlyout() { setFlyout(false); }
       document.addEventListener('click', function (e) {
         if (!self.contains(e.target)) { closeAll(); closeFlyout(); closeMobile(); }
       });
@@ -358,15 +373,23 @@
         }
       });
 
-      // Re-close panels if we cross the desktop/mobile boundary.
-      window.addEventListener('resize', function () { closeAll(); closeMobile(); });
+      // Re-close panels only when we actually cross the desktop/mobile boundary.
+      // (Mobile browsers fire resize as the URL bar hides/shows; reacting to
+      //  every one of those would snap the open sheet shut mid-scroll.)
+      var wasMobile = isMobile();
+      window.addEventListener('resize', function () {
+        var nowMobile = isMobile();
+        if (nowMobile === wasMobile) return;
+        wasMobile = nowMobile;
+        closeAll();
+        closeMobile();
+        closeFlyout();
+      });
 
       // ── Mobile hamburger ──
       if (toggle && links) {
         toggle.addEventListener('click', function () {
-          var open = toggle.getAttribute('aria-expanded') === 'true';
-          toggle.setAttribute('aria-expanded', String(!open));
-          links.classList.toggle('vz-open', !open);
+          setFlyout(toggle.getAttribute('aria-expanded') !== 'true');
         });
       }
     }

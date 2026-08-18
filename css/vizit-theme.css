@@ -609,6 +609,9 @@ vizit-nav {
 
 /* right cluster + toggle */
 .vz-nav-right { display: flex; align-items: center; gap: 1.5rem; }
+/* Sign-in duplicated inside the mobile sheet; hidden on desktop, where the
+   real one lives in the bar. */
+.vz-nav-mobile-actions { display: none; }
 .vz-nav-toggle {
   display: none;
   background: transparent;
@@ -650,6 +653,12 @@ vizit-nav {
 
 @media (max-width: 1180px) {
   .vz-nav-toggle { display: inline-flex; }
+  /* The bar keeps logo + CTA + hamburger only. Sign-in moves into the sheet
+     so the three controls stop competing for width on a phone. */
+  .vz-nav-right { gap: 0.5rem; }
+  .vz-nav-right .vz-nav-login { display: none; }
+  /* Page behind the open sheet must not scroll. */
+  html.vz-nav-locked, html.vz-nav-locked body { overflow: hidden; }
   .vz-nav-links {
     position: absolute;
     top: 64px;
@@ -664,12 +673,26 @@ vizit-nav {
     border-bottom: 1px solid var(--border, #e4e4e4);
     box-shadow: 0 24px 32px -24px rgba(0, 33, 61, 0.18);
     margin: 0;
+    /* dvh tracks the retracting URL bar; the vh line is the fallback for
+       browsers without dvh. Without it the sheet's last item sat under the
+       chrome and could not be scrolled to. */
     max-height: calc(100vh - 64px);
-    min-height: 62vh;
+    max-height: calc(100dvh - 64px);
     overflow-y: auto;
+    overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
   }
   .vz-nav-links.vz-open { display: flex; }
+  /* Sign-in row at the foot of the sheet */
+  .vz-nav-mobile-actions { display: block; margin-top: 1.25rem; }
+  .vz-nav-mobile-login {
+    display: block;
+    padding: 14px 0;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--color-900, #171717);
+  }
   .vz-nav-trigger {
     padding: 15px 0;
     border-bottom: 1px solid var(--border, #e4e4e4);
@@ -724,7 +747,7 @@ vizit-nav {
   vizit-nav, .vz-nav-inner { height: 56px; min-height: 56px; }
   .vz-nav-inner { padding: 0 1rem; }
   .vz-nav-logo img, .vz-nav-logo svg { height: 16px; }
-  .vz-nav-links { top: 56px; max-height: calc(100vh - 56px); }
+  .vz-nav-links { top: 56px; max-height: calc(100vh - 56px); max-height: calc(100dvh - 56px); }
   .vz-nav-cta { padding: 8px 12px; font-size: 11px; }
 }
 
@@ -754,6 +777,7 @@ vizit-nav .vz-nav-cta { border-radius: 999px !important; }
   vizit-nav .vz-nav-links .vz-nav-item.vz-open > .vz-nav-trigger,
   vizit-nav .vz-nav-links .vz-nav-item.vz-current > .vz-nav-trigger { color: var(--color-900, #171717); }
   vizit-nav .vz-nav-links .vz-nav-item.vz-mobile-open > .vz-nav-trigger { color: var(--accent, #0174d9); }
+  vizit-nav .vz-nav-mobile-login { color: var(--color-900, #171717); }
 }
 
 /* ════════════════════════════════════════════════════════════
