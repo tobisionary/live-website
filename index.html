@@ -987,7 +987,7 @@
     overflow: hidden;
   }
   @media (max-width: 900px) {
-    .case-stats { grid-template-columns: 1fr; gap: var(--space-5); }
+    .case-stats { grid-template-columns: 1fr 1fr; gap: var(--space-4); }
     .case-cta { margin-top: var(--space-5); }
     .case-photo { margin-top: var(--space-5); }
   }
@@ -2837,7 +2837,10 @@
   .cs-ph::after{content:"";position:absolute;inset:0;border-radius:10px;background:radial-gradient(60% 60% at 50% 40%, rgba(80,160,255,.14), transparent 70%)}
   @keyframes csScroll{from{transform:rotateX(28deg) rotateZ(-8deg) translateY(0)}to{transform:rotateX(28deg) rotateZ(-8deg) translateY(calc(-50% - 13px))}}
   @media (prefers-reduced-motion:reduce){ .cs-lane{ animation:none; } }
-  @media (max-width:1100px){ .cost-stream{ display:none; } }
+  @media (max-width:1100px){
+    .cost-stream{right:-34%;width:130%;-webkit-mask-image:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.55) 34%,#000 60%);mask-image:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.55) 34%,#000 60%)}
+    .cs-lane{opacity:.4}
+  }
 </style>
 <link id="gfont-Inter" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap">
 <meta property="og:type" content="website">

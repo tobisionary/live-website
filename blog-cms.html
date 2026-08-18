@@ -1188,7 +1188,7 @@
   </div>
 </aside>
 
-<script defer src="js/blog-data.js"></script>
+<script src="js/blog-data.js"></script>
 <script>
   // ─────────────────────────────────────────────
   // CSV upload + table render + edit drawer
@@ -1443,11 +1443,16 @@
       // Map CSV rows → article objects and push into the shared store.
       // The onChange listener picks this up and re-renders the table.
       var articles = okRows.map(rowToArticle);
-      var added = 0, updated = 0;
-      articles.forEach(function (a) {
-        if (window.VizitBlog.bySlug(a.slug)) { window.VizitBlog.update(a.slug, a); updated++; }
-        else { window.VizitBlog.add(a); added++; }
-      });
+      var added = 0, updated = 0, saved = true;
+      if (window.VizitBlog.upsertMany) {
+        var res = window.VizitBlog.upsertMany(articles);
+        added = res.added; updated = res.updated; saved = res.ok;
+      } else {
+        articles.forEach(function (a) {
+          if (window.VizitBlog.bySlug(a.slug)) { window.VizitBlog.update(a.slug, a); updated++; }
+          else { window.VizitBlog.add(a); added++; }
+        });
+      }
 
       var fname = pendingFilename;
       preview.classList.remove('show');
@@ -1461,7 +1466,8 @@
         var top = tableWrap.getBoundingClientRect().top + window.pageYOffset - 16;
         window.scrollTo({ top: top, behavior: 'smooth' });
       }
-      showToast('Imported ' + added + ' new · ' + updated + ' updated from ' + fname);
+      if (saved) showToast('Import complete ✓ ' + (added ? added + ' added' : '') + (added && updated ? ' · ' : '') + (updated ? updated + ' existing post' + (updated === 1 ? '' : 's') + ' refreshed' : '') + ' — ' + fname);
+      else showToast('Import too large for browser storage — it is showing now but will not survive a reload. Delete old articles or split the CSV.', 'error');
     }
 
     function rowToArticle(r) {
