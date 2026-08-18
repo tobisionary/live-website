@@ -16,7 +16,7 @@ Old-style paths (`vizit.com/vizit-api`) still resolve: the rewrite serves the fi
 
 ## Updating
 
-Edit the source page (`vizit-api.html`, `solutions/hero-images.html`, `js/blog-data.js`, …) and ask me to rebuild `vizit-site.html`. Hand-editing the bundle is possible but the page HTML lives inside a JSON payload, so it is not pleasant.
+Edit the source page (`api.html`, `solutions/hero-images.html`, `js/blog-data.js`, …) and ask me to rebuild `vizit-site.html`. Hand-editing the bundle is possible but the page HTML lives inside a JSON payload, so it is not pleasant.
 
 ## Folder structure
 
