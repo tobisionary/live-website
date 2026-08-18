@@ -2358,8 +2358,10 @@
     return null;
   }
   function persist(arr) {
-    try { localStorage.setItem(KEY, JSON.stringify(arr)); } catch (e) {}
+    var ok = true;
+    try { localStorage.setItem(KEY, JSON.stringify(arr)); } catch (e) { ok = false; }
     fire();
+    return ok;
   }
   function fire() {
     try { window.dispatchEvent(new CustomEvent(EVT)); } catch (e) {}
@@ -2491,6 +2493,16 @@
     },
     replaceAll: function (arr) {
       persist(arr.map(ensureDefaults));
+    },
+    upsertMany: function (articles) {
+      var arr = this.list(), idx = {}, fresh = [], added = 0, updated = 0;
+      for (var i = 0; i < arr.length; i++) idx[arr[i].slug] = i;
+      articles.forEach(function (a) {
+        if (a.slug in idx) { var k = idx[a.slug]; arr[k] = ensureDefaults(Object.assign({}, arr[k], a)); updated++; }
+        else { fresh.push(ensureDefaults(a)); added++; }
+      });
+      var ok = persist(fresh.concat(arr));
+      return { ok: ok, added: added, updated: updated };
     },
     reset: function () {
       try { localStorage.removeItem(KEY); } catch (e) {}
