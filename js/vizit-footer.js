@@ -92,7 +92,7 @@
   function ctaHTML() {
     return '<div class="vz-foot-cta vz-foot-cta--band">' +
              '<a class="vz-foot-band" href="' + resolve('demo.html') + '" aria-label="Don\u2019t get scrolled over. Get chosen. With Vizit. \u2014 Get your Vizit Score">' +
-               '<span class="vz-foot-band-visual"><img src="' + ((window.__resources && window.__resources.ctaShelf) || resolve('assets/img/cta-shelf.png')) + '" onerror="this.onerror=null;this.src=\'/assets/img/cta-shelf.png\'" alt="" /></span>' +
+               '<span class="vz-foot-band-visual"><img src="' + ((window.__resources && window.__resources.ctaShelf) || resolve('assets/img/cta-shelf.webp')) + '" onerror="this.onerror=null;this.src=\'/assets/img/cta-shelf.webp\'" alt="" /></span>' +
                '<span class="vz-foot-band-copy">' +
                  '<span class="vz-foot-band-h">Don\u2019t get scrolled over.<br><span class="hl">Get chosen.</span> With Vizit.</span>' +
                  '<span class="vz-foot-btn">Score your content</span>' +
