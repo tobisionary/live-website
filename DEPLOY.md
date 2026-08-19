@@ -1,40 +1,72 @@
-# vizit.com — one-file site
+# vizit.com
 
-`vizit-site.html` **is** the website: all 28 pages, every stylesheet, every script, and both logos are inside it. Pages render from an embedded payload and route on the URL hash.
+The site is a static, multi-file HTML project deployed on Vercel from `main`.
+Every push to `main` triggers a production deploy.
 
-## Publishing
+## What actually gets served
 
-Push the whole repo to GitHub and connect it to Vercel. Nothing else to do — `.vercelignore` keeps the editable sources out of the deployment, and `vercel.json` rewrites every URL to `vizit-site.html`.
+Vercel serves the **multi-file sources** at the repo root. `index.html` is the
+home page, `blog.html` is `/blog`, and so on — with `cleanUrls: true`, the `.html`
+extension is dropped from the public URL.
 
-Deployed files: `vizit-site.html`, `assets/`, `fonts/`, `llms.txt`.
+`vizit-site.html` is a single-file build of the whole site (every page, stylesheet
+and script inlined into one 1.9 MB document). `vercel.json` still contains rewrites
+pointing at it, but they never fire: Vercel checks the filesystem before applying a
+rewrite, so a real file always wins. The bundle is therefore deployed but unused.
+It is only reachable directly at `/vizit-site`.
 
-## URLs
+## Blog URLs
 
-`vizit.com/#/vizit-api` · `vizit.com/#/solutions/hero-images` · `vizit.com/#/moen-case-study` · `vizit.com/#/blog-article?slug=…`
+Articles live at `/blog/<slug>`. That path is a **rewrite** to
+`/blog-article?slug=<slug>`, so the address bar keeps the pretty URL. Two
+consequences worth remembering when editing `blog-article.html`:
 
-Old-style paths (`vizit.com/vizit-api`) still resolve: the rewrite serves the file and the router maps the path to the route.
+- Its links and assets must be **root-absolute** (`/css/…`, `/js/…`, `/demo`).
+  A relative path resolves against `/blog/` and 404s.
+- `getSlug()` reads the slug from the path as well as from `?slug=`, because a
+  rewrite means the query string never reaches the browser.
 
-## Updating
+`/blog-article?slug=<slug>` still serves directly, so older inbound links work.
 
-Edit the source page (`vizit-api.html`, `solutions/hero-images.html`, `js/blog-data.js`, …) and ask me to rebuild `vizit-site.html`. Hand-editing the bundle is possible but the page HTML lives inside a JSON payload, so it is not pleasant.
+Article content lives in `js/blog-data.js` as a seed array, cached per-visitor in
+`localStorage` under the key at the top of that file. **Bump that key whenever you
+change the seed**, or returning visitors keep the old cached copy.
 
-## Folder structure
+## Rebuilding the single-file bundle
+
+`tools/build-single-file.js` regenerates `vizit-site.html` from the sources. It is
+not a plain Node script — it expects injected helpers (`readFile`, `saveFile`, `ls`,
+`replaceText`, `log`) and uses top-level `await`, so it needs a small harness to run.
+
+Since the bundle is not currently served, rebuilding it is optional; keep it in sync
+if you intend to use it.
+
+## Layout
 
 | Path | Role |
 |---|---|
-| `vizit-site.html` | the deployed site (1.9 MB) |
-| `assets/img/` | all page images (platform screenshots, logos, case-study shots) |
-| `assets/awards/`, `assets/products/`, `assets/ebooks/` | award logos, product shots, gated PDFs |
+| `*.html` (root) | the deployed pages |
+| `solutions/` | the 11 solutions pages |
+| `css/`, `js/` | shared stylesheets and scripts |
+| `assets/` | images, logos, award badges, gated PDFs |
 | `fonts/` | Source Serif 4 |
-| `*.html`, `solutions/`, `css/`, `js/` | editable sources, not deployed |
-| `blog-cms.html` | internal post editor, not deployed |
-| `tools/site-router.js`, `tools/build-single-file.js` | the router that ships inside the bundle, and the bundler |
-| `_archive/` | superseded uploads and backups, kept for reference, not deployed |
+| `js/blog-data.js` | blog article store |
+| `blog-cms.html` | internal post editor (browser-local only; edits are not saved to the repo) |
+| `tools/` | the bundler and the router that ships inside the bundle |
+| `_archive/`, `uploads/` | superseded material, kept for reference |
 
-## Routes
+`.vercelignore` keeps `_archive/`, `uploads/`, `tools/` and docs out of the
+deployment. Everything else at the root is public.
 
-index · vizit-next-gen-platform · vizit-api · partner-ecosystem · case-studies · beauty / central-garden / ghirardelli / mars-petcare / moen / purina case studies · blog · blog-article · customer-support · demo · privacy-policy · terms-of-service · 11 `solutions/*` pages (`content-quality-scorecarding` is an alias of `content-scorecarding`).
+## Redirects
+
+`vercel.json` redirects the legacy paths (`/platform`, `/api`, `/partners`,
+`/support`, `/case-study/*`, …) to their current pages. Their old stub files were
+deleted from the repo, so these redirects are the only thing keeping those URLs alive.
 
 ## One tradeoff
 
-Pages render client-side, so search engines and LLM crawlers see the shell, not the page copy. Fine for staging or internal use; if organic search matters for vizit.com, publish the multi-file sources instead.
+Pages render their blog content client-side from `js/blog-data.js`, so search
+engines and LLM crawlers see the article shell rather than the body copy. Fine for
+the rest of the site, which is static HTML; worth revisiting if organic search on
+blog articles matters.

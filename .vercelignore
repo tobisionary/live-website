@@ -1,0 +1,25 @@
+# Not part of the deployed site.
+#
+# The site is served from the multi-file sources at the repo root, so those must
+# NOT be listed here. This file only excludes material that has no business being
+# on a public URL.
+
+# Superseded pages, backups and old uploads kept for reference only.
+_archive/
+uploads/
+
+# Internal blog editor. Browser-local only (it never writes to the repo), but it
+# has no business on a public URL.
+blog-cms.html
+
+# Build tooling — runs locally to regenerate vizit-site.html, never in the browser.
+tools/
+
+# Repo documentation.
+DEPLOY.md
+*.md
+
+# OS / editor noise.
+.DS_Store
+Thumbs.db
+.vercel
