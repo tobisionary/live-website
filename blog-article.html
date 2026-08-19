@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>How we built the Content Conversion Standard | Vizit Insights</title>
-<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
 <meta name="description" content="Three years, 100M+ images, 10T+ retail performance data points. The story behind the Vizit Score — what we measured, what we threw out, and the benchmark every CPG catalog now scores against." />
 <link rel="stylesheet" href="/css/colors-and-type.css" />
 <style>
@@ -794,12 +794,12 @@
 
 <!-- BREADCRUMB + BACK -->
 <div class="wrap crumb">
-  <a class="back-home" href="blog.html">
+  <a class="back-home" href="/blog">
     <span class="arrow">←</span>
     <span>Back to blog</span>
   </a>
   <div class="crumb-trail">
-    <a href="blog.html">Insights</a>
+    <a href="/blog">Insights</a>
     <span class="sep">/</span>
     <span>Research</span>
     <span class="sep">/</span>
@@ -994,7 +994,7 @@
       <!-- End-of-article CTA -->
       <div class="art-cta">
         <h3>See where your catalog sits against the <em>standard</em>.</h3>
-        <a href="index.html#calc">Get your Vizit Score →</a>
+        <a href="/demo">Score your content →</a>
       </div>
     </article>
 
@@ -1009,11 +1009,11 @@
         <span class="eyebrow" style="font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted);">Keep reading</span>
         <h2>Three more from the <em>brief</em>.</h2>
       </div>
-      <a class="all" href="blog.html">All insights →</a>
+      <a class="all" href="/blog">All insights →</a>
     </div>
 
     <div class="related-grid" id="relatedGrid">
-      <a class="rcard" href="blog-article.html">
+      <a class="rcard" href="/blog-article">
         <div class="rcard-img ti-case">
           <span class="rcard-thumb-num">+30</span>
           <span class="rcard-thumb-mark">Case · Mars Petcare</span>
@@ -1034,7 +1034,7 @@
         </div>
       </a>
 
-      <a class="rcard" href="blog-article.html">
+      <a class="rcard" href="/blog-article">
         <div class="rcard-img ti-research">
           <span class="rcard-thumb-num">500ms</span>
           <span class="rcard-thumb-mark">Research · Eye-tracking</span>
@@ -1055,7 +1055,7 @@
         </div>
       </a>
 
-      <a class="rcard" href="blog-article.html">
+      <a class="rcard" href="/blog-article">
         <div class="rcard-img ti-playbook">
           <span class="rcard-thumb-num">01</span>
           <span class="rcard-thumb-mark">Playbook · Pre-flight</span>
@@ -1209,7 +1209,7 @@
       // CTA always last
       html += '<div class="art-cta">' +
         '<h3>See where your catalog sits against the <em>standard</em>.</h3>' +
-        '<a href="index.html#calc">Get your Vizit Score →</a>' +
+        '<a href="/demo">Score your content →</a>' +
       '</div>';
       content.innerHTML = html;
     }
@@ -1218,7 +1218,7 @@
       var trail = document.querySelector('.crumb-trail');
       if (!trail) return;
       trail.innerHTML =
-        '<a href="blog.html">Insights</a>' +
+        '<a href="/blog">Insights</a>' +
         '<span class="sep">/</span>' +
         '<span>' + escapeHTML(a.category || 'Article') + '</span>' +
         '<span class="sep">/</span>' +
