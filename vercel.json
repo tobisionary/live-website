@@ -140,11 +140,12 @@
       "has": [
         {
           "type": "query",
-          "key": "slug"
+          "key": "slug",
+          "value": "(?<slug>.+)"
         }
       ],
       "destination": "/blog/:slug",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/:path(.+)\\.html",
