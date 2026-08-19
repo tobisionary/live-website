@@ -20,11 +20,14 @@ const dataURI = s => 'data:image/svg+xml,' + encodeURIComponent(s).replace(/'/g,
 const inlineLogos = s => replaceText(replaceText(s, 'assets/logo-black.svg', dataURI(logoB)), 'assets/logo-white.svg', dataURI(logoW));
 async function grab(map, name) { if (!map[name]) map[name] = inlineLogos(replaceText(await readFile(name), '../fonts/', 'fonts/')); } // inlined css/js serve from root
 
-// Assets the bundler must NOT inline: absolute URLs, protocol-relative URLs, and
-// root-absolute paths. The last group matters for /_vercel/insights/script.js —
-// Vercel serves it at request time, so it has no file on disk and has to stay a
-// live <script src> tag in the bundle.
-const isExternal = u => /^https?:/.test(u) || u.startsWith('//') || u.startsWith('/');
+// Assets the bundler must NOT inline, because there is no file on disk to inline:
+// absolute URLs, protocol-relative URLs, and Vercel's runtime-served insights
+// script. Those stay live <link>/<script> tags in the bundle.
+const isRuntimeAsset = u =>
+  /^https?:/.test(u) || u.startsWith('//') || u.startsWith('/_vercel/');
+// "/css/x.css" and "css/x.css" name the same repo file. Normalise to one key so
+// each stylesheet/script is still stored exactly once in the payload.
+const assetKey = u => u.replace(/^\//, '');
 
 async function addPage(file, isSol) {
   let h = await readFile(file);
@@ -39,12 +42,14 @@ async function addPage(file, isSol) {
     return;
   }
   for (const m of h.matchAll(/<link\b[^>]*href="([^"]+\.css)"[^>]*>/g)) {
-    if (isExternal(m[1])) continue;
-    await grab(CSSF, m[1]); h = replaceText(h, m[0], '@@CSS:' + m[1] + '@@');
+    if (isRuntimeAsset(m[1])) continue;
+    const k = assetKey(m[1]);
+    await grab(CSSF, k); h = replaceText(h, m[0], '@@CSS:' + k + '@@');
   }
   for (const m of h.matchAll(/<script\b[^>]*src="([^"]+\.js)"[^>]*><\/script>/g)) {
-    if (isExternal(m[1])) continue;
-    await grab(JSF, m[1]); h = replaceText(h, m[0], '@@JS:' + m[1] + '@@');
+    if (isRuntimeAsset(m[1])) continue;
+    const k = assetKey(m[1]);
+    await grab(JSF, k); h = replaceText(h, m[0], '@@JS:' + k + '@@');
   }
   h = inlineLogos(h);
   routes[path] = { title: ((h.match(/<title>([\s\S]*?)<\/title>/) || [])[1] || 'Vizit').trim(), doc: h };

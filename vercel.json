@@ -66,11 +66,6 @@
   ],
   "redirects": [
     {
-      "source": "/blog/:slug",
-      "destination": "/blog-article?slug=:slug",
-      "permanent": false
-    },
-    {
       "source": "/score-your-content",
       "destination": "/demo",
       "permanent": true
@@ -152,6 +147,10 @@
     }
   ],
   "rewrites": [
+    {
+      "source": "/blog/:slug",
+      "destination": "/blog-article?slug=:slug"
+    },
     {
       "source": "/",
       "destination": "/vizit-site.html"

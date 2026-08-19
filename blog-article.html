@@ -6,7 +6,7 @@
 <title>How we built the Content Conversion Standard | Vizit Insights</title>
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <meta name="description" content="Three years, 100M+ images, 10T+ retail performance data points. The story behind the Vizit Score — what we measured, what we threw out, and the benchmark every CPG catalog now scores against." />
-<link rel="stylesheet" href="css/colors-and-type.css" />
+<link rel="stylesheet" href="/css/colors-and-type.css" />
 <style>
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; background: var(--bg); scroll-behavior: smooth; }
@@ -771,9 +771,9 @@
     .nav-item .chev,.nav__item .chev{display:none}
   }
 </style>
-<link rel="stylesheet" href="css/vizit-theme.css">
-<script src="js/vizit-nav.js" defer></script>
-  <script src="js/vizit-footer.js" defer></script>
+<link rel="stylesheet" href="/css/vizit-theme.css">
+<script src="/js/vizit-nav.js" defer></script>
+  <script src="/js/vizit-footer.js" defer></script>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Vizit">
 <meta property="og:title" content="How we built the Content Conversion Standard | Vizit Insights">
@@ -1082,7 +1082,7 @@
 <!-- FOOTER -->
 <vizit-footer></vizit-footer>
 
-<script src="js/blog-data.js"></script>
+<script src="/js/blog-data.js"></script>
 <script>
   // ─────────────────────────────────────────────
   // Hydrate article from ?slug= URL parameter
@@ -1111,7 +1111,7 @@
     }
 
     function articleHref(slug) {
-      return 'blog-article.html?slug=' + encodeURIComponent(slug);
+      return '/blog/' + encodeURIComponent(slug);
     }
 
     function renderHead(a) {
