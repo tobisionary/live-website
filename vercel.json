@@ -66,6 +66,11 @@
   ],
   "redirects": [
     {
+      "source": "/blog/:slug",
+      "destination": "/blog-article?slug=:slug",
+      "permanent": false
+    },
+    {
       "source": "/score-your-content",
       "destination": "/demo",
       "permanent": true
@@ -136,18 +141,6 @@
       "permanent": true
     },
     {
-      "source": "/blog-article",
-      "has": [
-        {
-          "type": "query",
-          "key": "slug",
-          "value": "(?<slug>.+)"
-        }
-      ],
-      "destination": "/blog/:slug",
-      "permanent": false
-    },
-    {
       "source": "/:path(.+)\\.html",
       "destination": "/:path",
       "permanent": true
@@ -159,10 +152,6 @@
     }
   ],
   "rewrites": [
-    {
-      "source": "/blog/:slug",
-      "destination": "/blog-article?slug=:slug"
-    },
     {
       "source": "/",
       "destination": "/vizit-site.html"
