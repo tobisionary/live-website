@@ -20,6 +20,12 @@ const dataURI = s => 'data:image/svg+xml,' + encodeURIComponent(s).replace(/'/g,
 const inlineLogos = s => replaceText(replaceText(s, 'assets/logo-black.svg', dataURI(logoB)), 'assets/logo-white.svg', dataURI(logoW));
 async function grab(map, name) { if (!map[name]) map[name] = inlineLogos(replaceText(await readFile(name), '../fonts/', 'fonts/')); } // inlined css/js serve from root
 
+// Assets the bundler must NOT inline: absolute URLs, protocol-relative URLs, and
+// root-absolute paths. The last group matters for /_vercel/insights/script.js —
+// Vercel serves it at request time, so it has no file on disk and has to stay a
+// live <script src> tag in the bundle.
+const isExternal = u => /^https?:/.test(u) || u.startsWith('//') || u.startsWith('/');
+
 async function addPage(file, isSol) {
   let h = await readFile(file);
   if (isSol) h = replaceText(replaceText(h, '"../', '"'), "'../", "'"); // shell lives at root
@@ -33,11 +39,11 @@ async function addPage(file, isSol) {
     return;
   }
   for (const m of h.matchAll(/<link\b[^>]*href="([^"]+\.css)"[^>]*>/g)) {
-    if (/^https?:/.test(m[1])) continue;
+    if (isExternal(m[1])) continue;
     await grab(CSSF, m[1]); h = replaceText(h, m[0], '@@CSS:' + m[1] + '@@');
   }
   for (const m of h.matchAll(/<script\b[^>]*src="([^"]+\.js)"[^>]*><\/script>/g)) {
-    if (/^https?:/.test(m[1])) continue;
+    if (isExternal(m[1])) continue;
     await grab(JSF, m[1]); h = replaceText(h, m[0], '@@JS:' + m[1] + '@@');
   }
   h = inlineLogos(h);
