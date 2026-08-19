@@ -66,6 +66,26 @@
   ],
   "redirects": [
     {
+      "source": "/careers",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/company",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/technology",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/innovation-and-insights",
+      "destination": "/",
+      "permanent": false
+    },
+    {
       "source": "/score-your-content",
       "destination": "/demo",
       "permanent": true
