@@ -1094,6 +1094,10 @@
       var params = new URLSearchParams(window.__vzSearch || window.location.search);
       var s = params.get('slug');
       if (s) return s;
+      // Pretty URLs: /blog/<slug> is rewritten to this page server-side, so the
+      // query string never reaches the browser — the slug lives in the path.
+      var m = /^\/blog\/([^\/?#]+)\/?$/.exec(window.location.pathname || '');
+      if (m) return decodeURIComponent(m[1]);
       if (window.location.hash.indexOf('slug=') === 0) {
         return decodeURIComponent(window.location.hash.replace(/^#slug=/, ''));
       }

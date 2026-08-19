@@ -160,6 +160,10 @@
   ],
   "rewrites": [
     {
+      "source": "/blog/:slug",
+      "destination": "/blog-article?slug=:slug"
+    },
+    {
       "source": "/",
       "destination": "/vizit-site.html"
     },
