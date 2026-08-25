@@ -86,6 +86,11 @@
       "permanent": false
     },
     {
+      "source": "/content-effectiveness-rankings",
+      "destination": "/",
+      "permanent": false
+    },
+    {
       "source": "/score-your-content",
       "destination": "/demo",
       "permanent": true
