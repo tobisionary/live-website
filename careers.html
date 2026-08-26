@@ -17,22 +17,73 @@
     #open-roles { scroll-margin-top: 80px; }
     #life { scroll-margin-top: 80px; }
 
-    /* PANEL 1 — hero */
-    .cr-hero { padding: var(--space-9) 0 var(--space-8); }
-    .cr-hero h1 { margin: 0; max-width: 14ch; }
-    .cr-hero .dek { margin-top: var(--space-5); max-width: 46ch; }
+    /* ── PANEL 1 — hero with background video ──
+       Stack, back to front: poster image (paints instantly, and is the whole
+       show if the video is blocked, still loading, or reduced-motion is on)
+       → <video> → scrim → content. The section keeps a solid dark background
+       colour underneath so the inverted type is legible even if every media
+       layer fails. */
+    .cr-hero {
+      position: relative;
+      padding: var(--space-9) 0 var(--space-8);
+      background-color: #06121f;
+      background-image: radial-gradient(ellipse 80% 60% at 75% 10%, rgba(52,160,254,0.30), transparent 60%);
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .cr-hero-media {
+      position: absolute; inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image: url('assets/img/careers-hero-poster.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+    .cr-hero-media video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    /* Scrim: a strong floor across the whole frame, deepest at the bottom so
+       the facts strip stays readable over the busiest part of the footage. */
+    .cr-hero-scrim {
+      position: absolute; inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        linear-gradient(to top, rgba(4,14,24,0.94) 0%, rgba(4,14,24,0.72) 45%, rgba(4,14,24,0.58) 100%),
+        linear-gradient(to right, rgba(4,14,24,0.72) 0%, rgba(4,14,24,0.30) 55%, rgba(4,14,24,0.12) 100%);
+    }
+    .cr-hero > .container { position: relative; z-index: 2; }
+    .cr-hero h1 { margin: 0; max-width: 14ch; color: #fff; }
+    .cr-hero .dek { margin-top: var(--space-5); max-width: 46ch; color: rgba(255,255,255,0.82); }
     .cr-hero .cta-row { margin-top: var(--space-7); display: flex; gap: var(--space-3); flex-wrap: wrap; }
+    /* Button roles invert here: .btn-primary is forced to a near-black fill by
+       vizit-theme.css, which vanishes on dark footage, so the hero CTA uses the
+       white .btn-on-dark. .btn-secondary is a white fill by default and would
+       then compete with it — restated as an outline so it reads as the quieter
+       of the two. */
+    .cr-hero .btn-secondary {
+      background: transparent;
+      color: #fff;
+      border-color: rgba(255,255,255,0.45);
+    }
+    .cr-hero .btn-secondary:hover { background: rgba(255,255,255,0.10); border-color: #fff; color: #fff; }
 
-    /* quick-facts strip */
-    .cr-facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: var(--space-8); border-top: 1px solid var(--border); }
+    /* quick-facts strip — inverted to sit on the video */
+    .cr-facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: var(--space-8); border-top: 1px solid rgba(255,255,255,0.22); }
     .cr-fact { padding: var(--space-6) var(--space-5) 0 0; }
-    .cr-fact + .cr-fact { padding-left: var(--space-5); border-left: 1px solid var(--border); }
-    .cr-fact .n { display: block; font-family: var(--font-display); font-weight: 400; font-size: clamp(1.6rem, 3.2vw, 2.35rem); letter-spacing: -0.03em; line-height: 1; color: var(--blue-1000); }
-    .cr-fact .l { display: block; margin-top: var(--space-3); font-size: var(--text-sm); line-height: 1.45; color: var(--color-600); }
+    .cr-fact + .cr-fact { padding-left: var(--space-5); border-left: 1px solid rgba(255,255,255,0.22); }
+    .cr-fact .n { display: block; font-family: var(--font-display); font-weight: 400; font-size: clamp(1.6rem, 3.2vw, 2.35rem); letter-spacing: -0.03em; line-height: 1; color: #fff; }
+    .cr-fact .l { display: block; margin-top: var(--space-3); font-size: var(--text-sm); line-height: 1.45; color: rgba(255,255,255,0.72); }
     @media (max-width: 860px) {
       .cr-facts { grid-template-columns: 1fr 1fr; }
       .cr-fact:nth-child(odd) { padding-left: 0; border-left: none; }
-      .cr-fact:nth-child(n+3) { border-top: 1px solid var(--border); }
+      .cr-fact:nth-child(n+3) { border-top: 1px solid rgba(255,255,255,0.22); }
+    }
+    /* Motion is decorative here — drop to the poster still when it's unwelcome. */
+    @media (prefers-reduced-motion: reduce) {
+      .cr-hero-media video { display: none; }
     }
 
     /* ── PANEL 2 — full-bleed lifestyle band ──
@@ -179,7 +230,9 @@
     a:hover { color: var(--blue-500); }
 
     @media print {
-      vizit-nav, vizit-footer, .cr-filters { display: none !important; }
+      vizit-nav, vizit-footer, .cr-filters, .cr-hero-media, .cr-hero-scrim { display: none !important; }
+      .cr-hero { background: #fff !important; }
+      .cr-hero h1, .cr-hero .dek, .cr-fact .n, .cr-fact .l { color: var(--blue-1000) !important; }
       .panel--dark, .cr-life { background: #fff !important; color: var(--blue-1000) !important; }
       .panel--dark *, .cr-life * { color: var(--blue-1000) !important; }
       .panel { break-inside: avoid; }
@@ -217,11 +270,23 @@
 
 <!-- PANEL 1 — HERO -->
 <section class="cr-hero" data-screen-label="01 Hero">
+  <!-- NOTE: assets/video/careers-hero.mp4 is a WATERMARKED Artlist preview and
+       must be replaced with the licensed download before publish. Regenerate
+       assets/img/careers-hero-poster.jpg from the clean file at the same time —
+       the poster is the first frame and carries the same watermark. -->
+  <div class="cr-hero-media" aria-hidden="true">
+    <video
+      src="assets/video/careers-hero.mp4"
+      poster="assets/img/careers-hero-poster.jpg"
+      autoplay muted loop playsinline preload="metadata"
+      tabindex="-1"></video>
+  </div>
+  <div class="cr-hero-scrim" aria-hidden="true"></div>
   <div class="container">
     <h1 class="display">Small team. Big problems. No politics.</h1>
     <p class="subhead dek">Remote-first, deliberately small, and allergic to busywork. Here is what it is actually like.</p>
     <div class="cta-row">
-      <a class="btn btn-primary btn-lg" href="#open-roles">See open roles <span class="arrow">→</span></a>
+      <a class="btn btn-on-dark btn-lg" href="#open-roles">See open roles <span class="arrow">→</span></a>
       <a class="btn btn-secondary btn-lg" href="#life">Life here</a>
     </div>
 
