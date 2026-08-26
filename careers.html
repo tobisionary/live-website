@@ -5,9 +5,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Careers at Vizit | Build the Standard for Content That Converts</title>
+  <title>Careers at Vizit | Small Team, Big Problems, No Politics</title>
 <link rel="icon" type="image/png" href="assets/favicon.png">
-  <meta name="description" content="Join Vizit and help build the agentic platform for content optimization. See open roles across engineering, AI research, go-to-market, and customer success.">
+  <meta name="description" content="Remote-first, deliberately small, allergic to busywork. See what life at Vizit is actually like — and the roles we're hiring for right now.">
   <link rel="stylesheet" href="css/ci-styles.css">
   <link rel="stylesheet" href="css/vizit-theme.css">
   <script src="js/vizit-nav.js" defer></script>
@@ -15,68 +15,124 @@
   <style>
     /* ───────── Careers ───────── */
     #open-roles { scroll-margin-top: 80px; }
+    #life { scroll-margin-top: 80px; }
 
     /* PANEL 1 — hero */
     .cr-hero { padding: var(--space-9) 0 var(--space-8); }
-    .cr-hero h1 { margin: 0; max-width: 16ch; }
-    .cr-hero .dek { margin-top: var(--space-5); max-width: 54ch; }
+    .cr-hero h1 { margin: 0; max-width: 14ch; }
+    .cr-hero .dek { margin-top: var(--space-5); max-width: 46ch; }
     .cr-hero .cta-row { margin-top: var(--space-7); display: flex; gap: var(--space-3); flex-wrap: wrap; }
 
-    /* company-at-a-glance stat band */
-    .cr-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: var(--space-8); border-top: 1px solid var(--border); }
-    .cr-stat { padding: var(--space-6) var(--space-5) 0 0; }
-    .cr-stat + .cr-stat { padding-left: var(--space-5); border-left: 1px solid var(--border); }
-    .cr-stat .n { display: block; font-family: var(--font-display); font-weight: 400; font-size: clamp(1.75rem, 3.4vw, 2.5rem); letter-spacing: -0.03em; line-height: 1; color: var(--blue-1000); }
-    .cr-stat .l { display: block; margin-top: var(--space-3); font-size: var(--text-sm); line-height: 1.5; color: var(--color-600); }
+    /* quick-facts strip */
+    .cr-facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: var(--space-8); border-top: 1px solid var(--border); }
+    .cr-fact { padding: var(--space-6) var(--space-5) 0 0; }
+    .cr-fact + .cr-fact { padding-left: var(--space-5); border-left: 1px solid var(--border); }
+    .cr-fact .n { display: block; font-family: var(--font-display); font-weight: 400; font-size: clamp(1.6rem, 3.2vw, 2.35rem); letter-spacing: -0.03em; line-height: 1; color: var(--blue-1000); }
+    .cr-fact .l { display: block; margin-top: var(--space-3); font-size: var(--text-sm); line-height: 1.45; color: var(--color-600); }
     @media (max-width: 860px) {
-      .cr-stats { grid-template-columns: 1fr 1fr; }
-      .cr-stat:nth-child(odd) { padding-left: 0; border-left: none; }
-      .cr-stat:nth-child(n+3) { border-top: 1px solid var(--border); }
+      .cr-facts { grid-template-columns: 1fr 1fr; }
+      .cr-fact:nth-child(odd) { padding-left: 0; border-left: none; }
+      .cr-fact:nth-child(n+3) { border-top: 1px solid var(--border); }
     }
 
-    /* shared prose block */
-    .cr-prose { max-width: 62ch; }
-    .cr-prose p { font-size: 1.0625rem; line-height: 1.62; color: var(--color-800); margin: 0 0 var(--space-4); }
-    .cr-prose p:last-child { margin-bottom: 0; }
-    .panel--dark .cr-prose p { color: rgba(255,255,255,0.80); }
+    /* ── PANEL 2 — full-bleed lifestyle band ──
+       The photo is the top background layer; the scrim gradients sit above it
+       so the type stays legible on any image. If the photo is missing or fails
+       to load, the browser simply skips that layer and the brand gradient
+       underneath carries the section on its own — it never renders broken. */
+    .cr-life {
+      position: relative;
+      min-height: min(76vh, 680px);
+      display: flex;
+      align-items: flex-end;
+      background-color: var(--blue-1000);
+      background-image:
+        linear-gradient(to top, rgba(0,15,28,0.94) 0%, rgba(0,15,28,0.66) 40%, rgba(0,15,28,0.46) 100%),
+        radial-gradient(ellipse 90% 70% at 78% 12%, rgba(52,160,254,0.42), transparent 62%),
+        radial-gradient(ellipse 80% 60% at 8% 88%, rgba(1,116,217,0.34), transparent 60%),
+        url('assets/img/careers-life.jpg');
+      background-size: cover, cover, cover, cover;
+      background-position: center, center, center, center;
+      background-repeat: no-repeat;
+      overflow: hidden;
+    }
+    /* Fine dot texture keeps the gradient-only fallback from reading as flat. */
+    .cr-life::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.16) 1px, transparent 1px);
+      background-size: 4px 4px;
+      opacity: 0.22;
+      pointer-events: none;
+    }
+    .cr-life .container { position: relative; z-index: 1; padding-top: var(--space-9); padding-bottom: var(--space-8); }
+    .cr-life h2 { margin: 0; max-width: 15ch; color: #fff; }
+    .cr-life .cr-life-cap {
+      margin: var(--space-5) 0 0;
+      max-width: 40ch;
+      font-size: 1.0625rem;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.78);
+    }
+    .cr-life-tag {
+      display: inline-block;
+      margin-bottom: var(--space-5);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--blue-200);
+    }
+    @media (min-width: 900px) and (hover: hover) {
+      .cr-life { background-attachment: scroll, scroll, scroll, fixed; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cr-life { background-attachment: scroll, scroll, scroll, scroll; }
+    }
 
-    /* PANEL 3 — values */
-    .cr-values { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5); margin-top: var(--space-7); }
-    @media (max-width: 980px) { .cr-values { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 640px) { .cr-values { grid-template-columns: 1fr; } }
-    .cr-value { padding: var(--space-6); border: 1px solid var(--border); background: #fff; display: flex; flex-direction: column; gap: var(--space-3); }
-    .cr-value .no { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
-    .cr-value h3 { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.25rem, 2.4vw, 1.6rem); letter-spacing: -0.02em; line-height: 1.15; margin: 0; color: var(--blue-1000); }
-    .cr-value p { font-size: var(--text-base); line-height: 1.55; color: var(--color-700); margin: 0; }
+    /* PANEL 3 — how we work (short cards) */
+    .cr-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5); margin-top: var(--space-7); }
+    @media (max-width: 980px) { .cr-cards { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .cr-cards { grid-template-columns: 1fr; } }
+    .cr-card {
+      padding: var(--space-6);
+      border: 1px solid var(--border);
+      background: #fff;
+      display: flex; flex-direction: column; gap: var(--space-3);
+      transition: transform 220ms cubic-bezier(0.2,0,0,1), box-shadow 220ms cubic-bezier(0.2,0,0,1), border-color 220ms;
+    }
+    .cr-card:hover { transform: translateY(-3px); border-color: var(--blue-200); box-shadow: 0 14px 34px rgba(0,33,61,0.10); }
+    .cr-card .no { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+    .cr-card h3 { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.2rem, 2.3vw, 1.5rem); letter-spacing: -0.02em; line-height: 1.15; margin: 0; color: var(--blue-1000); }
+    .cr-card p { font-size: var(--text-base); line-height: 1.5; color: var(--color-600); margin: 0; }
 
-    /* PANEL 4 — benefits */
-    .cr-benefits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: var(--space-7); background: #fff; border: 1px solid #e5e8ec; overflow: hidden; }
-    @media (max-width: 980px) { .cr-benefits { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 640px) { .cr-benefits { grid-template-columns: 1fr; } }
-    .cr-benefit { padding: var(--space-5); border-left: 1px solid #e5e8ec; border-top: 1px solid #e5e8ec; }
-    .cr-benefit h4 { font-family: var(--font-display); font-weight: 400; font-size: var(--text-lg); letter-spacing: -0.02em; line-height: 1.15; margin: 0 0 var(--space-3); color: var(--blue-1000); }
-    .cr-benefit p { font-size: var(--text-sm); line-height: 1.55; color: var(--color-600); margin: 0; }
-    /* Grid lines only between cells, never on the outer edge. Recomputed per
-       breakpoint because the column count changes which cells sit on an edge. */
-    .cr-benefits > .cr-benefit:nth-child(-n+3) { border-top: none; }
-    .cr-benefits > .cr-benefit:nth-child(3n+1) { border-left: none; }
+    /* PANEL 4 — perks (tight one-liners) */
+    .cr-perks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: var(--space-7); background: #fff; border: 1px solid #e5e8ec; overflow: hidden; }
+    @media (max-width: 980px) { .cr-perks { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 640px) { .cr-perks { grid-template-columns: 1fr; } }
+    .cr-perk { padding: var(--space-5); border-left: 1px solid #e5e8ec; border-top: 1px solid #e5e8ec; }
+    .cr-perk h4 { font-family: var(--font-display); font-weight: 400; font-size: 1.1875rem; letter-spacing: -0.02em; line-height: 1.15; margin: 0 0 var(--space-2); color: var(--blue-1000); }
+    .cr-perk p { font-size: var(--text-sm); line-height: 1.45; color: var(--color-600); margin: 0; }
+    /* Grid lines between cells only — recomputed per breakpoint, since the
+       column count changes which cells sit on an outer edge. */
+    .cr-perks > .cr-perk:nth-child(-n+3) { border-top: none; }
+    .cr-perks > .cr-perk:nth-child(3n+1) { border-left: none; }
     @media (max-width: 980px) {
-      .cr-benefits > .cr-benefit { border-top: 1px solid #e5e8ec; border-left: 1px solid #e5e8ec; }
-      .cr-benefits > .cr-benefit:nth-child(-n+2) { border-top: none; }
-      .cr-benefits > .cr-benefit:nth-child(2n+1) { border-left: none; }
+      .cr-perks > .cr-perk { border-top: 1px solid #e5e8ec; border-left: 1px solid #e5e8ec; }
+      .cr-perks > .cr-perk:nth-child(-n+2) { border-top: none; }
+      .cr-perks > .cr-perk:nth-child(2n+1) { border-left: none; }
     }
     @media (max-width: 640px) {
-      .cr-benefits > .cr-benefit { border-left: none; border-top: 1px solid #e5e8ec; }
-      .cr-benefits > .cr-benefit:first-child { border-top: none; }
+      .cr-perks > .cr-perk { border-left: none; border-top: 1px solid #e5e8ec; }
+      .cr-perks > .cr-perk:first-child { border-top: none; }
     }
 
     /* PANEL 5 — open roles */
-    .cr-roles-head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-6); flex-wrap: wrap; }
     .cr-filters { display: flex; gap: var(--space-5); flex-wrap: wrap; margin-top: var(--space-7); padding-bottom: var(--space-5); border-bottom: 1px solid var(--border); }
     .cr-filter-group { display: flex; flex-direction: column; gap: var(--space-3); }
     .cr-filter-group .k { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
     .cr-chips { display: flex; gap: var(--space-2); flex-wrap: wrap; }
-    .cr-chip { font-family: var(--font-sans); font-size: var(--text-sm); font-weight: 500; color: var(--color-600); background: #fff; border: 1px solid var(--border); padding: 8px 14px; cursor: pointer; transition: all var(--duration, 200ms) var(--ease, ease); }
+    .cr-chip { font-family: var(--font-sans); font-size: var(--text-sm); font-weight: 500; color: var(--color-600); background: #fff; border: 1px solid var(--border); padding: 8px 14px; cursor: pointer; transition: all 200ms cubic-bezier(0.2,0,0,1); }
     .cr-chip:hover { border-color: var(--accent); color: var(--accent); }
     .cr-chip[aria-pressed="true"] { background: var(--blue-1000); border-color: var(--blue-1000); color: #fff; }
 
@@ -84,12 +140,12 @@
 
     .cr-roles { list-style: none; margin: var(--space-4) 0 0; padding: 0; border-top: 1px solid var(--border); }
     .cr-role { border-bottom: 1px solid var(--border); }
-    .cr-role a { display: grid; grid-template-columns: 1.6fr 1fr 1fr auto; align-items: center; gap: var(--space-5); padding: var(--space-5) 0; text-decoration: none; transition: background var(--duration, 200ms) var(--ease, ease); }
+    .cr-role a { display: grid; grid-template-columns: 1.6fr 1fr 1fr auto; align-items: center; gap: var(--space-5); padding: var(--space-5) 0; text-decoration: none; transition: background 200ms cubic-bezier(0.2,0,0,1); }
     .cr-role a:hover { background: var(--color-50); }
     .cr-role a:hover .cr-role-go { color: var(--accent); transform: translateX(3px); }
     .cr-role-title { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.05rem, 1.9vw, 1.3rem); letter-spacing: -0.02em; line-height: 1.2; color: var(--blue-1000); }
     .cr-role-meta { font-size: var(--text-sm); color: var(--color-600); }
-    .cr-role-go { font-family: var(--font-mono); font-size: var(--text-sm); color: var(--muted); justify-self: end; transition: all var(--duration, 200ms) var(--ease, ease); }
+    .cr-role-go { font-family: var(--font-mono); font-size: var(--text-sm); color: var(--muted); justify-self: end; transition: all 200ms cubic-bezier(0.2,0,0,1); }
     @media (max-width: 780px) {
       .cr-role a { grid-template-columns: 1fr auto; gap: var(--space-2) var(--space-4); }
       .cr-role-title { grid-column: 1 / -1; }
@@ -106,12 +162,17 @@
     @media (max-width: 560px) { .cr-steps { grid-template-columns: 1fr; } }
     .cr-step { padding-top: var(--space-4); border-top: 2px solid var(--blue-300); }
     .cr-step .no { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-300); }
-    .cr-step h4 { font-family: var(--font-display); font-weight: 400; font-size: var(--text-lg); letter-spacing: -0.02em; line-height: 1.15; margin: var(--space-3) 0 var(--space-3); color: #fff; }
-    .cr-step p { font-size: var(--text-sm); line-height: 1.55; color: rgba(255,255,255,0.72); margin: 0; }
+    .cr-step h4 { font-family: var(--font-display); font-weight: 400; font-size: var(--text-lg); letter-spacing: -0.02em; line-height: 1.15; margin: var(--space-3) 0 var(--space-2); color: #fff; }
+    .cr-step p { font-size: var(--text-sm); line-height: 1.45; color: rgba(255,255,255,0.72); margin: 0; }
 
-    .cr-link { display: inline-flex; align-items: center; gap: 8px; margin-top: var(--space-6); font-family: var(--font-mono); font-size: var(--text-sm); letter-spacing: 0.04em; color: var(--accent); text-decoration: none; }
+    .cr-lede { max-width: 48ch; font-size: 1.0625rem; line-height: 1.55; color: var(--color-600); margin: var(--space-5) 0 0; }
+    .panel--dark .cr-lede { color: rgba(255,255,255,0.72); }
+
+    .cr-link { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: var(--text-sm); letter-spacing: 0.04em; color: var(--accent); text-decoration: none; }
     .cr-link:hover { text-decoration: underline; text-underline-offset: 3px; }
-    .cr-link--dark { margin-top: 0; color: rgba(255,255,255,0.72); }
+    /* .btn-on-dark is forced to a white fill by a site-wide !important rule in
+       vizit-theme.css, so a second button here can't read as secondary. */
+    .cr-link--dark { color: rgba(255,255,255,0.72); }
     .cr-link--dark:hover { color: #fff; }
 
     a { color: var(--accent); }
@@ -119,21 +180,21 @@
 
     @media print {
       vizit-nav, vizit-footer, .cr-filters { display: none !important; }
-      .panel--dark { background: #fff !important; color: var(--blue-1000) !important; }
-      .panel--dark * { color: var(--blue-1000) !important; }
+      .panel--dark, .cr-life { background: #fff !important; color: var(--blue-1000) !important; }
+      .panel--dark *, .cr-life * { color: var(--blue-1000) !important; }
       .panel { break-inside: avoid; }
     }
     .final::before { content: none; }
   </style>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Vizit">
-<meta property="og:title" content="Careers at Vizit | Build the Standard for Content That Converts">
-<meta property="og:description" content="Join Vizit and help build the agentic platform for content optimization. See open roles across engineering, AI research, go-to-market, and customer success.">
+<meta property="og:title" content="Careers at Vizit | Small Team, Big Problems, No Politics">
+<meta property="og:description" content="Remote-first, deliberately small, allergic to busywork. See what life at Vizit is actually like — and the roles we're hiring for right now.">
 <meta property="og:image" content="https://vizit.com/assets/og-cover.jpg">
 <meta property="og:image:width" content="1600">
 <meta property="og:image:height" content="1000">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Careers at Vizit | Build the Standard for Content That Converts">
+<meta name="twitter:title" content="Careers at Vizit | Small Team, Big Problems, No Politics">
 <meta name="twitter:image" content="https://vizit.com/assets/og-cover.jpg">
 <script defer src="/_vercel/insights/script.js"></script>
 <script>
@@ -157,135 +218,90 @@
 <!-- PANEL 1 — HERO -->
 <section class="cr-hero" data-screen-label="01 Hero">
   <div class="container">
-    <span class="eyebrow">Careers at Vizit</span>
-    <h1 class="display">Build the standard for content that converts.</h1>
-    <p class="subhead dek">We are teaching machines to see products the way shoppers do — and giving the world's biggest brands an objective measure of what wins on the visual shelf. Come build it with us.</p>
+    <h1 class="display">Small team. Big problems. No politics.</h1>
+    <p class="subhead dek">Remote-first, deliberately small, and allergic to busywork. Here is what it is actually like.</p>
     <div class="cta-row">
       <a class="btn btn-primary btn-lg" href="#open-roles">See open roles <span class="arrow">→</span></a>
-      <a class="btn btn-secondary btn-lg" href="#life-at-vizit">Life at Vizit</a>
+      <a class="btn btn-secondary btn-lg" href="#life">Life here</a>
     </div>
 
     <!-- NOTE: placeholder figures — confirm with People Ops before publish. -->
-    <div class="cr-stats">
-      <div class="cr-stat">
-        <span class="n">2016</span>
-        <span class="l">Founded, with roots in visual AI research</span>
-      </div>
-      <div class="cr-stat">
-        <span class="n">Remote-first</span>
-        <span class="l">Distributed across the US and Europe</span>
-      </div>
-      <div class="cr-stat">
-        <span class="n">1B+</span>
-        <span class="l">Shopper signals behind every Vizit Score</span>
-      </div>
-      <div class="cr-stat">
-        <span class="n">Global brands</span>
-        <span class="l">The category leaders you already buy from</span>
-      </div>
+    <div class="cr-facts">
+      <div class="cr-fact"><span class="n">~40</span><span class="l">People, on purpose</span></div>
+      <div class="cr-fact"><span class="n">5</span><span class="l">Countries, one calendar</span></div>
+      <div class="cr-fact"><span class="n">3×</span><span class="l">Onsites a year</span></div>
+      <div class="cr-fact"><span class="n">0</span><span class="l">Layers between you and the CEO</span></div>
     </div>
   </div>
 </section>
 
-<!-- PANEL 2 — WHY VIZIT -->
-<section class="panel panel--paper" id="life-at-vizit" data-screen-label="02 Why Vizit">
+<!-- PANEL 2 — LIFESTYLE BAND (full-bleed) -->
+<!-- NOTE: drop a team/lifestyle photo at assets/img/careers-life.jpg (landscape,
+     ~2400px wide, people not product). Until then the brand gradient carries
+     the section on its own — no broken-image state. -->
+<section class="cr-life" id="life" data-screen-label="02 Life at Vizit">
   <div class="container">
-    <span class="eyebrow" style="display:block;margin-bottom:var(--space-4);">Why Vizit</span>
-    <h2 class="display" style="max-width:20ch;">A hard problem, a real market, and a team small enough that your work shows.</h2>
-    <div class="cr-prose" style="margin-top:var(--space-6);">
-      <p>Every product on every digital shelf gets a fraction of a second to earn a click. For decades, the decision about which image to use came down to opinion. Vizit replaced the opinion with math — a model trained on how real shoppers respond, scoring the conversion power of content before a dollar is spent on it.</p>
-      <p>That means genuinely difficult work: computer vision at catalog scale, agentic systems that act on what they see, and a product used daily by the people who decide what the world's largest brands put in front of shoppers. Teams here are small and unusually senior, so the thing you build this quarter is in front of customers next quarter.</p>
-    </div>
-    <a class="cr-link" href="vizit-next-gen-platform.html">See what you would be building →</a>
+    <span class="cr-life-tag">Life at Vizit</span>
+    <h2 class="display">The best part of the job is who you do it with.</h2>
+    <p class="cr-life-cap">Three onsites a year, and the rest of the time your calendar is yours.</p>
   </div>
 </section>
 
-<!-- PANEL 3 — VALUES -->
+<!-- PANEL 3 — HOW WE WORK -->
 <section class="panel" data-screen-label="03 How we work">
   <div class="container">
-    <span class="eyebrow" style="display:block;margin-bottom:var(--space-4);">How we work</span>
-    <h2 class="display" style="max-width:18ch;">The habits we hire for.</h2>
-    <div class="cr-values">
-      <div class="cr-value">
+    <h2 class="display" style="max-width:16ch;">How we actually work.</h2>
+    <div class="cr-cards">
+      <div class="cr-card">
         <span class="no">01</span>
-        <h3>Evidence over opinion</h3>
-        <p>We built a company on replacing subjective review with data. We hold our own decisions to the same bar.</p>
+        <h3>Fewer meetings</h3>
+        <p>Write it down. Meet only when writing it down would not do.</p>
       </div>
-      <div class="cr-value">
+      <div class="cr-card">
         <span class="no">02</span>
-        <h3>Ship, then sharpen</h3>
-        <p>Real feedback comes from real usage. We get work in front of customers early and improve it in the open.</p>
+        <h3>Own the whole thing</h3>
+        <p>Your title is where you start, not where you stop.</p>
       </div>
-      <div class="cr-value">
+      <div class="cr-card">
         <span class="no">03</span>
-        <h3>Own the outcome</h3>
-        <p>Titles describe where you start, not where you stop. If it needs doing and you see it first, it is yours.</p>
+        <h3>Say the real thing</h3>
+        <p>Direct, kind, no guessing games. Distributed teams run on it.</p>
       </div>
-      <div class="cr-value">
+      <div class="cr-card">
         <span class="no">04</span>
-        <h3>Customers in the room</h3>
-        <p>Engineers join customer calls. Everyone hears the problem first-hand rather than through a summary.</p>
+        <h3>Ship on Fridays</h3>
+        <p>And nobody panics, because we trust the tests.</p>
       </div>
-      <div class="cr-value">
+      <div class="cr-card">
         <span class="no">05</span>
-        <h3>Clarity is a kindness</h3>
-        <p>Direct feedback, written decisions, no guessing games. Distributed teams run on things being said plainly.</p>
+        <h3>Deliberately small</h3>
+        <p>We hire slowly so nobody has to carry a passenger.</p>
       </div>
-      <div class="cr-value">
+      <div class="cr-card">
         <span class="no">06</span>
-        <h3>Depth beats headcount</h3>
-        <p>We stay deliberately small and hire people who raise the bar, rather than growing for the sake of it.</p>
+        <h3>Log off</h3>
+        <p>Rested people make better calls. We mean it about the time off.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PANEL 4 — BENEFITS -->
-<section class="panel panel--paper" data-screen-label="04 Benefits">
+<!-- PANEL 4 — PERKS -->
+<section class="panel panel--paper" data-screen-label="04 Perks">
   <div class="container">
-    <span class="eyebrow" style="display:block;margin-bottom:var(--space-4);">Benefits &amp; perks</span>
-    <h2 class="display" style="max-width:18ch;">Set up to do the best work of your career.</h2>
-    <div class="cr-prose" style="margin-top:var(--space-6);max-width:58ch;">
-      <p>Benefits vary by country and are confirmed in writing before you sign. Below is what applies to most roles.</p>
-    </div>
-    <!-- NOTE: placeholder benefits copy — confirm each line with People Ops before publish. -->
-    <div class="cr-benefits">
-      <div class="cr-benefit">
-        <h4>Meaningful equity</h4>
-        <p>Every employee is an owner. We explain the numbers behind your grant rather than handing you a percentage.</p>
-      </div>
-      <div class="cr-benefit">
-        <h4>Health, dental &amp; vision</h4>
-        <p>Comprehensive coverage for you and your dependents, with premiums covered by Vizit.</p>
-      </div>
-      <div class="cr-benefit">
-        <h4>Remote-first, always</h4>
-        <p>Work from where you do your best thinking. Meetings are scheduled around overlap, not a headquarters.</p>
-      </div>
-      <div class="cr-benefit">
-        <h4>Flexible time off</h4>
-        <p>No accrual math. A minimum expectation instead of a maximum, because rested people build better products.</p>
-      </div>
-      <div class="cr-benefit">
-        <h4>Paid parental leave</h4>
-        <p>Time to be present for the parts that do not come back, for every kind of new parent.</p>
-      </div>
-      <div class="cr-benefit">
-        <h4>Home office &amp; hardware</h4>
-        <p>A budget for the desk, chair, and machine you actually want, refreshed on a regular cycle.</p>
-      </div>
-      <div class="cr-benefit">
-        <h4>Learning budget</h4>
-        <p>Conferences, courses, and books. AI moves quickly and we would rather you moved with it.</p>
-      </div>
-      <div class="cr-benefit">
-        <h4>Team onsites</h4>
-        <p>We bring everyone together a few times a year for the work that is better done in one room.</p>
-      </div>
-      <div class="cr-benefit">
-        <h4>401(k)</h4>
-        <p>Retirement savings with a company match for US-based employees.</p>
-      </div>
+    <h2 class="display" style="max-width:14ch;">The good stuff.</h2>
+    <p class="cr-lede">Varies a little by country. All of it confirmed in writing before you sign.</p>
+    <!-- NOTE: placeholder perks copy — confirm each line with People Ops before publish. -->
+    <div class="cr-perks">
+      <div class="cr-perk"><h4>Real equity</h4><p>Everyone owns a piece. We show you the math.</p></div>
+      <div class="cr-perk"><h4>Health, dental, vision</h4><p>Premiums on us, family included.</p></div>
+      <div class="cr-perk"><h4>Work from anywhere</h4><p>No headquarters to commute to.</p></div>
+      <div class="cr-perk"><h4>Flexible time off</h4><p>With a minimum, not a maximum.</p></div>
+      <div class="cr-perk"><h4>Parental leave</h4><p>Paid, and for every kind of new parent.</p></div>
+      <div class="cr-perk"><h4>Pick your setup</h4><p>The desk, the chair, the machine you want.</p></div>
+      <div class="cr-perk"><h4>Learning budget</h4><p>Courses, conferences, books. Go get smarter.</p></div>
+      <div class="cr-perk"><h4>Team onsites</h4><p>Three a year, somewhere good.</p></div>
+      <div class="cr-perk"><h4>401(k)</h4><p>With a match, for US folks.</p></div>
     </div>
   </div>
 </section>
@@ -296,12 +312,7 @@
      with the ATS embed script — before publish. -->
 <section class="panel" id="open-roles" data-screen-label="05 Open roles">
   <div class="container">
-    <div class="cr-roles-head">
-      <div>
-        <span class="eyebrow" style="display:block;margin-bottom:var(--space-4);">Open roles</span>
-        <h2 class="display" style="max-width:16ch;">Find your seat.</h2>
-      </div>
-    </div>
+    <h2 class="display" style="max-width:14ch;">Find your seat.</h2>
 
     <div class="cr-filters">
       <div class="cr-filter-group">
@@ -330,128 +341,54 @@
 
     <ul class="cr-roles" id="cr-roles">
       <li class="cr-role" data-team="Engineering" data-location="Remote — US">
-        <a href="#">
-          <span class="cr-role-title">Senior Full-Stack Engineer</span>
-          <span class="cr-role-meta">Engineering</span>
-          <span class="cr-role-meta">Remote — US</span>
-          <span class="cr-role-go">Apply →</span>
-        </a>
+        <a href="#"><span class="cr-role-title">Senior Full-Stack Engineer</span><span class="cr-role-meta">Engineering</span><span class="cr-role-meta">Remote — US</span><span class="cr-role-go">Apply →</span></a>
       </li>
       <li class="cr-role" data-team="Engineering" data-location="Remote — Europe">
-        <a href="#">
-          <span class="cr-role-title">Staff Platform Engineer</span>
-          <span class="cr-role-meta">Engineering</span>
-          <span class="cr-role-meta">Remote — Europe</span>
-          <span class="cr-role-go">Apply →</span>
-        </a>
+        <a href="#"><span class="cr-role-title">Staff Platform Engineer</span><span class="cr-role-meta">Engineering</span><span class="cr-role-meta">Remote — Europe</span><span class="cr-role-go">Apply →</span></a>
       </li>
       <li class="cr-role" data-team="Engineering" data-location="Boston, MA">
-        <a href="#">
-          <span class="cr-role-title">Data Engineer, Retail Signals</span>
-          <span class="cr-role-meta">Engineering</span>
-          <span class="cr-role-meta">Boston, MA</span>
-          <span class="cr-role-go">Apply →</span>
-        </a>
+        <a href="#"><span class="cr-role-title">Data Engineer, Retail Signals</span><span class="cr-role-meta">Engineering</span><span class="cr-role-meta">Boston, MA</span><span class="cr-role-go">Apply →</span></a>
       </li>
       <li class="cr-role" data-team="AI Research" data-location="Remote — US">
-        <a href="#">
-          <span class="cr-role-title">Research Scientist, Computer Vision</span>
-          <span class="cr-role-meta">AI Research</span>
-          <span class="cr-role-meta">Remote — US</span>
-          <span class="cr-role-go">Apply →</span>
-        </a>
+        <a href="#"><span class="cr-role-title">Research Scientist, Computer Vision</span><span class="cr-role-meta">AI Research</span><span class="cr-role-meta">Remote — US</span><span class="cr-role-go">Apply →</span></a>
       </li>
       <li class="cr-role" data-team="AI Research" data-location="Remote — US">
-        <a href="#">
-          <span class="cr-role-title">Machine Learning Engineer, Agentic Systems</span>
-          <span class="cr-role-meta">AI Research</span>
-          <span class="cr-role-meta">Remote — US</span>
-          <span class="cr-role-go">Apply →</span>
-        </a>
+        <a href="#"><span class="cr-role-title">Machine Learning Engineer, Agentic Systems</span><span class="cr-role-meta">AI Research</span><span class="cr-role-meta">Remote — US</span><span class="cr-role-go">Apply →</span></a>
       </li>
       <li class="cr-role" data-team="Product &amp; Design" data-location="Remote — US">
-        <a href="#">
-          <span class="cr-role-title">Senior Product Manager, Platform</span>
-          <span class="cr-role-meta">Product &amp; Design</span>
-          <span class="cr-role-meta">Remote — US</span>
-          <span class="cr-role-go">Apply →</span>
-        </a>
+        <a href="#"><span class="cr-role-title">Senior Product Manager, Platform</span><span class="cr-role-meta">Product &amp; Design</span><span class="cr-role-meta">Remote — US</span><span class="cr-role-go">Apply →</span></a>
       </li>
       <li class="cr-role" data-team="Product &amp; Design" data-location="Remote — Europe">
-        <a href="#">
-          <span class="cr-role-title">Product Designer</span>
-          <span class="cr-role-meta">Product &amp; Design</span>
-          <span class="cr-role-meta">Remote — Europe</span>
-          <span class="cr-role-go">Apply →</span>
-        </a>
+        <a href="#"><span class="cr-role-title">Product Designer</span><span class="cr-role-meta">Product &amp; Design</span><span class="cr-role-meta">Remote — Europe</span><span class="cr-role-go">Apply →</span></a>
       </li>
       <li class="cr-role" data-team="Go-to-Market" data-location="Remote — US">
-        <a href="#">
-          <span class="cr-role-title">Enterprise Account Executive, CPG</span>
-          <span class="cr-role-meta">Go-to-Market</span>
-          <span class="cr-role-meta">Remote — US</span>
-          <span class="cr-role-go">Apply →</span>
-        </a>
+        <a href="#"><span class="cr-role-title">Enterprise Account Executive, CPG</span><span class="cr-role-meta">Go-to-Market</span><span class="cr-role-meta">Remote — US</span><span class="cr-role-go">Apply →</span></a>
       </li>
       <li class="cr-role" data-team="Go-to-Market" data-location="Boston, MA">
-        <a href="#">
-          <span class="cr-role-title">Product Marketing Manager</span>
-          <span class="cr-role-meta">Go-to-Market</span>
-          <span class="cr-role-meta">Boston, MA</span>
-          <span class="cr-role-go">Apply →</span>
-        </a>
+        <a href="#"><span class="cr-role-title">Product Marketing Manager</span><span class="cr-role-meta">Go-to-Market</span><span class="cr-role-meta">Boston, MA</span><span class="cr-role-go">Apply →</span></a>
       </li>
       <li class="cr-role" data-team="Customer Success" data-location="Remote — US">
-        <a href="#">
-          <span class="cr-role-title">Customer Success Manager, Enterprise</span>
-          <span class="cr-role-meta">Customer Success</span>
-          <span class="cr-role-meta">Remote — US</span>
-          <span class="cr-role-go">Apply →</span>
-        </a>
+        <a href="#"><span class="cr-role-title">Customer Success Manager, Enterprise</span><span class="cr-role-meta">Customer Success</span><span class="cr-role-meta">Remote — US</span><span class="cr-role-go">Apply →</span></a>
       </li>
       <li class="cr-role" data-team="Customer Success" data-location="Remote — Europe">
-        <a href="#">
-          <span class="cr-role-title">Solutions Architect</span>
-          <span class="cr-role-meta">Customer Success</span>
-          <span class="cr-role-meta">Remote — Europe</span>
-          <span class="cr-role-go">Apply →</span>
-        </a>
+        <a href="#"><span class="cr-role-title">Solutions Architect</span><span class="cr-role-meta">Customer Success</span><span class="cr-role-meta">Remote — Europe</span><span class="cr-role-go">Apply →</span></a>
       </li>
     </ul>
 
-    <p class="cr-empty" id="cr-empty" hidden>No roles match that combination right now — try another team or location, or <a href="mailto:careers@vizit.com?subject=General%20interest%20in%20Vizit">introduce yourself</a> and we will reach out when something opens.</p>
+    <p class="cr-empty" id="cr-empty" hidden>Nothing matches that combination right now — try another mix, or <a href="mailto:careers@vizit.com?subject=General%20interest%20in%20Vizit">say hello anyway</a>.</p>
   </div>
 </section>
 
 <!-- PANEL 6 — HIRING PROCESS -->
 <section class="panel panel--dark" data-screen-label="06 Hiring process">
   <div class="container">
-    <span class="eyebrow on-dark" style="display:block;margin-bottom:var(--space-4);">Our hiring process</span>
-    <h2 class="display on-dark" style="max-width:20ch;">Four conversations. No trick questions.</h2>
-    <div class="cr-prose" style="margin-top:var(--space-6);max-width:58ch;">
-      <p>Most candidates go from first call to offer in two to three weeks. You will know who you are meeting and what each stage covers before it happens.</p>
-    </div>
+    <h2 class="display on-dark" style="max-width:18ch;">Four conversations. No trick questions.</h2>
+    <p class="cr-lede">First call to offer in about two to three weeks.</p>
     <div class="cr-steps">
-      <div class="cr-step">
-        <span class="no">Step 01</span>
-        <h4>Intro call</h4>
-        <p>Thirty minutes with a recruiter on what you are looking for, what the role is, and whether the two line up.</p>
-      </div>
-      <div class="cr-step">
-        <span class="no">Step 02</span>
-        <h4>Hiring manager</h4>
-        <p>A deeper conversation about the work itself with the person you would report to.</p>
-      </div>
-      <div class="cr-step">
-        <span class="no">Step 03</span>
-        <h4>Working session</h4>
-        <p>A practical exercise close to the real job — reviewed together, never as unpaid homework.</p>
-      </div>
-      <div class="cr-step">
-        <span class="no">Step 04</span>
-        <h4>Team &amp; decision</h4>
-        <p>Meet future teammates, ask us anything, and get a clear yes or no with feedback either way.</p>
-      </div>
+      <div class="cr-step"><span class="no">Step 01</span><h4>Intro call</h4><p>Thirty minutes. What you want, what the role is.</p></div>
+      <div class="cr-step"><span class="no">Step 02</span><h4>Hiring manager</h4><p>The real conversation, with your future boss.</p></div>
+      <div class="cr-step"><span class="no">Step 03</span><h4>Working session</h4><p>A practical exercise. Never unpaid homework.</p></div>
+      <div class="cr-step"><span class="no">Step 04</span><h4>Team &amp; decision</h4><p>Meet everyone. Clear yes or no, with feedback.</p></div>
     </div>
   </div>
 </section>
@@ -459,12 +396,11 @@
 <!-- PANEL 7 — FINAL CTA -->
 <section class="final" style="background:#0a0e14;" data-screen-label="07 Final CTA">
   <div class="container final-inner">
-    <span class="eyebrow on-dark">Do not see your role?</span>
-    <h2 class="display on-dark" style="font-size:clamp(2rem,5vw,3.5rem);">We are always looking for people who see it first.</h2>
-    <p class="subhead on-dark">Tell us what you would want to build here. If there is a fit now or one coming, we will find it.</p>
+    <h2 class="display on-dark" style="font-size:clamp(2rem,5vw,3.5rem);">Nothing fits? Tell us anyway.</h2>
+    <p class="subhead on-dark">If there is a fit now, or one coming, we will find it.</p>
     <div class="final-ctas">
       <!-- NOTE: confirm careers@vizit.com is monitored, or swap for the ATS general-interest form. -->
-      <a class="btn btn-on-dark btn-lg" href="mailto:careers@vizit.com?subject=General%20interest%20in%20Vizit">Introduce yourself <span class="arrow">→</span></a>
+      <a class="btn btn-on-dark btn-lg" href="mailto:careers@vizit.com?subject=General%20interest%20in%20Vizit">Say hello <span class="arrow">→</span></a>
       <a class="cr-link cr-link--dark" href="#open-roles">Back to open roles →</a>
     </div>
   </div>
