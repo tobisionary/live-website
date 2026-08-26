@@ -8,21 +8,9 @@
    so they sit alongside the other pages. Structure, copy and the
    distinctive components are the mockup's; the skin is the site's.
 
-   Note: vizit-theme.css hides .eyebrow site-wide, so section labels
-   here use .sp-kicker, which stays visible.
+   These pages carry no section kickers: the headline alone opens each
+   section, as on the rest of the site.
    ════════════════════════════════════════════════════════════ */
-
-/* ── section labels ── */
-.sp-kicker {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--blue-600);
-  margin-bottom: var(--space-4);
-}
-.sp-kicker.on-dark { color: var(--blue-200); }
 
 /* ── badge ── */
 .sp-badge {
@@ -72,7 +60,6 @@
 }
 .sp-pull .dim { display: block; color: var(--color-400); }
 .sp-pull .punch { display: block; color: var(--blue-1000); }
-.sp-pull .punch em { font-style: normal; color: var(--accent); }
 
 /* ── two-up feature split ── */
 .sp-feature { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8); align-items: center; }
