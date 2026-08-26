@@ -63,8 +63,8 @@
           title: 'Products',
           items: [
             { href: 'vizit-next-gen-platform.html', label: 'Vizit Next Gen Platform' },
-            { href: 'spark-ai.html', label: 'Spark AI', desc: 'Generate images proven to win in your category.' },
-            { href: 'spark-studio.html', label: 'Spark Studio', desc: 'Vizit-trained designers optimize your content for you.' },
+            { href: 'spark-ai.html', label: 'Spark AI' },
+            { href: 'spark-studio.html', label: 'Spark Studio' },
             { href: 'vizit-api.html', label: 'Vizit API' }
           ]
         }
@@ -108,13 +108,9 @@
         {
           title: 'Company',
           items: [
-            { href: 'careers.html', label: 'Careers', desc: 'Open roles across engineering, AI research, and go-to-market.' },
-            { href: 'customer-support.html', label: 'Customer Support' }
+            { href: 'careers.html', label: 'Careers' }
           ]
         }
-      ],
-      cards: [
-        { theme: 'dark', href: 'careers.html', title: 'We\u2019re hiring', sub: 'Build the standard for content that converts.' }
       ]
     }
   ];
@@ -134,7 +130,7 @@
     'vizit-agents': 'platform', 'vizit-ip': 'platform',
     resources: 'resources',
     results: 'results',
-    company: 'company', careers: 'company', support: 'company'
+    company: 'company', careers: 'company'
   };
 
   // Compute the '../' prefix needed to reach the project root from the
