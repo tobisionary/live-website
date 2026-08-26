@@ -28,6 +28,8 @@
       title: 'Platform',
       links: [
         { href: 'vizit-next-gen-platform.html', label: 'Vizit Next Gen Platform' },
+        { href: 'spark-ai.html',                label: 'Spark AI' },
+        { href: 'spark-studio.html',            label: 'Spark Studio' },
         { href: 'vizit-api.html',               label: 'Vizit API' },
         { href: 'partner-ecosystem.html',       label: 'Partner Ecosystem' }
       ]

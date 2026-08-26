@@ -11,7 +11,8 @@
 
    data-current accepts a page id so the matching top-level item is
    marked aria-current. Recognized ids:
-     home · ci · solutions · platform · api · partners · why · results
+     home · ci · solutions · platform · api · spark · spark-studio
+     · partners · why · results
      · resources · company · demo · about · leadership · careers · newsroom
      · hero-images · product-page-optimization · retail-media-roas
      · answer-engine-optimization · accessibility
@@ -62,6 +63,8 @@
           title: 'Products',
           items: [
             { href: 'vizit-next-gen-platform.html', label: 'Vizit Next Gen Platform' },
+            { href: 'spark-ai.html', label: 'Spark AI', desc: 'Generate images proven to win in your category.' },
+            { href: 'spark-studio.html', label: 'Spark Studio', desc: 'Vizit-trained designers optimize your content for you.' },
             { href: 'vizit-api.html', label: 'Vizit API' }
           ]
         }
@@ -127,6 +130,7 @@
   var CURRENT_MAP = {
     how: 'how', ci: 'how',
     platform: 'platform', api: 'platform',
+    spark: 'platform', 'spark-ai': 'platform', 'spark-studio': 'platform',
     'vizit-agents': 'platform', 'vizit-ip': 'platform',
     resources: 'resources',
     results: 'results',
