@@ -51,6 +51,13 @@
       ]
     },
     {
+      title: 'Company',
+      links: [
+        { href: 'careers.html',         label: 'Careers' },
+        { href: 'customer-support.html', label: 'Customer Support' }
+      ]
+    },
+    {
       title: 'Get Started',
       links: [
         { href: 'demo.html', label: 'Score Your Content' },

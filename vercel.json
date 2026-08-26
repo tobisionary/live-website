@@ -66,11 +66,6 @@
   ],
   "redirects": [
     {
-      "source": "/careers",
-      "destination": "/",
-      "permanent": false
-    },
-    {
       "source": "/company",
       "destination": "/",
       "permanent": false

@@ -12,7 +12,7 @@
    data-current accepts a page id so the matching top-level item is
    marked aria-current. Recognized ids:
      home · ci · solutions · platform · api · partners · why · results
-     · resources · demo · about · leadership · careers · newsroom
+     · resources · company · demo · about · leadership · careers · newsroom
      · hero-images · product-page-optimization · retail-media-roas
      · answer-engine-optimization · accessibility
 
@@ -95,6 +95,24 @@
           ]
         }
       ]
+    },
+    {
+      id: 'company', label: 'Company', href: 'careers.html',
+      head: 'The team behind the content standard.',
+      big: true,
+      grid: 1,
+      cols: [
+        {
+          title: 'Company',
+          items: [
+            { href: 'careers.html', label: 'Careers', desc: 'Open roles across engineering, AI research, and go-to-market.' },
+            { href: 'customer-support.html', label: 'Customer Support' }
+          ]
+        }
+      ],
+      cards: [
+        { theme: 'dark', href: 'careers.html', title: 'We\u2019re hiring', sub: 'Build the standard for content that converts.' }
+      ]
     }
   ];
 
@@ -102,7 +120,7 @@
   var LOGIN = { href: 'https://app.vizit.com/login', label: 'Sign in' };
 
   // Display order of the top-level tabs (carries across every page).
-  var NAV_ORDER = ['platform', 'results', 'resources'];
+  var NAV_ORDER = ['platform', 'results', 'resources', 'company'];
   NAV.sort(function (a, b) { return NAV_ORDER.indexOf(a.id) - NAV_ORDER.indexOf(b.id); });
 
   // Which page ids light up which top-level item.
@@ -111,7 +129,8 @@
     platform: 'platform', api: 'platform',
     'vizit-agents': 'platform', 'vizit-ip': 'platform',
     resources: 'resources',
-    results: 'results'
+    results: 'results',
+    company: 'company', careers: 'company', support: 'company'
   };
 
   // Compute the '../' prefix needed to reach the project root from the
