@@ -352,18 +352,21 @@
 
 <!-- PANEL 1 — HERO -->
 <section class="cr-hero" data-screen-label="01 Hero">
-  <!-- NOTE: assets/video/careers-hero.mp4 is a WATERMARKED Artlist preview and
-       must be replaced with the licensed download before publish. Regenerate
-       assets/img/careers-hero-poster.jpg from the clean file at the same time —
-       the poster is the first frame and carries the same watermark. -->
-  <div class="cr-hero-media" aria-hidden="true">
-    <video
-      src="assets/video/careers-hero.mp4"
-      poster="assets/img/careers-hero-poster.jpg"
-      autoplay muted loop playsinline preload="metadata"
-      tabindex="-1"></video>
-  </div>
-  <div class="cr-hero-scrim" aria-hidden="true"></div>
+  <!-- The background video is out until the licensed Artlist download is in
+       hand: the preview file carries a watermark on every frame. To restore,
+       put the clean file at assets/video/careers-hero.mp4, generate a poster
+       from its first frame, and put this back inside the section:
+
+         <div class="cr-hero-media" aria-hidden="true">
+           <video src="assets/video/careers-hero.mp4"
+                  poster="assets/img/careers-hero-poster.jpg"
+                  autoplay muted loop playsinline preload="metadata"
+                  tabindex="-1"></video>
+         </div>
+         <div class="cr-hero-scrim" aria-hidden="true"></div>
+
+       .cr-hero-media / .cr-hero-scrim are still styled below, so nothing
+       else needs changing. -->
   <div class="container">
     <h1 class="display">Join us and build the future.</h1>
     <p class="subhead dek">Remote-first, deliberately small, and allergic to busywork. Here is what it is actually like.</p>
