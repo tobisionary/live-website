@@ -23,9 +23,22 @@
        → <video> → scrim → content. The section keeps a solid dark background
        colour underneath so the inverted type is legible even if every media
        layer fails. */
+    /* "See open roles" glides down to the list rather than jumping there.
+       home-v2.css already does this site-wide but is not loaded on this page,
+       so it is set here. The scroll-margin keeps the heading clear of the
+       sticky nav when the scroll lands. */
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    #open-roles { scroll-margin-top: 88px; }
+
     .cr-hero {
       position: relative;
-      padding: var(--space-9) 0 var(--space-8);
+      /* A tall band, since the video is the point — but short of filling the
+         viewport, so the section below shows at the bottom edge and the page
+         reads as scrollable. The copy centres in whatever height it gets. */
+      min-height: calc(72vh - 64px);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: var(--space-9) 0;
       background-color: #06121f;
       background-image: radial-gradient(ellipse 80% 60% at 75% 10%, rgba(52,160,254,0.30), transparent 60%);
       overflow: hidden;
@@ -70,161 +83,232 @@
     }
     .cr-hero .btn-secondary:hover { background: rgba(255,255,255,0.10); border-color: #fff; color: #fff; }
 
-    /* quick-facts strip — inverted to sit on the video */
-    .cr-facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: var(--space-8); border-top: 1px solid rgba(255,255,255,0.22); }
-    .cr-fact { padding: var(--space-6) var(--space-5) 0 0; }
-    .cr-fact + .cr-fact { padding-left: var(--space-5); border-left: 1px solid rgba(255,255,255,0.22); }
-    .cr-fact .n { display: block; font-family: var(--font-display); font-weight: 400; font-size: clamp(1.6rem, 3.2vw, 2.35rem); letter-spacing: -0.03em; line-height: 1; color: #fff; }
-    .cr-fact .l { display: block; margin-top: var(--space-3); font-size: var(--text-sm); line-height: 1.45; color: rgba(255,255,255,0.72); }
-    @media (max-width: 860px) {
-      .cr-facts { grid-template-columns: 1fr 1fr; }
-      .cr-fact:nth-child(odd) { padding-left: 0; border-left: none; }
-      .cr-fact:nth-child(n+3) { border-top: 1px solid rgba(255,255,255,0.22); }
-    }
     /* Motion is decorative here — drop to the poster still when it's unwelcome. */
     @media (prefers-reduced-motion: reduce) {
       .cr-hero-media video { display: none; }
     }
 
-    /* ── PANEL 2 — full-bleed lifestyle band ──
-       The photo is the top background layer; the scrim gradients sit above it
-       so the type stays legible on any image. If the photo is missing or fails
-       to load, the browser simply skips that layer and the brand gradient
-       underneath carries the section on its own — it never renders broken. */
-    .cr-life {
-      position: relative;
-      min-height: min(76vh, 680px);
-      display: flex;
-      align-items: flex-end;
-      background-color: var(--blue-1000);
-      background-image:
-        linear-gradient(to top, rgba(0,15,28,0.94) 0%, rgba(0,15,28,0.66) 40%, rgba(0,15,28,0.46) 100%),
-        radial-gradient(ellipse 90% 70% at 78% 12%, rgba(52,160,254,0.42), transparent 62%),
-        radial-gradient(ellipse 80% 60% at 8% 88%, rgba(1,116,217,0.34), transparent 60%),
-        url('assets/img/careers-life.jpg');
-      background-size: cover, cover, cover, cover;
-      background-position: center, center, center, center;
-      background-repeat: no-repeat;
-      overflow: hidden;
+    /* ── PANEL 2 — benefits ──
+       The one content section between a dark hero and the roles table, so it
+       carries the page on its own. A blue field with a bloom behind the head,
+       and the nine lines as cards that lift rather than cells in a ruled
+       table — the table read as a spec sheet once the descriptions came out. */
+    .cr-benefits {
+      position: relative; overflow: hidden;
+      background: linear-gradient(180deg, #eef6ff 0%, #f7fbff 58%, #ffffff 100%);
+      border-top: 1px solid rgba(1,116,217,0.10);
     }
-    /* Fine dot texture keeps the gradient-only fallback from reading as flat. */
-    .cr-life::before {
-      content: '';
-      position: absolute; inset: 0;
-      background-image: radial-gradient(rgba(255,255,255,0.16) 1px, transparent 1px);
-      background-size: 4px 4px;
-      opacity: 0.22;
-      pointer-events: none;
+    .cr-benefits-glow {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(52% 46% at 50% 4%, rgba(52,160,254,0.20), transparent 62%),
+        radial-gradient(70% 50% at 96% 100%, rgba(1,116,217,0.10), transparent 60%);
     }
-    .cr-life .container { position: relative; z-index: 1; padding-top: var(--space-9); padding-bottom: var(--space-8); }
-    .cr-life h2 { margin: 0; max-width: 15ch; color: #fff; }
-    .cr-life .cr-life-cap {
-      margin: var(--space-5) 0 0;
-      max-width: 40ch;
-      font-size: 1.0625rem;
-      line-height: 1.55;
-      color: rgba(255,255,255,0.78);
+    /* the dot grid the home page hero runs, at light-panel strength */
+    .cr-benefits::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background-image: radial-gradient(circle at 1px 1px, rgba(1,116,217,0.16) 1px, transparent 1.4px);
+      background-size: 22px 22px;
+      -webkit-mask-image: radial-gradient(58% 58% at 50% 12%, black, transparent 72%);
+      mask-image: radial-gradient(58% 58% at 50% 12%, black, transparent 72%);
+      opacity: 0.5;
     }
-    .cr-life-tag {
-      display: inline-block;
-      margin-bottom: var(--space-5);
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--blue-200);
+    .cr-benefits > .container { position: relative; z-index: 1; }
+    /* Centred head over the grid: the section is a headline and a block of
+       cards, and the headline reads better over the middle of it than tucked
+       at the left edge. */
+    .cr-center > .container > .display {
+      text-align: center; max-width: none;
+      margin-left: auto; margin-right: auto;
     }
-    @media (min-width: 900px) and (hover: hover) {
-      .cr-life { background-attachment: scroll, scroll, scroll, fixed; }
+
+    .cr-perks {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-4); margin-top: var(--space-8);
+    }
+    @media (max-width: 980px) { .cr-perks { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) { .cr-perks { grid-template-columns: 1fr; } }
+    .cr-perk {
+      display: flex; align-items: center; gap: var(--space-4);
+      padding: var(--space-5);
+      background: #ffffff; border: 1px solid var(--blue-100); border-radius: 14px;
+      box-shadow: 0 14px 34px -22px rgba(0,33,61,0.18);
+      transition: transform 260ms cubic-bezier(0.2,0,0,1),
+                  box-shadow 260ms cubic-bezier(0.2,0,0,1), border-color 260ms;
+    }
+    .cr-perk:hover {
+      transform: translateY(-3px); border-color: var(--blue-300);
+      box-shadow: 0 24px 50px -24px rgba(1,116,217,0.34);
+    }
+    .cr-perk .ic {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; flex-shrink: 0; border-radius: 10px;
+      background: var(--accent-soft); border: 1px solid var(--blue-100);
+      color: var(--blue-base);
+    }
+    .cr-perk .ic svg { width: 21px; height: 21px; display: block; }
+    /* the cards are a row of labels, so the title is the whole cell — left
+       aligned inside it even though the head above is centred */
+    .cr-perk h4 {
+      font-family: var(--font-display); font-weight: 500; font-size: 1.0625rem;
+      letter-spacing: -0.015em; line-height: 1.25; margin: 0;
+      color: var(--blue-1000); text-align: left;
     }
     @media (prefers-reduced-motion: reduce) {
-      .cr-life { background-attachment: scroll, scroll, scroll, scroll; }
+      .cr-perk { transition: none; }
+      .cr-perk:hover { transform: none; }
     }
 
-    /* PANEL 3 — how we work (short cards) */
-    .cr-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5); margin-top: var(--space-7); }
-    @media (max-width: 980px) { .cr-cards { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 640px) { .cr-cards { grid-template-columns: 1fr; } }
-    .cr-card {
-      padding: var(--space-6);
-      border: 1px solid var(--border);
-      background: #fff;
-      display: flex; flex-direction: column; gap: var(--space-3);
-      transition: transform 220ms cubic-bezier(0.2,0,0,1), box-shadow 220ms cubic-bezier(0.2,0,0,1), border-color 220ms;
-    }
-    .cr-card:hover { transform: translateY(-3px); border-color: var(--blue-200); box-shadow: 0 14px 34px rgba(0,33,61,0.10); }
-    .cr-card .no { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
-    .cr-card h3 { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.2rem, 2.3vw, 1.5rem); letter-spacing: -0.02em; line-height: 1.15; margin: 0; color: var(--blue-1000); }
-    .cr-card p { font-size: var(--text-base); line-height: 1.5; color: var(--color-600); margin: 0; }
-
-    /* PANEL 4 — perks (tight one-liners) */
-    .cr-perks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: var(--space-7); background: #fff; border: 1px solid #e5e8ec; overflow: hidden; }
-    @media (max-width: 980px) { .cr-perks { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 640px) { .cr-perks { grid-template-columns: 1fr; } }
-    .cr-perk { padding: var(--space-5); border-left: 1px solid #e5e8ec; border-top: 1px solid #e5e8ec; }
-    .cr-perk h4 { font-family: var(--font-display); font-weight: 400; font-size: 1.1875rem; letter-spacing: -0.02em; line-height: 1.15; margin: 0 0 var(--space-2); color: var(--blue-1000); }
-    .cr-perk p { font-size: var(--text-sm); line-height: 1.45; color: var(--color-600); margin: 0; }
-    /* Grid lines between cells only — recomputed per breakpoint, since the
-       column count changes which cells sit on an outer edge. */
-    .cr-perks > .cr-perk:nth-child(-n+3) { border-top: none; }
-    .cr-perks > .cr-perk:nth-child(3n+1) { border-left: none; }
-    @media (max-width: 980px) {
-      .cr-perks > .cr-perk { border-top: 1px solid #e5e8ec; border-left: 1px solid #e5e8ec; }
-      .cr-perks > .cr-perk:nth-child(-n+2) { border-top: none; }
-      .cr-perks > .cr-perk:nth-child(2n+1) { border-left: none; }
-    }
-    @media (max-width: 640px) {
-      .cr-perks > .cr-perk { border-left: none; border-top: 1px solid #e5e8ec; }
-      .cr-perks > .cr-perk:first-child { border-top: none; }
-    }
-
-    /* PANEL 5 — open roles */
+    /* PANEL 3 — open roles */
     .cr-filters { display: flex; gap: var(--space-5); flex-wrap: wrap; margin-top: var(--space-7); padding-bottom: var(--space-5); border-bottom: 1px solid var(--border); }
-    .cr-filter-group { display: flex; flex-direction: column; gap: var(--space-3); }
+    .cr-filter-group { display: flex; flex-direction: column; gap: var(--space-3); min-width: 0; }
     .cr-filter-group .k { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
-    .cr-chips { display: flex; gap: var(--space-2); flex-wrap: wrap; }
-    .cr-chip { font-family: var(--font-sans); font-size: var(--text-sm); font-weight: 500; color: var(--color-600); background: #fff; border: 1px solid var(--border); padding: 8px 14px; cursor: pointer; transition: all 200ms cubic-bezier(0.2,0,0,1); }
-    .cr-chip:hover { border-color: var(--accent); color: var(--accent); }
-    .cr-chip[aria-pressed="true"] { background: var(--blue-1000); border-color: var(--blue-1000); color: #fff; }
+    /* Native select, restyled. The chevron is a background image rather than a
+       sibling element so the control stays one focusable thing and the OS
+       menu opens where it should on every platform. */
+    .cr-select {
+      -webkit-appearance: none; appearance: none;
+      font-family: var(--font-sans); font-size: var(--text-sm); font-weight: 500;
+      color: var(--blue-1000); background-color: #fff;
+      border: 1px solid var(--border); border-radius: 8px;
+      padding: 10px 40px 10px 14px; min-width: 15rem; max-width: 100%;
+      cursor: pointer; line-height: 1.2;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300213d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9.5l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 13px center; background-size: 16px 16px;
+      transition: border-color 200ms cubic-bezier(0.2,0,0,1), box-shadow 200ms cubic-bezier(0.2,0,0,1);
+    }
+    .cr-select:hover { border-color: var(--blue-300); }
+    .cr-select:focus-visible { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(1,116,217,0.18); }
+    @media (max-width: 560px) { .cr-select { min-width: 0; width: 100%; } .cr-filter-group { width: 100%; } }
 
     .cr-count { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin: var(--space-5) 0 0; }
 
     .cr-roles { list-style: none; margin: var(--space-4) 0 0; padding: 0; border-top: 1px solid var(--border); }
     .cr-role { border-bottom: 1px solid var(--border); }
-    .cr-role a { display: grid; grid-template-columns: 1.6fr 1fr 1fr auto; align-items: center; gap: var(--space-5); padding: var(--space-5) 0; text-decoration: none; transition: background 200ms cubic-bezier(0.2,0,0,1); }
-    .cr-role a:hover { background: var(--color-50); }
-    .cr-role a:hover .cr-role-go { color: var(--accent); transform: translateX(3px); }
+    .cr-role-head { display: grid; grid-template-columns: 1.6fr 1fr 1fr auto; align-items: center; gap: var(--space-5); padding: var(--space-5) 0; text-decoration: none; transition: background 200ms cubic-bezier(0.2,0,0,1); }
+    .cr-role-head:hover { background: var(--color-50); }
+    .cr-role-head:hover .cr-role-go,
+    .cr-role-head[aria-expanded="true"] .cr-role-go { color: var(--accent); }
     .cr-role-title { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.05rem, 1.9vw, 1.3rem); letter-spacing: -0.02em; line-height: 1.2; color: var(--blue-1000); }
     .cr-role-meta { font-size: var(--text-sm); color: var(--color-600); }
     .cr-role-go { font-family: var(--font-mono); font-size: var(--text-sm); color: var(--muted); justify-self: end; transition: all 200ms cubic-bezier(0.2,0,0,1); }
     @media (max-width: 780px) {
-      .cr-role a { grid-template-columns: 1fr auto; gap: var(--space-2) var(--space-4); }
+      .cr-role-head { grid-template-columns: 1fr auto; gap: var(--space-2) var(--space-4); }
       .cr-role-title { grid-column: 1 / -1; }
       .cr-role-meta + .cr-role-meta { justify-self: end; }
-      .cr-role-go { display: none; }
     }
     .cr-role[hidden] { display: none; }
     .cr-empty { padding: var(--space-7) 0; font-size: 1.0625rem; color: var(--color-600); }
     .cr-empty[hidden] { display: none; }
 
-    /* PANEL 6 — hiring process */
-    .cr-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-5); margin-top: var(--space-7); }
-    @media (max-width: 980px) { .cr-steps { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 560px) { .cr-steps { grid-template-columns: 1fr; } }
-    .cr-step { padding-top: var(--space-4); border-top: 2px solid var(--blue-300); }
-    .cr-step .no { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-300); }
-    .cr-step h4 { font-family: var(--font-display); font-weight: 400; font-size: var(--text-lg); letter-spacing: -0.02em; line-height: 1.15; margin: var(--space-3) 0 var(--space-2); color: #fff; }
-    .cr-step p { font-size: var(--text-sm); line-height: 1.45; color: rgba(255,255,255,0.72); margin: 0; }
+    /* ── a row opens its description in place ──
+       The head is a button spanning the row, so the whole row is the control
+       and the keyboard gets it for free. It reuses the grid the old anchor
+       had, with a chevron that turns when the panel is open. */
+    .cr-role-head {
+      width: 100%; font: inherit; color: inherit; text-align: left;
+      background: none; border: 0; cursor: pointer;
+    }
+    .cr-role-go { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+    .cr-chev { width: 15px; height: 15px; flex-shrink: 0; transition: transform 240ms cubic-bezier(0.2,0,0,1); }
+    .cr-role-head[aria-expanded="true"] .cr-chev { transform: rotate(180deg); }
+    .cr-role-head:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 
-    .cr-lede { max-width: 48ch; font-size: 1.0625rem; line-height: 1.55; color: var(--color-600); margin: var(--space-5) 0 0; }
-    .panel--dark .cr-lede { color: rgba(255,255,255,0.72); }
+    /* the title is the accordion control, so the heading wraps the button
+       rather than replacing it — the outline reads h2 › h3 › h4 while the row
+       still looks and behaves like a row */
+    .cr-role-h { margin: 0; font: inherit; font-weight: inherit; }
 
-    .cr-link { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: var(--text-sm); letter-spacing: 0.04em; color: var(--accent); text-decoration: none; }
-    .cr-link:hover { text-decoration: underline; text-underline-offset: 3px; }
-    /* .btn-on-dark is forced to a white fill by a site-wide !important rule in
-       vizit-theme.css, so a second button here can't read as secondary. */
-    .cr-link--dark { color: rgba(255,255,255,0.72); }
-    .cr-link--dark:hover { color: #fff; }
+    /* Prose at a reading measure on the left, the facts and the apply
+       prompt as a rail on the right — a 76ch column alone left half the row
+       empty, and the rail puts Apply beside the description instead of a
+       thousand pixels below it. */
+    .cr-role-body {
+      display: grid; grid-template-columns: minmax(0, 1fr) 20rem;
+      gap: var(--space-8); padding: 0 0 var(--space-7);
+      align-items: start;
+    }
+    /* The `display: grid` above is author-level, so it outranks the UA rule
+       behind the hidden attribute and a closed panel would render anyway.
+       Same guard as .cr-role[hidden] and .cr-empty[hidden] below. */
+    .cr-role-body[hidden] { display: none; }
+    /* The rail is first in the markup so Apply is early in the tab order on
+       any screen; the columns are placed explicitly so it still renders to
+       the right of the prose. */
+    .cr-jd { grid-area: 1 / 1; }
+    .cr-role-side {
+      grid-area: 1 / 2;
+      display: grid; gap: var(--space-5);
+      position: sticky; top: 88px;
+    }
+    @media (max-width: 900px) {
+      /* One column, and markup order takes over — the facts and the way to
+         apply land above the description rather than past the end of it. */
+      .cr-role-body { grid-template-columns: 1fr; gap: var(--space-6); }
+      .cr-jd, .cr-role-side { grid-area: auto; }
+      .cr-role-side { position: static; }
+    }
+
+    /* ── the description itself ── */
+    .cr-jd { max-width: 76ch; }
+    .cr-jd h4 {
+      font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent);
+      margin: var(--space-6) 0 var(--space-3);
+    }
+    .cr-jd > *:first-child { margin-top: 0; }
+    .cr-jd p { font-size: var(--text-base); line-height: 1.65; color: var(--color-600); margin: 0 0 var(--space-4); }
+    .cr-jd p:last-child { margin-bottom: 0; }
+    .cr-jd ul { list-style: none; margin: 0; padding: 0; }
+    .cr-jd li {
+      position: relative; padding-left: var(--space-5);
+      font-size: var(--text-base); line-height: 1.6; color: var(--color-600);
+      margin-bottom: var(--space-3);
+    }
+    /* a short blue rule for a bullet, so the list reads as spec not prose */
+    .cr-jd li::before {
+      content: ""; position: absolute; left: 0; top: 0.72em;
+      width: 9px; height: 1.5px; background: var(--blue-300);
+    }
+    /* the facts strip above the copy */
+    /* the facts, stacked in the rail */
+    .cr-jd-meta { display: grid; gap: var(--space-4); margin: 0; }
+    .cr-jd-meta > div { padding-bottom: var(--space-4); border-bottom: 1px solid var(--border); }
+    .cr-jd-meta > div:last-child { padding-bottom: 0; border-bottom: none; }
+    .cr-jd-meta dt {
+      font-family: var(--font-mono); font-size: 10px;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+    }
+    .cr-jd-meta dd { margin: 6px 0 0; font-size: var(--text-sm); color: var(--blue-1000); }
+    /* the apply card, at the top of the rail */
+    .cr-apply {
+      padding: var(--space-5);
+      background: var(--accent-soft); border: 1px solid var(--blue-100); border-radius: 14px;
+    }
+    .cr-apply-copy { margin: 0 0 var(--space-4); font-size: var(--text-base); line-height: 1.5; color: var(--blue-1000); }
+    .cr-apply .btn { width: 100%; justify-content: center; }
+    /* A mailto: link goes nowhere for anyone whose machine has no mail client
+       registered, and the browser gives no way to detect that — so the address
+       is always on screen and copyable rather than hidden behind the button. */
+    .cr-apply-alt {
+      margin: var(--space-4) 0 0; text-align: center;
+      font-size: var(--text-sm); line-height: 1.5; color: var(--color-600);
+    }
+    .cr-copy {
+      font: inherit; color: var(--accent); background: none; border: 0; padding: 0;
+      cursor: pointer; text-decoration: underline; text-underline-offset: 3px;
+      text-decoration-style: dotted; text-decoration-thickness: 1px;
+    }
+    .cr-copy:hover { color: var(--blue-500); text-decoration-style: solid; }
+    .cr-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+    .cr-copied:not(:empty) {
+      display: block; margin-top: var(--space-2);
+      font-family: var(--font-mono); font-size: 10px;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue-600);
+    }
+    @media (prefers-reduced-motion: reduce) { .cr-chev { transition: none; } }
+
+
 
     a { color: var(--accent); }
     a:hover { color: var(--blue-500); }
@@ -232,13 +316,11 @@
     @media print {
       vizit-nav, vizit-footer, .cr-filters, .cr-hero-media, .cr-hero-scrim { display: none !important; }
       .cr-hero { background: #fff !important; }
-      .cr-hero h1, .cr-hero .dek, .cr-fact .n, .cr-fact .l { color: var(--blue-1000) !important; }
-      .panel--dark, .cr-life { background: #fff !important; color: var(--blue-1000) !important; }
-      .panel--dark *, .cr-life * { color: var(--blue-1000) !important; }
+      .cr-hero h1, .cr-hero .dek { color: var(--blue-1000) !important; }
+      .cr-benefits, .cr-benefits-glow { background: #fff !important; }
       .panel { break-inside: avoid; }
     }
-    .final::before { content: none; }
-  </style>
+      </style>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Vizit">
 <meta property="og:title" content="Careers at Vizit | Small Team, Big Problems, No Politics">
@@ -283,207 +365,237 @@
   </div>
   <div class="cr-hero-scrim" aria-hidden="true"></div>
   <div class="container">
-    <h1 class="display">Small team. Big problems. No politics.</h1>
+    <h1 class="display">Join us and build the future.</h1>
     <p class="subhead dek">Remote-first, deliberately small, and allergic to busywork. Here is what it is actually like.</p>
     <div class="cta-row">
       <a class="btn btn-on-dark btn-lg" href="#open-roles">See open roles <span class="arrow">→</span></a>
-      <a class="btn btn-secondary btn-lg" href="#life">Life here</a>
-    </div>
-
-    <!-- NOTE: placeholder figures — confirm with People Ops before publish. -->
-    <div class="cr-facts">
-      <div class="cr-fact"><span class="n">~40</span><span class="l">People, on purpose</span></div>
-      <div class="cr-fact"><span class="n">5</span><span class="l">Countries, one calendar</span></div>
-      <div class="cr-fact"><span class="n">3×</span><span class="l">Onsites a year</span></div>
-      <div class="cr-fact"><span class="n">0</span><span class="l">Layers between you and the CEO</span></div>
     </div>
   </div>
 </section>
 
-<!-- PANEL 2 — LIFESTYLE BAND (full-bleed) -->
-<!-- NOTE: drop a team/lifestyle photo at assets/img/careers-life.jpg (landscape,
-     ~2400px wide, people not product). Until then the brand gradient carries
-     the section on its own — no broken-image state. -->
-<section class="cr-life" id="life" data-screen-label="02 Life at Vizit">
+<!-- PANEL 2 — BENEFITS -->
+<section class="panel cr-benefits cr-center" data-screen-label="02 Benefits">
+  <div class="cr-benefits-glow" aria-hidden="true"></div>
   <div class="container">
-    <span class="cr-life-tag">Life at Vizit</span>
-    <h2 class="display">The best part of the job is who you do it with.</h2>
-    <p class="cr-life-cap">Three onsites a year, and the rest of the time your calendar is yours.</p>
-  </div>
-</section>
-
-<!-- PANEL 3 — HOW WE WORK -->
-<section class="panel" data-screen-label="03 How we work">
-  <div class="container">
-    <h2 class="display" style="max-width:16ch;">How we actually work.</h2>
-    <div class="cr-cards">
-      <div class="cr-card">
-        <span class="no">01</span>
-        <h3>Fewer meetings</h3>
-        <p>Write it down. Meet only when writing it down would not do.</p>
-      </div>
-      <div class="cr-card">
-        <span class="no">02</span>
-        <h3>Own the whole thing</h3>
-        <p>Your title is where you start, not where you stop.</p>
-      </div>
-      <div class="cr-card">
-        <span class="no">03</span>
-        <h3>Say the real thing</h3>
-        <p>Direct, kind, no guessing games. Distributed teams run on it.</p>
-      </div>
-      <div class="cr-card">
-        <span class="no">04</span>
-        <h3>Ship on Fridays</h3>
-        <p>And nobody panics, because we trust the tests.</p>
-      </div>
-      <div class="cr-card">
-        <span class="no">05</span>
-        <h3>Deliberately small</h3>
-        <p>We hire slowly so nobody has to carry a passenger.</p>
-      </div>
-      <div class="cr-card">
-        <span class="no">06</span>
-        <h3>Log off</h3>
-        <p>Rested people make better calls. We mean it about the time off.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PANEL 4 — PERKS -->
-<section class="panel panel--paper" data-screen-label="04 Perks">
-  <div class="container">
-    <h2 class="display" style="max-width:14ch;">The good stuff.</h2>
-    <p class="cr-lede">Varies a little by country. All of it confirmed in writing before you sign.</p>
-    <!-- NOTE: placeholder perks copy — confirm each line with People Ops before publish. -->
+    <h2 class="display">Benefits and perks.</h2>
+    <!-- NOTE: placeholder list — confirm each line with People Ops before publish. -->
     <div class="cr-perks">
-      <div class="cr-perk"><h4>Real equity</h4><p>Everyone owns a piece. We show you the math.</p></div>
-      <div class="cr-perk"><h4>Health, dental, vision</h4><p>Premiums on us, family included.</p></div>
-      <div class="cr-perk"><h4>Work from anywhere</h4><p>No headquarters to commute to.</p></div>
-      <div class="cr-perk"><h4>Flexible time off</h4><p>With a minimum, not a maximum.</p></div>
-      <div class="cr-perk"><h4>Parental leave</h4><p>Paid, and for every kind of new parent.</p></div>
-      <div class="cr-perk"><h4>Pick your setup</h4><p>The desk, the chair, the machine you want.</p></div>
-      <div class="cr-perk"><h4>Learning budget</h4><p>Courses, conferences, books. Go get smarter.</p></div>
-      <div class="cr-perk"><h4>Team onsites</h4><p>Three a year, somewhere good.</p></div>
-      <div class="cr-perk"><h4>401(k)</h4><p>With a match, for US folks.</p></div>
+      <div class="cr-perk"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5v8.5h8.5"/><circle cx="12" cy="12" r="8.5"/></svg></span><h4>Real equity</h4></div>
+      <div class="cr-perk"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-7-4.4-7-9.2A3.9 3.9 0 0 1 12 8.6a3.9 3.9 0 0 1 7 2.7c0 4.8-7 9.2-7 9.2z"/></svg></span><h4>Health, dental, vision</h4></div>
+      <div class="cr-perk"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17"/><path d="M12 3.5a13 13 0 0 1 0 17 13 13 0 0 1 0-17z"/></svg></span><h4>Work from anywhere</h4></div>
+      <div class="cr-perk"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.1M12 19.3v2.1M2.6 12h2.1M19.3 12h2.1M5.4 5.4l1.5 1.5M17.1 17.1l1.5 1.5M18.6 5.4l-1.5 1.5M6.9 17.1l-1.5 1.5"/></svg></span><h4>Flexible time off</h4></div>
+      <div class="cr-perk"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 20.5v-1.7A4.3 4.3 0 0 1 7.8 14.5h2.4a4.3 4.3 0 0 1 4.3 4.3v1.7"/><path d="M17.5 12.5a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z"/><path d="M20.5 20.5v-2.9a3 3 0 0 0-2-2.8"/></svg></span><h4>Parental leave</h4></div>
+      <div class="cr-perk"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.8" y="4.5" width="18.4" height="12" rx="1.6"/><path d="M8.5 20.5h7M12 16.5v4"/></svg></span><h4>Pick your setup</h4></div>
+      <div class="cr-perk"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5h5.3A2.7 2.7 0 0 1 12 7.2v13a2.2 2.2 0 0 0-2.2-2.2H4z"/><path d="M20 4.5h-5.3A2.7 2.7 0 0 0 12 7.2v13a2.2 2.2 0 0 1 2.2-2.2H20z"/></svg></span><h4>Learning budget</h4></div>
+      <div class="cr-perk"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 10c0 5.2-7 11-7 11S5 15.2 5 10a7 7 0 0 1 14 0z"/><circle cx="12" cy="9.8" r="2.5"/></svg></span><h4>Team onsites</h4></div>
+      <div class="cr-perk"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 17.5l5.2-5.6 3.4 3 6.4-7.4"/><path d="M14.4 7.5h4.1v4.1"/></svg></span><h4>401(k)</h4></div>
     </div>
   </div>
 </section>
 
-<!-- PANEL 5 — OPEN ROLES -->
-<!-- NOTE: role listings below are placeholders. Wire each `href` to the live
-     ATS posting (Greenhouse / Lever / Ashby) — or replace this whole block
-     with the ATS embed script — before publish. -->
-<section class="panel" id="open-roles" data-screen-label="05 Open roles">
+<!-- PANEL 3 — OPEN ROLES -->
+<!-- The two roles below carry their full descriptions inline and apply by
+     email. If hiring moves to an ATS (Greenhouse / Lever / Ashby), this whole
+     block is what the embed replaces. -->
+<section class="panel" id="open-roles" data-screen-label="03 Open roles">
   <div class="container">
-    <h2 class="display" style="max-width:14ch;">Find your seat.</h2>
+    <h2 class="display" style="max-width:14ch;">Open roles.</h2>
 
     <div class="cr-filters">
-      <div class="cr-filter-group">
-        <span class="k" id="cr-team-label">Team</span>
-        <div class="cr-chips" role="group" aria-labelledby="cr-team-label" data-filter="team">
-          <button class="cr-chip" type="button" aria-pressed="true" data-value="all">All</button>
-          <button class="cr-chip" type="button" aria-pressed="false" data-value="Engineering">Engineering</button>
-          <button class="cr-chip" type="button" aria-pressed="false" data-value="AI Research">AI Research</button>
-          <button class="cr-chip" type="button" aria-pressed="false" data-value="Product &amp; Design">Product &amp; Design</button>
-          <button class="cr-chip" type="button" aria-pressed="false" data-value="Go-to-Market">Go-to-Market</button>
-          <button class="cr-chip" type="button" aria-pressed="false" data-value="Customer Success">Customer Success</button>
-        </div>
-      </div>
-      <div class="cr-filter-group">
-        <span class="k" id="cr-loc-label">Location</span>
-        <div class="cr-chips" role="group" aria-labelledby="cr-loc-label" data-filter="location">
-          <button class="cr-chip" type="button" aria-pressed="true" data-value="all">All</button>
-          <button class="cr-chip" type="button" aria-pressed="false" data-value="Remote — US">Remote — US</button>
-          <button class="cr-chip" type="button" aria-pressed="false" data-value="Remote — Europe">Remote — Europe</button>
-          <button class="cr-chip" type="button" aria-pressed="false" data-value="Boston, MA">Boston, MA</button>
-        </div>
-      </div>
+      <label class="cr-filter-group">
+        <span class="k">Team</span>
+        <!-- options are built from the roles below, so the menus stay right
+             however the list changes -->
+        <select class="cr-select" id="cr-team" data-filter="team"></select>
+      </label>
+      <label class="cr-filter-group">
+        <span class="k">Location</span>
+        <select class="cr-select" id="cr-location" data-filter="location"></select>
+      </label>
     </div>
 
     <p class="cr-count" id="cr-count" role="status" aria-live="polite"></p>
 
     <ul class="cr-roles" id="cr-roles">
-      <li class="cr-role" data-team="Engineering" data-location="Remote — US">
-        <a href="#"><span class="cr-role-title">Senior Full-Stack Engineer</span><span class="cr-role-meta">Engineering</span><span class="cr-role-meta">Remote — US</span><span class="cr-role-go">Apply →</span></a>
+
+      <li class="cr-role" data-team="Customer Success" data-location="Remote">
+        <h3 class="cr-role-h">
+          <button class="cr-role-head" type="button" aria-expanded="false" aria-controls="jd-sr-customer-success-manager">
+            <span class="cr-role-title">Sr. Customer Success Manager</span>
+            <span class="cr-role-meta">Customer Success</span>
+            <span class="cr-role-meta">Remote</span>
+            <span class="cr-role-go">View role<svg class="cr-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></span>
+          </button>
+        </h3>
+        <div class="cr-role-body" id="jd-sr-customer-success-manager" hidden>
+          <aside class="cr-role-side">
+            <div class="cr-apply">
+              <p class="cr-apply-copy">Send your resume over to us and we&rsquo;ll take a look.</p>
+              <a class="btn btn-primary" href="mailto:recruiting@vizit.com?subject=Application%20%E2%80%94%20Sr.%20Customer%20Success%20Manager">Apply for this role</a>
+              <p class="cr-apply-alt">Or email <button type="button" class="cr-copy" data-copy="recruiting@vizit.com">recruiting@vizit.com</button><span class="cr-copied" role="status" aria-live="polite"></span></p>
+            </div>
+            <dl class="cr-jd-meta">
+              <div><dt>Location</dt><dd>Remote</dd></div>
+              <div><dt>Commitment</dt><dd>Full time</dd></div>
+              <div><dt>Base salary</dt><dd>From $125,000 + commissions</dd></div>
+            </dl>
+          </aside>
+          <div class="cr-jd">
+            <h4>About Vizit</h4>
+            <p>Vizit pioneered the field of image analytics and launched the world&rsquo;s first content measurement standard&mdash;Vizit Scores&mdash;to help designers, marketers, and e-commerce leaders around the globe increase attention levels, audience appeal, and conversion effectiveness with their target audiences online. We help the world&rsquo;s most iconic brands and retailers win the race for consumer attention through a patented AI-powered Visual Content Effectiveness Platform. Vizit enables teams, anywhere in the world, to measure, manage, and optimize their content effectiveness at every step of the consumer journey, in real-time, to make the best impression with target audiences through effective visual communication.</p>
+            <p>Our award-winning AI models predict, measure, optimize, and monitor e-commerce content&rsquo;s effectiveness with your target audience.</p>
+            <p>We are looking for an experienced Sr. Customer Success Manager to join our Customer Success Management team, focusing on expanding and renewing accounts in your assigned book of business. Join our team to help push the boundaries of AI-powered content analytics and image enhancement.</p>
+
+            <h4>Overview</h4>
+            <p>The ideal candidate for this role will have experience exceeding retention and upsell targets in an eCommerce and/or marketing technology-based sales environment focused on CPG brands and retailers. Working in a fast-moving company, they will have the ability to develop long-term relationships with enterprise customers, identify growth opportunities, and drive renewals while ensuring customer success. This role requires a proactive and strategic approach to account management, working closely with Sales, Product, and Marketing to maximize customer value and retention.</p>
+
+            <h4>Who you are</h4>
+            <ul>
+              <li>7+ years of experience in account management, renewals, or enterprise customer success with a proven track record of driving upsell revenue within existing accounts.</li>
+              <li>Experience managing and growing enterprise SaaS accounts within the CPG, Retail, or eCommerce industries.</li>
+              <li>Demonstrated ability to manage multi-million-dollar book of business and increase customer lifetime value through upselling and cross-selling.</li>
+              <li>Excellent communication (written, oral, presentation) and relationship-building skills with executive stakeholders.</li>
+              <li>Ability to collaborate cross-functionally with Sales, Marketing, and Product teams to ensure customer needs are met and drive account expansion.</li>
+              <li>Data-driven mindset with experience leveraging analytics and insights to drive account strategy and customer success.</li>
+              <li>Experience using Salesforce and other CRM/account management tools.</li>
+            </ul>
+
+            <h4>What you&rsquo;ll do</h4>
+            <ul>
+              <li>Own and manage a portfolio of mid-market &amp; enterprise accounts, ensuring customer satisfaction and growing referenceable accounts.</li>
+              <li>Drive revenue through renewals and upselling additional Vizit products and solutions within existing accounts.</li>
+              <li>Develop and execute strategic account plans to maximize customer value and ensure long-term success.</li>
+              <li>Proactively identify and mitigate churn risks, ensuring high customer retention rates.</li>
+              <li>Act as a trusted advisor to key stakeholders, helping them leverage Vizit&rsquo;s AI-powered platform to achieve their business objectives.</li>
+              <li>Work closely with customer champions to drive adoption and ensure customers derive maximum value from the platform.</li>
+              <li>Partner with Marketing and Product teams to provide customer insights and influence roadmap priorities.</li>
+              <li>Negotiate and close contract renewals, managing pricing discussions and contract terms.</li>
+              <li>Maintain accurate pipeline and forecast data in Salesforce.</li>
+            </ul>
+
+            <h4>It&rsquo;s essential to have</h4>
+            <ul>
+              <li>Previous experience managing global enterprise SaaS accounts in the CPG, Retail, or eCommerce space.</li>
+              <li>A track record of exceeding renewal and expansion targets.</li>
+              <li>Strong executive presence and ability to communicate complex solutions to senior stakeholders.</li>
+              <li>An analytical mindset with the ability to leverage customer data to inform account strategies.</li>
+            </ul>
+
+            <h4>Compensation</h4>
+            <p>Specific to pay transparency laws, the minimum annual base salary for this position is $125,000 plus commissions. This compensation package will include variable pay, incentive stock options, and benefits. The final job level and compensation will be determined by various factors such as a candidate&rsquo;s relevant work experience, years of relevant experience, skills, qualifications, certifications, geographic location, and other business considerations.</p>
+
+            <h4>What&rsquo;s in it for you</h4>
+            <ul>
+              <li>The opportunity to grow your career at an innovative, fast-growing AI company that&rsquo;s carving out a major leadership position.</li>
+              <li>Work with a smart, experienced and fun team to help bring an entirely new software category to market.</li>
+              <li>We offer competitive salaries, 401k, stock options, generous PTO, health, dental &amp; vision, work/life allowance and remote work flexibility.</li>
+            </ul>
+            <p>Although we are headquartered in Boston, Massachusetts, Vizit is a remote-first company. We provide opportunities for teams to gather in person to enhance collaboration and productivity. In addition to excellent benefits, our culture is influenced by our Growth Principles: Customer Obsessed, Invent and Improve, Take Ownership, and Be Human! We have an awesome team that is building an amazing, successful product and company. Whoever you are and however you identify, if this sounds like a role and a team that you&rsquo;d .%20Customer%20Success%20Manager">Apply for this role</a>
+          </div>
+        </div>
       </li>
-      <li class="cr-role" data-team="Engineering" data-location="Remote — Europe">
-        <a href="#"><span class="cr-role-title">Staff Platform Engineer</span><span class="cr-role-meta">Engineering</span><span class="cr-role-meta">Remote — Europe</span><span class="cr-role-go">Apply →</span></a>
+
+      <li class="cr-role" data-team="Product &amp; Design" data-location="Remote">
+        <h3 class="cr-role-h">
+          <button class="cr-role-head" type="button" aria-expanded="false" aria-controls="jd-digital-graphic-designer">
+            <span class="cr-role-title">Digital Graphic Designer</span>
+            <span class="cr-role-meta">Product &amp; Design</span>
+            <span class="cr-role-meta">Remote</span>
+            <span class="cr-role-go">View role<svg class="cr-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></span>
+          </button>
+        </h3>
+        <div class="cr-role-body" id="jd-digital-graphic-designer" hidden>
+          <aside class="cr-role-side">
+            <div class="cr-apply">
+              <p class="cr-apply-copy">Send your resume over to us and we&rsquo;ll take a look.</p>
+              <a class="btn btn-primary" href="mailto:recruiting@vizit.com?subject=Application%20%E2%80%94%20Digital%20Graphic%20Designer">Apply for this role</a>
+              <p class="cr-apply-alt">Or email <button type="button" class="cr-copy" data-copy="recruiting@vizit.com">recruiting@vizit.com</button><span class="cr-copied" role="status" aria-live="polite"></span></p>
+            </div>
+            <dl class="cr-jd-meta">
+              <div><dt>Location</dt><dd>Boston, MA (remote)</dd></div>
+              <div><dt>Commitment</dt><dd>Full time contractor</dd></div>
+              <div><dt>Pay</dt><dd>Paid contractor</dd></div>
+            </dl>
+          </aside>
+          <div class="cr-jd">
+            <p>Vizit is the most advanced, actionable, AI-driven content analytics company in the world. Our award-winning AI models predict, measure, optimize, and monitor e-commerce content&rsquo;s effectiveness with your target audience. Join our team to help push the boundaries of AI-powered content analytics and image enhancement.</p>
+
+            <h4>About the role</h4>
+            <p>Join an innovative and groundbreaking visual AI company working with top-tier consumer brands like Mars, L&rsquo;Or&eacute;al, and Colgate. You&rsquo;ll support our customer success and insights teams by applying your design skills to enhance product detail page (PDP) imagery for Amazon and other online retailers.</p>
+
+            <h4>Key responsibilities</h4>
+            <ul>
+              <li>Use Adobe Creative Suite (Photoshop, Illustrator, InDesign) and Figma to edit and optimize ecommerce imagery.</li>
+              <li>Collaborate with creative designers, ecommerce managers, and brand strategists to improve sales performance and storytelling through product visuals.</li>
+              <li>Leverage Vizit&rsquo;s AI platform to analyze visual performance and guide content enhancements.</li>
+              <li>Support the creation of before/after visuals, mockups, and design templates.</li>
+              <li>Contribute to client deliverables with clean, compelling visual content.</li>
+              <li>Assist with asset management and content versioning across projects.</li>
+              <li>Design content for the largest and most iconic brands in global ecommerce.</li>
+            </ul>
+
+            <h4>What you bring</h4>
+            <ul>
+              <li>Proficiency with Adobe Creative Suite (Photoshop, Illustrator, InDesign) and Figma.</li>
+              <li>Comfortable using AI image generation tools and AI image editing tools (Midjourney, Adobe Firefly, Imagen).</li>
+              <li>Functional experience using Claude or similar AI tools to support creative workflows (e.g. brainstorming, writing captions, summarizing feedback).</li>
+              <li>Strong understanding of design principles&mdash;typography, layout, and visual hierarchy.</li>
+              <li>Ability to take feedback and iterate quickly.</li>
+              <li>Interest in consumer brands, ecommerce, and digital marketing.</li>
+              <li>Bonus: familiarity with Amazon, Shopify, or other ecommerce marketplaces.</li>
+            </ul>
+
+            <h4>Why this role is unique</h4>
+            <ul>
+              <li>Real-world experience shaping content for globally recognized brands.</li>
+              <li>Exposure to how AI and data are used to drive creative and business decisions.</li>
+              <li>Fast-paced, hands-on work with a collaborgital%20Graphic%20Designer">Apply for this role</a>
+          </div>
+        </div>
       </li>
-      <li class="cr-role" data-team="Engineering" data-location="Boston, MA">
-        <a href="#"><span class="cr-role-title">Data Engineer, Retail Signals</span><span class="cr-role-meta">Engineering</span><span class="cr-role-meta">Boston, MA</span><span class="cr-role-go">Apply →</span></a>
-      </li>
-      <li class="cr-role" data-team="AI Research" data-location="Remote — US">
-        <a href="#"><span class="cr-role-title">Research Scientist, Computer Vision</span><span class="cr-role-meta">AI Research</span><span class="cr-role-meta">Remote — US</span><span class="cr-role-go">Apply →</span></a>
-      </li>
-      <li class="cr-role" data-team="AI Research" data-location="Remote — US">
-        <a href="#"><span class="cr-role-title">Machine Learning Engineer, Agentic Systems</span><span class="cr-role-meta">AI Research</span><span class="cr-role-meta">Remote — US</span><span class="cr-role-go">Apply →</span></a>
-      </li>
-      <li class="cr-role" data-team="Product &amp; Design" data-location="Remote — US">
-        <a href="#"><span class="cr-role-title">Senior Product Manager, Platform</span><span class="cr-role-meta">Product &amp; Design</span><span class="cr-role-meta">Remote — US</span><span class="cr-role-go">Apply →</span></a>
-      </li>
-      <li class="cr-role" data-team="Product &amp; Design" data-location="Remote — Europe">
-        <a href="#"><span class="cr-role-title">Product Designer</span><span class="cr-role-meta">Product &amp; Design</span><span class="cr-role-meta">Remote — Europe</span><span class="cr-role-go">Apply →</span></a>
-      </li>
-      <li class="cr-role" data-team="Go-to-Market" data-location="Remote — US">
-        <a href="#"><span class="cr-role-title">Enterprise Account Executive, CPG</span><span class="cr-role-meta">Go-to-Market</span><span class="cr-role-meta">Remote — US</span><span class="cr-role-go">Apply →</span></a>
-      </li>
-      <li class="cr-role" data-team="Go-to-Market" data-location="Boston, MA">
-        <a href="#"><span class="cr-role-title">Product Marketing Manager</span><span class="cr-role-meta">Go-to-Market</span><span class="cr-role-meta">Boston, MA</span><span class="cr-role-go">Apply →</span></a>
-      </li>
-      <li class="cr-role" data-team="Customer Success" data-location="Remote — US">
-        <a href="#"><span class="cr-role-title">Customer Success Manager, Enterprise</span><span class="cr-role-meta">Customer Success</span><span class="cr-role-meta">Remote — US</span><span class="cr-role-go">Apply →</span></a>
-      </li>
-      <li class="cr-role" data-team="Customer Success" data-location="Remote — Europe">
-        <a href="#"><span class="cr-role-title">Solutions Architect</span><span class="cr-role-meta">Customer Success</span><span class="cr-role-meta">Remote — Europe</span><span class="cr-role-go">Apply →</span></a>
-      </li>
+
     </ul>
 
-    <p class="cr-empty" id="cr-empty" hidden>Nothing matches that combination right now — try another mix, or <a href="mailto:careers@vizit.com?subject=General%20interest%20in%20Vizit">say hello anyway</a>.</p>
-  </div>
-</section>
-
-<!-- PANEL 6 — HIRING PROCESS -->
-<section class="panel panel--dark" data-screen-label="06 Hiring process">
-  <div class="container">
-    <h2 class="display on-dark" style="max-width:18ch;">Four conversations. No trick questions.</h2>
-    <p class="cr-lede">First call to offer in about two to three weeks.</p>
-    <div class="cr-steps">
-      <div class="cr-step"><span class="no">Step 01</span><h4>Intro call</h4><p>Thirty minutes. What you want, what the role is.</p></div>
-      <div class="cr-step"><span class="no">Step 02</span><h4>Hiring manager</h4><p>The real conversation, with your future boss.</p></div>
-      <div class="cr-step"><span class="no">Step 03</span><h4>Working session</h4><p>A practical exercise. Never unpaid homework.</p></div>
-      <div class="cr-step"><span class="no">Step 04</span><h4>Team &amp; decision</h4><p>Meet everyone. Clear yes or no, with feedback.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- PANEL 7 — FINAL CTA -->
-<section class="final" style="background:#0a0e14;" data-screen-label="07 Final CTA">
-  <div class="container final-inner">
-    <h2 class="display on-dark" style="font-size:clamp(2rem,5vw,3.5rem);">Nothing fits? Tell us anyway.</h2>
-    <p class="subhead on-dark">If there is a fit now, or one coming, we will find it.</p>
-    <div class="final-ctas">
-      <!-- NOTE: confirm careers@vizit.com is monitored, or swap for the ATS general-interest form. -->
-      <a class="btn btn-on-dark btn-lg" href="mailto:careers@vizit.com?subject=General%20interest%20in%20Vizit">Say hello <span class="arrow">→</span></a>
-      <a class="cr-link cr-link--dark" href="#open-roles">Back to open roles →</a>
-    </div>
+    <p class="cr-empty" id="cr-empty" hidden>Nothing matches that combination right now — try another mix, or <a href="mailto:recruiting@vizit.com?subject=General%20interest%20in%20Vizit">say hello anyway</a>.</p>
   </div>
 </section>
 
 <vizit-footer data-cta="off"></vizit-footer>
 
 <script>
-  /* Open-roles filter — team × location, both defaulting to "all".
-     Progressive enhancement: with JS off every role stays visible. */
+  /* Open roles — two menus over the list, and each row opens its own
+     description in place.
+
+     Progressive enhancement throughout: the menus are empty in the markup and
+     filled from the roles themselves, so with JS off there is nothing to
+     operate and every role stays visible. The descriptions are the one thing
+     JS hides, so they are unhidden here on boot rather than in the markup —
+     without JS they read as part of the page. */
   (function () {
     var list = document.getElementById('cr-roles');
     if (!list) return;
     var roles = [].slice.call(list.querySelectorAll('.cr-role'));
-    var groups = [].slice.call(document.querySelectorAll('.cr-chips[data-filter]'));
     var empty = document.getElementById('cr-empty');
     var count = document.getElementById('cr-count');
     var state = { team: 'all', location: 'all' };
+
+    /* ── the menus, built from the roles present ── */
+    var menus = [].slice.call(document.querySelectorAll('.cr-select[data-filter]'));
+    menus.forEach(function (sel) {
+      var key = sel.dataset.filter;
+      var seen = [], all = key === 'team' ? 'All teams' : 'All locations';
+      roles.forEach(function (r) {
+        var v = r.dataset[key];
+        if (v && seen.indexOf(v) === -1) seen.push(v);
+      });
+      seen.sort();
+      sel.appendChild(new Option(all, 'all'));
+      seen.forEach(function (v) { sel.appendChild(new Option(v, v)); });
+      sel.addEventListener('change', function () {
+        state[key] = sel.value;
+        apply();
+      });
+    });
 
     function apply() {
       var shown = 0;
@@ -492,25 +604,117 @@
                  (state.location === 'all' || role.dataset.location === state.location);
         role.hidden = !ok;
         if (ok) shown++;
+        /* a filtered-out row should not keep an open panel behind it */
+        if (!ok) close(role.querySelector('.cr-role-head'));
       });
       if (empty) empty.hidden = shown !== 0;
       if (count) count.textContent = shown === 1 ? '1 open role' : shown + ' open roles';
     }
 
-    groups.forEach(function (group) {
-      var key = group.dataset.filter;
-      group.addEventListener('click', function (e) {
-        var chip = e.target.closest('.cr-chip');
-        if (!chip || !group.contains(chip)) return;
-        state[key] = chip.dataset.value;
-        group.querySelectorAll('.cr-chip').forEach(function (c) {
-          c.setAttribute('aria-pressed', String(c === chip));
-        });
-        apply();
+    /* ── one row at a time ── */
+    function panelOf(head) { return document.getElementById(head.getAttribute('aria-controls')); }
+    function close(head) {
+      if (!head || head.getAttribute('aria-expanded') !== 'true') return;
+      head.setAttribute('aria-expanded', 'false');
+      panelOf(head).hidden = true;
+    }
+    function open(head) {
+      head.setAttribute('aria-expanded', 'true');
+      panelOf(head).hidden = false;
+    }
+
+    var heads = [].slice.call(list.querySelectorAll('.cr-role-head'));
+    heads.forEach(function (head) {
+      panelOf(head).hidden = true;                 // JS is on, so start closed
+      head.addEventListener('click', function () {
+        var isOpen = head.getAttribute('aria-expanded') === 'true';
+        heads.forEach(close);
+        if (isOpen) return;
+        open(head);
+        /* These descriptions run long, so collapsing the one above this row
+           can pull the row hundreds of pixels up the page — sometimes clean
+           off the top of the viewport. Nudge it back under the nav only when
+           the click has actually left it outside a comfortable band. */
+        var top = head.getBoundingClientRect().top;
+        if (top < 72 || top > window.innerHeight - 120) {
+          var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          window.scrollTo({
+            top: window.scrollY + top - 88,
+            behavior: calm ? 'auto' : 'smooth'
+          });
+        }
       });
     });
 
     apply();
+  })();
+
+  /* Copy-the-address fallback. Clipboard API where it is available (it needs a
+     secure context, which localhost and the live https site both are), and a
+     hidden-textarea execCommand where it is not. Either way the address stays
+     visible on the page, so a failure here still leaves it readable. */
+  (function () {
+    var btns = [].slice.call(document.querySelectorAll('.cr-copy'));
+    if (!btns.length) return;
+
+    function legacyCopy(text) {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:absolute;left:-9999px;top:0';
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      document.body.removeChild(ta);
+      return ok;
+    }
+
+    /* Last resort: put the address under the cursor's selection, so the
+       keystroke we are about to suggest actually has something to copy. */
+    function selectText(el) {
+      try {
+        var r = document.createRange();
+        r.selectNodeContents(el);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(r);
+        return true;
+      } catch (e) { return false; }
+    }
+    var KEY = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent)
+      ? '\u2318C' : 'Ctrl+C';
+
+    btns.forEach(function (btn) {
+      var note = btn.parentElement.querySelector('.cr-copied');
+      var timer;
+      function say(msg) {
+        if (!note) return;
+        note.textContent = msg;
+        clearTimeout(timer);
+        timer = setTimeout(function () { note.textContent = ''; }, 2400);
+      }
+      function fallback(text) {
+        if (legacyCopy(text)) { say('Copied'); return; }
+        selectText(btn);
+        say('Selected \u2014 press ' + KEY);
+      }
+      btn.addEventListener('click', function () {
+        var text = btn.dataset.copy, done = false;
+        function settle(fn) { if (done) return; done = true; fn(); }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          /* A clipboard promise that never settles would leave the click with
+             no feedback at all, so it races a short timer into the fallback. */
+          var t = setTimeout(function () { settle(function () { fallback(text); }); }, 700);
+          navigator.clipboard.writeText(text).then(
+            function () { clearTimeout(t); settle(function () { say('Copied'); }); },
+            function () { clearTimeout(t); settle(function () { fallback(text); }); }
+          );
+        } else {
+          settle(function () { fallback(text); });
+        }
+      });
+    });
   })();
 </script>
 

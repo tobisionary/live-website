@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Spark Studio | Your PDP, Optimized. Done For You.</title>
 <link rel="icon" type="image/png" href="assets/favicon.png">
-  <meta name="description" content="No new headcount, no learning curve. Send us your content and Vizit-trained ecommerce designers hand back images built to convert, scored to prove it.">
+  <meta name="description" content="No new headcount, no learning curve. Send us your content and Vizit-trained ecommerce designers hand back images built to convert.">
   <link rel="stylesheet" href="css/ci-styles.css">
   <!-- elevate before theme: elevate supplies the shared type scale, but
        forces .btn-primary to accent blue. theme's site-wide parity block
@@ -17,7 +17,429 @@
   <link rel="stylesheet" href="css/spark-styles.css">
   <script src="js/vizit-nav.js" defer></script>
   <script src="js/vizit-footer.js" defer></script>
-  <style>
+  <script src="js/spark-dome.js" defer></script>
+  <style id="spark-studio-v2">
+    /* The centred dome hero and the closing black card live in
+       css/spark-styles.css — spark-ai.html opens and closes the same way. */
+
+    /* ═══════════ OPERATING MODEL ═══════════
+       Three ways an account can run: launches, live listings, or both.
+       The trio is cut from the brand blues — a pale blue wash, a light
+       rule on top, blue answers — so the row reads as one family and
+       still sits softly on the white panel. The three paths are told
+       apart by icon and copy, not by three unrelated hues. */
+    .sw-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-5); margin-top: var(--space-8); align-items: stretch;
+    }
+    .sw {
+      min-width: 0; display: flex; flex-direction: column; position: relative;
+      padding: var(--space-6);
+      background: linear-gradient(170deg, #f3f9ff 0%, #ffffff 56%);
+      border: 1px solid var(--blue-100);
+      box-shadow: 0 14px 34px -18px rgba(0,33,61,0.18);
+      transition: transform 260ms var(--ease, ease), box-shadow 260ms var(--ease, ease),
+                  border-color 260ms var(--ease, ease);
+    }
+    /* the rule sits inside the card, so the shared 14px radius clips it */
+    .sw::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, var(--blue-300), var(--blue-200) 58%, rgba(128,195,254,0.4));
+    }
+    /* a breath of the hero's glow in the top corner, so the card is not a
+       flat slab */
+    .sw::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(80% 60% at 88% -8%, rgba(52,160,254,0.12), transparent 62%);
+    }
+    .sw > * { position: relative; z-index: 1; }
+    .sw:hover {
+      transform: translateY(-3px);
+      border-color: var(--blue-200);
+      box-shadow: 0 24px 52px -22px rgba(1,116,217,0.32);
+    }
+    .sw .ic {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 38px; height: 38px; flex-shrink: 0;
+      border: 1px solid var(--blue-100);
+      background: #ffffff; color: var(--blue-base);
+    }
+    .sw .ic svg { width: 20px; height: 20px; display: block; }
+    .sw h3 {
+      font-family: var(--font-display); font-weight: 600;
+      font-size: clamp(1.3rem, 1.9vw, 1.6rem);
+      letter-spacing: -0.025em; line-height: 1.14;
+      color: var(--blue-1000); margin: var(--space-4) 0 0;
+    }
+    .sw-body {
+      color: var(--color-600); font-size: var(--text-sm); line-height: 1.6;
+      margin: var(--space-3) 0 0;
+    }
+    /* A floor under the pitch, deep enough for the longest of the three,
+       lands all three rules on one line. The "who" block follows it
+       directly rather than being pinned to the floor of the card — the
+       three detail lines differ in length, and bottom-anchoring them
+       pushed the rules out of line with each other. */
+    @media (min-width: 901px) { .sw-body { min-height: 6.4em; } }
+    .sw-who {
+      margin-top: var(--space-5); padding-top: var(--space-5);
+      border-top: 1px solid var(--blue-100);
+    }
+    .sw-who .l {
+      display: block; font-family: var(--font-mono); font-size: 10px;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+    }
+    .sw-who .a {
+      display: block;
+      font-family: var(--font-display); font-weight: 600;
+      font-size: clamp(1.15rem, 1.7vw, 1.4rem); letter-spacing: -0.02em;
+      color: var(--blue-1000); margin: var(--space-2) 0 0;
+    }
+    @media (max-width: 900px) { .sw-grid { grid-template-columns: 1fr; gap: var(--space-5); } }
+    @media (prefers-reduced-motion: reduce) { .sw:hover { transform: none; } }
+
+    /* ═══════════ FLYWHEEL ═══════════
+       Centred heading, and the ring dressed up: a soft hub disc behind the
+       centre label, a gradient arc with a bead riding it, and an icon on
+       every node. The ring itself still comes from spark-styles.css. */
+    .sp-fly-panel .display,
+    .sp-fly-panel > .container > .sp-body {
+      text-align: center; margin-left: auto; margin-right: auto;
+    }
+    .sp-fly-panel .display { max-width: 24ch; }
+    .sp-fly-panel > .container > .sp-body { margin-top: var(--space-5); max-width: 58ch; }
+
+    .sp-fly { max-width: 880px; aspect-ratio: 1.16; }
+    .sp-fly-inner {
+      transform-box: view-box; transform-origin: 50% 50%;
+      animation: sp-fly-drift-rev 70s linear infinite;
+    }
+    @keyframes sp-fly-drift-rev { to { transform: rotate(-360deg); } }
+    /* Dead centre of the ring, which is not the centre of .sp-fly. The
+       ring's <svg> is an absolutely positioned replaced element with an
+       intrinsic 1:1 ratio: with `inset: 8%` setting both top and bottom,
+       `bottom` is dropped and the box takes its height from its width, so
+       the circle hangs lower than the box's own middle. Its centre is
+       8% + (84% x 1.16) / 2 of the height — the same point the hub disc
+       is drawn on, so the label sits inside the hub. */
+    .sp-fly-center { top: calc(8% + 84% * 1.16 / 2); }
+    .sp-fly-head { filter: drop-shadow(0 0 1.6px rgba(140,210,255,0.95)); }
+    .sp-fly-head-glow { filter: blur(1.4px); }
+    /* the track drifts, the gradient under the ring turns: slow enough to
+       read as depth rather than motion */
+    .sp-fly-track {
+      transform-box: view-box; transform-origin: 50% 50%;
+      animation: sp-fly-drift 90s linear infinite;
+    }
+    .sp-fly-trail {
+      transform-box: view-box; transform-origin: 50% 50%;
+      animation: sp-fly-drift 44s linear infinite;
+    }
+    .sp-hub {
+      transform-box: view-box; transform-origin: 50% 50%;
+      animation: sp-hub-breathe 7s ease-in-out infinite;
+    }
+    @keyframes sp-fly-drift { to { transform: rotate(360deg); } }
+    @keyframes sp-hub-breathe {
+      0%, 100% { transform: scale(1); }
+      50%      { transform: scale(1.035); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .sp-fly-track, .sp-fly-trail, .sp-hub, .sp-fly-inner { animation: none; }
+    }
+    .sp-fly-node {
+      width: 214px; padding: var(--space-4) var(--space-4) var(--space-5);
+      box-shadow: 0 10px 26px rgba(0,33,61,0.07);
+      transition: transform 220ms var(--ease, ease), box-shadow 220ms var(--ease, ease), border-color 220ms;
+    }
+    .sp-fly-node:hover {
+      transform: translate(-50%, calc(-50% - 4px));
+      border-color: var(--blue-200);
+      box-shadow: 0 18px 40px rgba(0,33,61,0.13);
+    }
+    /* the icon and the step number share the top line */
+    .sp-fly-node .ic, .sp-recs .sp-rec .ic {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 30px; height: 30px; flex-shrink: 0;
+      border: 1px solid var(--blue-100); background: var(--accent-soft);
+      color: var(--blue-600);
+    }
+    .sp-fly-node .ic svg, .sp-recs .sp-rec .ic svg { width: 17px; height: 17px; display: block; }
+    .sp-fly-node .ic { margin-bottom: var(--space-3); }
+    /* the step number rides the top-right corner, clear of the icon */
+    .sp-fly-node .n {
+      position: absolute; top: var(--space-4); right: var(--space-4);
+      margin: 0; color: var(--blue-200); font-size: 12px;
+    }
+    .sp-fly-node .t { margin-bottom: 3px; }
+    /* the three ways work reaches the loop, named on station one */
+    .sp-fly-in {
+      display: flex; flex-wrap: wrap; gap: 5px; margin-top: var(--space-3);
+    }
+    .sp-fly-in span {
+      font-family: var(--font-mono); font-size: 9px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--blue-600); background: var(--accent-soft);
+      border: 1px solid var(--blue-100); border-radius: 5px; padding: 2px 5px;
+    }
+
+    /* the hub is a plain white field for the label — no glow behind it */
+    .sp-fly-arrow { filter: drop-shadow(0 0 2.5px rgba(1,116,217,0.5)); }
+    /* the label is the only thing in the hub, so it sits on the ring's
+       own centre and carries the page's headline weight */
+    .sp-fly-center { max-width: 230px; }
+    .sp-fly-center .t {
+      font-weight: 600; letter-spacing: -0.03em; line-height: 1.06;
+      font-size: clamp(1.2rem, 1.9vw, 1.6rem);
+    }
+
+    /* the mobile list carries the same icons */
+    .sp-fly-list .sp-rec { align-items: center; }
+    @media (max-width: 1080px) { .sp-fly-node { width: 190px; } }
+
+    /* ═══════════ THE THREE OPTIONS ═══════════
+       Three cards, no scaffolding above them: each answer rides inside
+       the top of its own card, so a card carries its own label. They run
+       to a common height with the deliverable on the floor, so the three
+       read across rather than down. */
+    .sp-tree { margin-top: var(--space-7); }
+    .sp-tree-branches { align-items: stretch; gap: var(--space-5); padding-top: 0; }
+    /* nothing hangs above the cards any more: no question node, no bar,
+       no drops. The shared stylesheet draws all three with
+       pseudo-elements, so they are off. */
+    .sp-tree-branches::before, .sp-tree-branch::before, .sp-tree-branch::after { display: none; }
+
+    /* ═══════════ THE CARDS' ARRIVAL ═══════════
+       Off the .in that js/spark-motion.js sets when the section scrolls
+       into view: the middle card lands first, on its own, then the two
+       others slide out from behind it to their own columns.
+
+       Each piece follows the flywheel's pattern — visible in its own rule,
+       hidden by a .sp-tree rule until reveal, and the animation carrying
+       `backwards` so it holds its first keyframe through the delay and
+       then hands the property back to the stylesheet, which is what
+       leaves the hover lifts working afterwards. */
+    .sp-tree { --fork-mid: 0.15s; --fork-card: 0.62s; }
+
+    /* the middle card sits over the two that slide out from under it */
+    .sp-tree-branch { z-index: 1; }
+    .sp-tree-branch:nth-child(2) { z-index: 3; }
+
+    /* The slide is one column plus one gap — exactly the distance from
+       the middle card's centre to their own, so they read as coming out
+       from under it. */
+    .sp-tree .sp-tree-spark,
+    .sp-tree .sp-tree-branch:first-child > .sp-tree-card,
+    .sp-tree .sp-tree-branch:last-child > .sp-tree-card { opacity: 0; }
+    .in .sp-tree-spark {
+      opacity: 1;
+      animation: sp-fork-mid 560ms cubic-bezier(.22,.9,.28,1) var(--fork-mid) backwards;
+    }
+    .in .sp-tree-branch:first-child > .sp-tree-card,
+    .in .sp-tree-branch:last-child > .sp-tree-card {
+      opacity: 1;
+      animation: sp-fork-out 700ms cubic-bezier(.2,.8,.2,1) var(--fork-card) backwards;
+    }
+    .in .sp-tree-branch:first-child > .sp-tree-card { animation-delay: var(--fork-card); }
+    .in .sp-tree-branch:last-child > .sp-tree-card {
+      --fork-dir: -1; animation-delay: calc(var(--fork-card) + 90ms);
+    }
+    @keyframes sp-fork-mid {
+      from { opacity: 0; transform: translateY(12px) scale(0.985); }
+      to   { opacity: 1; transform: none; }
+    }
+    @keyframes sp-fork-out {
+      0%   { opacity: 0; transform: translateX(calc(var(--fork-dir, 1) * (100% + var(--space-5)))) scale(0.94); }
+      26%  { opacity: 1; }
+      100% { opacity: 1; transform: none; }
+    }
+
+    /* stacked, there is nothing to slide out from behind: the cards just
+       come up in order, and sooner */
+    @media (max-width: 900px) {
+      .sp-tree { --fork-mid: 0.08s; --fork-card: 0.26s; }
+      .in .sp-tree-branch:first-child > .sp-tree-card,
+      .in .sp-tree-branch:last-child > .sp-tree-card { animation-name: sp-fork-mid; }
+      .in .sp-tree-branch:last-child > .sp-tree-card { animation-delay: calc(var(--fork-card) + 120ms); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .sp-tree .sp-tree-spark,
+      .sp-tree .sp-tree-branch > .sp-tree-card {
+        opacity: 1 !important; animation: none !important; transform: none !important;
+      }
+    }
+    /* junction bead where each branch leaves the bar */
+    .sp-tree-branch::after {
+      content: ''; position: absolute; top: calc(-1 * var(--space-5)); left: 50%;
+      width: 8px; height: 8px; border-radius: 50%; translate: -50% -50%;
+      background: var(--accent); box-shadow: 0 0 0 4px #fff, 0 0 0 5px var(--blue-100);
+    }
+    .sp-tree-card {
+      display: flex; flex-direction: column;
+      padding: var(--space-6); position: relative;
+    }
+    .sp-tree-card .sp-tree-answer {
+      align-self: flex-start; margin: 0 0 var(--space-4);
+    }
+    .sp-tree-card .m { font-size: clamp(1.15rem, 1.8vw, 1.4rem); margin-bottom: var(--space-3); }
+    /* three lines of description in every card puts all three footers on
+       one line across the row */
+    .sp-tree-card .d { min-height: 4.5em; margin-bottom: var(--space-5); }
+    /* what you walk away with, on its own hairline at the foot of the
+       card — no label and no tint, so the card stays white throughout */
+    .sp-tree-card .g {
+      margin-top: auto; padding-top: var(--space-4);
+      border-top: 1px solid var(--border); color: var(--blue-1000);
+    }
+    /* the longest of the three runs to two lines — a floor here lands all
+       three hairlines on one row */
+    @media (min-width: 901px) { .sp-tree-card .g { min-height: 4.4rem; } }
+    @media (max-width: 900px) {
+      .sp-tree-card .d { min-height: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) { .sp-fly-node { transition: none; } }
+
+    /* The featured card is called out by the rainbow rig below instead of
+       a blue rule, so both the top stroke and the blue border come off. */
+    .sp-tree-card.is-featured { border-color: transparent; box-shadow: 0 10px 28px rgba(0,33,61,0.10); }
+
+    /* ── rainbow rig on the featured card ──
+       Two layers behind an opaque card: a crisp 2px rim and a blurred
+       halo. Each holds an oversized square running a conic gradient, and
+       the square is what rotates — rotating the gradient's own start
+       angle would need @property, and rotating a non-square layer would
+       sweep its corners through the frame. The layers clip to their own
+       rounded box; the card, painted on top, hides everything but the
+       2px band and the bleed. */
+    .sp-tree-spark { position: relative; flex: 1; display: flex; }
+    .sp-tree-spark > .sp-tree-card { flex: 1; position: relative; z-index: 1; background: #fff; }
+    .sp-tree-spark-rim,
+    .sp-tree-spark-glow {
+      position: absolute; overflow: hidden; pointer-events: none; z-index: 0;
+    }
+    .sp-tree-spark-rim { inset: -2px; border-radius: 16px; }
+    /* The halo is blurred on the layer itself, not on the square inside
+       it. The square is clipped to this box first and the blur is applied
+       to that result, which is free to spread past the box — so the light
+       falls off into the column gap instead of ending on the hard edge a
+       blur inside `overflow: hidden` would leave. */
+    .sp-tree-spark-glow {
+      inset: 2px; border-radius: 14px; opacity: 0.85; filter: blur(13px);
+    }
+    .sp-tree-spark-rim::before,
+    .sp-tree-spark-glow::before {
+      content: ''; position: absolute; top: 50%; left: 50%;
+      width: 200%; aspect-ratio: 1; transform: translate(-50%, -50%);
+      background: conic-gradient(from 0deg,
+        #ff4d4d, #ff8f2e, #ffd93d, #43d17a, #2fd3c2,
+        #34a0fe, #0174d9, #8b5cf6, #ff4dab, #ff4d4d);
+      animation: sp-rainbow-spin 7s linear infinite;
+    }
+    @keyframes sp-rainbow-spin {
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+    /* the lift belongs to the whole rig, not the card inside it */
+    .sp-tree-spark > .sp-tree-card:hover { transform: none; border-color: transparent; box-shadow: 0 10px 28px rgba(0,33,61,0.10); }
+    .sp-tree-spark:hover { transform: translateY(-2px); transition: transform 200ms var(--ease, ease); }
+    .sp-tree-spark:hover .sp-tree-spark-glow { opacity: 1; }
+    .sp-tree-spark-glow { transition: opacity 220ms var(--ease, ease); }
+
+    /* ── the featured card's ribbon ──
+       The product name was a chip the size of the answer tags, which is
+       not what the middle option is. It gets the card's full width
+       instead: a navy band bled to the edges (the card clips it to the
+       shared radius), the rainbow of the rim as a hairline under it, and
+       the answer kept on the right where the chip used to sit. Its height
+       is set so the three card titles still line up across the row. */
+    .sp-tree-ribbon {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: var(--space-3); flex-wrap: wrap;
+      margin: calc(-1 * var(--space-6)) calc(-1 * var(--space-6)) calc(var(--space-5) - 5px);
+      padding: 13px var(--space-6);
+      background: linear-gradient(110deg, #002a4e, #00213d 72%);
+      border-bottom: 2px solid transparent;
+      border-image: linear-gradient(90deg, #ff4d4d, #ffd93d, #43d17a, #34a0fe, #8b5cf6, #ff4dab) 1;
+    }
+    .sp-tree-ribbon .rn {
+      font-family: var(--font-display); font-weight: 600;
+      font-size: 1.0625rem; letter-spacing: -0.01em; color: #ffffff;
+    }
+    .sp-tree-ribbon .ra {
+      font-family: var(--font-mono); font-size: 10px;
+      letter-spacing: 0.14em; text-transform: uppercase; color: #9ed0ff;
+    }
+
+    /* two tags over the featured card */
+    .sp-tree-tags {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-4);
+      /* above the halo, which bleeds up past the top of the card */
+      position: relative; z-index: 2;
+    }
+    .sp-tree-tags .sp-tree-answer { margin-bottom: 0; align-self: auto; }
+    /* the tag row spans the card, so Spark Studio sits on the right edge */
+    .sp-tree-card .sp-tree-tags { width: 100%; }
+    /* rainbow hairline on the Spark Studio tag, from the same palette */
+    .sp-tree-answer--spark {
+      color: var(--blue-1000); border: 1px solid transparent;
+      background:
+        linear-gradient(#fff, #fff) padding-box,
+        linear-gradient(90deg, #ff4d4d, #ffd93d, #43d17a, #34a0fe, #8b5cf6, #ff4dab) border-box;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .sp-tree-spark-rim::before,
+      .sp-tree-spark-glow::before { animation: none; }
+      .sp-tree-spark:hover { transform: none; }
+    }
+    .sp-tree-card .m { font-size: clamp(1.15rem, 1.8vw, 1.4rem); margin-bottom: var(--space-3); }
+    /* three lines of description in every card puts all three "You get"
+       rules on one line across the row */
+    .sp-tree-card .d { min-height: 4.5em; margin-bottom: var(--space-5); }
+    .sp-tree-card .g {
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--border);
+    }
+    @media (max-width: 900px) { .sp-tree-card .d { min-height: 0; } }
+    .sp-tree-card .g .gl { letter-spacing: 0.14em; font-size: 10px; margin-bottom: var(--space-2); }
+    @media (prefers-reduced-motion: reduce) { .sp-fly-node { transition: none; } }
+
+    /* ═══════════ ROUNDED CARDS (page-scoped) ═══════════
+       vizit-theme.css zeroes every --radius-* token with !important and
+       squares a fixed class list, so the radii here are literal px and
+       scoped to this page — spark-ai.html keeps the squared treatment. */
+    .sw,
+    .sp-card,
+    .sp-tree-card,
+    .sp-fly-node,
+    .sp-rec,
+    .sp-step-motif { border-radius: 14px; }
+    .sp-tree-answer,
+    .sp-rec .n { border-radius: 6px; }
+    .sp-fly-node .ic,
+    .sp-recs .sp-rec .ic,
+    .sw .ic,
+    .sp-card .ic { border-radius: 9px; }
+    .sp-tree-card, .sw { overflow: hidden; }
+
+    /* ═══════════ WHO IT'S FOR ═══════════
+       Centred heading over the row, on a cool grey band rather than the
+       warm editorial paper — the page's palette is blue, and the beige
+       read as a different site. */
+    .panel--paper { background: #f1f5f9; border-top-color: rgba(0,33,61,0.07); }
+    .sp-cards { gap: var(--space-5); }
+    .sp-card {
+      display: flex; flex-direction: column;
+      background: #fff; box-shadow: 0 1px 2px rgba(0,33,61,0.04);
+    }
+    .sp-card .ic {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 38px; height: 38px; margin-bottom: var(--space-4);
+      border: 1px solid var(--blue-100); background: var(--accent-soft);
+      color: var(--blue-600);
+    }
+    .sp-card .ic svg { width: 20px; height: 20px; display: block; }
+    .sp-card .t { margin-bottom: var(--space-3); font-weight: 600; }
+
     #flywheel { scroll-margin-top: 80px; }
     a { color: var(--accent); }
     a:hover { color: var(--blue-500); }
@@ -26,7 +448,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Vizit">
 <meta property="og:title" content="Spark Studio | Your PDP, Optimized. Done For You.">
-<meta property="og:description" content="No new headcount, no learning curve. Send us your content and Vizit-trained ecommerce designers hand back images built to convert, scored to prove it.">
+<meta property="og:description" content="No new headcount, no learning curve. Send us your content and Vizit-trained ecommerce designers hand back images built to convert.">
 <meta property="og:image" content="https://vizit.com/assets/og-cover.jpg">
 <meta property="og:image:width" content="1600">
 <meta property="og:image:height" content="1000">
@@ -52,125 +474,203 @@
 
 <vizit-nav data-current="spark-studio"></vizit-nav>
 
-<!-- PANEL 1 — HERO -->
-<section class="sp-hero" data-screen-label="01 Hero">
+<!-- PANEL 1 — HERO (dark, home-page hero motion) -->
+<section class="sp-hero sp-hero--dome" data-screen-label="01 Hero">
+  <!-- filled by js/spark-dome.js; decorative, so it stays out of the
+       accessibility tree -->
+  <div class="sp-hero-dome" data-spark-dome aria-hidden="true"></div>
   <div class="container">
-    <span class="sp-badge">Spark Studio</span>
-    <h1 class="display">Your PDP, optimized. Done for you.</h1>
-    <p class="subhead sp-lede">No new headcount. No learning curve. Send us your content — Vizit-trained ecommerce designers hand back images built to convert, scored to prove it.</p>
-    <div class="cta-row">
-      <a class="btn btn-primary btn-lg" href="demo.html">Opt in to Spark Studio <span class="arrow">→</span></a>
-      <a class="sp-link" href="#flywheel">See the flywheel <span class="arr">→</span></a>
+    <div class="sp-hero-copy">
+      <span class="sp-eyebrow">Spark Studio</span>
+      <h1 class="display">Your PDP, optimized.<br>Done for you.</h1>
+      <p class="subhead sp-lede">No new headcount. No learning curve. Send us your content — Vizit-trained ecommerce designers hand back images built to convert.</p>
+      <div class="cta-row">
+        <a class="btn btn-on-dark btn-lg" href="demo.html">Opt in to Spark Studio</a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- PANEL 2 — POSITIONING -->
-<div class="sp-pull" data-screen-label="02 Positioning">
+<!-- PANEL 2 — DECISION TREE -->
+<section class="panel sp-reveal sp-center-head" data-screen-label="02 Level of support">
   <div class="container">
-    <p>
-      <span class="dim">Agencies deliver opinions.</span>
-      <span class="punch">Spark Studio delivers scores.</span>
-    </p>
-  </div>
-</div>
+    <h2 class="display">Three ways to work with us.</h2>
+    <p class="sp-body">Pick the level of support that fits your team. Every path ends the same way — scored, publish-ready content.</p>
 
-<!-- PANEL 3 — THE FLYWHEEL -->
-<section class="panel sp-reveal" id="flywheel" data-screen-label="03 The flywheel">
+    <div class="sp-tree">
+      <div class="sp-tree-branches">
+        <div class="sp-tree-branch">
+          <div class="sp-tree-card">
+            <span class="sp-tree-answer">Your team</span>
+            <div class="m">Human-led creative</div>
+            <div class="d">Vizit delivers the insights and recommendations. Your internal team or agency executes the creative.</div>
+            <div class="g">Scores, Insight Maps, Spark Images, and Spark Ideas.</div>
+          </div>
+        </div>
+        <div class="sp-tree-branch">
+          <div class="sp-tree-spark">
+            <span class="sp-tree-spark-glow" aria-hidden="true"></span>
+            <span class="sp-tree-spark-rim" aria-hidden="true"></span>
+            <div class="sp-tree-card is-featured">
+              <div class="sp-tree-ribbon">
+                <span class="rn">Spark Studio</span>
+                <span class="ra">Together</span>
+              </div>
+              <div class="m">AI + human finishing</div>
+              <div class="d">Spark AI generates the recommendations and the images. Our designers handle optimizing conversion-ready content.</div>
+              <div class="g">Publish-ready assets and PDPs, finished to spec and on brand.</div>
+            </div>
+          </div>
+        </div>
+        <div class="sp-tree-branch">
+          <div class="sp-tree-card">
+            <span class="sp-tree-answer">Vizit</span>
+            <div class="m">Fully AI</div>
+            <div class="d">The complete Spark workflow, end to end — from diagnosis through image creation — run for you.</div>
+            <div class="g">Optimized content across your catalog, at Spark speed.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PANEL 3 — OPERATING MODEL -->
+<section class="panel sp-reveal sp-center-head" data-screen-label="03 Operating model">
   <div class="container">
-    <h2 class="display" style="max-width:20ch;">One loop. Content in, conversion out.</h2>
-    <p class="sp-body" style="margin-top:var(--space-5);">Every round through the flywheel makes the next one smarter — live results feed the intelligence behind your next set of images.</p>
+    <h2 class="display" style="max-width:34ch;">Three workflows.<br>Before the shelf, on it, and both.</h2>
+    <p class="sp-body">Most teams come to Spark Studio for the launches &mdash; new activations where the content has to be right on day one. It works just as well on the listings already live, and most accounts end up running both.</p>
+
+    <div class="sw-grid">
+
+      <article class="sw sw--new">
+        <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.4l1.7 4.5 4.5 1.7-4.5 1.7L12 15.8l-1.7-4.5L5.8 9.6l4.5-1.7z"/><path d="M18.4 15.6l.7 1.9 1.9.7-1.9.7-.7 1.9-.7-1.9-1.9-.7 1.9-.7z"/></svg></span>
+        <h3>New activations</h3>
+        <p class="sw-body">Net-new products and activations not yet on the digital shelf. Assets come straight from your PIM and DAM and get scored in collections, not on live PDPs.</p>
+        <div class="sw-who">
+          <span class="l">Who initiates</span>
+          <span class="a">Customer</span>
+        </div>
+      </article>
+
+      <article class="sw sw--live">
+        <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.6 20.4h16.8"/><path d="M6.8 20.4v-4.8"/><path d="M12 20.4V9.6"/><path d="M17.2 20.4V5.2"/></svg></span>
+        <h3>Existing PDPs</h3>
+        <p class="sw-body">Live listings already on the shelf, scored against the category winning right now. Spark finds the biggest-impact PDPs to optimize.</p>
+        <div class="sw-who">
+          <span class="l">Who initiates</span>
+          <span class="a">Vizit</span>
+        </div>
+      </article>
+
+      <article class="sw sw--both">
+        <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9.3" cy="12" r="5.6"/><circle cx="14.7" cy="12" r="5.6"/></svg></span>
+        <h3>Blended</h3>
+        <p class="sw-body">A mix of net-new content and existing PDPs, running in parallel for one account &mdash; where most teams land after the first round.</p>
+        <div class="sw-who">
+          <span class="l">Who initiates</span>
+          <span class="a">Mixed</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- PANEL 4 — THE FLYWHEEL -->
+<section class="panel sp-reveal sp-fly-panel" id="flywheel" data-screen-label="04 The flywheel">
+  <div class="container">
+    <h2 class="display">One loop.<br>Content in, conversion out.</h2>
+    <p class="sp-body">New activations, existing PDPs, or both — the work runs the same loop, and every round makes the next one smarter.</p>
 
     <!-- Desktop: the loop as a ring. Hidden under 900px in favour of the list below. -->
     <div class="sp-fly" aria-hidden="true">
       <svg class="sp-fly-ring" viewBox="0 0 100 100" fill="none">
         <defs>
-          <marker id="sp-arrowhead" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
-            <path d="M0,0 L6,3 L0,6 Z" fill="#34a0fe"/>
-          </marker>
+          <linearGradient id="sp-ring-grad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#7cc4ff"/>
+            <stop offset="55%" stop-color="#0174d9"/>
+            <stop offset="100%" stop-color="#4f9dff"/>
+          </linearGradient>
         </defs>
-        <g class="sp-fly-spin">
-          <circle cx="50" cy="50" r="42" stroke="#b3dbff" stroke-width="0.8" stroke-dasharray="2.5 2.5"/>
-          <path d="M 50 8 A 42 42 0 0 1 88 62" stroke="#34a0fe" stroke-width="1" marker-end="url(#sp-arrowhead)" opacity="0.9"/>
+        <!-- the track, the spokes out to each station, then the hub disc -->
+        <circle class="sp-fly-track" cx="50" cy="50" r="42" stroke="#dce9f7" stroke-width="0.6" stroke-dasharray="1.6 3.2"/>
+        <g class="sp-fly-spokes" stroke="#b9d7f2" stroke-width="0.55" stroke-dasharray="1.6 2.2">
+          <line x1="50.00" y1="27.40" x2="50.00" y2="9.40"/>
+          <line x1="71.49" y1="43.02" x2="88.61" y2="37.45"/>
+          <line x1="63.28" y1="68.28" x2="73.86" y2="82.85"/>
+          <line x1="36.72" y1="68.28" x2="26.14" y2="82.85"/>
+          <line x1="28.51" y1="43.02" x2="11.39" y2="37.45"/>
+        </g>
+        <circle class="sp-fly-inner" cx="50" cy="50" r="31" stroke="#d3e5f7" stroke-width="0.5" stroke-dasharray="0.9 3.4"/>
+        <circle class="sp-hub" cx="50" cy="50" r="21" fill="#ffffff" stroke="#e1eef9" stroke-width="0.6"/>
+        <!-- the ring the loop runs on: always closed, the gradient turning
+             slowly under it -->
+        <circle class="sp-fly-trail" cx="50" cy="50" r="42"
+                stroke="url(#sp-ring-grad)" stroke-width="1.1" stroke-linecap="round"/>
+        <!-- The comet: a head with a tail of arcs behind it, all inside one
+             group that turns at a constant rate. Keeping the tail in the
+             rotating group is what keeps it welded to the head — a dash
+             pattern on the ring would have to be phase-matched to the
+             rotation by hand.
+
+             The unpainted circle is load-bearing: it makes the group's own
+             bounding box the full ring, so the rotation lands on the ring
+             centre whether the browser resolves transform-origin against
+             the view-box or the fill-box. -->
+        <g class="sp-fly-arrow">
+          <circle cx="50" cy="50" r="42" fill="none" stroke="none"/>
+          <g fill="none" stroke="#34a0fe" stroke-linecap="round">
+            <path class="sp-fly-tail" d="M39.13 9.43 A 42 42 0 0 1 50.00 8.00" stroke-width="1.55" opacity="0.9"/>
+            <path class="sp-fly-tail" d="M26.51 15.18 A 42 42 0 0 1 39.13 9.43" stroke-width="1.35" opacity="0.66"/>
+            <path class="sp-fly-tail" d="M14.38 27.74 A 42 42 0 0 1 26.51 15.18" stroke-width="1.15" opacity="0.46"/>
+            <path class="sp-fly-tail" d="M8.00 50.00 A 42 42 0 0 1 14.38 27.74" stroke-width="0.95" opacity="0.28"/>
+            <path class="sp-fly-tail" d="M19.79 79.18 A 42 42 0 0 1 8.00 50.00" stroke-width="0.75" opacity="0.15"/>
+            <path class="sp-fly-tail" d="M58.73 91.08 A 42 42 0 0 1 19.79 79.18" stroke-width="0.6" opacity="0.07"/>
+          </g>
+          <circle class="sp-fly-head-glow" cx="50" cy="8" r="2.9" fill="rgba(52,160,254,0.30)"/>
+          <circle class="sp-fly-head" cx="50" cy="8" r="1.15" fill="#eaf6ff"/>
         </g>
       </svg>
-      <div class="sp-fly-node n1"><span class="n">01</span><div class="t">You send content</div><div class="b">The images or products you want optimized.</div></div>
-      <div class="sp-fly-node n2"><span class="n">02</span><div class="t">We connect it to Vizit</div><div class="b">Your content enters the platform.</div></div>
-      <div class="sp-fly-node n3"><span class="n">03</span><div class="t">Vizit analyzes</div><div class="b">Scores, Insight Maps, and category intelligence.</div></div>
-      <div class="sp-fly-node n4"><span class="n">04</span><div class="t">Designers create</div><div class="b">Spark AI and design tools, directed by experts.</div></div>
-      <div class="sp-fly-node n5"><span class="n">05</span><div class="t">You publish</div><div class="b">Optimized content goes live on Amazon.</div></div>
+      <div class="sp-fly-node n1"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2v10.4"/><path d="M8.4 6.8 12 3.2l3.6 3.6"/><path d="M3.6 13.6V18a2.4 2.4 0 0 0 2.4 2.4h12A2.4 2.4 0 0 0 20.4 18v-4.4"/></svg></span><span class="n">01</span><div class="t">The work comes in</div><div class="b">Launch assets from you, live PDPs we pull, or both.</div><div class="sp-fly-in"><span>New</span><span>Existing</span><span>Both</span></div></div>
+      <div class="sp-fly-node n2"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.6 14.4 14.4 9.6"/><path d="M11.2 6.6 13 4.8a3.9 3.9 0 0 1 5.5 5.5l-1.8 1.8"/><path d="M12.8 17.4 11 19.2a3.9 3.9 0 0 1-5.5-5.5l1.8-1.8"/></svg></span><span class="n">02</span><div class="t">We connect it to Vizit</div><div class="b">Either way it lands in the platform.</div></div>
+      <div class="sp-fly-node n3"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.6 20.4h16.8"/><path d="M6.8 20.4v-5.6"/><path d="M12 20.4V9.2"/><path d="M17.2 20.4V4.8"/></svg></span><span class="n">03</span><div class="t">Vizit analyzes</div><div class="b">Scores, Insight Maps, and category intelligence.</div></div>
+      <div class="sp-fly-node n4"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.9 20.1 8 19.2 18.3 8.9a2.4 2.4 0 0 0-3.4-3.4L4.6 15.8z"/><path d="M13.4 7 17 10.6"/></svg></span><span class="n">04</span><div class="t">Designers optimize</div><div class="b">Spark AI and design tools, directed by experts.</div></div>
+      <div class="sp-fly-node n5"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.2 9.2h17.6"/><path d="M5 9.2V6.6l1.4-2.2h11.2L19 6.6v2.6"/><path d="M4.9 9.2v10.1a1.1 1.1 0 0 0 1.1 1.1h12a1.1 1.1 0 0 0 1.1-1.1V9.2"/><path d="M9.4 20.4v-5.2h5.2v5.2"/></svg></span><span class="n">05</span><div class="t">You publish</div><div class="b">New listings launch optimized, live PDPs get refreshed.</div></div>
       <div class="sp-fly-center">
-        <div class="t">Results feed the next round.</div>
+        <div class="t">The Spark Studio workflow</div>
       </div>
     </div>
 
     <!-- Mobile: the same loop as an ordered list. This is also the accessible
          copy of the ring above, which is aria-hidden. -->
     <div class="sp-fly-list sp-recs">
-      <div class="sp-rec"><span class="n">1</span><div><strong>You send content</strong><span>The images or products you want optimized.</span></div></div>
-      <div class="sp-rec"><span class="n">2</span><div><strong>We connect it to Vizit</strong><span>Your content enters the platform.</span></div></div>
-      <div class="sp-rec"><span class="n">3</span><div><strong>Vizit analyzes</strong><span>Scores, Insight Maps, and category intelligence.</span></div></div>
-      <div class="sp-rec"><span class="n">4</span><div><strong>Designers create</strong><span>Spark AI and design tools, directed by experts.</span></div></div>
-      <div class="sp-rec"><span class="n">5</span><div><strong>You publish</strong><span>Optimized content goes live on Amazon — and results feed the next round.</span></div></div>
-    </div>
-  </div>
-</section>
-
-<hr class="sp-divider">
-
-<!-- PANEL 4 — DECISION TREE -->
-<section class="panel sp-reveal" data-screen-label="04 Level of support">
-  <div class="container">
-    <h2 class="display" style="max-width:18ch;">Three ways to work with us.</h2>
-
-    <div class="sp-tree">
-      <div class="sp-tree-q">Who makes the final asset?</div>
-      <div class="sp-tree-stem" aria-hidden="true"></div>
-      <div class="sp-tree-branches">
-        <div class="sp-tree-branch">
-          <span class="sp-tree-answer">Your team</span>
-          <div class="sp-tree-card">
-            <div class="m">Human-led creative</div>
-            <div class="d">Vizit delivers the insights and recommendations. Your internal team or agency executes the creative.</div>
-            <div class="g"><span class="gl">You get</span>Scores, Insight Maps, Spark Ideas, and a packaged creative brief.</div>
-          </div>
-        </div>
-        <div class="sp-tree-branch">
-          <span class="sp-tree-answer">Together</span>
-          <div class="sp-tree-card is-featured">
-            <div class="m">AI + human finishing</div>
-            <div class="d">Spark AI generates the recommendations and images. Our designers handle final brand and retailer requirements.</div>
-            <div class="g"><span class="gl">You get</span>Publish-ready assets, finished to spec, scores attached.</div>
-          </div>
-        </div>
-        <div class="sp-tree-branch">
-          <span class="sp-tree-answer">Vizit</span>
-          <div class="sp-tree-card">
-            <div class="m">Fully AI</div>
-            <div class="d">The complete Spark workflow, end to end — from diagnosis through image creation — run for you.</div>
-            <div class="g"><span class="gl">You get</span>Optimized content across your catalog, at Spark speed.</div>
-          </div>
-        </div>
-      </div>
-      <div class="sp-tree-note">Not sure? Start anywhere — you can change levels any time.</div>
+      <div class="sp-rec"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2v10.4"/><path d="M8.4 6.8 12 3.2l3.6 3.6"/><path d="M3.6 13.6V18a2.4 2.4 0 0 0 2.4 2.4h12A2.4 2.4 0 0 0 20.4 18v-4.4"/></svg></span><div><strong>The work comes in</strong><span>Launch assets from you, live PDPs we pull, or both &mdash; new activations, existing PDPs, or a mix.</span></div></div>
+      <div class="sp-rec"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.6 14.4 14.4 9.6"/><path d="M11.2 6.6 13 4.8a3.9 3.9 0 0 1 5.5 5.5l-1.8 1.8"/><path d="M12.8 17.4 11 19.2a3.9 3.9 0 0 1-5.5-5.5l1.8-1.8"/></svg></span><div><strong>We connect it to Vizit</strong><span>Either way it lands in the platform.</span></div></div>
+      <div class="sp-rec"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.6 20.4h16.8"/><path d="M6.8 20.4v-5.6"/><path d="M12 20.4V9.2"/><path d="M17.2 20.4V4.8"/></svg></span><div><strong>Vizit analyzes</strong><span>Scores, Insight Maps, and category intelligence.</span></div></div>
+      <div class="sp-rec"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.9 20.1 8 19.2 18.3 8.9a2.4 2.4 0 0 0-3.4-3.4L4.6 15.8z"/><path d="M13.4 7 17 10.6"/></svg></span><div><strong>Designers optimize</strong><span>Spark AI and design tools, directed by experts.</span></div></div>
+      <div class="sp-rec"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.2 9.2h17.6"/><path d="M5 9.2V6.6l1.4-2.2h11.2L19 6.6v2.6"/><path d="M4.9 9.2v10.1a1.1 1.1 0 0 0 1.1 1.1h12a1.1 1.1 0 0 0 1.1-1.1V9.2"/><path d="M9.4 20.4v-5.2h5.2v5.2"/></svg></span><div><strong>You publish</strong><span>New listings launch optimized, live PDPs get refreshed — and results feed the next round.</span></div></div>
     </div>
   </div>
 </section>
 
 <!-- PANEL 5 — WHO IT'S FOR -->
-<section class="panel panel--paper sp-reveal" data-screen-label="05 Who it's for">
+<section class="panel panel--paper sp-reveal sp-center-head" data-screen-label="05 Who it's for">
   <div class="container">
-    <h2 class="display" style="max-width:18ch;">Need the work done, not another tool.</h2>
+    <h2 class="display">Need the work done. Not another tool. Built for teams that&hellip;</h2>
     <div class="sp-cards">
       <div class="sp-card">
+        <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.4"/><path d="M12 7.4V12l3.3 2.1"/></svg></span>
         <div class="t">Are stretched thin</div>
         <div class="b">Get Vizit-optimized PDP content without adding headcount or briefing an agency.</div>
       </div>
       <div class="sp-card">
+        <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.4 3 5.6 13.4h5.2L10.2 21l7.8-10.4h-5.2z"/></svg></span>
         <div class="t">Want better PDPs, faster</div>
         <div class="b">Skip the learning curve — results arrive while your team stays focused.</div>
       </div>
       <div class="sp-card">
+        <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.6 12S6 5.9 12 5.9 21.4 12 21.4 12 18 18.1 12 18.1 2.6 12 2.6 12z"/><circle cx="12" cy="12" r="2.9"/></svg></span>
         <div class="t">Want to see how Vizit does it</div>
         <div class="b">Watch our designers run the full optimization workflow on your own products.</div>
       </div>
@@ -178,53 +678,26 @@
   </div>
 </section>
 
-<!-- PANEL 6 — THE DELIVERABLE -->
-<section class="panel sp-reveal" data-screen-label="06 The deliverable">
+<!-- PANEL 6 — FINAL CTA -->
+<section class="panel sp-reveal" data-screen-label="06 Final CTA">
   <div class="container">
-    <div class="sp-feature">
-      <div class="sp-feature-copy">
-        <h2 class="display">Every image comes back with a receipt.</h2>
-        <p class="sp-body" style="margin-top:var(--space-5);">Optimized against your category and your audience, with its Vizit score attached — you know it's stronger before it goes live.</p>
+    <div class="sp-band-dark sp-band-card">
+      <!-- filled by js/spark-dome.js — the hero's field, quartered into
+           this card's bottom-right corner -->
+      <div class="sp-band-dome" data-spark-dome="corner" aria-hidden="true"></div>
+      <div class="sp-band-copy">
+        <h2 class="display on-dark">Opt in to Spark Studio<br>and see what your content can do.</h2>
       </div>
-      <div class="sp-feature-visual">
-        <div class="sp-fanout" style="grid-template-columns:1fr auto 1fr;">
-          <!-- Both screenshots carry their own score readout along the bottom
-               edge, so the Before/After labels sit above the image rather than
-               on it — an overlay would cover the very number that's the point. -->
-          <figure class="sp-ba">
-            <figcaption class="sp-ba-label">Before</figcaption>
-            <div class="sp-shot">
-              <img loading="lazy" decoding="async" src="assets/img/gen-card-v2.webp" alt="The original product image, scored 13 out of 100 before optimization">
-            </div>
-          </figure>
-          <div class="sp-arrow" aria-hidden="true">→</div>
-          <figure class="sp-ba">
-            <figcaption class="sp-ba-label is-after">After</figcaption>
-            <div class="sp-shot is-best">
-              <img loading="lazy" decoding="async" src="assets/img/gen-2-v2.webp" alt="The same product image after Spark Studio, scored 98 out of 100">
-            </div>
-          </figure>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PANEL 7 — FINAL CTA -->
-<section class="panel sp-reveal" data-screen-label="07 Final CTA">
-  <div class="container">
-    <div class="sp-band-dark">
-      <h2 class="display on-dark" style="max-width:16ch;">Send us your first set.</h2>
-      <p class="sp-lede">Opt in to Spark Studio and see what your content can do.</p>
       <div class="cta-row">
-        <a class="btn btn-on-dark btn-lg" href="demo.html">Opt in to Spark Studio <span class="arrow">→</span></a>
-        <a class="sp-link" style="color:rgba(255,255,255,0.75);" href="spark-ai.html">Explore Spark AI <span class="arr">→</span></a>
+        <a class="btn btn-on-dark btn-lg" href="demo.html">Opt in to Spark Studio</a>
+        <a class="btn btn-outline-dark btn-lg" href="spark-ai.html">Explore Spark AI <span class="arrow">→</span></a>
       </div>
     </div>
   </div>
 </section>
 
-<vizit-footer></vizit-footer>
+<vizit-footer data-cta="off"></vizit-footer>
+
 
 <script src="js/spark-motion.js" defer></script>
 

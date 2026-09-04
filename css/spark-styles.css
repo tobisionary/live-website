@@ -33,8 +33,91 @@
 .sp-hero .sp-lede { margin-top: var(--space-5); max-width: 54ch; }
 .sp-hero .cta-row { margin-top: var(--space-7); display: flex; gap: var(--space-3); flex-wrap: wrap; align-items: center; }
 
+/* ── dark hero (shared by spark-ai.html + spark-studio.html) ──
+   ═══════════ DARK HERO — ported from the home page hero ═══════════
+   Same three moving parts index.html runs: the black field with two
+   blue radials (.dark-flow), the pair of pulsing glow rings, and the
+   blue gradient sweeping across the second headline line. The global
+   nav is already dark (vizit-theme.css), so the hero reads as one
+   continuous band with it — no transparent-nav override needed. */
+.sp-hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(110% 60% at 50% -5%, rgba(1,116,217,0.16), transparent 60%),
+    radial-gradient(80% 50% at 92% 78%, rgba(1,116,217,0.09), transparent 60%),
+    #000000;
+  padding: var(--space-9) 0 var(--space-9);
+}
+/* dot grid, masked to the upper right as on the home page */
+.sp-hero::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(circle at 1px 1px, rgba(128,195,254,0.18) 1px, transparent 1.4px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(60% 60% at 80% 20%, black, transparent 70%);
+  mask-image: radial-gradient(60% 60% at 80% 20%, black, transparent 70%);
+  opacity: 0.55;
+}
+.sp-hero > .container { position: relative; z-index: 2; }
+
+/* the two pulsing rings */
+.sp-hero-ring {
+  position: absolute; z-index: 1; pointer-events: none;
+  width: 62vw; aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle, transparent 54%, rgba(1,116,217,.15) 62%, rgba(30,144,255,.8) 71%, rgba(120,190,255,1) 74%, rgba(30,144,255,.75) 77%, rgba(1,116,217,.15) 86%, transparent 92%);
+  filter: blur(14px); opacity: 0;
+  animation: spRingPulse 5s ease-in-out infinite;
+}
+.sp-hero-ring.tl { top: 0; left: 0; transform: translate(-55%, -55%); }
+.sp-hero-ring.br { top: 50%; right: 0; transform: translate(55%, -50%); animation-delay: -2.5s; }
+@keyframes spRingPulse { 0%, 100% { opacity: 0; } 35%, 65% { opacity: 1; } }
+
+/* headline: white Inter, with the blue sweep on the second line */
+.sp-hero h1.display {
+  color: #ffffff;
+  font-family: 'Inter', var(--font-sans);
+  font-weight: 600;
+  line-height: 1.02;
+  max-width: 20ch;
+}
+.sp-hero .sp-flow {
+  background: linear-gradient(90deg, #7cc4ff 0%, #4f9dff 25%, #3b7bff 50%, #4f9dff 75%, #7cc4ff 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  filter: drop-shadow(0 0 22px rgba(80,157,255,.55)) drop-shadow(0 0 44px rgba(59,123,255,.35));
+  animation: spHeroFlow 6s linear infinite;
+}
+@keyframes spHeroFlow { from { background-position: 0% 50%; } to { background-position: -200% 50%; } }
+
+/* hero copy + chrome on dark */
+.sp-hero .sp-lede { color: rgba(214,236,255,0.82); }
+.sp-hero .sp-badge {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(128,195,254,0.28);
+  color: #b3dbff;
+}
+.sp-hero .sp-badge::before { background: var(--blue-300); }
+/* the hero already ends in a hard edge — no hairline under it */
+.sp-hero + .panel, .sp-hero + .sp-pull { border-top: none; }
+@media (prefers-reduced-motion: reduce) {
+  .sp-hero-ring { animation: none; opacity: 0.8; }
+  .sp-hero .sp-flow { animation: none; }
+}
+/* The CTA colour itself is set per page (vizit-theme's parity block owns
+   .btn-primary / .btn-on-dark); the hero only adds the glow around it. */
+.sp-hero .btn { box-shadow: 0 0 36px rgba(1,116,217,0.45), 0 10px 28px -10px rgba(0,0,0,0.55); }
+
 .sp-lede { font-size: 1.125rem; line-height: 1.55; color: var(--color-600); }
 .sp-body { font-size: 1.0625rem; line-height: 1.6; color: var(--color-600); max-width: 52ch; }
+
+/* ── centred section head + subhead (spark-ai.html + spark-studio.html) ── */
+.sp-center-head > .container > .display,
+.sp-center-head > .container > .sp-body {
+  text-align: center; margin-left: auto; margin-right: auto;
+}
+.sp-center-head > .container > .display { max-width: 26ch; }
+.sp-center-head > .container > .sp-body { margin-top: var(--space-5); max-width: 60ch; }
 .panel--dark .sp-body, .sp-band-dark .sp-body { color: rgba(255,255,255,0.78); }
 
 .sp-link {
@@ -61,15 +144,34 @@
 .sp-pull .dim { display: block; color: var(--color-400); }
 .sp-pull .punch { display: block; color: var(--blue-1000); }
 
-/* ── two-up feature split ── */
-.sp-feature { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8); align-items: center; }
-.sp-feature > * { min-width: 0; }
-.sp-feature.flip .sp-feature-copy { order: 2; }
-.sp-feature.flip .sp-feature-visual { order: 1; }
+/* ── positioning pull-quote, centred: one column, no artwork ──
+   Panel-depth padding rather than the band's usual half of it: with no
+   artwork beside it the quote is the whole section, and it wants the same
+   air the panels above and below it have.
+
+   No measure at all, so each of the two sentences takes a line of its
+   own — they are separate blocks already. The type is scaled off vw, so
+   the lines shrink with the viewport and keep to one line each down to
+   the clamp's floor, below which they wrap, which is right on a phone. */
+.sp-pull--center { padding: var(--space-10) 0; }
+.sp-pull--center p {
+  max-width: none; margin-left: auto; margin-right: auto; text-align: center;
+}
+/* the setup and the punch are one thought each — a gap, not a line break */
+.sp-pull--center .punch { margin-top: var(--space-4); }
+
+/* ── positioning pull-quote, split: copy left, artwork right ──
+   Shared by spark-ai.html + spark-studio.html. */
+.sp-pull--split .container {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: var(--space-8); align-items: center;
+}
+.sp-pull--split .container > * { min-width: 0; }
+.sp-pull--split p { max-width: 22ch; }
+.sp-pos-visual { border: 1px solid var(--border); background: var(--surface); aspect-ratio: 4 / 3; }
+.sp-pos-visual image-slot { display: block; width: 100%; height: 100%; }
 @media (max-width: 900px) {
-  .sp-feature, .sp-feature.flip { grid-template-columns: 1fr; gap: var(--space-6); }
-  .sp-feature.flip .sp-feature-copy { order: 1; }
-  .sp-feature.flip .sp-feature-visual { order: 2; }
+  .sp-pull--split .container { grid-template-columns: 1fr; gap: var(--space-6); }
 }
 
 /* ── image-type marquee ── */
@@ -130,35 +232,83 @@
 .sp-rec span { color: var(--color-600); font-size: var(--text-sm); line-height: 1.5; }
 
 /* ── workflow strip ── */
-.sp-wf { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--space-3); margin-top: var(--space-7); }
+.sp-wf { display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: var(--space-4); margin-top: var(--space-8); }
+/* No connectors between the steps: the numbers already read as a
+   sequence, and the arrows crowded the cards once the strip came down to
+   four across. */
 .sp-wf-step {
-  position: relative; padding: var(--space-4); border: 1px solid var(--border); background: #fff;
+  position: relative; display: flex; flex-direction: column;
+  padding: var(--space-5); border: 1px solid var(--border); background: #fff;
   transition: transform 200ms var(--ease, ease), box-shadow 200ms var(--ease, ease), border-color 200ms;
 }
 .sp-wf-step:hover { transform: translateY(-2px); border-color: var(--blue-200); box-shadow: 0 10px 26px rgba(0,33,61,0.08); }
-.sp-wf-step .n { display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; color: var(--blue-600); margin-bottom: var(--space-2); }
-.sp-wf-step .t { display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; font-weight: 500; font-size: var(--text-sm); color: var(--blue-1000); margin-bottom: 4px; }
+.sp-wf-step .n { display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; color: var(--blue-600); margin-bottom: var(--space-4); }
+.sp-wf-step .t { display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; font-weight: 500; font-size: var(--text-sm); color: var(--blue-1000); margin-bottom: var(--space-2); }
 .sp-wf-step .b { color: var(--color-600); font-size: var(--text-xs); line-height: 1.5; }
-.sp-wf-step:not(:last-child)::after {
-  content: '→'; position: absolute; right: -14px; top: 50%; transform: translateY(-50%);
-  font-family: var(--font-mono); color: var(--blue-300); font-size: var(--text-sm); z-index: 1;
-}
+/* A floor of two lines under every step, so the four cards run one even
+   rhythm instead of four different ones — only above the stacking width,
+   where they sit side by side and the difference shows. */
+@media (min-width: 901px) { .sp-wf-step .b { min-height: 3em; } }
 .sp-new {
   font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em;
   color: var(--blue-600); background: var(--accent-soft); border: 1px solid var(--blue-100); padding: 0 var(--space-2);
 }
+/* On a workflow card the tag rides the top right corner rather than the
+   title line — the titles then all start at the same place whether or not
+   a step is new, and the row of numbers reads clean down the left. */
+.sp-wf-step > .sp-new,
+.sp-wf-out > .sp-new {
+  position: absolute; top: var(--space-5); right: var(--space-5);
+  line-height: 1.5;
+}
+.sp-wf-out > .sp-new { top: var(--space-6); right: var(--space-6); }
 .sp-wf-split { display: grid; grid-template-columns: auto 1fr 1fr; gap: var(--space-4); margin-top: var(--space-5); align-items: stretch; }
 .sp-wf-split-label {
   font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em;
   color: var(--muted); writing-mode: vertical-rl; transform: rotate(180deg);
   text-align: center; border-right: 1px dashed var(--blue-100); padding-left: var(--space-3);
 }
-.sp-wf-out { padding: var(--space-5); border: 1px solid var(--blue-100); background: var(--accent-soft); }
+/* One outcome instead of a labelled pair. It runs the full width of the
+   strip above it and sits one grid gap below it, so the whole section is
+   on a single even rhythm and both tiers share the same left and right
+   edges — a narrower card centred under four columns lines up with
+   nothing. The blue fill is what marks it as the outcome; it does not
+   need distance as well. */
+.sp-wf-split--solo { grid-template-columns: 1fr; margin-top: var(--space-4); }
+/* The outcome card is the one dark thing in a white section, so it reads
+   as the end of the run rather than a fifth step. The glow is centred
+   behind the copy, and its alpha is set from the contrast it has to
+   leave: at 0.44 the brightest point of the field composites to about
+   rgb(3,57,106), which is 11.8:1 under the white title and 6.8:1 under
+   the deck — both clear of AA with room to spare. */
+.sp-wf-split--solo .sp-wf-out {
+  position: relative; overflow: hidden; text-align: center;
+  background: #05080f; border-color: rgba(128,195,254,0.20);
+}
+.sp-wf-split--solo .sp-wf-out::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(48% 165% at 50% 50%, rgba(1,116,217,0.44), transparent 68%),
+    radial-gradient(90% 130% at 50% 132%, rgba(52,160,254,0.22), transparent 60%);
+}
+.sp-wf-split--solo .sp-wf-out > * { position: relative; z-index: 1; }
+.sp-wf-split--solo .sp-wf-out .t { justify-content: center; color: #ffffff; }
+/* one line of deck, centred, no measure to wrap it */
+.sp-wf-split--solo .sp-wf-out .b {
+  max-width: none; color: rgba(214,236,255,0.82);
+}
+/* The tag is the one child that must not be lifted into the flow by the
+   z-index rule above — it is restated absolute here, where the selector
+   is specific enough to win it back. */
+.sp-wf-split--solo .sp-wf-out > .sp-new {
+  position: absolute; z-index: 1;
+  background: rgba(255,255,255,0.07); border-color: rgba(128,195,254,0.34); color: #b3dbff;
+}
+.sp-wf-out { position: relative; padding: var(--space-6); border: 1px solid var(--blue-100); background: var(--accent-soft); }
 .sp-wf-out .t { display: flex; align-items: center; gap: var(--space-2); font-family: var(--font-display); font-size: var(--text-md); color: var(--blue-1000); margin-bottom: var(--space-2); }
 .sp-wf-out .b { color: var(--blue-700); font-size: var(--text-sm); line-height: 1.5; }
 @media (max-width: 900px) {
-  .sp-wf { grid-template-columns: 1fr; gap: var(--space-5); }
-  .sp-wf-step:not(:last-child)::after { content: '↓'; right: auto; left: 50%; top: auto; bottom: -18px; transform: translateX(-50%); }
+  .sp-wf { grid-template-columns: 1fr; gap: var(--space-4); }
   .sp-wf-split { grid-template-columns: 1fr; }
   .sp-wf-split-label { writing-mode: horizontal-tb; transform: none; border-right: none; border-bottom: 1px dashed var(--blue-100); padding: 0 0 var(--space-2); }
 }
@@ -195,8 +345,6 @@
 .sp-fly-node.n5 { left: 9%; top: 38%; }
 .sp-fly-center { position: absolute; left: 50%; top: 52%; transform: translate(-50%, -50%); text-align: center; max-width: 190px; }
 .sp-fly-center .t { font-family: var(--font-display); font-size: var(--text-lg); line-height: 1.15; color: var(--blue-1000); }
-.sp-fly-spin { animation: sp-spin 60s linear infinite; transform-origin: 50% 50%; transform-box: view-box; }
-@keyframes sp-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 .sp-fly-list { display: none; }
 @media (max-width: 900px) {
   .sp-fly { display: none; }
@@ -254,26 +402,283 @@
 /* ── motion: scroll reveal ── */
 .sp-reveal { opacity: 0; transform: translateY(24px); transition: opacity 700ms var(--ease, ease), transform 700ms var(--ease, ease); }
 .sp-reveal.in { opacity: 1; transform: none; }
-.sp-fly .sp-fly-node { opacity: 0; transform: translate(-50%, -40%); }
-.sp-fly.in .sp-fly-node { opacity: 1; transform: translate(-50%, -50%); transition: opacity 600ms var(--ease, ease), transform 600ms var(--ease, ease); }
-.sp-fly.in .sp-fly-node.n1 { transition-delay: 0ms; }
-.sp-fly.in .sp-fly-node.n2 { transition-delay: 140ms; }
-.sp-fly.in .sp-fly-node.n3 { transition-delay: 280ms; }
-.sp-fly.in .sp-fly-node.n4 { transition-delay: 420ms; }
-.sp-fly.in .sp-fly-node.n5 { transition-delay: 560ms; }
-.sp-fly .sp-fly-center { opacity: 0; transition: opacity 800ms var(--ease, ease) 700ms; }
-.sp-fly.in .sp-fly-center { opacity: 1; }
+.sp-fly {
+  /* One clock for the whole loop. The comet turns at a constant rate —
+     no station-to-station stepping — and every station's flash is keyed
+     off the same period, so the walkthrough and the orbit can never
+     drift apart. Retiming the loop is a one-value change here. */
+  --sp-fly-orb: 11s;
+}
+
+/* stations arrive in a quick stagger on reveal */
+.sp-fly .sp-fly-node { opacity: 0; }
+.sp-fly.in .sp-fly-node {
+  opacity: 1;
+  /* `backwards`, not `forwards`: the node holds the first keyframe through
+     its delay, then hands the transform back to the stylesheet so the
+     hover lift still works once the walkthrough is over.
+
+     The flash is a second animation rather than part of the pop, and it
+     touches only border and shadow — an animation that also drove
+     transform would outrank the pop's and swallow it. */
+  animation: spFlyPop 620ms cubic-bezier(.22,.9,.28,1) backwards,
+             spFlyPass var(--sp-fly-orb) linear infinite;
+}
+/* pop delay, then the flash offset: station n sits n/5 of a lap round the
+   ring, which is exactly when the comet reaches it */
+.sp-fly.in .sp-fly-node.n1 { animation-delay: 60ms,  calc(var(--sp-fly-orb) * 0); }
+.sp-fly.in .sp-fly-node.n2 { animation-delay: 140ms, calc(var(--sp-fly-orb) * 0.2); }
+.sp-fly.in .sp-fly-node.n3 { animation-delay: 220ms, calc(var(--sp-fly-orb) * 0.4); }
+.sp-fly.in .sp-fly-node.n4 { animation-delay: 300ms, calc(var(--sp-fly-orb) * 0.6); }
+.sp-fly.in .sp-fly-node.n5 { animation-delay: 380ms, calc(var(--sp-fly-orb) * 0.8); }
+@keyframes spFlyPop {
+  0%   { opacity: 0; transform: translate(-50%, -44%) scale(0.88); }
+  62%  { opacity: 1; transform: translate(-50%, -50%) scale(1.025); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+/* the station lights as the comet passes, then settles back */
+@keyframes spFlyPass {
+  0%   { border-color: var(--blue-300); box-shadow: 0 0 0 1px rgba(52,160,254,0.5), 0 16px 38px -12px rgba(1,116,217,0.5); }
+  16%  { border-color: var(--border); box-shadow: 0 10px 26px rgba(0,33,61,0.07); }
+  100% { border-color: var(--border); box-shadow: 0 10px 26px rgba(0,33,61,0.07); }
+}
+
+/* the ring the comet runs on. It stays closed — the loop is always
+   running, so there is nothing to draw station by station. */
+.sp-fly-trail { opacity: 0; }
+.sp-fly.in .sp-fly-trail { opacity: 1; transition: opacity 900ms var(--ease, ease) 120ms; }
+
+/* the comet: head, glow and tail in one group, turning at a constant
+   rate. It keeps orbiting for as long as the section is on screen — it
+   is a flywheel. */
+.sp-fly-arrow {
+  opacity: 0;
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+}
+.sp-fly.in .sp-fly-arrow {
+  opacity: 1;
+  transition: opacity 700ms var(--ease, ease) 200ms;
+  animation: spFlyOrbit var(--sp-fly-orb) linear infinite;
+}
+@keyframes spFlyOrbit { to { transform: rotate(360deg); } }
+
+/* the hub label lands once the loop has closed */
+.sp-fly .sp-fly-center { opacity: 0; }
+.sp-fly.in .sp-fly-center {
+  opacity: 1;
+  transition: opacity 700ms var(--ease, ease) calc(var(--sp-fly-dur) * 0.88);
+}
 .sp-pull .punch { opacity: 0; transform: translateY(12px); transition: opacity 700ms var(--ease, ease) 250ms, transform 700ms var(--ease, ease) 250ms; }
 .sp-pull.in .punch { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
-  .sp-reveal, .sp-pull .punch, .sp-fly .sp-fly-node, .sp-fly .sp-fly-center { opacity: 1 !important; transform: none !important; transition: none !important; }
-  .sp-marquee-track, .sp-fly-spin { animation: none !important; }
+  .sp-reveal, .sp-pull .punch, .sp-fly .sp-fly-center { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .sp-fly .sp-fly-node {
+    opacity: 1 !important; transition: none !important; animation: none !important;
+    transform: translate(-50%, -50%) !important;
+  }
+  .sp-marquee-track, .sp-fly-arrow { animation: none !important; }
+  .sp-fly-arrow { opacity: 1 !important; }
+  .sp-fly-trail { opacity: 1 !important; transition: none !important; }
 }
 
 @media print {
   vizit-nav, vizit-footer { display: none !important; }
-  .sp-reveal, .sp-pull .punch, .sp-fly .sp-fly-node, .sp-fly .sp-fly-center { opacity: 1 !important; transform: none !important; }
+  .sp-reveal, .sp-pull .punch, .sp-fly .sp-fly-center { opacity: 1 !important; transform: none !important; }
+  .sp-fly .sp-fly-node { opacity: 1 !important; transform: translate(-50%, -50%) !important; animation: none !important; }
+  .sp-fly-trail { opacity: 1 !important; }
   .sp-band-dark { background: #fff !important; color: var(--blue-1000) !important; }
   .sp-band-dark * { color: var(--blue-1000) !important; }
+}
+
+/* ════════════════════════════════════════════════════════════
+   CENTRED DOME HERO + CLOSING CARD
+   Shared by spark-studio.html and spark-ai.html. Both pages open on
+   the same hero — centred copy over a field of tilted discs — and
+   close on the same black card, so the treatment lives here rather
+   than in either page's own style block.
+   ════════════════════════════════════════════════════════════ */
+
+/* ═══════════ HERO ═══════════
+   Centred copy over a wide dome of discs anchored to the bottom edge.
+   js/spark-dome.js lays the field out and hands every disc its hue,
+   size and phase; the tilt, the light sweep and the flip are here.
+
+   Every disc tips the same way — one field of coins caught at one
+   angle, no per-disc wander. The motion is the sweep instead: a
+   bright band travelling round the dome, which is one keyframe rule
+   plus a per-disc delay set from the disc's angle.
+
+   The copy stacked over the field takes pointer events for its badge
+   and button; the discs take none at all, because the cursor is
+   tracked on the hero itself. */
+.sp-hero { text-align: center; }
+/* Room under the copy for the field to rise into. Only where there is a
+   field: spark-ai.html runs the same centred copy over the home page's
+   plain dark flow, and would otherwise carry 400px of empty floor. */
+.sp-hero--dome { padding-bottom: clamp(200px, 27vw, 400px); }
+/* the page name reads as an eyebrow over the headline, not a chip */
+.sp-eyebrow {
+  display: block; font-family: var(--font-mono);
+  font-size: clamp(0.9rem, 1.1vw, 1.05rem);
+  letter-spacing: 0.22em; text-transform: uppercase; color: #ffffff;
+}
+/* the field tracks the cursor across the whole hero, so the container
+   over it has to let the pointer through — the copy takes it back for its
+   own eyebrow and button */
+.sp-hero--dome > .container { pointer-events: none; }
+.sp-hero-copy { pointer-events: auto; max-width: 860px; margin: 0 auto; }
+.sp-hero h1.display { max-width: none; }
+.sp-hero .sp-lede { margin-left: auto; margin-right: auto; }
+.sp-hero .cta-row { justify-content: center; }
+
+.sp-hero-dome {
+  position: absolute; z-index: 1; bottom: 8px; left: 50%; translate: -50% 0;
+  width: min(104vw, 1480px); aspect-ratio: 2.7 / 1;
+  pointer-events: none;
+}
+/* the bloom the discs sit in */
+.sp-hero-dome::before {
+  content: ''; position: absolute; left: 50%; bottom: -34%;
+  width: 76%; aspect-ratio: 1.6; translate: -50% 0;
+  background: radial-gradient(ellipse at 50% 62%,
+    rgba(52,160,254,0.22), rgba(1,116,217,0.12) 46%, transparent 70%);
+  filter: blur(34px);
+}
+/* holds the centred copy legible over the crown of the field. Above
+   the discs, but pointer events pass straight through it. */
+.sp-hero-dome::after {
+  content: ''; position: absolute; inset: -6% 0 0; z-index: 2;
+  background: linear-gradient(180deg, #000 0%, rgba(0,0,0,0.72) 15%, transparent 46%);
+}
+
+.dm-dot {
+  position: absolute; translate: -50% -50%;
+  width: var(--sz); height: var(--sz);
+  opacity: var(--o, 1); border-radius: 50%;
+  /* The shared tilt, as a flat scaleY rather than a rotateX with a
+     perspective: the same ellipse, and it keeps a few hundred discs
+     out of 3D rendering contexts entirely. The scale on top of it is
+     the cursor's lift. */
+  transform: scaleY(0.78) scale(calc(1 + var(--e, 0) * 0.3));
+  /* and the bloom it brushes on */
+  box-shadow: 0 0 calc(var(--e, 0) * 20px) calc(var(--e, 0) * 5px)
+              rgba(206,240,255, calc(var(--e, 0) * 0.55));
+  transition: transform 220ms ease-out, box-shadow 240ms ease-out;
+}
+/* --e (0 → 1) is the disc's energy: the script brushes it on from the
+   cursor's path and lets it decay, so the lit discs trail behind the
+   pointer and settle back late — a stroke of light, not a spotlight. */
+.dm-i {
+  display: block; width: 100%; height: 100%; border-radius: 50%;
+  background-color: hsl(var(--h) 82% calc(var(--l) * 1%));
+  /* lit discs go to near-white; the line above is the fallback for
+     engines without color-mix */
+  background-color: color-mix(in srgb,
+    hsl(var(--h) 82% calc(var(--l) * 1%)),
+    #f2fbff calc(var(--e, 0) * 100%));
+  box-shadow: inset 0 0 0 1px hsl(var(--h) 55% 12% / 0.7);
+  transition: background-color 220ms ease-out;
+  /* The sweep: a bright band travelling round the dome, each disc's
+     delay being its own angle. It moves opacity rather than colour, so
+     the field rides the compositor instead of repainting every disc on
+     every frame. */
+  animation: dm-sweep 7s linear var(--sw, 0s) infinite;
+}
+@keyframes dm-sweep {
+  0%, 100% { opacity: 1; }
+  46%      { opacity: 0.66; }
+}
+/* the script marks a field live only while it is on screen */
+.sp-hero-dome:not(.is-live) .dm-i,
+.sp-band-dome:not(.is-live) .dm-i { animation-play-state: paused; }
+
+/* a rounder dome on narrow screens — 2.7:1 leaves nothing of it */
+@media (max-width: 760px) {
+  .sp-hero-dome { width: min(112vw, 620px); aspect-ratio: 1.9 / 1; }
+  .sp-hero--dome { padding-bottom: clamp(170px, 44vw, 260px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dm-i { animation: none; }
+  .dm-dot { transition-duration: 120ms; }
+}
+
+/* ═══════════ FINAL CTA — black card ═══════════
+   Copy on the left, the two calls to action stacked on the right, and
+   the hero's disc field running out of the bottom-right corner. */
+.sp-band-card {
+  background: #05080f;
+  border-radius: 22px;
+  padding: clamp(2.5rem, 5vw, 4.5rem);
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--space-7); flex-wrap: wrap;
+  /* The headline size comes through --h-section, the hook
+     vizit-elevate.css leaves in its own `h2.display` rule — that rule
+     sets font-size with !important, so setting the variable is the way
+     in rather than shouting back at it. */
+  --h-section: clamp(1.5rem, 2.5vw, 2.15rem);
+}
+/* a whisper of the hero's glow so the card is not a flat slab */
+.sp-band-card::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(70% 90% at 88% 8%, rgba(1,116,217,0.28), transparent 62%),
+    radial-gradient(60% 80% at 4% 100%, rgba(1,76,142,0.26), transparent 60%);
+}
+.sp-band-card > * { position: relative; z-index: 1; }
+/* the disc field, out of the bottom-right corner and under the copy
+   and the buttons */
+.sp-band-card > .sp-band-dome {
+  position: absolute; right: 0; bottom: 0; z-index: 0;
+  width: min(70%, 700px); aspect-ratio: 1.5 / 1;
+  /* held back a little so the field reads as texture behind the two
+     buttons rather than competing with them */
+  opacity: 0.8; pointer-events: none;
+}
+.sp-band-card .display { line-height: 1.14; text-wrap: pretty; }
+/* Tight measure so the line after the product name falls into two
+   short lines rather than one long one with an orphan under it. Only
+   above the stacking width — under it the card is one column and the
+   headline should use the whole of it. */
+@media (min-width: 721px) { .sp-band-card .display { max-width: 17ch; } }
+.sp-band-copy { flex: 1 1 24rem; min-width: 0; }
+.sp-band-card .cta-row {
+  flex: 0 0 auto; display: flex; flex-direction: column;
+  align-items: stretch; gap: var(--space-3);
+}
+.sp-band-card .cta-row .btn { justify-content: center; }
+@media (max-width: 720px) {
+  .sp-band-card { display: block; }
+  .sp-band-card .cta-row { margin-top: var(--space-6); }
+}
+
+/* CTAs light up under the cursor; none of them lift. The parity block
+   in vizit-theme.css raises every .btn by 2px on hover — this sits
+   later in the document, so it wins on order alone. */
+.btn:hover { transform: none; }
+
+/* second CTA: outlined on the dark card. Not in vizit-theme's parity
+   class list, so it needs its own pill radius, and its own copy of the
+   cursor-glow hover — the --mx/--my the glow follows are already set on
+   every .btn by the tracker in js/vizit-footer.js. */
+.btn-outline-dark {
+  /* frosted, not transparent: the disc field runs behind this button,
+     and the discs showed through the label. The blur does most of the
+     work, so the fill can stay light. */
+  background: rgba(4,10,20,0.32); color: #ffffff;
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.38);
+  /* vizit-theme.css squares `.btn` with !important and only re-pills the
+     classes in its parity list, so this one has to say so itself. */
+  border-radius: 999px !important;
+  transition: background 200ms ease, border-color 200ms ease, box-shadow 200ms ease, color 200ms ease;
+}
+.btn-outline-dark:hover {
+  background-color: rgba(255,255,255,0.06);
+  background-image: radial-gradient(170px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(94,182,255,0.5) 0%, rgba(52,160,254,0.22) 38%, rgba(52,160,254,0) 72%);
+  border-color: rgba(128,195,254,0.65); color: #ffffff;
+  box-shadow: 0 0 30px -4px rgba(52,160,254,0.5);
 }

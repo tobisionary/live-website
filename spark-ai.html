@@ -5,7 +5,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spark AI | Creative That Already Knows What Wins</title>
+  <title>Spark AI | Generate High-Converting Content. Any Category. One Click.</title>
 <link rel="icon" type="image/png" href="assets/favicon.png">
   <meta name="description" content="Spark AI reads every image in your category on Amazon and Walmart, then generates versions of yours built to beat them — each one scored before you publish.">
   <link rel="stylesheet" href="css/ci-styles.css">
@@ -17,21 +17,383 @@
   <link rel="stylesheet" href="css/spark-styles.css">
   <script src="js/vizit-nav.js" defer></script>
   <script src="js/vizit-footer.js" defer></script>
+  <script src="js/spark-dome.js" defer></script>
   <style>
     #how { scroll-margin-top: 80px; }
     a { color: var(--accent); }
     a:hover { color: var(--blue-500); }
     .final::before { content: none; }
   </style>
+  <style id="spark-ai-v2">
+    /* ═══════════ HERO HEADLINE ═══════════
+       The dome hero centres its copy in a fixed column (css/spark-styles.css).
+       Spark Studio's headline is two short lines and sits inside the shared
+       860px; this page's first line — "Generate high-converting content.",
+       33 characters — does not, so the column is widened here and the
+       headline scaled to fit it. The two sentences then land as the two
+       lines the <br> asks for. !important because elevate's `h1.display`
+       rule carries the size; below ~700px the first line wraps again, which
+       is right on a phone. */
+    .sp-hero-copy { max-width: 980px; }
+    .sp-hero h1.display {
+      font-size: clamp(2rem, 4.4vw, 3.5rem) !important;
+      max-width: none;
+    }
+
+    /* ═══════════ HERO DEPTH ═══════════
+       The home page hero is a tall band with its copy centred in it, and
+       the two glow rings read the way they do because of that height —
+       one arc through the top left, the other well below the copy on the
+       right. At the Spark hero's default depth the right-hand ring lands
+       straight behind the headline, so this page takes the home page's
+       proportions along with its field. */
+    .sp-hero {
+      min-height: calc(62vh - 64px);
+      padding-top: var(--space-8); padding-bottom: var(--space-8);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    /* On a phone the band's own padding is depth enough — 80vh of a tall
+       portrait viewport leaves a long run of empty field under the button,
+       and the rings are already clear of the copy at that width. */
+    @media (max-width: 760px) { .sp-hero { min-height: 0; } }
+
+    /* ═══════════ GENERATION BLOCKS — two columns, side by side ═══════════
+       Each column is one image slot on a product page: the original, then
+       the five versions Spark returns. The source screenshots carry a score
+       readout baked into the pixels, which turns illegible at column width —
+       so assets/img/spark-*.webp are those shots cropped to artwork only,
+       and the scores are drawn here as .sp-score chips instead. */
+    .sp-gen-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: var(--space-6); margin-top: var(--space-8);
+    }
+    .sp-gen {
+      min-width: 0;
+      display: flex; flex-direction: column;
+      padding: var(--space-6);
+      border: 1px solid var(--border);
+      background: #ffffff;
+      transition: border-color 240ms var(--ease, ease), box-shadow 240ms var(--ease, ease);
+    }
+    .sp-gen:hover { border-color: var(--blue-200); box-shadow: 0 18px 44px rgba(0,33,61,0.10); }
+    /* Card head and deck are centred over the card, matching how the
+       section above them opens. */
+    .sp-gen-head {
+      font-family: var(--font-display); font-weight: 600;
+      font-size: clamp(1.3rem, 1.9vw, 1.7rem);
+      letter-spacing: -0.025em; line-height: 1.1;
+      color: var(--blue-1000); margin: 0; text-align: center;
+    }
+    .sp-gen-desc {
+      color: var(--color-600); font-size: var(--text-sm); line-height: 1.55;
+      margin: var(--space-3) auto 0; max-width: 44ch; text-align: center;
+    }
+    /* Both cards run three lines of description at desktop; the floor keeps the
+       two columns' originals and decks on the same baselines if copy shifts. */
+    @media (min-width: 1081px) { .sp-gen-desc { min-height: calc(3 * 1.55 * var(--text-sm)); } }
+
+    /* ── the original, with its score read out beside it ── */
+    .sp-gen-orig {
+      display: grid; grid-template-columns: 150px 1fr;
+      gap: var(--space-5); align-items: center;
+      margin: var(--space-6) 0 0;
+    }
+    .sp-gen-orig > * { min-width: 0; }
+    .sp-orig-meta { max-width: 420px; }
+    /* "Original" now rides the image itself. Solid chip rather than a
+       translucent one: these shots run from near-white to deep red, and a
+       wash would drop out on the light ones. */
+    .sp-orig-tag {
+      position: absolute; top: 6px; left: 6px; z-index: 1;
+      font-family: var(--font-mono); font-size: 9px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      background: rgba(255,255,255,0.94); color: var(--blue-1000);
+      border: 1px solid rgba(0,33,61,0.10);
+      padding: 3px 7px;
+    }
+
+    /* ── the flow marker between original and versions ── */
+    .sp-gen-flow {
+      display: flex; align-items: center; gap: var(--space-3);
+      margin: var(--space-5) 0 var(--space-4);
+      font-family: var(--font-mono); font-size: 10px;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-600);
+    }
+    .sp-gen-flow::after {
+      content: ''; flex: 1; height: 1px;
+      background: var(--border);
+    }
+
+    /* ── the tray of five versions ── */
+    .sp-gen-tray { margin-top: auto; }
+    .sp-gen-deck { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+    .sp-gen-card { margin: 0; min-width: 0; position: relative; }
+    .sp-gen-card .sp-frame { transition: transform 220ms var(--ease, ease), box-shadow 220ms var(--ease, ease); }
+    .sp-gen-card:hover .sp-frame { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(0,33,61,0.18); }
+    .sp-gen-card .sp-score { margin-top: 6px; }
+    /* The number sits beside its bar rather than over it. The figure is two
+       characters at deck width, so set inline it costs little and leaves the
+       bar the rest of the tile to run across — and the five readouts land on
+       one line instead of five stacked pairs. */
+    .sp-gen-deck .sp-score { display: flex; align-items: center; gap: 6px; }
+    .sp-gen-deck .sp-score b { flex-shrink: 0; }
+    .sp-gen-deck .sp-score i { flex: 1; margin-top: 0; }
+
+    /* ── shared image frame ── */
+    .sp-frame {
+      position: relative; display: block; overflow: hidden;
+      border: 1px solid var(--border); background: var(--surface);
+      aspect-ratio: 1 / 1;
+    }
+    .sp-frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+    /* ── score chip: mono number over a thin fill bar ── */
+    .sp-score { display: block; }
+    .sp-score b {
+      display: block; font-family: var(--font-mono); font-weight: 500;
+      font-size: var(--text-sm); line-height: 1; color: var(--blue-1000);
+      letter-spacing: -0.01em;
+    }
+    .sp-score i {
+      display: block; height: 3px; margin-top: 4px;
+      background: rgba(0,33,61,0.10); overflow: hidden;
+    }
+    .sp-score i::after {
+      content: ''; display: block; height: 100%;
+      width: var(--v, 0%); background: var(--sc, var(--blue-base));
+      transform-origin: left center;
+      transition: width 900ms var(--ease, ease);
+    }
+    /* the bars fill as the panel reveals */
+    .sp-reveal:not(.in) .sp-score i::after { width: 0; }
+    .sp-score--low  { --sc: #e5484d; }
+    .sp-score--mid   { --sc: #f5a524; }
+    .sp-score--high { --sc: #17a34a; }
+    /* the original's readout, larger */
+    .sp-score--lg b { font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 400; }
+    .sp-score--lg i { height: 5px; margin-top: var(--space-3); }
+
+    @media (max-width: 1080px) {
+      /* One card per row now, so the card is as wide as the container. The
+         original's row was still built for a half-width card: a 150px thumb
+         and a 420px-capped readout, left-aligned, which left several hundred
+         pixels of dead space on the right and hung the row off-centre under
+         a centred head. Centre the pair and give the thumb more presence. */
+      .sp-gen-grid { grid-template-columns: 1fr; gap: var(--space-7); }
+      .sp-gen-orig {
+        grid-template-columns: 190px minmax(0, 420px);
+        justify-content: center;
+      }
+    }
+    @media (max-width: 520px) {
+      .sp-gen { padding: var(--space-5); }
+      .sp-gen-orig { grid-template-columns: 130px 1fr; gap: var(--space-4); }
+      .sp-gen-deck { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .sp-score i::after, .sp-gen-card .sp-frame { transition: none; }
+      .sp-reveal:not(.in) .sp-score i::after { width: var(--v, 0%); }
+    }
+
+    /* ═══════════ THE FLOW — category in, intelligence out ═══════════
+       Dark band, to echo the hero and give the page a second beat. Three
+       stations on a lit rail; each one shows the work rather than just
+       naming it — real category shots coming in, the attributes the model
+       separates, the score that comes out. Every motif is CSS or existing
+       assets; nothing new is fetched. */
+    .sp-flowpanel {
+      position: relative; overflow: hidden;
+      border-top: none; color: #fff;
+      background:
+        radial-gradient(90% 70% at 15% -10%, rgba(1,116,217,0.20), transparent 62%),
+        radial-gradient(70% 60% at 92% 108%, rgba(1,76,142,0.28), transparent 60%),
+        #05080f;
+    }
+    .sp-flowpanel > .container { position: relative; z-index: 1; }
+    .sp-flowpanel .display { color: #fff; }
+    .sp-flowpanel .sp-body { color: rgba(214,236,255,0.78); }
+
+    /* the rail */
+    .sp-rail { position: relative; margin: var(--space-8) 0 0; height: 1px; }
+    .sp-rail::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(128,195,254,0.38) 12%, rgba(128,195,254,0.38) 88%, transparent);
+    }
+    .sp-rail-pulse {
+      position: absolute; top: 50%; left: 0; width: 84px; height: 3px;
+      transform: translateY(-50%);
+      background: linear-gradient(90deg, transparent, #7cc4ff, transparent);
+      filter: blur(1px) drop-shadow(0 0 8px rgba(124,196,255,0.9));
+      animation: spRail 4.2s cubic-bezier(.5,0,.5,1) infinite;
+    }
+    @keyframes spRail { 0% { left: 4%; opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } 100% { left: 92%; opacity: 0; } }
+
+    .sp-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
+    .sp-step {
+      min-width: 0; position: relative; padding-top: var(--space-6);
+      display: flex; flex-direction: column;
+    }
+    /* the station dot, sitting on the rail */
+    .sp-step::before {
+      content: ''; position: absolute; top: -5px; left: 0;
+      width: 9px; height: 9px; border-radius: 50%;
+      background: #7cc4ff; box-shadow: 0 0 0 4px rgba(124,196,255,0.16), 0 0 14px rgba(124,196,255,0.8);
+    }
+    .sp-step .n {
+      display: block; font-family: var(--font-mono); font-size: 10px;
+      letter-spacing: 0.16em; color: #7cc4ff; margin-bottom: var(--space-3);
+    }
+    .sp-step .t {
+      font-family: var(--font-display); font-weight: 600;
+      font-size: clamp(1.15rem, 1.7vw, 1.45rem);
+      letter-spacing: -0.02em; line-height: 1.15; color: #fff;
+      margin-bottom: var(--space-3);
+    }
+    .sp-step .b { color: rgba(214,236,255,0.66); font-size: var(--text-sm); line-height: 1.55; }
+    .sp-step-motif {
+      flex: 1;
+      margin-top: var(--space-5); padding: var(--space-4);
+      border: 1px solid rgba(128,195,254,0.16);
+      background: rgba(255,255,255,0.03);
+      min-height: 168px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+
+    /* motif 1 — the category arriving, tile by tile */
+    .sp-ingest { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+    .sp-ingest span {
+      display: block; aspect-ratio: 1 / 1; overflow: hidden;
+      border: 1px solid rgba(128,195,254,0.18);
+      opacity: 0; transform: scale(0.82);
+      transition: opacity 520ms var(--ease, ease), transform 520ms var(--ease, ease);
+    }
+    .sp-ingest img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .sp-reveal.in .sp-ingest span { opacity: 1; transform: none; }
+    .sp-reveal.in .sp-ingest span:nth-child(1) { transition-delay: 60ms; }
+    .sp-reveal.in .sp-ingest span:nth-child(2) { transition-delay: 130ms; }
+    .sp-reveal.in .sp-ingest span:nth-child(3) { transition-delay: 200ms; }
+    .sp-reveal.in .sp-ingest span:nth-child(4) { transition-delay: 270ms; }
+    .sp-reveal.in .sp-ingest span:nth-child(5) { transition-delay: 340ms; }
+    .sp-reveal.in .sp-ingest span:nth-child(6) { transition-delay: 410ms; }
+    .sp-reveal.in .sp-ingest span:nth-child(7) { transition-delay: 480ms; }
+    .sp-reveal.in .sp-ingest span:nth-child(8) { transition-delay: 550ms; }
+    .sp-ingest-count {
+      margin-top: var(--space-3); font-family: var(--font-mono); font-size: 10px;
+      letter-spacing: 0.12em; text-transform: uppercase; color: rgba(179,219,255,0.62);
+    }
+    .sp-ingest-count b { color: #fff; font-weight: 500; }
+
+    /* motif 2 — the attributes the model separates */
+    .sp-attrs { display: flex; flex-direction: column; gap: var(--space-3); }
+    .sp-attr { display: grid; grid-template-columns: 1fr 62px; gap: var(--space-3); align-items: center; }
+    .sp-attr .k {
+      font-family: var(--font-mono); font-size: 9.5px;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(214,236,255,0.72); white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis;
+    }
+    .sp-attr .v {
+      font-family: var(--font-mono); font-size: 10px; text-align: right;
+      color: #7cc4ff;
+    }
+    .sp-attr.is-neg .v { color: #ff7a7d; }
+    .sp-attr .bar { grid-column: 1 / -1; height: 4px; background: rgba(255,255,255,0.07); overflow: hidden; }
+    .sp-attr .bar::after {
+      content: ''; display: block; height: 100%; width: 0;
+      background: linear-gradient(90deg, #0174d9, #7cc4ff);
+      transition: width 1000ms var(--ease, ease);
+    }
+    .sp-attr.is-neg .bar::after { background: linear-gradient(90deg, #b8353a, #ff7a7d); }
+    .sp-reveal.in .sp-attr .bar::after { width: var(--w, 0%); }
+    .sp-reveal.in .sp-attr:nth-child(2) .bar::after { transition-delay: 120ms; }
+    .sp-reveal.in .sp-attr:nth-child(3) .bar::after { transition-delay: 240ms; }
+    .sp-reveal.in .sp-attr:nth-child(4) .bar::after { transition-delay: 360ms; }
+
+    /* motif 3 — what comes back out */
+    .sp-out { text-align: left; }
+    .sp-out-score {
+      display: flex; align-items: baseline; gap: var(--space-3);
+      font-family: var(--font-mono); font-weight: 400;
+      letter-spacing: -0.03em; color: #fff;
+      font-size: clamp(2.4rem, 4.4vw, 3.4rem); line-height: 1;
+    }
+    .sp-out-score .was {
+      font-size: var(--text-sm); letter-spacing: 0.06em;
+      color: rgba(214,236,255,0.45); text-decoration: line-through;
+    }
+    .sp-out-bar { height: 5px; margin-top: var(--space-4); background: rgba(255,255,255,0.08); overflow: hidden; }
+    .sp-out-bar::after {
+      content: ''; display: block; height: 100%; width: 0;
+      background: linear-gradient(90deg, #0174d9, #7cc4ff);
+      box-shadow: 0 0 12px rgba(124,196,255,0.7);
+      transition: width 1200ms var(--ease, ease) 200ms;
+    }
+    .sp-reveal.in .sp-out-bar::after { width: 98%; }
+    .sp-out-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: var(--space-4); }
+    .sp-out-pills span {
+      font-family: var(--font-mono); font-size: 9.5px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #b3dbff; border: 1px solid rgba(128,195,254,0.3);
+      background: rgba(1,116,217,0.16); padding: 3px 7px;
+    }
+
+    @media (max-width: 900px) {
+      .sp-steps { grid-template-columns: 1fr; gap: var(--space-7); }
+      .sp-rail { display: none; }
+      .sp-step { padding-top: 0; padding-left: var(--space-5); }
+      .sp-step::before { top: 6px; }
+      .sp-step::after {
+        content: ''; position: absolute; left: 4px; top: 20px; bottom: calc(-1 * var(--space-7));
+        width: 1px; background: linear-gradient(180deg, rgba(128,195,254,0.35), transparent);
+      }
+      .sp-step:last-child::after { display: none; }
+      .sp-step-motif { min-height: 0; }
+      .sp-ingest, .sp-attrs, .sp-out { max-width: 420px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .sp-rail-pulse { animation: none; opacity: 0.55; }
+      .sp-ingest span { opacity: 1 !important; transform: none !important; transition: none; }
+      .sp-attr .bar::after, .sp-out-bar::after { transition: none; }
+      .sp-reveal:not(.in) .sp-attr .bar::after { width: var(--w, 0%); }
+      .sp-reveal:not(.in) .sp-out-bar::after { width: 98%; }
+    }
+
+    /* ═══════════ ROUNDED CARDS (page-scoped) ═══════════
+       vizit-theme.css zeroes every --radius-* token with !important and
+       squares a fixed class list, so the radii here are literal px, and
+       they match the 14px Spark Studio uses on its own cards. The image
+       frames take a smaller radius so the artwork echoes the card it sits
+       in rather than restating it. */
+    .sp-gen,
+    .sp-step-motif,
+    .sp-wf-step,
+    .sp-wf-out { border-radius: 14px; }
+    .sp-frame { border-radius: 10px; }
+    /* The five generated tiles stay square — they read as a contact sheet of
+       the same crop, and at ~99px a radius was rounding off a tenth of each
+       edge. The original beside them keeps its radius: it is one framed shot,
+       not one of a set. */
+    .sp-gen-deck .sp-frame { border-radius: 0; }
+    .sp-orig-tag { border-radius: 4px; }
+    .sp-score i, .sp-attr .bar, .sp-out-bar { border-radius: 999px; }
+    .sp-ingest span { border-radius: 6px; }
+
+    /* ═══════════ CLOSING CARD ═══════════
+       The headline is one clause now, close to the length Spark Studio's
+       card carries, so it runs at the size the shared card sets and only
+       wants a slightly wider measure to fall into three lines rather than
+       four. */
+    @media (min-width: 721px) { .sp-band-card .display { max-width: 22ch; } }
+  </style>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Vizit">
-<meta property="og:title" content="Spark AI | Creative That Already Knows What Wins">
+<meta property="og:title" content="Spark AI | Generate High-Converting Content. Any Category. One Click.">
 <meta property="og:description" content="Spark AI reads every image in your category on Amazon and Walmart, then generates versions of yours built to beat them — each one scored before you publish.">
 <meta property="og:image" content="https://vizit.com/assets/og-cover.jpg">
 <meta property="og:image:width" content="1600">
 <meta property="og:image:height" content="1000">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Spark AI | Creative That Already Knows What Wins">
+<meta name="twitter:title" content="Spark AI | Generate High-Converting Content. Any Category. One Click.">
 <meta name="twitter:image" content="https://vizit.com/assets/og-cover.jpg">
 <script defer src="/_vercel/insights/script.js"></script>
 <script>
@@ -52,144 +414,230 @@
 
 <vizit-nav data-current="spark"></vizit-nav>
 
-<!-- PANEL 1 — HERO -->
+<!-- PANEL 1 — HERO (the home page's dark flow, centred) -->
 <section class="sp-hero" data-screen-label="01 Hero">
+  <div class="sp-hero-ring tl" aria-hidden="true"></div>
+  <div class="sp-hero-ring br" aria-hidden="true"></div>
   <div class="container">
-    <span class="sp-badge">Spark AI</span>
-    <h1 class="display">Creative that already knows what wins.</h1>
-    <p class="subhead sp-lede">Spark AI reads every image in your category on Amazon and Walmart — then generates versions of yours built to beat them.</p>
-    <div class="cta-row">
-      <a class="btn btn-primary btn-lg" href="demo.html">Score your content <span class="arrow">→</span></a>
-      <a class="sp-link" href="#how">See how it works <span class="arr">→</span></a>
+    <div class="sp-hero-copy">
+      <span class="sp-eyebrow">Spark AI</span>
+      <h1 class="display">Generate high-converting content.<br><span class="sp-flow">Any category. One click.</span></h1>
+      <p class="subhead sp-lede">Spark AI reads every image in your category on Amazon and Walmart — then generates versions of yours built to beat them.</p>
+      <div class="cta-row">
+        <a class="btn btn-on-dark btn-lg" href="demo.html">Score your content</a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- PANEL 2 — THE SPARK WORKFLOW -->
-<section class="panel sp-reveal" data-screen-label="02 The Spark workflow">
+<!-- PANEL 2 — ONE IMAGE, FIVE VERSIONS (hero + carousel, side by side) -->
+<section class="panel sp-reveal sp-center-head" data-screen-label="02 Any one image gets five versions">
   <div class="container">
-    <h2 class="display" style="max-width:20ch;">From brand context to final asset.</h2>
-    <p class="sp-body" style="margin-top:var(--space-5);">Spark carries your brand and product context through every step — generate, remix, refine, select. Then finish however your team works best.</p>
+    <h2 class="display">Any one image gets five versions.</h2>
+    <p class="sp-body">Point Spark at any image on your product page. It generates five iterations built from the image types winning in your category — each one scored before you publish, so you ship the strongest.</p>
 
-    <div class="sp-wf">
-      <div class="sp-wf-step"><span class="n">01</span><div class="t">Brand guidelines <span class="sp-new">New</span></div><div class="b">Persistent brand and product context behind every generation.</div></div>
-      <div class="sp-wf-step"><span class="n">02</span><div class="t">Spark generation</div><div class="b">Your initial Spark image, grounded in category intelligence.</div></div>
-      <div class="sp-wf-step"><span class="n">03</span><div class="t">Remix <span class="sp-new">New</span></div><div class="b">Create new Spark images from an existing one.</div></div>
-      <div class="sp-wf-step"><span class="n">04</span><div class="t">Prompting <span class="sp-new">New</span></div><div class="b">Refine the same image over multiple iterations.</div></div>
-      <div class="sp-wf-step"><span class="n">05</span><div class="t">Favorites <span class="sp-new">New</span></div><div class="b">Select the assets worth finishing.</div></div>
-    </div>
+    <div class="sp-gen-grid">
 
-    <div class="sp-wf-split">
-      <div class="sp-wf-split-label">Then finish your way</div>
-      <div class="sp-wf-out">
-        <div class="t">Finish with Spark Studio <span class="sp-new">New</span></div>
-        <div class="b">Human-in-the-loop support when you need it — our designers take your selects to a final, publish-ready asset.</div>
-      </div>
-      <div class="sp-wf-out">
-        <div class="t">Export a creative brief <span class="sp-new">New</span></div>
-        <div class="b">Package the work as a PDF brief for your agency or creative team to execute.</div>
-      </div>
+      <article class="sp-gen">
+        <h3 class="sp-gen-head">Hero image generation</h3>
+        <p class="sp-gen-desc">The image that decides whether a shopper stops. Spark rebuilds it against the heroes that convert in your category — scale, framing, and thumbnail clarity.</p>
+
+        <div class="sp-gen-orig">
+          <div class="sp-frame">
+            <span class="sp-orig-tag">Original</span>
+            <img loading="lazy" decoding="async" src="assets/img/spark-hero-original.webp" alt="The original hero image — the retail pack shot, carrying its full set of on-pack claims and badges" width="390" height="390">
+          </div>
+          <div class="sp-orig-meta">
+            <span class="sp-score sp-score--mid sp-score--lg" style="--v:76%"><b>76</b><i></i></span>
+          </div>
+        </div>
+
+        <div class="sp-gen-flow">Generated Spark images</div>
+
+        <!-- NOTE: illustrative scores — confirm against a real Spark run before publish. -->
+        <div class="sp-gen-tray">
+          <div class="sp-gen-deck">
+          <figure class="sp-gen-card">
+            <div class="sp-frame"><img loading="lazy" decoding="async" src="assets/img/spark-hero-5.webp" alt="Spark version 5 — the clutter dropped for a large corner weight and a single cheese cue" width="390" height="390"></div>
+            <span class="sp-score sp-score--high" style="--v:97%"><b>97</b><i></i></span>
+          </figure>
+          <figure class="sp-gen-card">
+            <div class="sp-frame"><img loading="lazy" decoding="async" src="assets/img/spark-hero-2.webp" alt="Spark version 2 — a brown base band carrying an enlarged 4 OZ, with the cheese moved outside the pack" width="390" height="390"></div>
+            <span class="sp-score sp-score--high" style="--v:95%"><b>95</b><i></i></span>
+          </figure>
+          <figure class="sp-gen-card">
+            <div class="sp-frame"><img loading="lazy" decoding="async" src="assets/img/spark-hero-4.webp" alt="Spark version 4 — the protein callout raised and the weight set in a full-width base band" width="390" height="390"></div>
+            <span class="sp-score sp-score--high" style="--v:92%"><b>92</b><i></i></span>
+          </figure>
+          <figure class="sp-gen-card">
+            <div class="sp-frame"><img loading="lazy" decoding="async" src="assets/img/spark-hero-3.webp" alt="Spark version 3 — the tagline and character kept, with the weight in a corner wedge" width="390" height="390"></div>
+            <span class="sp-score sp-score--high" style="--v:90%"><b>90</b><i></i></span>
+          </figure>
+          <figure class="sp-gen-card">
+            <div class="sp-frame"><img loading="lazy" decoding="async" src="assets/img/spark-hero-1.webp" alt="Spark version 1 — the pack with its tagline, protein callout and certification badges" width="390" height="390"></div>
+            <span class="sp-score sp-score--high" style="--v:88%"><b>88</b><i></i></span>
+          </figure>
+          </div>
+        </div>
+      </article>
+
+      <article class="sp-gen">
+        <h3 class="sp-gen-head">Carousel image generation</h3>
+        <p class="sp-gen-desc">The images that close the sale. Spark generates carousel frames that carry the claims, context, and callouts shoppers in your category actually respond to.</p>
+
+        <div class="sp-gen-orig">
+          <div class="sp-frame">
+            <span class="sp-orig-tag">Original</span>
+            <img loading="lazy" decoding="async" src="assets/img/spark-carousel-original.webp" alt="The original carousel image — tomatoes on soil with a small headline" width="838" height="873">
+          </div>
+          <div class="sp-orig-meta">
+            <span class="sp-score sp-score--low sp-score--lg" style="--v:13%"><b>13</b><i></i></span>
+          </div>
+        </div>
+
+        <div class="sp-gen-flow">Generated Spark images</div>
+
+        <div class="sp-gen-tray">
+          <div class="sp-gen-deck">
+          <figure class="sp-gen-card">
+            <div class="sp-frame"><img loading="lazy" decoding="async" src="assets/img/spark-carousel-2.webp" alt="Spark version 2, scored 98 out of 100" width="390" height="381"></div>
+            <span class="sp-score sp-score--high" style="--v:98%"><b>98</b><i></i></span>
+          </figure>
+          <figure class="sp-gen-card">
+            <div class="sp-frame"><img loading="lazy" decoding="async" src="assets/img/spark-carousel-1.webp" alt="Spark version 1, scored 97 out of 100" width="390" height="381"></div>
+            <span class="sp-score sp-score--high" style="--v:97%"><b>97</b><i></i></span>
+          </figure>
+          <figure class="sp-gen-card">
+            <div class="sp-frame"><img loading="lazy" decoding="async" src="assets/img/spark-carousel-3.webp" alt="Spark version 3, scored 94 out of 100" width="390" height="381"></div>
+            <span class="sp-score sp-score--high" style="--v:94%"><b>94</b><i></i></span>
+          </figure>
+          <figure class="sp-gen-card">
+            <div class="sp-frame"><img loading="lazy" decoding="async" src="assets/img/spark-carousel-4.webp" alt="Spark version 4, scored 90 out of 100" width="390" height="381"></div>
+            <span class="sp-score sp-score--high" style="--v:90%"><b>90</b><i></i></span>
+          </figure>
+          <figure class="sp-gen-card">
+            <div class="sp-frame"><img loading="lazy" decoding="async" src="assets/img/spark-carousel-5.webp" alt="Spark version 5, scored 87 out of 100" width="390" height="381"></div>
+            <span class="sp-score sp-score--high" style="--v:87%"><b>87</b><i></i></span>
+          </figure>
+          </div>
+        </div>
+      </article>
+
     </div>
   </div>
 </section>
 
 <!-- PANEL 3 — POSITIONING -->
-<div class="sp-pull" data-screen-label="03 Positioning">
+<div class="sp-pull sp-pull--center" data-screen-label="03 Positioning">
   <div class="container">
     <p>
       <span class="dim">Image generators make images that look good.</span>
-      <span class="punch">Spark generates images proven to work in your category.</span>
+      <span class="punch">Spark generates images proven to sell.</span>
     </p>
   </div>
 </div>
 
-<!-- PANEL 4 — CATEGORY INTELLIGENCE -->
-<section class="panel sp-reveal" id="how" data-screen-label="04 Category intelligence">
+<!-- PANEL 4 — CATEGORY → CONVERSION INTELLIGENCE -->
+<section class="panel sp-flowpanel sp-reveal" id="how" data-screen-label="04 Conversion intelligence">
   <div class="container">
-    <div class="sp-feature">
-      <div class="sp-feature-copy">
-        <h2 class="display">It starts by reading the shelf.</h2>
-        <p class="sp-body" style="margin-top:var(--space-5);">Spark AI classifies every image in your category on a retailer — hero, lifestyle, infographic, close-up, packaging — and learns which image types win. Before it touches your content, it knows the field.</p>
+    <h2 class="display" style="max-width:22ch;">Your entire category in. Conversion intelligence out.</h2>
+    <p class="sp-body" style="margin-top:var(--space-5);">Spark ingests every image on every competing product page in your category, learns what moves shoppers there, and hands back direction you can act on — not generic best practice.</p>
+
+    <div class="sp-rail" aria-hidden="true"><span class="sp-rail-pulse"></span></div>
+
+    <div class="sp-steps">
+
+      <div class="sp-step">
+        <span class="n">01</span>
+        <div class="t">Take in the category</div>
+        <div class="b">Every image on every competing product page across Amazon and Walmart, classified by type — hero, lifestyle, infographic, close-up, packaging.</div>
+        <div class="sp-step-motif">
+          <div class="sp-ingest" aria-hidden="true">
+            <span><img loading="lazy" decoding="async" src="assets/img/source-image-11.webp" alt=""></span>
+            <span><img loading="lazy" decoding="async" src="assets/img/source-image-15.webp" alt=""></span>
+            <span><img loading="lazy" decoding="async" src="assets/img/source-image-14.webp" alt=""></span>
+            <span><img loading="lazy" decoding="async" src="assets/img/source-image-19.webp" alt=""></span>
+            <span><img loading="lazy" decoding="async" src="assets/img/source-image-20.webp" alt=""></span>
+            <span><img loading="lazy" decoding="async" src="assets/img/source-image-18.webp" alt=""></span>
+            <span><img loading="lazy" decoding="async" src="assets/img/source-image-24.webp" alt=""></span>
+            <span><img loading="lazy" decoding="async" src="assets/img/source-image-13.webp" alt=""></span>
+          </div>
+          <div class="sp-ingest-count"><b>4,120</b> images ingested</div>
+        </div>
       </div>
-      <div class="sp-feature-visual">
-        <div class="sp-marquee" role="img" aria-label="Image types classified across the category: hero, lifestyle, infographic, close-up, packaging, scale, in use, bundle">
-          <div class="sp-marquee-track" aria-hidden="true">
-            <div class="sp-tile"><span>Hero</span></div>
-            <div class="sp-tile"><span>Lifestyle</span></div>
-            <div class="sp-tile"><span>Infographic</span></div>
-            <div class="sp-tile"><span>Close-up</span></div>
-            <div class="sp-tile"><span>Packaging</span></div>
-            <div class="sp-tile"><span>Scale</span></div>
-            <div class="sp-tile"><span>In use</span></div>
-            <div class="sp-tile"><span>Bundle</span></div>
-            <div class="sp-tile"><span>Hero</span></div>
-            <div class="sp-tile"><span>Lifestyle</span></div>
-            <div class="sp-tile"><span>Infographic</span></div>
-            <div class="sp-tile"><span>Close-up</span></div>
-            <div class="sp-tile"><span>Packaging</span></div>
-            <div class="sp-tile"><span>Scale</span></div>
-            <div class="sp-tile"><span>In use</span></div>
-            <div class="sp-tile"><span>Bundle</span></div>
+
+      <div class="sp-step">
+        <span class="n">02</span>
+        <div class="t">Analyze what converts</div>
+        <div class="b">Models trained on shopper behavior isolate the visual attributes driving conversion in your category — and the ones costing you sales.</div>
+        <div class="sp-step-motif">
+          <div class="sp-attrs" aria-hidden="true">
+            <div class="sp-attr" style="--w:86%">
+              <span class="k">Product scale</span><span class="v">+18%</span>
+              <span class="bar"></span>
+            </div>
+            <div class="sp-attr" style="--w:62%">
+              <span class="k">Usage context</span><span class="v">+11%</span>
+              <span class="bar"></span>
+            </div>
+            <div class="sp-attr" style="--w:44%">
+              <span class="k">Claim legibility</span><span class="v">+7%</span>
+              <span class="bar"></span>
+            </div>
+            <div class="sp-attr is-neg" style="--w:31%">
+              <span class="k">Busy background</span><span class="v">&minus;9%</span>
+              <span class="bar"></span>
+            </div>
           </div>
         </div>
-        <div style="display:flex; gap:var(--space-2); margin-top:var(--space-4);">
-          <span class="sp-badge sp-badge--brand sp-badge--plain">Amazon</span>
-          <span class="sp-badge sp-badge--plain">Walmart</span>
+      </div>
+
+      <div class="sp-step">
+        <span class="n">03</span>
+        <div class="t">Deliver insight and performance</div>
+        <div class="b">Scored, written direction your team can execute — and generated assets built to outperform what's on the shelf today.</div>
+        <div class="sp-step-motif">
+          <div class="sp-out" aria-hidden="true">
+            <div class="sp-out-score"><span data-count="98">0</span><span class="was">13</span></div>
+            <div class="sp-out-bar"></div>
+            <div class="sp-out-pills">
+              <span>Scored</span><span>Publish-ready</span><span>Brief exported</span>
+            </div>
+          </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
 <hr class="sp-divider">
 
-<!-- PANEL 5 — SPARK IMAGES -->
-<section class="panel sp-reveal" data-screen-label="05 Spark Images">
+<!-- PANEL 5 — THE SPARK WORKFLOW -->
+<section class="panel sp-reveal sp-center-head" data-screen-label="05 The Spark workflow">
   <div class="container">
-    <h2 class="display" style="max-width:20ch;">One image in. Five stronger versions out.</h2>
-    <p class="sp-body" style="margin:var(--space-5) 0 var(--space-7);">Take any image on your product page. Spark Images generates up to five iterations — each built from the image types winning in your category, each carrying a Vizit score. Publish the strongest.</p>
-    <div class="sp-fanout">
-      <!-- These screenshots already carry their own Vizit score readouts, so the
-           markup adds no score overlay of its own — a second number would only
-           contradict the one in the image. -->
-      <div class="sp-shot">
-        <img loading="lazy" decoding="async" src="assets/img/gen-card-v2.webp" alt="The original product image, scored 13 out of 100">
-      </div>
-      <div class="sp-arrow" aria-hidden="true">→</div>
-      <div class="sp-variants">
-        <div class="sp-shot"><img loading="lazy" decoding="async" src="assets/img/gen-1-v2.webp" alt="Spark-generated variant scored 97"></div>
-        <div class="sp-shot is-best"><img loading="lazy" decoding="async" src="assets/img/gen-2-v2.webp" alt="Spark-generated variant scored 98 — the strongest of the set"></div>
-        <div class="sp-shot"><img loading="lazy" decoding="async" src="assets/img/gen-3-v2.webp" alt="Spark-generated variant scored 94"></div>
-        <div class="sp-shot"><img loading="lazy" decoding="async" src="assets/img/gen-4-v2.webp" alt="Spark-generated variant scored 90"></div>
-        <div class="sp-shot"><img loading="lazy" decoding="async" src="assets/img/gen-5-v2.webp" alt="Spark-generated variant scored 87"></div>
+    <h2 class="display" style="max-width:none;">From brand context<br>to final asset.</h2>
+    <p class="sp-body">Spark carries your brand and product context through every step — generate, remix, refine, select. Then finish however your team works best.</p>
+
+    <div class="sp-wf">
+      <div class="sp-wf-step"><span class="n">01</span><div class="t">Spark generation</div><div class="b">Your initial Spark image, grounded in category intelligence.</div></div>
+      <div class="sp-wf-step"><span class="sp-new">New</span><span class="n">02</span><div class="t">Remix</div><div class="b">Create new Spark images from an existing one.</div></div>
+      <div class="sp-wf-step"><span class="sp-new">New</span><span class="n">03</span><div class="t">Prompting</div><div class="b">Refine the same image over multiple iterations.</div></div>
+      <div class="sp-wf-step"><span class="sp-new">New</span><span class="n">04</span><div class="t">Favorites</div><div class="b">Select the assets worth finishing.</div></div>
+    </div>
+
+    <div class="sp-wf-split sp-wf-split--solo">
+      <div class="sp-wf-out">
+        <span class="sp-new">New</span>
+        <div class="t">Finish with Spark Studio</div>
+        <div class="b">Human-in-the-loop finishing — our designers take your selects to a publish-ready asset.</div>
       </div>
     </div>
   </div>
 </section>
 
-<hr class="sp-divider">
-
-<!-- PANEL 6 — SPARK IDEAS -->
-<section class="panel sp-reveal" data-screen-label="06 Spark Ideas">
-  <div class="container">
-    <div class="sp-feature flip">
-      <div class="sp-feature-copy">
-        <h2 class="display">Know exactly what to change.</h2>
-        <p class="sp-body" style="margin-top:var(--space-5);">No score without a reason. Spark Ideas reads your image against Vizit Insight Maps and category intelligence, then hands your team specific, written direction — the changes that raise the number.</p>
-      </div>
-      <div class="sp-feature-visual">
-        <div class="sp-recs">
-          <div class="sp-rec"><span class="n">1</span><div><strong>Increase product scale</strong><span>Top performers in this category fill 70%+ of the frame.</span></div></div>
-          <div class="sp-rec"><span class="n">2</span><div><strong>Add usage context</strong><span>Lifestyle cues outperform plain packshots for this audience.</span></div></div>
-          <div class="sp-rec"><span class="n">3</span><div><strong>Simplify the background</strong><span>Insight Maps show attention pulled off the product.</span></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PANEL 7 — EVERY WORKFLOW -->
-<section class="panel panel--paper sp-reveal" data-screen-label="07 Every workflow">
+<!-- PANEL 6 — EVERY WORKFLOW -->
+<section class="panel panel--paper sp-reveal" data-screen-label="06 Every workflow">
   <div class="container">
     <h2 class="display" style="max-width:20ch;">However your team works, Spark fits.</h2>
     <div class="sp-map">
@@ -202,21 +650,25 @@
   </div>
 </section>
 
-<!-- PANEL 8 — CROSS-LINK TO SPARK STUDIO -->
-<section class="panel sp-reveal" data-screen-label="08 Spark Studio cross-link">
+<!-- PANEL 7 — CROSS-LINK TO SPARK STUDIO -->
+<section class="panel sp-reveal" data-screen-label="07 Spark Studio cross-link">
   <div class="container">
-    <div class="sp-band-dark">
-      <h2 class="display on-dark" style="max-width:18ch;">Want it done for you?</h2>
-      <p class="sp-lede">Spark Studio pairs Spark AI with Vizit-trained designers who optimize your content and hand it back, scored and ready to publish.</p>
+    <div class="sp-band-dark sp-band-card">
+      <!-- filled by js/spark-dome.js — the hero's field, quartered into
+           this card's bottom-right corner -->
+      <div class="sp-band-dome" data-spark-dome="corner" aria-hidden="true"></div>
+      <div class="sp-band-copy">
+        <h2 class="display on-dark">Spark Studio pairs Spark AI with Vizit-trained designers.</h2>
+      </div>
       <div class="cta-row">
-        <a class="btn btn-on-dark btn-lg" href="spark-studio.html">Explore Spark Studio <span class="arrow">→</span></a>
-        <a class="sp-link" style="color:rgba(255,255,255,0.75);" href="demo.html">Score your content <span class="arr">→</span></a>
+        <a class="btn btn-on-dark btn-lg" href="spark-studio.html">Explore Spark Studio</a>
+        <a class="btn btn-outline-dark btn-lg" href="demo.html">Score your content</a>
       </div>
     </div>
   </div>
 </section>
 
-<vizit-footer></vizit-footer>
+<vizit-footer data-cta="off"></vizit-footer>
 
 <script src="js/spark-motion.js" defer></script>
 
