@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile &amp; AI Readiness | Hero Image Optimization | Vizit</title>
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+  <meta name="description" content="Automatically test every product image for contrast and legibility compliance. Built for ADA Title III and European Accessibility Act (EAA) requirements.">
+  <link rel="stylesheet" href="../css/ci-styles.css?v=f1658c0b">
+  <link rel="stylesheet" href="../css/company-styles.css?v=9f190d0e">
+  <link rel="stylesheet" href="../css/solutions-styles.css?v=155c03c9">
+  <link rel="stylesheet" href="../css/vizit-theme.css?v=9b79a492">
+  <link rel="stylesheet" href="../css/vizit-elevate.css?v=d82ed54b">
+  <script src="../js/solutions-home.js?v=366904da" defer></script>
+  <script src="../js/vizit-nav.js?v=4aaba305" defer></script>
+<script src="../js/vizit-footer.js?v=ff40bd6c" defer></script>
+<style>
+  /* ─── Page-specific (Accessibility) ─── */
+
+  /* Hero — contrast heatmap on a real product image mock */
+  .access-stage {
+    position: relative;
+    background: var(--blue-1000);
+    color: #fff;
+    aspect-ratio: 1 / 1.05;
+    overflow: hidden;
+    display: grid; grid-template-rows: 36px 1fr;
+  }
+  .access-stage::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(110% 70% at 80% 0%, rgba(52,160,254,0.30), transparent 60%),
+      radial-gradient(80% 80% at 0% 100%, rgba(1,116,217,0.25), transparent 65%);
+    pointer-events: none;
+  }
+  .access-stage .hs-chrome {
+    position: relative; z-index: 1;
+    height: 36px;
+    background: rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.10);
+    display: flex; align-items: center; gap: 10px; padding: 0 14px;
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.08em; color: var(--blue-200);
+    text-transform: uppercase;
+  }
+  .access-stage .body {
+    position: relative; z-index: 1;
+    padding: var(--space-6);
+    display: grid; grid-template-rows: auto 1fr auto;
+    gap: var(--space-4);
+  }
+  .access-stage .heads {
+    display: flex; justify-content: space-between;
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.08em; color: var(--blue-200);
+    text-transform: uppercase;
+  }
+  .access-stage .main {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: var(--space-4);
+    align-items: center;
+  }
+  @media (max-width: 540px) { .access-stage .main { grid-template-columns: 1fr; } }
+  .pkg-mock {
+    aspect-ratio: 1 / 1;
+    background: #b85543;
+    box-shadow: 0 14px 30px rgba(0,0,0,0.35), inset 0 -22px 30px rgba(0,0,0,0.25);
+    padding: var(--space-4) var(--space-5) var(--space-4) var(--space-5);
+    display: grid; grid-template-rows: 1fr auto auto auto auto auto 1fr;
+    gap: 6px;
+    position: relative;
+    color: #fff;
+    overflow: visible;
+  }
+  .pkg-mock .pkg-line {
+    position: relative;
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+    align-self: center;
+    padding-right: 64px;
+  }
+  .pkg-mock .pkg-line.brand {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.92);
+  }
+  .pkg-mock .pkg-line.product {
+    font-size: 1.05rem;
+    color: rgba(255,210,180,0.85); /* LOW CONTRAST: 1.5:1 vs red bg */
+  }
+  .pkg-mock .pkg-line.claim {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.92);
+    background: rgba(0,0,0,0.18);
+    padding: 4px 10px;
+    align-self: flex-start;
+  }
+  .pkg-mock .pkg-line.size {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: rgba(220,140,110,0.7); /* VERY LOW CONTRAST */
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .pkg-mock .heat-tag {
+    position: absolute;
+    right: -10px;
+    transform: translateY(-50%);
+    top: 50%;
+    font-family: var(--font-mono); font-size: 9px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 3px 7px;
+    white-space: nowrap;
+  }
+  .heat-tag.fail { background: var(--risk-red); color: #fff; }
+  .heat-tag.warn { background: var(--risk-amber); color: #fff; }
+  .heat-tag.pass { background: var(--blue-base); color: #fff; }
+  .access-stage.legi { aspect-ratio: auto; }
+  .stat-panel{position:relative;overflow:hidden}
+  .big-stat{position:relative;text-align:center;max-width:64ch;margin:0 auto;display:flex;flex-direction:column;align-items:center}
+  .stat-phones{display:flex;gap:10px;margin-bottom:var(--space-6)}
+  .stat-phones i{display:block;width:18px;height:34px;border-radius:5px;border:1.5px solid rgba(14,27,42,.25);background:#fff;position:relative}
+  .stat-phones i::after{content:'';position:absolute;left:50%;bottom:3px;width:6px;height:1.5px;border-radius:1px;background:rgba(14,27,42,.25);transform:translateX(-50%)}
+  .stat-phones i:nth-child(-n+6){background:var(--accent);border-color:var(--accent)}
+  .stat-phones i:nth-child(-n+6)::after{background:rgba(255,255,255,.7)}
+  .big-stat-n{font-family:var(--font-display);font-weight:400;font-size:clamp(6rem,16vw,13rem);line-height:.9;letter-spacing:-.05em;color:var(--text);font-variant-numeric:tabular-nums}
+  .big-stat-n .cnt{display:inline-block;min-width:2ch;text-align:right}
+  .big-stat-n em{font-style:normal;color:var(--accent);font-size:.5em;vertical-align:top;line-height:1.5}
+  .big-stat-l{margin:var(--space-6) auto 0;font-size:clamp(1.1rem,1.6vw,1.35rem);line-height:1.45;color:var(--muted);max-width:44ch;text-wrap:pretty}
+  .big-stat-src{margin-top:var(--space-5);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .access-stage.legi .body { align-content: center; }
+
+  .pkg-readout {
+    display: flex; flex-direction: column; gap: var(--space-3);
+  }
+  .pkg-readout .meter-row {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.10);
+    padding: var(--space-3) var(--space-4);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: var(--space-3);
+  }
+  .pkg-readout .meter-row .lbl {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.08em; color: var(--blue-200);
+    text-transform: uppercase;
+  }
+  .pkg-readout .meter-row .ratio {
+    font-family: var(--font-display); font-size: 1.25rem;
+    letter-spacing: -0.02em;
+  }
+  .pkg-readout .meter-row .ratio em { font-style: normal; }
+  .pkg-readout .meter-row.fail .ratio { color: #ff8b7e; }
+  .pkg-readout .meter-row.fail .ratio em { color: #ff8b7e; }
+  .pkg-readout .meter-row.warn .ratio { color: #ffd28a; }
+  .pkg-readout .meter-row.warn .ratio em { color: #ffd28a; }
+  .pkg-readout .meter-row.pass .ratio { color: var(--cyan); }
+  .pkg-readout .meter-row.pass .ratio em { color: var(--cyan); }
+  .pkg-readout .meter-row .bar {
+    grid-column: 1 / -1;
+    height: 4px;
+    background: rgba(255,255,255,0.1);
+    margin-top: 6px;
+    position: relative;
+  }
+  .pkg-readout .meter-row .bar::after {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: var(--w, 50%);
+  }
+  .pkg-readout .meter-row.fail .bar::after { background: var(--risk-red); }
+  .pkg-readout .meter-row.warn .bar::after { background: var(--risk-amber); }
+  .pkg-readout .meter-row.pass .bar::after { background: var(--cyan); }
+  .access-stage .verdict {
+    display: flex; justify-content: space-between;
+    padding-top: var(--space-3);
+    border-top: 1px solid rgba(255,255,255,0.10);
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.1em; color: var(--blue-200);
+    text-transform: uppercase;
+  }
+  .access-stage .verdict .v { color: #ff8b7e; }
+
+  /* Standards split (legacy) */
+  .standards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5);
+    margin-top: var(--space-7);
+  }
+  @media (max-width: 760px) { .standards { grid-template-columns: 1fr; } }
+  .std-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    padding: var(--space-6);
+    display: flex; flex-direction: column; gap: var(--space-3);
+  }
+  .std-card .key {
+    font-family: var(--font-mono); font-size: 10.5px;
+    letter-spacing: 0.12em; color: var(--accent);
+    text-transform: uppercase;
+  }
+  .std-card h4 {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: clamp(1.25rem, 2vw, 1.625rem);
+    letter-spacing: -0.02em; line-height: 1.15;
+    margin: 0;
+  }
+  .std-card h4 em { color: var(--accent); font-style: normal; }
+  .std-card p {
+    margin: 0; font-size: var(--text-sm);
+    color: var(--muted); line-height: 1.55;
+  }
+  .std-card .pill {
+    margin-top: var(--space-2);
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 10px;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    background: var(--accent-soft);
+    color: var(--blue-700);
+    border: 1px solid var(--blue-100);
+    width: max-content;
+  }
+
+  /* Element scorecard — diagnostics */
+  .scorecard {
+    background: #fff;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .scorecard-head {
+    padding: var(--space-4) var(--space-5);
+    background: var(--blue-1000); color: #fff;
+    display: flex; align-items: baseline; justify-content: space-between;
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .scorecard-head .live {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--blue-200);
+  }
+  .scorecard-head .live::before {
+    content: ''; width: 6px; height: 6px; border-radius: 999px;
+    background: var(--cyan);
+    box-shadow: 0 0 0 3px rgba(52,160,254,0.25);
+  }
+  .sc-row {
+    display: grid;
+    grid-template-columns: 1fr auto 110px 90px;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-5);
+    border-bottom: 1px solid var(--border);
+    font-size: var(--text-sm);
+  }
+  .sc-row:last-child { border-bottom: none; }
+  .sc-row .el {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    letter-spacing: -0.01em;
+  }
+  .sc-row .el small {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    margin-top: 2px;
+  }
+  .sc-row .ratio {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--text);
+  }
+  .sc-row .status {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 4px 8px;
+    text-align: center;
+  }
+  .sc-row.fail .status { background: rgba(200,69,58,0.12); color: var(--risk-red); }
+  .sc-row.warn .status { background: rgba(217,155,39,0.12); color: #b07a14; }
+  .sc-row.pass .status { background: var(--accent-soft); color: var(--blue-700); }
+  .sc-row .verdict {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    text-align: right;
+  }
+  .sc-row.fail .verdict { color: var(--risk-red); }
+  .sc-row.warn .verdict { color: #b07a14; }
+  .sc-row.pass .verdict { color: var(--accent); }
+  @media (max-width: 720px) {
+    .sc-row {
+      grid-template-columns: 1fr auto;
+      gap: var(--space-2);
+    }
+    .sc-row .ratio, .sc-row .status, .sc-row .verdict {
+      grid-column: 1 / -1; text-align: left;
+    }
+  }
+  .value-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .value-card.has-img{min-width:0}
+  .value-card.has-img image-slot{display:block;width:100%;max-width:100%;aspect-ratio:4/3;margin-bottom:var(--space-5)}
+  /* Two readers */
+  .readers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-4);margin-top:var(--space-7)}
+  @media (max-width:760px){.readers{grid-template-columns:1fr}}
+  .reader{background:#fff;border:1px solid var(--sf-line,#e5e7eb);border-radius:var(--sf-r,16px);padding:var(--space-5);display:flex;flex-direction:column;gap:var(--space-3);min-width:0}
+  .reader h4{margin:var(--space-2) 0 0;font-family:var(--font-display);font-weight:400;font-size:clamp(1.4rem,2vw,1.75rem);letter-spacing:-.02em;line-height:1.15}
+  .reader h4 em{font-style:normal;color:var(--accent)}
+  .reader p{margin:0;color:var(--muted);line-height:1.5;max-width:40ch}
+  .rv{aspect-ratio:16/10;border-radius:12px;overflow:hidden;position:relative;background:radial-gradient(90% 70% at 15% 0%,rgba(1,116,217,.45),transparent 55%),radial-gradient(70% 60% at 100% 100%,rgba(52,160,254,.3),transparent 55%),linear-gradient(160deg,#0b1220,#000);border:1px solid rgba(128,195,254,.18)}
+  .rv::after{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.5) .6px,transparent .7px);background-size:3px 3px;opacity:.12;mix-blend-mode:overlay;pointer-events:none}
+  .rv>*{position:relative;z-index:1}
+  .rv.ai{display:grid;place-items:center;padding:14px}
+  .rv-img{height:100%;aspect-ratio:1;border-radius:8px;background:#fff;position:relative;overflow:visible}
+  .rv-img img{z-index:0}
+  .rv-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:6%}
+  .rv-data{position:absolute;inset:0;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.04em;pointer-events:none;z-index:2}
+  .rv-data .pop{position:absolute;left:var(--lx);top:var(--ly);display:flex;align-items:center;gap:6px;padding:5px 9px;border-radius:999px;color:#fff;white-space:nowrap;box-shadow:0 10px 24px -8px rgba(0,0,0,.6);opacity:0;transform:translate(0,var(--ty,0)) scale(.85);transition:opacity .35s,transform .35s cubic-bezier(.2,.9,.3,1.3)}
+  .rv-data .pop.on{opacity:1;transform:translate(0,var(--ty,0)) scale(1)}
+  .rv-data .pop b{font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.85;font-weight:600}
+  .rv-data .brand{background:#0174d9}.rv-data .type{background:#7c3aed}.rv-data .variant{background:#d97706}.rv-data .count{background:#1f9d55;left:auto!important;right:calc(100% - var(--lx));transform-origin:right center}
+  .rv-data .spot{position:absolute;left:var(--x);top:var(--y);width:var(--w);height:var(--h);border:1.5px solid var(--c);border-radius:4px;opacity:0;box-shadow:0 0 0 2px rgba(255,255,255,.5) inset;transform:scale(1.15);transition:opacity .3s,transform .3s}
+  .rv-data .spot.on{opacity:1;transform:none}
+  .rv-cur{position:absolute;left:0;top:0;width:16px;height:16px;z-index:4;opacity:0;filter:drop-shadow(0 2px 3px rgba(0,0,0,.5));transition:transform .9s cubic-bezier(.4,0,.2,1),opacity .3s}
+  .rv-cur.on{opacity:1}.rv-cur.click{transform:var(--t) scale(.8)!important}
+  .rv.mob{display:grid;place-items:end center;overflow:hidden}
+  .rv-phone{width:46%;aspect-ratio:9/12;background:#1a1f26;border-radius:22px 22px 0 0;padding:8px 8px 0;box-shadow:0 0 0 1px #3a4550;overflow:hidden}
+  .rv-screen{height:100%;background:#fff;border-radius:16px 16px 0 0;overflow:hidden;padding:10px 10px 0;-webkit-mask-image:linear-gradient(#000 82%,transparent);mask-image:linear-gradient(#000 82%,transparent)}
+  .rv-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;align-content:start;padding-bottom:6px;animation:rvScroll 14s linear infinite;will-change:transform}
+  .rv-grid .half{display:contents}
+  .rv-grid i{display:block;aspect-ratio:1;border-radius:6px;background:#eef0f3;position:relative;overflow:hidden;animation:rvFlash 2.4s ease-in-out infinite}
+  .rv-grid i:nth-child(2n){animation-delay:.8s}.rv-grid i:nth-child(3n){animation-delay:1.4s}
+  .rv-grid i.pick{animation:none;padding:0;background:#fff;box-shadow:0 0 0 1.5px var(--accent)}
+  .rv-grid i.pick img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:4%}
+  @keyframes rvFlash{0%,100%{background:#eef0f3}50%{background:#e3e6ea}}
+  @keyframes rvScroll{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+  @media (prefers-reduced-motion:reduce){.rv-grid,.rv-grid i,.readers.in .rv-data .pop{animation:none}.rv-data .pop{opacity:1;transform:none}}
+  /* Legibility: scan + floating checks */
+  .legi-wrap{position:relative;display:flex;justify-content:center;align-items:center;min-height:520px;padding:0 6%}
+  .legi-hero{width:min(300px,56%);background:#fff;border:1px solid var(--sf-line,#e5e7eb);border-radius:var(--sf-r,16px);overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 2px rgba(14,27,42,.04)}
+  .legi-hero .pic{flex:1;position:relative;background:#fff;min-height:0;aspect-ratio:1;overflow:hidden}
+  .legi-hero .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:8%}
+  .legi-hero .scan{position:absolute;left:0;right:0;top:-6px;height:3px;background:linear-gradient(90deg,transparent,var(--cyan,#34a0fe),transparent);box-shadow:0 0 18px 5px rgba(52,160,254,.35);opacity:0}
+  .legi-wrap.in .scan{animation:legiScan 1.6s ease-in-out 1 forwards}
+  @keyframes legiScan{0%{top:-6px;opacity:0}8%{opacity:1}92%{opacity:1}100%{top:100%;opacity:0}}
+  .legi-hero .score{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:14px;padding:14px 18px;border-top:1px solid var(--sf-line,#e5e7eb);background:#fafbfc}
+  .legi-hero .score b{font-family:var(--font-sans);font-size:30px;font-weight:500;letter-spacing:-.04em;color:#0e1b2a;line-height:1}
+  .legi-wrap .track{position:relative;display:block;height:8px;border-radius:4px;background:#eef0f3;overflow:hidden}
+  .legi-wrap .fill{position:absolute;left:0;top:0;bottom:0;width:var(--w);border-radius:4px;background:linear-gradient(90deg,#bbf0cf,#1f9d55)}
+  .float{position:absolute;background:#fff;border:1px solid var(--sf-line,#e5e7eb);border-radius:14px;padding:12px 14px;box-shadow:0 24px 60px -24px rgba(14,27,42,.35),0 1px 2px rgba(14,27,42,.04);width:min(240px,44%);opacity:0;transform:translateY(14px) scale(.98);transition:opacity .5s cubic-bezier(.2,.85,.25,1),transform .5s cubic-bezier(.2,.85,.25,1)}
+  .legi-wrap.in .float{opacity:1;transform:none}
+  .float.f1{left:0;top:4%;transition-delay:2.6s}
+  .float.f2{right:0;top:10%;transition-delay:2.9s}
+  .float.f3{left:2%;bottom:6%;transition-delay:3.2s}
+  .float.f4{right:2%;bottom:10%;transition-delay:3.5s}
+  .float.f1 .ready-row{grid-template-columns:1fr}
+  .float.f1{animation:legiBob 6s ease-in-out 3s infinite}.float.f3{animation:legiBob 7s ease-in-out 3.6s infinite}
+  @keyframes legiBob{0%,100%{translate:0 0}50%{translate:0 -6px}}
+  .ready-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .rd{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:10px;background:#f6f8fa;font-size:12.5px;font-weight:500;color:#0e1b2a;white-space:nowrap}
+  .rd .ic{width:13px;height:13px;border:1.5px solid #0e1b2a;border-radius:3px;flex:none}.rd .ic.bot{border-radius:5px}
+  .rd b{margin-left:auto;width:18px;height:18px;border-radius:4px;display:grid;place-items:center;color:#fff;font-size:11px;font-weight:700;flex:none}
+  .rd b.ok{background:#1f9d55}.rd b.ok::after{content:'';width:4px;height:8px;border:solid #fff;border-width:0 2px 2px 0;transform:translateY(-1px) rotate(45deg)}
+  .rd b.warn{background:#d2452f}.rd b.warn::after{content:'!'}
+  .grp .gh{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
+  .grp h4{margin:0;font-family:var(--font-display);font-weight:400;font-size:15px;letter-spacing:-.01em;color:#0e1b2a}
+  .apill{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:4px;background:#e8f7ee;color:#1f9d55}
+  .apill.rev{background:#fff4d6;color:#b26a00}
+  .grp ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+  .grp li{display:flex;align-items:center;gap:10px;padding:4px 0;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#4a5a6a;opacity:0;transition:opacity .3s}
+  .legi-wrap.in .grp li{opacity:1;transition-delay:calc(3.2s + var(--i,0)*.08s)}
+  .grp li::after{content:'';flex:1;order:1;border-bottom:1px dotted #cfd4da;transform:translateY(1px)}
+  .grp li i{order:2;width:14px;height:14px;position:relative;flex:none}
+  .grp li.ok i::after{content:'';position:absolute;left:4px;top:0;width:5px;height:10px;border:solid #1f9d55;border-width:0 2px 2px 0;transform:rotate(45deg)}
+  .grp li.warn i::after{content:'';position:absolute;left:1px;top:1px;width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid #f59e0b}
+  .grp.bar .fill{background:linear-gradient(90deg,#bbf0cf,#1f9d55);transition-delay:3.7s}
+  @media (max-width:640px){.legi-wrap{min-height:0;flex-direction:column;gap:10px;padding:0}.legi-hero{width:100%}.float{position:static;width:auto;transform:none}.float.f1 .ready-row{grid-template-columns:1fr 1fr}}
+  .vz-foot-band-copy{align-items:flex-start!important;text-align:left!important}
+  /* iPhone body + endless bland scroll */
+  .iphone{position:relative;width:100%;max-width:300px;aspect-ratio:9/19.2;margin:0 auto;background:#0b0f14;border-radius:48px;padding:12px;box-shadow:0 40px 80px rgba(0,0,0,.45),inset 0 0 0 2px #2a333d,inset 0 0 0 5px #0b0f14,inset 0 0 0 6px #3a4550}
+  .iphone::before,.iphone::after{content:'';position:absolute;background:#2a333d;border-radius:2px}
+  .iphone::before{left:-3px;top:22%;width:3px;height:9%;box-shadow:0 14% 0 0 #2a333d}
+  .iphone::after{right:-3px;top:28%;width:3px;height:14%}
+  .iphone .btn-vol{position:absolute;left:-3px;top:34%;width:3px;height:9%;background:#2a333d;border-radius:2px}
+  .iphone .island{position:absolute;top:22px;left:50%;transform:translateX(-50%);width:84px;height:24px;background:#000;border-radius:999px;z-index:4}
+  .iphone .scr{position:absolute;inset:12px;border-radius:38px;background:#f6f6f6;overflow:hidden}
+  /* AI readiness: phone chat + popped-out hero with attribute callouts */
+  .ai-ready{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--space-5);align-items:center}
+  .ai-ready .iphone.small{max-width:290px;margin:0;border-radius:46px;padding:11px;aspect-ratio:9/19.3;background:#d9dde3;box-shadow:0 40px 80px rgba(0,0,0,.45),inset 0 0 0 2px #f4f6f8,inset 0 0 0 5px #d9dde3,inset 0 0 0 6px #aab1ba}
+  .ai-ready .iphone.small::before,.ai-ready .iphone.small::after,.ai-ready .iphone.small .btn-vol{background:#c3c9d1}
+  .ai-ready .iphone.small .island{top:20px;width:76px;height:22px}
+  .ai-ready .iphone.small .scr{inset:11px;border-radius:36px}
+  .ai-ready .scr.chat{background:#fff;color:#111;display:flex;flex-direction:column}
+  .ai-ready .scr.chat::before,.ai-ready .scr.chat::after{content:none}
+  .ai-ready.play .iphone.small,.ai-ready.play .scr.chat,.ai-ready.play .msgs,.ai-ready.play .msg.ai,.ai-ready.play .rec{overflow:visible}
+  .chat-top{height:72px;display:flex;align-items:center;justify-content:center;gap:6px;padding-top:28px;font-size:12px;font-weight:500;color:#111;border-bottom:1px solid #eef0f3}
+  .chat-top .dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#7cc4ff,#0174d9)}
+  .chat-in{margin-top:auto;margin:auto 12px 18px;height:40px;border-radius:999px;background:#f1f3f6;display:flex;align-items:center;justify-content:space-between;padding:0 6px 0 16px;font-size:13px;color:#8a94a3}
+  .chat-in i{width:28px;height:28px;border-radius:50%;background:#111;position:relative}
+  .chat-in i::after{content:'';position:absolute;left:50%;top:50%;width:6px;height:6px;border:solid #fff;border-width:2px 0 0 2px;transform:translate(-50%,-30%) rotate(45deg)}
+  .msgs{padding:18px 12px;display:flex;flex-direction:column;gap:14px;font-size:13px;line-height:1.4}
+  .msg{max-width:92%;padding:10px 12px;border-radius:16px}
+  .msg.me{align-self:flex-end;background:#0174d9;color:#fff;border-bottom-right-radius:4px}
+  .msg.ai{align-self:flex-start;background:#f1f3f6;color:#111;border-bottom-left-radius:4px}
+  .msg p{margin:0}.msg p+.rec,.rec+p{margin-top:8px}
+  .rec{display:flex;flex-direction:column;gap:8px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:8px;color:#111}
+  .rec .pic{aspect-ratio:1;border-radius:8px;background:#f3f4f6;position:relative;overflow:visible}
+  .rec .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:8px;background:#fff}
+  .rec .pic .ghost{z-index:5;opacity:0;box-shadow:0 20px 50px rgba(0,0,0,.4);transform-origin:top left}
+  .ai-ready.play .rec .pic .ghost{animation:popDup 1.1s cubic-bezier(.2,.85,.25,1) .4s forwards}
+  @keyframes popDup{0%{opacity:0;transform:translate(0,0) scale(1)}15%{opacity:1}100%{opacity:1;transform:translate(var(--dx,260px),var(--dy,-40px)) scale(var(--sc,2.2))}}
+  .popout{opacity:0;transition:opacity .3s}
+  .ai-ready.play .popout{opacity:1;transition-delay:1.45s}
+  .ai-ready.play .rec .pic .ghost{animation-fill-mode:forwards}
+  .ai-ready.play.settled .rec .pic .ghost{opacity:0;animation:none}
+  .rec .t{display:flex;flex-direction:column;gap:2px;font-size:12px;line-height:1.3}
+  .rec .t b{font-weight:600}.rec .t span{color:#6b7280}
+  .popout{position:relative;aspect-ratio:1;border-radius:16px;background:#fff;border:1px solid rgba(128,195,254,.35);box-shadow:0 30px 80px rgba(1,30,60,.45),0 0 0 1px rgba(255,255,255,.04) inset;overflow:visible}
+  .popout::before{content:'';position:absolute;left:-26px;top:50%;width:26px;height:1px;background:linear-gradient(90deg,rgba(124,196,255,0),rgba(124,196,255,.8));pointer-events:none}
+  .pop-img{position:absolute;inset:0;border-radius:16px;overflow:hidden}
+  .pop-img img{width:100%;height:100%;object-fit:contain;background:#fff}
+  .popout .tag{position:absolute;left:var(--x);top:var(--y);width:var(--w);height:var(--h);border:1.5px solid var(--cyan,#34a0fe);border-radius:6px;box-shadow:0 0 0 1px rgba(255,255,255,.6) inset,0 0 18px rgba(52,160,254,.35);font-family:var(--font-sans);font-size:12px;font-weight:600;letter-spacing:0;text-transform:none;color:#fff;animation:tagIn .6s ease both}
+  .popout .tag>b{position:absolute;left:-1.5px;top:-26px;padding:4px 9px;border-radius:6px 6px 6px 0;background:var(--cyan,#34a0fe);color:#fff;font-weight:600;white-space:nowrap}
+  .popout .tag{text-indent:-9999px}.popout .tag>b{text-indent:0}
+  .popout .tag.count>b{left:auto;right:-1.5px;border-radius:5px 5px 0 5px}.popout .tag.size>b{top:auto;bottom:-26px;border-radius:0 6px 6px 6px}
+  .popout .tag.brand{animation-delay:1.6s}.popout .tag.type{animation-delay:1.85s}.popout .tag.count{animation-delay:2.1s}.popout .tag.variant{animation-delay:2.35s}.popout .tag.size{animation-delay:2.6s}
+  @keyframes tagIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:none}}
+  .ai-ready:not(.play) .popout .tag{animation-play-state:paused;opacity:0}
+  .popout .tag.variant > b{top:-26px;left:-1.5px;right:auto;border-radius:6px 6px 6px 0}
+  .popout .tag.brand > b{top:-2px;left:auto;right:calc(100% + 6px);border-radius:6px 0 0 6px}
+  .popout .tag.type > b{top:auto;bottom:-2px;left:calc(100% + 6px);border-radius:0 6px 6px 0}
+  .popout .tag.size > b{top:calc(100% + 6px);bottom:auto;left:-1.5px;right:auto;border-radius:0 6px 6px 6px}
+  @media (max-width:640px){.ai-ready{grid-template-columns:1fr}.ai-ready .iphone.small{margin:0 auto}.popout::before{display:none}}
+  .sol-hero-grid>.hero-ai{background:none!important;border:none!important;box-shadow:none!important;padding:0!important;display:grid}
+  .sol-hero-grid>.hero-ai>*{border-radius:inherit!important;overflow:visible!important;border-color:initial!important}
+  .sol-hero-grid>.hero-ai .popout{border-radius:16px!important;box-shadow:0 30px 80px rgba(1,30,60,.45)!important;border:1px solid rgba(128,195,254,.35)!important}
+  .sol-hero-grid>.hero-ai .iphone.small{border-radius:46px!important;box-shadow:0 40px 80px rgba(0,0,0,.45),inset 0 0 0 2px #f4f6f8,inset 0 0 0 5px #d9dde3,inset 0 0 0 6px #aab1ba!important}
+</style>
+<link rel="stylesheet" href="../css/solutions-home.css?v=9dbf9ddb">
+<link rel="stylesheet" href="../css/solutions-facelift.css?v=6ea946d6">
+<link rel="stylesheet" href="../css/solutions-clean.css?v=0fbef6fb">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vizit">
+<meta property="og:title" content="Mobile &amp; AI Readiness | Hero Image Optimization | Vizit">
+<meta property="og:image" content="https://vizit.com/assets/og-cover.jpg">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="1000">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mobile &amp; AI Readiness | Hero Image Optimization | Vizit">
+<meta name="twitter:image" content="https://vizit.com/assets/og-cover.jpg">
+<script defer src="/_vercel/insights/script.js"></script>
+<script>
+  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;family=Inter:wght@300;400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;family=Inter:wght@300;400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap"></noscript>
+</head>
+<body>
+
+<vizit-nav data-current="accessibility"></vizit-nav>
+
+<!-- ════════════════════════════════════════════════════════════
+     PANEL 1 — AUTOMATED IMAGE ACCESSIBILITY TESTING
+     ════════════════════════════════════════════════════════════ -->
+<section class="sol-hero" data-screen-label="01 Automated A11y testing">
+  <div class="container">
+    <div class="sol-hero-grid">
+      <div class="reveal">
+        <span class="crumb"><a href="hero-images.html">Hero Image Optimization</a><span>/</span><span>Mobile &amp; AI Readiness</span></span>
+        <span class="badge-inline" style="margin-top: var(--space-4);">Now included for all Vizit customers</span>
+        <h1 class="display">If they can't read it, they won't buy it.</h1>
+        <p class="subhead">Vizit tests every asset for clarity and glance-readability on mobile, so it's readable, compliant, and built to convert, across your whole catalog.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary btn-lg" href="../demo.html">Test my hero images <span class="arrow">→</span></a>
+        </div>
+      </div>
+      <div class="reveal ai-ready hero-ai" aria-label="An AI assistant recommends the product; the hero image is enlarged with brand, type, variant, size and count called out">
+        <div class="iphone small">
+          <span class="btn-vol"></span>
+          <div class="island"></div>
+          <div class="scr chat">
+            <div class="chat-top"><span class="dot"></span><span>Assistant</span></div>
+            <div class="msgs">
+              <div class="msg me">What's a healthy snack bar with simple ingredients?</div>
+              <div class="msg ai"><p>Top pick for real-ingredient bars:</p>
+                <div class="rec"><div class="pic"><img src="../assets/products/larabar-variety.webp" alt=""><img class="ghost" src="../assets/products/larabar-variety.webp" alt=""></div><div class="t"><b>Lärabar Fruit Variety Pack</b><span>Fruit &amp; nut bars · 18 bars</span></div></div>
+              </div>
+            </div>
+            <div class="chat-in"><span>Ask anything</span><i></i></div>
+          </div>
+        </div>
+        <div class="popout">
+          <div class="pop-img"><img src="../assets/products/larabar-variety.webp" alt=""></div>
+          <div class="tag brand" style="--x:36.6%;--y:16.4%;--w:39.2%;--h:9.2%"><b>Brand</b>Lärabar</div>
+          <div class="tag variant" style="--x:11.3%;--y:7.0%;--w:88.7%;--h:7.6%"><b>Variant</b>Fruit Variety Pack</div>
+          <div class="tag type" style="--x:24.2%;--y:45.9%;--w:57.4%;--h:47.1%"><b>Type</b>Fruit &amp; nut bars</div>
+          <div class="tag size" style="--x:13.7%;--y:38.0%;--w:11.1%;--h:13.4%"><b>Count</b>18 bars</div>
+        </div>
+      </div>
+
+    <script>(function(){var w=document.querySelector('.ai-ready');if(!w)return;var g=w.querySelector('.rec .pic .ghost'),p=w.querySelector('.pop-img');function arm(){var a=g.getBoundingClientRect(),b=p.getBoundingClientRect();g.style.setProperty('--dx',(b.left-a.left)+'px');g.style.setProperty('--dy',(b.top-a.top)+'px');g.style.setProperty('--sc',(b.width/a.width).toFixed(3));}
+      var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();arm();requestAnimationFrame(function(){w.classList.add('play');setTimeout(function(){w.classList.add('settled')},1600)})}},{threshold:.4});io.observe(w);window.addEventListener('resize',function(){if(!w.classList.contains('play'))arm()})})();</script>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     PANEL 2 — THE ACCESSIBILITY MANDATE
+     ════════════════════════════════════════════════════════════ -->
+<section class="panel panel--paper stat-panel" data-screen-label="02 Mobile first">
+  <div class="container">
+    <div class="big-stat reveal">
+      <div class="big-stat-n">59<em>%</em></div>
+      <p class="big-stat-l">of global ecommerce sales now happen on a phone. Your hero image is judged first at thumbnail size, on a 6-inch screen.</p>
+      <span class="big-stat-src">Statista, 2025</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     PANEL 3 — GLANCE READABILITY TESTING
+     ════════════════════════════════════════════════════════════ -->
+<section class="panel" data-screen-label="03 Glance readability">
+  <div class="container">
+    <div class="two-up" style="align-items:center;">
+      <div class="copy reveal">
+        <h2 class="display">Do your hero images pass the <em>accessibility</em> standard?</h2>
+        <p class="subhead">Vizit's AI finds every text string in your image, measures its contrast and size at thumbnail scale, and tells you exactly which ones a shopper can actually read.</p>
+      </div>
+      <div class="reveal legi-wrap" aria-label="The hero image is scanned, then readiness checks float in beside it">
+        <div class="legi-hero">
+          <div class="pic"><img src="../assets/products/larabar-variety.webp" alt=""><span class="scan"></span></div>
+          <div class="score"><b>92</b><span class="track"><span class="fill" style="--w:92%"></span></span></div>
+        </div>
+        <div class="float f1"><div class="ready-row"><span class="rd"><i class="ic ph"></i>Mobile-ready<b class="ok"></b></span><span class="rd"><i class="ic bot"></i>Agent-ready<b class="ok"></b></span></div></div>
+        <div class="float f2 grp"><div class="gh"><h4>Shopper clarity</h4><span class="apill">Pass</span></div><ul><li class="ok" style="--i:0"><span>Brand</span><i></i></li><li class="ok" style="--i:1"><span>Product type</span><i></i></li><li class="ok" style="--i:2"><span>Variant</span><i></i></li><li class="ok" style="--i:3"><span>Size + count</span><i></i></li></ul></div>
+        <div class="float f3 grp"><div class="gh"><h4>Image quality</h4><span class="apill">Pass</span></div><ul><li class="ok" style="--i:4"><span>Background separation</span><i></i></li><li class="ok" style="--i:5"><span>Product centered</span><i></i></li><li class="ok" style="--i:6"><span>Product prominent</span><i></i></li><li class="ok" style="--i:7"><span>No off-pack text</span><i></i></li></ul></div>
+        <div class="float f4 grp bar"><div class="gh"><h4>Composition</h4><span class="apill">Pass</span></div><span class="track"><span class="fill" style="--w:92%"></span></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     PANEL 3B — AI VS MOBILE: PROS AND CONS
+     ════════════════════════════════════════════════════════════ -->
+<section class="panel" data-screen-label="03b AI vs mobile">
+  <div class="container">
+    <div class="copy reveal" style="max-width:72ch;margin:0 auto;text-align:center;">
+      <h2 class="display" style="margin-left:auto;margin-right:auto;max-width:none;"><span style="white-space:nowrap;">Two readers, one image.</span><br><em>Optimize</em> for both.</h2>
+      <p class="subhead" style="margin-left:auto;margin-right:auto;">AI shopping agents and mobile shoppers judge the same hero, but they read it differently.</p>
+    </div>
+    <div class="readers reveal">
+      <div class="reader">
+        <div class="rv ai">
+          <div class="rv-img">
+            <img src="../assets/products/larabar-variety.webp" alt="">
+            <div class="rv-data">
+              <span class="spot" data-n="1" style="--c:#0174d9;--x:38.2%;--y:20.5%;--w:34.5%;--h:8.1%"></span>
+              <span class="spot" data-n="2" style="--c:#d97706;--x:16.0%;--y:12.1%;--w:78.0%;--h:6.7%"></span>
+              <span class="spot" data-n="3" style="--c:#1f9d55;--x:18.0%;--y:39.5%;--w:9.7%;--h:11.8%"></span>
+              <span class="spot" data-n="4" style="--c:#7c3aed;--x:27.3%;--y:46.4%;--w:50.5%;--h:41.5%"></span>
+              <span class="pop brand" data-n="1" style="--lx:74.2%;--ly:24.4%;--ty:-50%"><b>brand</b>Lärabar</span>
+              <span class="pop variant" data-n="2" style="--lx:16.0%;--ly:12.1%;--ty:-110%"><b>variant</b>variety pack</span>
+              <span class="pop count" data-n="3" style="--lx:16.5%;--ly:45.3%;--ty:-50%"><b>count</b>18 bars</span>
+              <span class="pop type" data-n="4" style="--lx:77.8%;--ly:87.9%;--ty:-100%;left:auto!important;right:22.2%"><b>type</b>fruit &amp; nut bars</span>
+            </div>
+            <svg class="rv-cur" viewBox="0 0 24 24"><path d="M5 3l14 8.5-6.2 1.3L16 20l-2.6 1.1-3.2-7.2L5 18z" fill="#fff" stroke="#111" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+        <h4>What an <em>agent</em> reads</h4>
+        <p>Text, product identity, and claims parsed as data, so it can match, cite, and recommend the SKU.</p>
+      </div>
+      <div class="reader">
+        <div class="rv mob">
+          <div class="rv-phone"><div class="rv-screen"><div class="rv-grid"><i></i><i class="pick"><img src="../assets/products/larabar-variety.webp" alt=""></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="pick"><img src="../assets/products/larabar-variety.webp" alt=""></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div>
+        </div>
+        <h4>What a <em>shopper</em> sees</h4>
+        <p>A thumbnail on a six-inch screen, judged in a split second against everything around it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="panel panel--paper" data-screen-label="06 New standard">
+  <div class="container">
+    <div class="copy reveal" style="max-width:60ch;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center;">
+      <h2 class="display" style="margin-left:auto;margin-right:auto;max-width:none;"><span style="white-space:nowrap;">Make every hero <em>readable</em>,</span><br>everywhere it's seen.</h2>
+      <p class="subhead" style="margin-left:auto;margin-right:auto;">Instantly audit your digital shelf for global compliance risks and ensure every <a href="hero-images.html" style="color:var(--accent); border-bottom:1px solid var(--blue-100); padding-bottom:1px; text-decoration:none;">hero image</a> is engineered to convert on the smallest screens.</p>
+      <div class="badge-inline" style="margin-top: var(--space-5);">Included in your Vizit subscription</div>
+      <div class="cta-row" style="margin-top: var(--space-5);justify-content:center;">
+        <a class="btn btn-primary btn-lg" href="../demo.html">Run an accessibility audit <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     FAQ
+     ════════════════════════════════════════════════════════════ -->
+<section class="panel" data-screen-label="07 FAQ">
+  <div class="container">
+    <div class="faq-grid">
+      <div class="reveal">
+        <h2 class="display" style="margin-top: var(--space-3); font-size: clamp(1.75rem, 3vw, 2.5rem);">Mobile and AI readiness <em>questions</em>, answered.</h2>
+        <p class="subhead" style="margin-top: var(--space-4);">What digital commerce, legal, and creative leaders ask us most about mobile and AI readiness and the EAA.</p>
+      </div>
+      <div class="reveal">
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary><span class="plus">+</span>What accessibility standards apply to product images?</summary>
+            <div class="answer">Digital accessibility law, including ADA Title III in the U.S. and the European Accessibility Act (EAA) in Europe, requires that text in product images meets minimum contrast and legibility thresholds. Vizit measures every text element against those thresholds, and against how human eyes actually perceive clarity on backlit mobile screens.</div>
+          </details>
+          <details class="faq-item">
+            <summary><span class="plus">+</span>Does the European Accessibility Act apply to ecommerce product images?</summary>
+            <div class="answer">Yes. As of June 28, 2025, the European Accessibility Act applies to B2C digital commerce in the EU, including product content where text overlays communicate critical information. The law applies to any brand selling into EU markets regardless of where the brand is headquartered, and non-compliance carries financial penalties, market access restrictions, and rising enforcement scrutiny across member states.</div>
+          </details>
+          <details class="faq-item">
+            <summary><span class="plus">+</span>How do I audit my Amazon images for readability?</summary>
+            <div class="answer">Vizit automatically scans every text element in your Amazon hero and carousel images, measures contrast and legible size, and provides an element-by-element scorecard. The analysis accounts for how Amazon's mobile thumbnails, search grid display, and PDP context affect actual glance-readability. Results return at catalog scale within the Vizit Platform, with the precise element-level guidance needed to fix failing assets.</div>
+          </details>
+          <details class="faq-item">
+            <summary><span class="plus">+</span>What's the penalty for non-compliant product images under accessibility law?</summary>
+            <div class="answer">Penalties vary by jurisdiction. Under ADA Title III, U.S. brands face private litigation, settlement costs averaging tens of thousands of dollars per case, and ongoing remediation obligations. Under the European Accessibility Act, EU member states are implementing fines, market access restrictions, and enforcement actions that vary in severity by country. Beyond legal exposure, non-compliant imagery silently suppresses conversion: shoppers who can't read on-image text — including the 1 in 12 men with color vision deficiency — abandon products that don't communicate clearly at first glance.</div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     FINAL CTA
+     ════════════════════════════════════════════════════════════ -->
+<vizit-footer data-cta-headline="Compliant. Readable.|*Conversion ready.*"></vizit-footer>
+
+<script>
+
+  (function(){
+    var box=document.querySelector('.rv.ai .rv-img'); if(!box) return;
+    var cur=box.querySelector('.rv-cur'), spots=box.querySelectorAll('.spot'), pops=box.querySelectorAll('.pop');
+    var stops=[[55.6,24.4],[54.6,15.4],[22.9,45.3],[52.3,67.7]]; // cursor targets (% of image box): logo, header, 18 badge, bars
+    var reduced=matchMedia('(prefers-reduced-motion:reduce)').matches, timer=null, alive=false;
+    function at(p){ var t='translate('+p[0]+'cqw,'+p[1]+'cqh)'; cur.style.setProperty('--t',t); cur.style.transform=t; }
+    function reset(){ spots.forEach(function(s){s.classList.remove('on')}); pops.forEach(function(p){p.classList.remove('on')}); cur.classList.remove('on','click'); }
+    function step(i){
+      if(!alive) return;
+      if(i>=stops.length){ timer=setTimeout(function(){ reset(); timer=setTimeout(function(){ step(0); },700); },2600); return; }
+      at(stops[i]);
+      timer=setTimeout(function(){ cur.classList.add('click'); setTimeout(function(){cur.classList.remove('click')},160);
+        spots[i].classList.add('on'); setTimeout(function(){ pops[i].classList.add('on'); },180);
+        timer=setTimeout(function(){ step(i+1); },1300);
+      },950);
+    }
+    function start(){ if(alive) return; alive=true; reset(); if(reduced){ spots.forEach(function(s){s.classList.add('on')}); pops.forEach(function(p){p.classList.add('on')}); return; } at([-10,50]); cur.classList.add('on'); timer=setTimeout(function(){step(0)},300); }
+    function stop(){ alive=false; clearTimeout(timer); }
+    box.style.containerType='size';
+    new IntersectionObserver(function(e){ e[0].isIntersecting?start():stop(); },{threshold:.4}).observe(box);
+  })();
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) { els.forEach(function(e){ e.classList.add('in'); }); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    els.forEach(function(e){ io.observe(e); });
+  })();
+</script>
+
+</body>
+</html>

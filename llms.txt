@@ -102,29 +102,33 @@ Vizit's generative image capability, powered by the Content Optimization Agent. 
 [https://vizit.com/ip](https://vizit.com/ip)
 The patented architecture behind Visual Intelligence: 47 issued U.S. patents across eight foundational AI primitives, built over a decade. Why generic AI describes an image while Vizit predicts human choice.
 
-### Solution: Pre-Syndication Conversion Scoring
-[https://vizit.com/solutions/pre-syndication-conversion-scoring](https://vizit.com/solutions/pre-syndication-conversion-scoring)
-For content operations and syndication teams. A PIM calls the Vizit API to score every asset against the Content Conversion Standard before it syndicates, so only Vizit Certified content reaches the shelf.
+### Solution: Hero Image Optimization
+[https://vizit.com/solutions/hero-images](https://vizit.com/solutions/hero-images)
+How Vizit scores, benchmarks, and optimizes the hero image — the asset that wins the click in the search grid, in sponsored placements, and in AI discovery.
+
+### Solution: Mobile and AI Readiness
+[https://vizit.com/solutions/mobile-ai-readiness](https://vizit.com/solutions/mobile-ai-readiness)
+How Vizit tests every hero image for glance-readability on mobile and legibility to AI shopping agents, including the contrast and legibility requirements of ADA Title III and the European Accessibility Act.
+
+### Solution: Carousel Image Optimization
+[https://vizit.com/solutions/carousel-image-optimization](https://vizit.com/solutions/carousel-image-optimization)
+How Vizit scores every secondary image, orders the carousel by what converts, and fills the gaps with Spark AI.
 
 ### Solution: Product Page Optimization
 [https://vizit.com/solutions/product-page-optimization](https://vizit.com/solutions/product-page-optimization)
-For ecommerce and digital shelf teams. How Vizit turns existing traffic into revenue by finding and fixing the content failures that suppress PDP conversion across the catalog.
+For ecommerce and digital shelf teams. One Product Page Score for the whole PDP, covering hero, carousel, image order, mix and count. Includes pre-syndication scoring: a PIM calls the Vizit API so every product is scored and certified before it syndicates.
 
-### Solution: Hero Image Optimization
-[https://vizit.com/solutions/hero-images](https://vizit.com/solutions/hero-images)
-How Vizit scores, benchmarks, and optimizes the hero image — the asset that wins the click in the search grid and drives retail media ROAS.
+### Solution: Product Catalog Optimization
+[https://vizit.com/solutions/product-catalog-optimization](https://vizit.com/solutions/product-catalog-optimization)
+How Vizit scores every product page in a catalog and ranks the fixes by revenue upside, so teams optimize in the order that pays back first.
 
 ### Solution: Retail Media ROAS
 [https://vizit.com/solutions/retail-media-roas](https://vizit.com/solutions/retail-media-roas)
-For retail media and performance marketing teams. Why retail media spend fails when it lands on low-scoring content, and how Vizit ensures paid impressions land on content built to convert.
+For retail media and performance marketing teams. Why retail media spend fails when it lands on low-scoring content, and how Vizit scores every destination before campaigns run.
 
 ### Solution: Answer Engine Optimization
 [https://vizit.com/solutions/answer-engine-optimization](https://vizit.com/solutions/answer-engine-optimization)
 How Vizit prepares product content for AI-driven shopping discovery. People search with words but buy with their eyes; AI surfaces images, and content must convert in AI-native environments.
-
-### Solution: Mobile and AI Readiness
-[https://vizit.com/solutions/accessibility](https://vizit.com/solutions/accessibility)
-How Vizit ensures content is readable and effective on mobile and in AI-mediated shopping contexts.
 
 ### ROI
 [https://vizit.com/roi](https://vizit.com/roi)

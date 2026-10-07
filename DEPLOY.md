@@ -46,7 +46,7 @@ if you intend to use it.
 | Path | Role |
 |---|---|
 | `*.html` (root) | the deployed pages |
-| `solutions/` | the 11 solutions pages |
+| `solutions/` | the solutions pages (six in the nav; the rest are older, unlinked pages) |
 | `css/`, `js/` | shared stylesheets and scripts |
 | `assets/` | images, logos, award badges, gated PDFs |
 | `fonts/` | Source Serif 4 |

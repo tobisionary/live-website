@@ -331,8 +331,74 @@ function mountBleed(el){
   setTimeout(closeDrill, 4600);
 }
 
-/* ── mount on scroll into view ── */
-const MOUNTS = { blink: mountBlink, carousel: mountCarousel, h2h: mountH2H, bleed: mountBleed };
+/* ══════════ 5. SEARCH → SHELF ══════════ */
+function mountSearch(el){
+  const root = el.dataset.root || '';
+  const query = el.dataset.query || 'lotion';
+  const custom = (el.dataset.images||'').split(',').map(s=>s.trim()).filter(Boolean);
+  const set = custom.length ? custom.map(img=>({img, name:''})) : [PRODUCTS[1], PRODUCTS[5], PRODUCTS[3], PRODUCTS[4], PRODUCTS[2], PRODUCTS[0]];
+  const tile = p => `<div class="fx-tile"><div class="ph"><img src="${root}${p.img}" alt="${p.name}"></div><span class="ln"></span><span class="ln s"></span></div>`;
+  el.innerHTML =
+    `<div class="fx-frame fx-search">
+      <div class="fx-search-stage">
+        <div class="fx-sbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><span class="q"><span class="txt"></span><span class="caret"></span></span><span class="go">Search</span></div>
+        <div class="fx-sgrid">${set.map(tile).join('')}</div>
+        <div class="fx-toast fx-atc"><i></i>Added to cart</div>
+        <div class="fx-cur"><svg viewBox="0 0 24 24"><path d="M5 3l14 8.5-6.2 1.3L16 20l-2.6 1.1-3.2-7.2L5 18z" fill="#fff" stroke="#111" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+      </div>
+    </div>`;
+  const stage = el.querySelector('.fx-search-stage'), txt = el.querySelector('.txt'), go = el.querySelector('.go'),
+        toast = el.querySelector('.fx-atc'), cur = el.querySelector('.fx-cur'), tiles = [...el.querySelectorAll('.fx-tile')];
+  const reduced = matchMedia('(prefers-reduced-motion:reduce)').matches;
+  let timers=[], alive=false, raf=null, cx=0, cy=0;
+  const clearT=()=>{timers.forEach(clearTimeout);timers=[]; if(raf) cancelAnimationFrame(raf); raf=null;};
+  const wait=(ms,fn)=>timers.push(setTimeout(()=>{ if(alive) fn(); },ms));
+  const rnd=(a,b)=>a+Math.random()*(b-a);
+  const place=(x,y)=>{ cx=x; cy=y; cur.style.transform='translate('+x+'px,'+y+'px)'; };
+  const center=n=>{ const r=stage.getBoundingClientRect(), b=n.getBoundingClientRect(); return {x:b.left-r.left+b.width/2, y:b.top-r.top+b.height/2}; };
+  function moveTo(tx,ty,done){
+    if(raf) cancelAnimationFrame(raf);
+    const sx=cx, sy=cy, dx=tx-sx, dy=ty-sy, dist=Math.hypot(dx,dy)||1;
+    const dur=Math.max(420,Math.min(1100,260+dist*1.6)), bend=Math.min(90,dist*.22)*(Math.random()<.5?-1:1);
+    const qx=sx+dx*.5-dy/dist*bend, qy=sy+dy*.5+dx/dist*bend, ox=tx+dx/dist*Math.min(7,dist*.04), oy=ty+dy/dist*Math.min(7,dist*.04);
+    let t0=null; const ph=Math.random()*6.28, ease=p=>p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
+    const step=ts=>{ if(!t0)t0=ts; const p=Math.min((ts-t0)/dur,1), ev=ease(p); let x,y;
+      if(p<.88){ const q=ev/.97,u=1-q; x=u*u*sx+2*u*q*qx+q*q*ox; y=u*u*sy+2*u*q*qy+q*q*oy; } else { const k=(p-.88)/.12; x=ox+(tx-ox)*k; y=oy+(ty-oy)*k; }
+      const tr=(1-p)*1.2; place(x+Math.sin(ts/38+ph)*tr, y+Math.cos(ts/47+ph)*tr);
+      if(p<1) raf=requestAnimationFrame(step); else { raf=null; done&&done(); } };
+    raf=requestAnimationFrame(step);
+  }
+  const toNode=(n,dx,dy,done)=>{ const c=center(n); moveTo(c.x+(dx||0)+rnd(-4,4), c.y+(dy||0)+rnd(-4,4), done); };
+  const click=()=>{ cur.classList.add('click'); setTimeout(()=>cur.classList.remove('click'),140); };
+  function reset(){ stage.classList.remove('docked'); go.classList.remove('press'); txt.textContent=''; toast.classList.remove('on'); cur.classList.remove('show'); tiles.forEach(t=>t.classList.remove('in','win','lost','press')); }
+  function run(){
+    reset();
+    const r=stage.getBoundingClientRect(); place(r.width*.55, r.height*.6);
+    wait(300,()=>{ cur.classList.add('show'); toNode(txt,36,0,()=>{ click();
+      [...query].forEach((ch,i)=>wait(140+i*95,()=>{ txt.textContent+=ch; }));
+      wait(140+query.length*95+220,()=>{ toNode(go,0,0,()=>{ click(); go.classList.add('press');
+        wait(180,()=>{ go.classList.remove('press'); stage.classList.add('docked'); moveTo(cx-rnd(60,120), cy+rnd(100,160));
+          tiles.forEach((tl,i)=>wait(600+i*90,()=>tl.classList.add('in')));
+          wait(600+tiles.length*90+500,()=>{ tiles.forEach((tl,i)=>tl.classList.add(i===0?'win':'lost'));
+            wait(420,()=>{ toNode(tiles[0],rnd(-8,8),rnd(-4,8),()=>{ wait(rnd(160,260),()=>{ click(); tiles[0].classList.add('press');
+              wait(140,()=>{ tiles[0].classList.remove('press'); const tc=center(tiles[0]); toast.style.setProperty('--tx',tc.x+'px'); toast.style.setProperty('--ty',(tc.y-tiles[0].offsetHeight*.42)+'px'); toast.classList.add('on'); moveTo(cx+rnd(10,24), cy+rnd(10,20));
+                wait(1500,()=>{ toast.classList.remove('on'); cur.classList.remove('show');
+                  wait(500,()=>run());
+                });
+              });
+            }); });
+            });
+          });
+        });
+      }); });
+    }); });
+  }
+  if(reduced){ reset(); stage.classList.add('docked'); txt.textContent=query; tiles.forEach((tl,i)=>tl.classList.add('in',i===0?'win':'lost')); cur.style.display='none'; return; }
+  const io=new IntersectionObserver(en=>{ if(en[0].isIntersecting&&!alive){ alive=true; run(); } else if(!en[0].isIntersecting&&alive){ alive=false; clearT(); } },{threshold:.3});
+  io.observe(el);
+}
+
+const MOUNTS = { blink: mountBlink, carousel: mountCarousel, h2h: mountH2H, bleed: mountBleed, search: mountSearch };
 function boot(){
   const els = document.querySelectorAll('.fx[data-fx]');
   const io = new IntersectionObserver(entries => {

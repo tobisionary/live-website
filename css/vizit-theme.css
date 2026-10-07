@@ -913,7 +913,7 @@ vizit-footer::after {
 }
 .vz-foot-cols {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 2rem;
 }
 .vz-foot-col-title {

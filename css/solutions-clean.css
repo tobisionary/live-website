@@ -1,0 +1,154 @@
+
+
+.badge-inline,
+.score-chip,
+.score-tag,
+.donut .center .label,
+.shelf-caption,
+.calc-preview .lbl,
+.dash-card .dash-head,
+.dash-stat .k,
+.twin-foot,
+.ba-head,
+.ba-foot,
+.audit-row .info .sku,
+.ai-mock-head,
+.ai-card .body .why,
+.ai-card .body .brand,
+.ai-card.rejected .rank,
+.bbox .lbl,
+.contrast-stage .label-line .heat-tag,
+.contrast-meter .key,
+.callout-strip .ix,
+.inline-quote cite,
+.roas-card .ix,
+.preflight-head,
+.preflight-row .sku,
+.preflight-row .status,
+.access-stage .heads,
+.pkg-mock .pkg-line.size,
+.pkg-mock .heat-tag,
+.pkg-readout .meter-row .lbl,
+.access-stage .verdict,
+.std-card .key,
+.scorecard-head,
+.sc-row .el small,
+.sc-row .status,
+.sc-row .verdict,
+.stat-strip.mandate .stat .k,
+.verdict-stage .lab,
+.timeline-chip,
+.verdict-card .cert,
+.loop-box .tag,
+.abc .variant .cert,
+.ai-pane .lab,
+.ai-pane.ai-view .bbox .lbl,
+.ai-pane.human-view .signals,
+.ai-vs .foot,
+.visual-layer .lab,
+.ai-answer-head,
+.ai-answer .rec .info .brand,
+.ai-answer .rejected .body .label,
+.car-stage .heads,
+.slot .k,
+.car-stage .verdict,
+.job-list .q,
+.landscape .verdict,
+.bench-head,
+.brief-col .tag,
+.dualcert .mkt .flagline,
+.dualcert .cert,
+.dualcert .seam .one,
+.loc .card .mk,
+.gateway .gh,
+.gateway .grow .mkt,
+.gateway .grow .verdict,
+.leaderboard .lh,
+.casebar .lab,
+.tl .col .tag,
+.heatmap .hm-head,
+.heatmap .rg .nm,
+.onw .lab,
+.onw .slow,
+.onw .cert-badge,
+.thumbfail .t .cap,
+.tf-note,
+.studio-score .sh,
+.proof cite,
+.cost-col .tag,
+.cost-col .winner-tag,
+.launch-report .lr-head,
+.launch-report .lr-row .rk,
+.hero-proof .kicker,
+.hero-proof .voice cite,
+.ready-kicker,
+.ready-status,
+.ready-plus,
+.ready-score-lbl,
+.sub-link,
+.gate .g-chrome,
+.gate .g-head,
+.g-score .lab span,
+.gate .g-foot,
+.flowcard .lab,
+.stdmeter .ends .mid,
+.stdcard .tag,
+.cat-stage .heads,
+.cat-stage .legend,
+
+.scale-card .k,
+.audit-side .stamp,
+.audit-side .tag .k,
+.leak-stage .side-head,
+.buyer-pane .lab,
+.shopper-pane .lab,
+.shopper-pane .mock-pdp .meta .back,
+.leak-arrow,
+.leak-stage .foot,
+.fail-card .lab,
+.spons-mock .row-card .info .sub,
+.display-mock .ad .copy-area .micro,
+.display-mock .pdp-flag .info{text-transform:none!important;letter-spacing:0!important;font-family:var(--font-sans)!important;font-size:12.5px!important;font-weight:500;white-space:nowrap}
+.value-card .vix,.std-card .key,.stdcard .key,.scale-card .k,.roas-card .ix,.cat-stage .k,.card .mk,.loc .mk,[style*="text-transform: uppercase"],[style*="text-transform:uppercase"]{text-transform:none!important;letter-spacing:0!important;font-family:var(--font-sans)!important;font-size:12.5px!important;font-weight:500}
+.hs-chrome,.sol-hero-grid .heads,.sol-hero-grid .side-head,.sol-hero-grid .foot,.sol-hero-grid .verdict,.sol-hero-grid .legend,.sol-hero-grid .signals,.sol-hero-grid .bbox .lbl,.sol-hero-grid .leak-arrow span,
+.dim-card .dim-q,.shelf-caption,.twin-foot,.dash-stat .delta,.mobile-status,.shelf-card .meta,.ready-plus,.hero-proof .voice cite,.inline-quote cite:empty,
+.slot .row .k,.audit-row .info .delta,.ai-card .body .brand,.ai-card.rejected .reasons,.preflight-row .sku,.job-list .q,.visual-layer,.ribbon,.badge-inline,
+.audit-side .stamp,.calc-preview .lbl,.ba-foot,.dash-card .dash-head span:first-child,.stat .k{display:none!important}
+.shelf-card.win::before{content:none!important}
+.ai-answer .rejected .reasons,.ai-answer .rec .info .brand,.ai-answer-head span:last-child{display:none!important}
+.big-callout .src,.casebar .lab,.inline-quote cite,.proof cite,.hero-proof .kicker{text-transform:none!important;letter-spacing:0!important;font-family:var(--font-sans)!important;font-size:13px!important}
+.sol-hero-grid>:last-child:not(.fx)>*,.sol-hero-grid .car-stage,.sol-hero-grid .cat-stage,.sol-hero-grid .audit-split,.sol-hero-grid .leak-stage,.sol-hero-grid .access-stage,.sol-hero-grid .verdict-stage,.sol-hero-grid .ai-vs,.sol-hero-grid .hero-stage,.sol-hero-grid [class*="stage"],.sol-hero-grid .gate,.sol-hero-grid .score-panel,.sol-hero-grid .scorecard,.sol-hero-grid .audit-card{aspect-ratio:auto!important;min-height:0!important;grid-template-rows:1fr!important;height:auto!important}
+.sol-hero-grid>:last-child:not(.fx)>*{background:radial-gradient(120% 120% at 50% 0%,#10233c 0%,#060b13 70%)!important}
+.sol-hero-grid>:last-child:not(.fx)>*::before{display:none!important}
+.sol-hero-grid .body{padding:clamp(18px,2.4vw,28px)!important;gap:var(--space-4)!important}
+.flowcard .flowsteps .step{background:rgba(255,255,255,.06)!important;color:rgba(255,255,255,.9)!important;border:1px solid rgba(255,255,255,.16)!important;border-radius:999px!important}
+.flowcard.new .flowsteps .step{background:rgba(52,160,254,.16)!important;border-color:rgba(52,160,254,.45)!important}
+.sol-hero-grid .lab,.flowcard .lab,.buyer-pane .lab,.shopper-pane .lab,.ai-pane .lab{color:rgba(214,236,255,.6)!important;margin-bottom:10px}
+.audit-row .info .sku,.cat-stage .k,.roas-card .ix,.scale-card .k,.value-card .vix,.std-card .key,.dash-stat .k,.calc-preview .row .k{color:#6b7a89!important}
+.sub-link{text-transform:none!important;letter-spacing:0!important;font-size:14px!important;font-weight:500;color:rgba(214,236,255,.85)!important;border-bottom-color:rgba(214,236,255,.35)!important}
+.dash-card .dash-head{justify-content:flex-end}
+.pattern-foot,.cs-method{font-size:13px}
+
+.cat-stage .totals .k{display:block!important;color:rgba(214,236,255,.6)!important;margin-bottom:4px}
+
+/* Buttons stay put on hover: no lift. The arrow nudge and color change remain. */
+.btn:hover,.btn:active,.btn-primary:hover,.btn-on-dark:hover,.btn-dark:hover,.btn-ghost:hover,.btn-secondary:hover{transform:none!important}
+/* Footer CTA headline reads left-aligned, beside the shelf image. */
+.vz-foot-band-copy{align-items:flex-start!important;text-align:left!important}
+/* Phones: hero CTAs stack full-width so both buttons are the same size. */
+@media (max-width:560px){.sol-hero .cta-row{flex-direction:column;align-items:stretch}.sol-hero .cta-row .btn{width:100%;justify-content:center}}
+/* Phones: headings built from no-wrap lines must wrap, and callout cards must
+   not be pushed wider than the screen by a long one-line button. */
+@media (max-width:880px){.big-callout{grid-template-columns:minmax(0,1fr)!important}}
+@media (max-width:560px){
+  h2 span[style*="nowrap"]{white-space:normal!important}
+  .big-callout .cta-row{flex-direction:column;align-items:stretch}
+  .big-callout .btn{white-space:normal;width:100%;justify-content:center;text-align:center}
+}
+/* Secondary buttons on dark surfaces get the same cursor-glow hover as the
+   primary buttons there (solutions-home.js feeds --mx/--my to every .btn). */
+.sol-hero .btn-ghost:hover,.panel--dark .btn-ghost:hover,.ready-panel .btn-ghost:hover,.presyn .btn-ghost:hover,
+.final-cta .btn-ghost:hover,.final .btn-ghost:hover,.gs1-panel .btn-ghost:hover,.big-callout .btn-ghost:hover{
+  background:radial-gradient(170px circle at var(--mx,50%) var(--my,50%),rgba(94,182,255,.5) 0%,rgba(52,160,254,.25) 38%,rgba(52,160,254,0) 72%) #3f464e!important;
+  color:#fff!important;border-color:transparent!important;
+  box-shadow:0 0 0 1px #fff inset,0 0 26px -6px rgba(52,160,254,.4)!important}

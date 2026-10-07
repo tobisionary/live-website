@@ -7,200 +7,168 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ecommerce CRO for Product Pages | Improve PDP Conversion</title>
 <link rel="icon" type="image/png" href="../assets/favicon.png">
-  <meta name="description" content="Turn more product page visits into sales. Vizit pinpoints the exact images hurting PDP conversion, and what to fix to recover trapped revenue.">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": "Ecommerce Conversion Rate Optimization for Product Pages.",
-    "url": "https://vizit.com/solutions/pdp-optimization"
-  }
-  </script>
-  <link rel="stylesheet" href="../css/ci-styles.css">
-  <link rel="stylesheet" href="../css/company-styles.css">
-  <link rel="stylesheet" href="../css/solutions-styles.css">
-  <link rel="stylesheet" href="../css/vizit-theme.css">
-  <link rel="stylesheet" href="../css/vizit-elevate.css">
-  <link rel="stylesheet" href="../css/vizit-effects.css">
-  <script src="../js/vizit-effects.js" defer></script>
-  <script src="../js/vizit-nav.js" defer></script>
-  <script src="../js/vizit-footer.js" defer></script>
+  <meta name="description" content="Turn more product page visits into sales. Vizit pinpoints the exact images hurting PDP conversion, scores every asset before it syndicates, and shows what to fix to recover trapped revenue.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Ecommerce Conversion Rate Optimization for Product Pages.","url":"https://vizit.com/solutions/pdp-optimization"}</script>
+  <link rel="stylesheet" href="../css/ci-styles.css?v=f1658c0b">
+  <link rel="stylesheet" href="../css/company-styles.css?v=9f190d0e">
+  <link rel="stylesheet" href="../css/solutions-styles.css?v=155c03c9">
+  <link rel="stylesheet" href="../css/vizit-theme.css?v=9b79a492">
+  <link rel="stylesheet" href="../css/vizit-elevate.css?v=d82ed54b">
+  <script src="../js/solutions-home.js?v=366904da" defer></script>
+  <link rel="stylesheet" href="../css/vizit-effects.css?v=6c552f6d">
+  <script src="../js/vizit-effects.js?v=eb476814" defer></script>
+  <script src="../js/vizit-nav.js?v=4aaba305" defer></script>
+  <script src="../js/vizit-footer.js?v=ff40bd6c" defer></script>
 <style>
-  /* ─── Page-specific (PDP Optimization) ─── */
-
-  /* Panel 1 — Audit View: leak vs captured */
-  .audit-split {
-    position: relative;
-    background: var(--blue-1000);
-    color: #fff;
-    aspect-ratio: 1 / 1.05;
-    overflow: hidden;
-    display: grid;
-    grid-template-rows: 36px 1fr;
-  }
-  .audit-split::before {
-    content: ''; position: absolute; inset: 0;
-    background:
-      radial-gradient(120% 60% at 80% 0%, rgba(52,160,254,0.30), transparent 60%),
-      radial-gradient(80% 70% at 0% 100%, rgba(200,69,58,0.22), transparent 65%);
-    pointer-events: none;
-  }
-  .audit-split .hs-chrome {
-    position: relative; z-index: 1;
-    height: 36px;
-    background: rgba(255,255,255,0.06);
-    border-bottom: 1px solid rgba(255,255,255,0.10);
-    display: flex; align-items: center; gap: 10px; padding: 0 14px;
-    font-family: var(--font-mono); font-size: 10px;
-    letter-spacing: 0.08em; color: var(--blue-200);
-    text-transform: uppercase;
-  }
-  .audit-split .body {
-    position: relative; z-index: 1;
-    padding: var(--space-6);
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: var(--space-4);
-  }
-  @media (max-width: 540px) { .audit-split .body { grid-template-columns: 1fr; } }
-  .audit-side {
-    display: flex; flex-direction: column; gap: var(--space-3);
-  }
-  .audit-side .stamp {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-family: var(--font-mono); font-size: 10px;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 4px 8px;
-    width: max-content;
-  }
-  .audit-side.bad .stamp { background: rgba(200,69,58,0.16); color: #ffb1a8; border: 1px solid rgba(200,69,58,0.4); }
-  .audit-side.good .stamp { background: rgba(52,160,254,0.16); color: var(--cyan); border: 1px solid rgba(52,160,254,0.4); }
-  .carousel-strip {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.10);
-    padding: 10px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 6px;
-  }
-  .carousel-strip .ct {
-    aspect-ratio: 1 / 1;
-    background: linear-gradient(160deg, #efe6db, #c8a884);
-    position: relative; overflow: hidden;
-  }
-  .carousel-strip .ct::after {
-    content: '';
-    position: absolute; inset: 22% 22%;
-    background: var(--prod, #b85543);
-    border-radius: 14%;
-  }
-  .audit-side.bad .carousel-strip {
-    filter: blur(2px) grayscale(0.4);
-  }
-  .audit-side.good .carousel-strip {
-    box-shadow: 0 0 0 1px rgba(52,160,254,0.3), 0 0 26px rgba(52,160,254,0.18);
-  }
-  .audit-side .tag {
-    margin-top: var(--space-3);
-    padding: var(--space-4) var(--space-5);
-    display: flex; align-items: baseline; justify-content: space-between;
-    background: rgba(0,0,0,0.18);
-    border: 1px solid rgba(255,255,255,0.10);
-  }
-  .audit-side.bad .tag { background: rgba(200,69,58,0.20); border-color: rgba(200,69,58,0.35); }
-  .audit-side.good .tag { background: rgba(52,160,254,0.15); border-color: rgba(52,160,254,0.35); }
-  .audit-side .tag .k {
-    font-family: var(--font-mono); font-size: 10px;
-    letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--blue-200);
-  }
-  .audit-side .tag .v {
-    font-family: var(--font-display);
-    font-size: 1.5rem; letter-spacing: -0.02em;
-  }
-  .audit-side.bad .tag .v { color: #ff8b7e; }
-  .audit-side.good .tag .v { color: var(--cyan); }
-
-  /* Panel 2 — Digital shelf with one flagged tile */
-  .shelf-board {
-    background: #fff;
-    border: 1px solid var(--border);
-    padding: var(--space-5);
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-3);
-    position: relative;
-  }
-  @media (max-width: 540px) { .shelf-board { grid-template-columns: repeat(2, 1fr); } }
-  .shelf-board .head {
-    grid-column: 1 / -1;
-    display: flex; align-items: baseline; justify-content: space-between;
-    padding-bottom: var(--space-3);
-    border-bottom: 1px solid var(--border);
-    margin-bottom: var(--space-1);
-    font-family: var(--font-mono); font-size: 11px;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--muted);
-  }
-  .shelf-tile {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    padding: var(--space-3);
-    aspect-ratio: 1 / 1.18;
-    display: flex; flex-direction: column;
-    gap: var(--space-2);
-    position: relative;
-  }
-  .shelf-tile .pic {
-    flex: 1;
-    background: linear-gradient(160deg, var(--bg1, #efe6db), var(--bg2, #d4b89a));
-    position: relative; overflow: hidden;
-  }
-  .shelf-tile .pic::after {
-    content: '';
-    position: absolute; inset: 22%;
-    background: var(--prod, var(--blue-base));
-    border-radius: var(--prod-r, 14%);
-  }
-  .shelf-tile .label {
-    font-family: var(--font-mono); font-size: 9.5px;
-    letter-spacing: 0.08em; color: var(--muted);
-    text-transform: uppercase;
-  }
-  .shelf-tile .check {
-    position: absolute; top: 8px; right: 8px;
-    width: 18px; height: 18px;
-    display: grid; place-items: center;
-    background: var(--color-100);
-    color: var(--color-500);
-    border-radius: 999px;
-    font-size: 11px;
-  }
-  .shelf-tile.flag {
-    border: 1.5px solid var(--risk-amber);
-    background: #fff;
-    box-shadow: 0 0 0 4px rgba(217,155,39,0.16);
-    animation: flag-pulse 2.4s ease-in-out infinite;
-  }
-  @keyframes flag-pulse {
-    0%, 100% { box-shadow: 0 0 0 4px rgba(217,155,39,0.16); }
-    50%      { box-shadow: 0 0 0 9px rgba(217,155,39,0.05); }
-  }
-  .shelf-tile.flag .check {
-    background: var(--risk-amber); color: #fff;
-  }
-  .shelf-tile.flag::after {
-    content: 'Projected revenue leak: $420K';
-    position: absolute;
-    left: 50%; bottom: -10px; transform: translate(-50%, 100%);
-    background: var(--risk-amber); color: #fff;
-    font-family: var(--font-mono); font-size: 10px;
-    letter-spacing: 0.08em;
-    padding: 5px 10px;
-    white-space: nowrap;
-    z-index: 4;
-  }
-  .shelf-board { padding-bottom: var(--space-9); }
+  .audit-split{position:relative;background:var(--blue-1000);color:#fff;aspect-ratio:1/1.05;overflow:hidden;display:grid;grid-template-rows:36px 1fr}
+  .audit-split::before{content:'';position:absolute;inset:0;background:radial-gradient(120% 60% at 80% 0%,rgba(52,160,254,.3),transparent 60%),radial-gradient(80% 70% at 0% 100%,rgba(200,69,58,.22),transparent 65%);pointer-events:none}
+  .audit-split .hs-chrome{position:relative;z-index:1;height:36px;background:rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:10px;padding:0 14px;font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;color:var(--blue-200);text-transform:uppercase}
+  .audit-split .body{position:relative;z-index:1;padding:var(--space-6);display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4)}
+  @media (max-width:540px){.audit-split .body{grid-template-columns:1fr}}
+  .audit-side{display:flex;flex-direction:column;gap:var(--space-3)}
+  .audit-side .stamp{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;width:max-content}
+  .audit-side.bad .stamp{background:rgba(200,69,58,.16);color:#ffb1a8;border:1px solid rgba(200,69,58,.4)}
+  .audit-side.good .stamp{background:rgba(52,160,254,.16);color:var(--cyan);border:1px solid rgba(52,160,254,.4)}
+  .carousel-strip{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);padding:10px;display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+  .carousel-strip .ct{aspect-ratio:1/1;background:linear-gradient(160deg,#efe6db,#c8a884);position:relative;overflow:hidden}
+  .carousel-strip .ct::after{content:'';position:absolute;inset:22% 22%;background:var(--prod,#b85543);border-radius:14%}
+  .audit-side.bad .carousel-strip{filter:blur(2px) grayscale(.4)}
+  .audit-side.good .carousel-strip{box-shadow:0 0 0 1px rgba(52,160,254,.3),0 0 26px rgba(52,160,254,.18)}
+  .audit-side .tag{margin-top:var(--space-3);padding:var(--space-4) var(--space-5);display:flex;align-items:baseline;justify-content:space-between;background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.1)}
+  .audit-side.bad .tag{background:rgba(200,69,58,.2);border-color:rgba(200,69,58,.35)}
+  .audit-side.good .tag{background:rgba(52,160,254,.15);border-color:rgba(52,160,254,.35)}
+  .audit-side .tag .k{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--blue-200)}
+  .audit-side .tag .v{font-family:var(--font-display);font-size:1.5rem;letter-spacing:-.02em}
+  .audit-side.bad .tag .v{color:#ff8b7e}
+  .audit-side.good .tag .v{color:var(--cyan)}
+  /* Pre-syndication subsection */
+  .presyn{position:relative;background:var(--blue-1000);color:#fff;overflow:hidden}
+  .presyn::before{content:'';position:absolute;inset:0;background:radial-gradient(110% 70% at 0% 0%,rgba(52,160,254,.22),transparent 60%),radial-gradient(80% 80% at 100% 100%,rgba(1,116,217,.26),transparent 65%);pointer-events:none}
+  .presyn .container{position:relative;z-index:1}
+  .presyn .eyebrow{color:var(--blue-200)}
+  .presyn .display{color:#fff}
+  .presyn .display em{font-style:normal;color:var(--blue-300)}
+  .presyn .subhead{color:rgba(255,255,255,.82)}
+  .presyn .two-up{align-items:center}
+  .gate{position:relative;background:rgba(255,255,255,.04);color:#fff;border:1px solid rgba(255,255,255,.12);overflow:hidden;display:grid;grid-template-rows:1fr}
+  .gate .g-chrome{height:38px;background:rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:10px;padding:0 14px;font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;color:var(--blue-200);text-transform:uppercase}
+  .gate .g-chrome .dot{width:6px;height:6px;border-radius:999px;background:var(--cyan);box-shadow:0 0 0 3px rgba(52,160,254,.25)}
+  .gate .g-body{padding:var(--space-5);display:flex;flex-direction:column;gap:var(--space-3);justify-content:center}
+  .gate .g-head{display:flex;align-items:center;justify-content:space-between;font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;color:var(--blue-200);text-transform:uppercase}
+  .g-score{display:grid;grid-template-columns:1fr auto auto;gap:var(--space-3);align-items:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);padding:12px 14px}
+  .g-score .lab{font-family:var(--font-display);font-size:1.02rem;letter-spacing:-.01em}
+  .g-score .lab span{display:block;font-family:var(--font-mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--blue-200);margin-top:3px}
+  .g-score .val{font-family:var(--font-display);font-size:1.5rem;color:var(--cyan);letter-spacing:-.02em}
+  .g-score .mk{width:22px;height:22px;border-radius:999px;background:rgba(52,160,254,.18);border:1px solid var(--blue-300);color:var(--blue-200);display:grid;place-items:center;font-size:12px}
+  .gate .g-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;background:rgba(52,160,254,.14);border:1px solid var(--blue-300);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--blue-100)}
+  .gate .g-foot b{color:#fff;font-weight:500}
+  .flowcmp{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4);margin-top:var(--space-6)}
+  @media (max-width:700px){.flowcmp{grid-template-columns:1fr}}
+  .flowcard{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);padding:var(--space-4) var(--space-5)}
+  .flowcard .lab{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:var(--space-3)}
+  .flowcard.old .lab{color:#ffb1a8}
+  .flowcard.new .lab{color:var(--cyan)}
+  .flowsteps{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+  .flowsteps .step{font-family:var(--font-display);font-size:.98rem;letter-spacing:-.01em;color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.14);padding:6px 11px}
+  .flowcard.new .flowsteps .step{background:rgba(52,160,254,.14);border-color:rgba(52,160,254,.4);color:#fff}
+  .flowsteps .arr{font-family:var(--font-mono);color:rgba(255,255,255,.4)}
+  .flowcard.new .flowsteps .arr{color:var(--cyan)}
+  .presyn .cta-row .btn-ghost{color:var(--blue-200)}
+  /* PDP Score stage */
+  .pdp-stage{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;min-height:520px;gap:var(--space-5);align-items:center;padding:clamp(18px,3vw,32px);border-radius:var(--sf-r,16px);background:#fff;border:1px solid var(--sf-line,#e5e7eb);box-shadow:0 1px 2px rgba(14,27,42,.04),0 30px 60px -36px rgba(14,27,42,.25)}
+  .pdp-page{position:relative;background:#fff;border:1px solid var(--sf-line,#e5e7eb);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:14px;overflow:hidden;min-width:0;min-height:460px}
+  .pp-top{display:flex;gap:8px;align-items:center}.pp-logo{width:16px;height:16px;border-radius:4px;background:#1a1a1a}.pp-search{flex:1;height:18px;border-radius:999px;background:#f3f4f6;border:1px solid #e5e7eb}
+  .pp-body{display:grid;grid-template-columns:1.5fr 1fr;gap:14px;flex:1}
+  .pp-gal{display:flex;flex-direction:column;gap:8px}
+  .pp-main{aspect-ratio:1;border:1px solid #e5e7eb;border-radius:8px;position:relative;overflow:hidden}.pp-main img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .pp-thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}.pp-thumbs span{aspect-ratio:1;border:1px solid #e5e7eb;border-radius:4px;position:relative;overflow:hidden;background:#fff}.pp-thumbs span img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.pp-thumbs span.on{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}.pp-thumbs span.on{border-color:var(--accent);background:#fff}.pp-thumbs span img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:12%}.pp-thumbs span:not(.on)::after{content:'';position:absolute;inset:26%;border-radius:14%;background:var(--p)}
+  .pp-info{display:flex;flex-direction:column;gap:10px}.pp-info i{display:block;height:6px;border-radius:3px;background:#e5e7eb}.pp-info i.t{height:9px;background:#1f2937;width:80%}.pp-info i.stars{width:46px;height:8px;background:#f59e0b;clip-path:polygon(0 0,100% 0,100% 100%,0 100%);border-radius:2px;opacity:.85}.pp-info b{font-size:14px;font-weight:600;color:#111;letter-spacing:-.02em}.pp-btn{margin-top:auto;height:22px;border-radius:999px;background:#1a1a1a}
+  .pdp-score{display:flex;flex-direction:column;align-items:center;gap:14px;color:#0e1b2a;min-width:132px}
+  .pdp-score .dial{position:relative;width:124px;height:124px;display:grid;place-items:center;border-radius:16px;background:#dcf5e6;border:1px solid #b5e6c8}
+  .pdp-score .k{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}.pdp-score .k.good{color:#1f7a3f}
+  .pdp-score .n{font-family:var(--font-sans);font-weight:600;font-size:3rem;line-height:1;letter-spacing:-.04em;position:relative;z-index:1;color:#15602f}
+  @media (max-width:520px){.pdp-stage{grid-template-columns:1fr}.pdp-score{flex-direction:row;justify-content:center;gap:16px}.pdp-score .dial{width:96px;height:96px}.pdp-score .n{font-size:2.4rem}.pdp-score .ring{-webkit-mask:radial-gradient(circle,transparent 44px,#000 45px);mask:radial-gradient(circle,transparent 44px,#000 45px)}}
+  /* What feeds the score */
+  .feed-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--space-4);margin-top:var(--space-7)}
+  @media (max-width:1000px){.feed-grid{gap:var(--space-3)}.feed-card{padding:var(--space-4)}.feed-card h4{font-size:1rem}.feed-card p{font-size:.86rem}}@media (max-width:760px){.feed-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.feed-card:last-child{grid-column:1/-1}}@media (max-width:480px){.feed-grid{grid-template-columns:1fr}}
+  .feed-card{display:flex;flex-direction:column;gap:var(--space-3);padding:var(--space-5);border:1px solid var(--sf-line,#e5e7eb);border-radius:var(--sf-r,16px);background:#fff;text-decoration:none;color:inherit;min-width:0;transition:border-color .25s,box-shadow .25s,transform .25s}
+  a.feed-card:hover{border-color:rgba(14,27,42,.22);box-shadow:0 18px 40px -24px rgba(14,27,42,.25);transform:translateY(-2px)}
+  .feed-card .ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#eef6ff,#dbeeff);border:1px solid var(--blue-100,#b3dbff)}
+  .feed-card .ic svg{width:20px;height:20px;fill:none;stroke:var(--accent);stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+  .feed-card h4{margin:0;font-size:1.1rem;letter-spacing:-.02em;line-height:1.2}
+  .feed-card p{margin:0;font-size:.92rem;line-height:1.5;color:var(--sf-muted,#4a5a6a)}
+  .explore-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-4);margin-top:var(--space-7)}
+  @media (max-width:760px){.explore-grid{grid-template-columns:1fr}}
+  .explore-card{display:grid;grid-template-columns:120px 1fr;gap:var(--space-5);align-items:center;padding:var(--space-5);border:1px solid var(--sf-line,#e5e7eb);border-radius:var(--sf-r,16px);background:#fff;text-decoration:none;color:inherit;transition:border-color .25s,box-shadow .25s,transform .25s}
+  .explore-card:hover{border-color:rgba(14,27,42,.22);box-shadow:0 18px 40px -24px rgba(14,27,42,.25);transform:translateY(-2px)}
+  .explore-card .pic{aspect-ratio:1;border-radius:10px;background:#f6f8fa;position:relative;overflow:hidden}
+  .explore-card .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:12%}
+  .explore-card .pic.strip{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:10px;background:#f6f8fa}
+  .explore-card .pic.strip span{border-radius:6px;background:linear-gradient(160deg,#eef6ff,#d6eaff);position:relative}
+  .explore-card .pic.strip span::after{content:'';position:absolute;inset:28% 22%;border-radius:14%;background:var(--p)}
+  .explore-card h4{margin:0;font-size:clamp(1.15rem,1.6vw,1.4rem);letter-spacing:-.02em;line-height:1.15}
+  .explore-card p{margin:var(--space-2) 0 0;color:var(--sf-muted,#4a5a6a);font-size:.95rem;line-height:1.5}
+  .explore-card .go{display:inline-flex;align-items:center;gap:6px;margin-top:var(--space-3);font-size:.9rem;font-weight:500;color:var(--sf-ink,#0e1b2a)}
+  .explore-card:hover .go .arrow{transform:translateX(4px)}.explore-card .go .arrow{transition:transform .25s}
+  @media (max-width:520px){.explore-card{grid-template-columns:1fr}.explore-card .pic{max-width:140px}}
+  .vz-foot-btn{border-radius:999px}
+  /* Syndication stage: Vizit scorecard */
+  .syn-stage{background:#fff;border:1px solid rgba(128,195,254,.25);border-radius:var(--sf-r,16px);padding:clamp(18px,3vw,28px);color:#0e1b2a;box-shadow:0 30px 80px rgba(0,10,30,.45);display:flex;flex-direction:column;gap:var(--space-4)}
+  .syn-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .syn-stamp{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:4px;background:#fff4d6;color:#b26a00;transition:background .4s,color .4s}
+  .syn-wrap.scored .syn-stamp{background:#e8f7ee;color:#1f9d55}
+  .syn-name{font-family:var(--font-display);font-size:1.05rem;letter-spacing:-.01em;color:#0e1b2a}
+  .syn-body{display:grid;grid-template-columns:120px 1fr;gap:var(--space-5);align-items:center}
+  .syn-pic{aspect-ratio:1;border-radius:10px;background:#f7f8fa;border:1px solid #e5e7eb;position:relative;overflow:hidden}
+  .syn-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:10%}
+  .syn-side{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+  .syn-side .k{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .syn-side .k.good{color:var(--accent);opacity:0;transition:opacity .4s}
+  .syn-wrap.scored .syn-side .k.good{opacity:1}
+  .syn-side .n{font-family:var(--font-sans);font-weight:500;font-size:3.4rem;line-height:1;letter-spacing:-.04em;color:#0e1b2a;font-variant-numeric:tabular-nums}
+  .syn-rows{list-style:none;margin:0;padding:10px 12px;background:#f6f8fa;border-radius:10px;display:flex;flex-direction:column;gap:4px}
+  .syn-rows li{display:flex;align-items:center;gap:10px;padding:5px 0;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#4a5a6a}
+  .syn-rows li i{flex:1;border-bottom:1px dotted #cfd4da;transform:translateY(1px)}
+  .syn-rows li b{font-family:var(--font-sans);font-weight:600;font-size:14px;letter-spacing:-.02em;color:var(--accent);font-variant-numeric:tabular-nums;min-width:22px;text-align:right}
+  .syn-rows li b.ck{width:14px;height:14px;min-width:0;position:relative;opacity:0;transition:opacity .4s .4s}
+  .syn-rows li b.ck::after{content:'';position:absolute;left:4px;top:0;width:5px;height:10px;border:solid #1f9d55;border-width:0 2px 2px 0;transform:rotate(45deg)}
+  .syn-wrap.scored .syn-rows li b.ck{opacity:1}
+  @media (max-width:420px){.syn-body{grid-template-columns:1fr}}
+  /* Hero: last year vs this year */
+  .sol-hero-grid>:last-child:not(.fx)>.yoy-stage{background:#f3efe4!important}
+  .yoy-stage{position:relative;display:grid;grid-template-columns:1fr auto 1fr;grid-template-rows:1fr auto;gap:0 var(--space-4);align-items:center;padding:clamp(22px,3vw,36px);background:#f3efe4;color:#1a1a1a;aspect-ratio:1/1.02;overflow:hidden}
+  .yoy-cup{display:flex;flex-direction:column;align-items:center;gap:12px;min-width:0}
+  .yoy-cup img{width:100%;max-width:220px;aspect-ratio:1;object-fit:contain;mix-blend-mode:multiply;transition:transform .9s cubic-bezier(.2,.8,.2,1),opacity .9s,filter .9s}
+  .yoy-cup.last img{filter:grayscale(.6);opacity:.65}
+  .yoy-stage:not(.in) .yoy-cup img{opacity:0;transform:translateY(18px)}
+  .yoy-stage.in .yoy-cup.this img{transition-delay:.25s}
+  .ylab{font-family:var(--font-sans);font-size:12px;font-weight:600;letter-spacing:.02em;padding:6px 12px;border-radius:999px;background:#e4ddcc;color:#4a4a4a}
+  .yoy-cup.this .ylab{background:#1f7a3f;color:#fff}
+  .yoy-arrow{width:44px;color:#9a8f78;opacity:0;transform:translateX(-10px);transition:opacity .6s .6s,transform .6s .6s}
+  .yoy-stage.in .yoy-arrow{opacity:1;transform:none}
+  .ystat{text-align:center}
+  .ystat .k{display:block;font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#7a7266}
+  .ystat .v{display:block;font-family:var(--font-sans);font-weight:600;font-size:clamp(1.8rem,3vw,2.6rem);letter-spacing:-.04em;line-height:1.1;font-variant-numeric:tabular-nums;color:#1a1a1a}
+  .yoy-cup.last .ystat .v{color:#7a7266}.yoy-cup.this .ystat .v{color:#1f7a3f}
+  .yoy-foot{grid-column:1/-1;display:flex;align-items:baseline;justify-content:center;gap:8px;margin-top:var(--space-4);padding-top:var(--space-4);border-top:1px solid #e0d8c6;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#7a7266}
+  .yoy-foot b{font-family:var(--font-sans);font-size:1.1rem;font-weight:600;letter-spacing:-.02em;color:#1a1a1a}
+  .yoy-foot em{font-style:normal;color:#1f7a3f;font-weight:600}
+  @media (max-width:420px){.yoy-stage{grid-template-columns:1fr;grid-template-rows:auto}.yoy-arrow{transform:rotate(90deg);justify-self:center}}
+  /* Laptop (matches home page) */
+  .lap{position:relative;width:100%;margin:0 auto}
+  .lap-lid{position:relative;aspect-ratio:16/10;border-radius:22px 22px 10px 10px;background:linear-gradient(180deg,#2a2f36,#1a1d22);padding:14px 14px 20px;border:1px solid #0a0c10;box-shadow:0 0 0 1.5px #3a3f47 inset,0 30px 60px -30px rgba(0,33,61,.6)}
+  .lap-lid::before{content:"";position:absolute;top:5px;left:50%;transform:translateX(-50%);width:6px;height:6px;border-radius:50%;background:#0a0c10;box-shadow:0 0 0 1px #3a3f47}
+  .lap-screen{position:absolute;inset:14px 14px 20px;border-radius:12px 12px 4px 4px;overflow:hidden;background:#f3f3f3}
+  .lap-screen image-slot{position:absolute;inset:0;width:100%;height:100%}
+  .lap-base{position:relative;margin:-1px auto 0;width:102%;left:-1%;height:22px;border-radius:0 0 18px 18px;background:linear-gradient(180deg,#d4d7de,#9aa0aa 55%,#6c7280);box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 28px 40px -28px rgba(0,33,61,.55)}
+  .lap-base::before{content:"";position:absolute;left:8%;right:8%;top:0;height:4px;background:linear-gradient(180deg,#0a0c10,#2a2f36);border-radius:2px}
+  .lap-base::after{content:"";position:absolute;left:35%;right:35%;bottom:4px;height:3px;background:rgba(0,0,0,.12);border-radius:999px}
+  .lap::after{content:"";position:absolute;left:5%;right:5%;bottom:-34px;height:60px;background:radial-gradient(ellipse at 50% 30%,rgba(0,33,61,.3),transparent 70%);pointer-events:none;z-index:-1}
+  @media (max-width:640px){.lap-lid{padding:8px 8px 14px}.lap-screen{inset:8px 8px 14px}.lap-base{height:14px}}
 </style>
+<link rel="stylesheet" href="../css/solutions-home.css?v=9dbf9ddb">
+<link rel="stylesheet" href="../css/solutions-facelift.css?v=6ea946d6">
+<link rel="stylesheet" href="../css/solutions-clean.css?v=0fbef6fb">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Vizit">
 <meta property="og:title" content="Ecommerce CRO for Product Pages | Improve PDP Conversion">
@@ -210,6 +178,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Ecommerce CRO for Product Pages | Improve PDP Conversion">
 <meta name="twitter:image" content="https://vizit.com/assets/og-cover.jpg">
+<script defer src="/_vercel/insights/script.js"></script>
 <script>
   window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
 </script>
@@ -221,304 +190,162 @@
 
 <vizit-nav data-current="product-page-optimization"></vizit-nav>
 
-<!-- ════════════════════════════════════════════════════════════
-     PANEL 1 — TRAPPED REVENUE / Audit View
-     ════════════════════════════════════════════════════════════ -->
 <section class="sol-hero" data-screen-label="01 Trapped revenue">
   <div class="container">
     <div class="sol-hero-grid">
       <div class="reveal">
-        <span class="eyebrow">01 — Trapped revenue</span>
         <h1 class="display">Convert more of the traffic you <em>already have</em>.</h1>
-        <p class="subhead">You already paid to get shoppers to the page. Vizit shows you exactly which products are failing the first impression — and what to fix. Vizit Agents find, fix, and re-merchandise those pages continuously.</p>
+        <p class="subhead">You already paid for the traffic. Vizit shows which products fail the first impression and exactly what to fix.</p>
         <div class="cta-row">
           <a class="btn btn-primary btn-lg" href="../demo.html">See where you're losing conversion <span class="arrow">→</span></a>
         </div>
       </div>
-      <div class="reveal" aria-label="Vizit conversion audit comparison">
-        <div class="audit-split">
-          <div class="hs-chrome">
-            <span style="width:6px;height:6px;border-radius:999px;background:var(--cyan);box-shadow:0 0 0 3px rgba(52,160,254,0.25);"></span>
-            <span>Vizit · conversion audit</span>
-            <span style="margin-left:auto;">Q3 · category review</span>
-          </div>
-          <div class="body">
-            <div class="audit-side bad">
-              <span class="stamp">Before · current</span>
-              <div class="carousel-strip">
-                <div class="ct" style="--prod:#8e6442;"></div>
-                <div class="ct" style="--prod:#9e735a;"></div>
-                <div class="ct" style="--prod:#7d5236;"></div>
-                <div class="ct" style="--prod:#a0826b;"></div>
-              </div>
-              <div class="tag"><span class="k">Annual leakage</span><span class="v">−$2.4M</span></div>
-            </div>
-            <div class="audit-side good">
-              <span class="stamp">After · Vizit Certified</span>
-              <div class="carousel-strip">
-                <div class="ct" style="--prod:#0174d9; background:linear-gradient(160deg,#e6f3ff,#b3dbff);"></div>
-                <div class="ct" style="--prod:#015fb2; background:linear-gradient(160deg,#e6f3ff,#80c3fe);"></div>
-                <div class="ct" style="--prod:#0174d9; background:linear-gradient(160deg,#fff,#b3dbff);"></div>
-                <div class="ct" style="--prod:#34a0fe; background:linear-gradient(160deg,#e6f3ff,#80c3fe);"></div>
-              </div>
-              <div class="tag"><span class="k">Revenue captured</span><span class="v">+$4.1M</span></div>
-            </div>
-          </div>
+      <div class="reveal" aria-label="Same traffic, last year versus this year: a stronger hero and carousel convert more of it">
+        <div class="yoy-stage" data-yoy>
+          <div class="yoy-cup last"><span class="ylab">Last year</span><img src="../assets/products/chobani-old.png" alt=""><div class="ystat"><span class="k">Conversion</span><span class="v" data-count="1.8" data-suffix="%">0.0%</span></div></div>
+          <div class="yoy-arrow" aria-hidden="true"><svg viewBox="0 0 48 24"><path d="M2 12h40M32 3l10 9-10 9" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="yoy-cup this"><span class="ylab">This year</span><img src="../assets/products/chobani-new.png" alt=""><div class="ystat"><span class="k">Conversion</span><span class="v" data-count="3.4" data-suffix="%">0.0%</span></div></div>
+          <div class="yoy-foot"><span class="k">Same traffic</span><b>142K</b><span class="k">visits · <em data-count="89" data-suffix="%" data-prefix="+">+0%</em> conversion</span></div>
         </div>
       </div>
     </div>
   </div>
+
+<script>(function(){var s=document.querySelector('[data-yoy]');if(!s)return;var els=s.querySelectorAll('[data-count]');var done=false;function ease(t){return 1-Math.pow(1-t,3)}function run(){if(done)return;done=true;s.classList.add('in');els.forEach(function(e,i){var to=parseFloat(e.dataset.count),dec=(e.dataset.count.split('.')[1]||'').length,pre=e.dataset.prefix||'',suf=e.dataset.suffix||'';var t0=null,dur=1400,delay=500+i*250;function f(ts){if(!t0)t0=ts;var p=Math.min((ts-t0-delay)/dur,1);if(p<0){requestAnimationFrame(f);return}e.textContent=pre+(to*ease(p)).toFixed(dec)+suf;if(p<1)requestAnimationFrame(f)}requestAnimationFrame(f)})}if(matchMedia('(prefers-reduced-motion:reduce)').matches){s.classList.add('in');els.forEach(function(e){e.textContent=(e.dataset.prefix||'')+e.dataset.count+(e.dataset.suffix||'')});return}new IntersectionObserver(function(en){if(en[0].isIntersecting)run()},{threshold:.4}).observe(s)})();</script>
 </section>
 
-<!-- Logo ribbon -->
-<div class="ribbon reveal">
-  <div class="container ribbon-inner">
-    <span class="ribbon-eyebrow">Recovering millions in trapped revenue for the world's top brands</span>
-    <div class="ribbon-logos">
-      <span>BRAND A</span><span>BRAND B</span><span>BRAND C</span><span>BRAND D</span><span>BRAND E</span><span>BRAND F</span>
-    </div>
-  </div>
-</div>
-
-<!-- ════════════════════════════════════════════════════════════
-     PANEL 2 — THE BLIND SPOT
-     ════════════════════════════════════════════════════════════ -->
-<section class="panel panel--paper" data-screen-label="02 Blind spot">
+<section class="panel panel--paper" data-screen-label="02 PDP Score">
   <div class="container">
     <div class="two-up flip">
-      <div class="fx reveal" data-fx="h2h" data-root="../" aria-label="Head-to-head — your product vs the category leader"></div>
-      </div>
-      <div class="copy reveal">
-        <span class="eyebrow">02 — The blind spot</span>
-        <h2 class="display">First impressions drive the decision. Most teams still don't <em>measure</em> them.</h2>
-        <p class="subhead">Vizit automatically scans product pages and Amazon listings, pinpoints the exact images hurting your sales, and delivers a prioritized SKU-level roadmap to recover trapped revenue.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════════════════════════
-     PANEL 3 — CONVERSION AUDIT
-     ════════════════════════════════════════════════════════════ -->
-<section class="panel" data-screen-label="03 CI Audit">
-  <div class="container">
-    <div class="copy reveal" style="max-width:60ch;">
-      <span class="eyebrow">03 — The Vizit conversion audit</span>
-      <h2 class="display">Audit every pixel. Uncover every <em>lost dollar</em>.</h2>
-      <p class="subhead">A Vizit Conversion Audit shows you exactly which SKUs are leaking revenue, ranked by upside. You'll see the score gaps, the specific image failures, and the prioritized fixes — measured in dollars.</p>
-    </div>
-
-    <div class="reveal" style="margin-top: var(--space-7);">
-      <div class="audit-list" aria-label="Top SKU opportunities by revenue upside">
-        <div class="audit-row" style="grid-template-columns: 1fr; padding: var(--space-4) var(--space-5); background: var(--surface); border-bottom: 1px solid var(--border);">
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; color:var(--muted); text-transform:uppercase;">Top SKU opportunities · ranked by revenue upside</span>
-            <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; color:var(--blue-700); text-transform:uppercase;">Scanning · 11,248 SKUs</span>
-          </div>
-        </div>
-        <div class="audit-row scanning" style="--bg1:#f4ece2;--bg2:#c8a884;--prod:#8e6442;">
-          <div class="thumb" style="position:relative;background:#fff;"><img fetchpriority="high" decoding="async" src="../assets/products/vzero-orange.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;padding:6%;box-sizing:border-box;z-index:2;"></div>
-          <div class="info">
-            <span class="sku">SKU · B0A4FG · sports drink</span>
-            <div class="name">V-ZERO Sport Drink, Orange 20oz</div>
-            <div class="delta"><strong>$1.2M opportunity</strong> · Low contrast hero · variant unclear</div>
-          </div>
-          <div class="actions">
-            <span class="score low">Score 42</span>
-            <span class="upside">+$1.2M</span>
-          </div>
-        </div>
-        <div class="audit-row" style="--bg1:#efe6db;--bg2:#a0826b;--prod:#7d5236;">
-          <div class="thumb" style="position:relative;background:#fff;"><img loading="lazy" decoding="async" src="../assets/products/foundation.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;padding:6%;box-sizing:border-box;z-index:2;"></div>
-          <div class="info">
-            <span class="sku">SKU · B0R8K2 · foundation</span>
-            <div class="name">Infallible 32H Fresh Wear Foundation</div>
-            <div class="delta"><strong>$840K opportunity</strong> · Off-axis framing · brand mark obscured</div>
-          </div>
-          <div class="actions">
-            <span class="score low">Score 49</span>
-            <span class="upside">+$840K</span>
-          </div>
-        </div>
-        <div class="audit-row" style="--bg1:#f0e8de;--bg2:#cfc2ad;--prod:#a76d44;">
-          <div class="thumb" style="position:relative;background:#fff;"><img loading="lazy" decoding="async" src="../assets/products/vizbone.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;padding:6%;box-sizing:border-box;z-index:2;"></div>
-          <div class="info">
-            <span class="sku">SKU · B0Q9X1 · dog treats</span>
-            <div class="name">VIZ·BONE Dog Biscuits, Medium</div>
-            <div class="delta"><strong>$612K opportunity</strong> · Background fail · accessories distract</div>
-          </div>
-          <div class="actions">
-            <span class="score warn">Score 56</span>
-            <span class="upside">+$612K</span>
-          </div>
-        </div>
-        <div class="audit-row good" style="--bg1:#e6f3ff;--bg2:#80c3fe;--prod:#0174d9;">
-          <div class="thumb" style="position:relative;background:#fff;"><img loading="lazy" decoding="async" src="../assets/products/vizzy.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;padding:6%;box-sizing:border-box;z-index:2;"></div>
-          <div class="info">
-            <span class="sku">SKU · B0T2M9 · salty snacks</span>
-            <div class="name">Vizzy V-Shaped Chips, Party Size</div>
-            <div class="delta">Certified hero · maintaining +24% lift</div>
-          </div>
-          <div class="actions">
-            <span class="score good">Score 91</span>
-            <span class="upside" style="color:var(--accent);">Certified</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <p class="reveal" style="margin-top: var(--space-6); font-family: var(--font-display); font-style: normal; font-size: clamp(1.1rem, 1.6vw, 1.5rem); color: var(--blue-1000); max-width: 60ch; line-height: 1.4;">
-      AI reveals which products are losing at first impression — and the <em style="color: var(--accent);">revenue upside</em> of fixing them.
-    </p>
-  </div>
-</section>
-
-<!-- Inline customer quote between panels -->
-<section class="panel panel--tight" style="border-top: none; padding-top: 0;" data-screen-label="03b Customer quote">
-  <div class="container">
-    <div class="inline-quote reveal">
-      <span class="q">"</span>
-      <div>
-        <blockquote>We had systems to get content to shelf, but no system to tell us if it was actually ready to win. Vizit found the exact SKUs leaking revenue — and showed us the exact visual fixes to recover it.</blockquote>
-        <cite>— Director of Digital Commerce · case study placeholder</cite>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════════════════════════
-     PANEL 4 — TOTAL VISIBILITY (before / after)
-     ════════════════════════════════════════════════════════════ -->
-<section class="panel panel--paper" data-screen-label="04 Total visibility">
-  <div class="container">
-    <div class="two-up">
-      <div class="copy reveal">
-        <span class="eyebrow">04 — Total visibility</span>
-        <h2 class="display">Know which of your images are <em>winning</em> — and which are costing you sales.</h2>
-        <p class="subhead">From the hero to the last lifestyle shot, Vizit scores every visual's conversion power against category leaders. Spark then instantly generates optimized versions of the underperformers.</p>
-      </div>
-      <div class="reveal">
-        <div class="fx" data-fx="carousel" data-root="../" aria-label="The self-sorting carousel — interactive demo"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════════════════════════
-     PANEL 5 — MORE FROM EVERY VISIT
-     ════════════════════════════════════════════════════════════ -->
-<section class="panel" data-screen-label="05 More from every visit">
-  <div class="container">
-    <div class="copy reveal" style="max-width:60ch;">
-      <span class="eyebrow">05 — More from every visit</span>
-      <h2 class="display">Hit your growth targets without <em>spending more on ads</em>.</h2>
-      <p class="subhead">Whether you're optimizing DTC product pages or Amazon listings, better imagery unlocks more value from every visit. You capture the lift by fixing content you already own, not by buying more traffic.</p>
-    </div>
-
-    <div class="stat-strip reveal">
-      <div class="stat"><div class="n">16.5<em>%</em></div><div class="l">average conversion lift on visual content optimization</div></div>
-      <div class="stat"><div class="n"><em>4</em>%</div><div class="l">conversion gain per 10-point Vizit Score improvement</div></div>
-      <div class="stat"><div class="n">$<em>0</em></div><div class="l">extra ad spend to capture it</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════════════════════════
-     PANEL 6 — TRAPPED REVENUE / ROI calc CTA
-     ════════════════════════════════════════════════════════════ -->
-<section class="panel panel--paper" data-screen-label="06 Audit request">
-  <div class="container">
-    <div class="two-up">
-      <div class="copy reveal">
-        <span class="eyebrow">06 — Trapped revenue</span>
-        <h2 class="display">How much trapped revenue is <em>hiding</em> in your catalog?</h2>
-        <p class="subhead">Request a custom Vizit Conversion Audit to see which assets are costing you money and where the biggest upside exists.</p>
-        <div class="cta-row" style="margin-top: var(--space-6);">
-          <a class="btn btn-primary btn-lg" href="../demo.html">Calculate your revenue opportunity <span class="arrow">→</span></a>
-        </div>
-      </div>
-      <div class="reveal">
-        <div class="calc-preview">
-          <span class="lbl">Conversion audit · preview</span>
-          <div class="row"><span class="k">Catalog size</span><span class="v">11,248 SKUs</span></div>
-          <div class="row"><span class="k">SKUs scoring &lt; 80</span><span class="v">62%</span></div>
-          <div class="row"><span class="k">Avg. conversion lift at 80+</span><span class="v">16.5%</span></div>
-          <div class="row"><span class="k">Annual PDP revenue (LTM)</span><span class="v">$184M</span></div>
-          <div class="blur">
-            <div class="lock" aria-hidden="true">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="5" y="11" width="14" height="10"/>
-                <path d="M8 11 V7 a4 4 0 0 1 8 0 V11"/>
-              </svg>
+      <div class="reveal" aria-label="A product page analyzed top to bottom with a single PDP Score">
+        <div class="pdp-stage">
+          <div class="pdp-page">
+            <div class="pp-top"><span class="pp-logo"></span><span class="pp-search"></span></div>
+            <div class="pp-body">
+              <div class="pp-gal">
+                <div class="pp-main"><img src="../assets/products/chobani-hero.jpg" alt=""></div>
+                <div class="pp-thumbs"><span class="on"><img src="../assets/products/chobani-hero.jpg" alt=""></span><span><img src="../assets/products/chobani-c1.jpg" alt=""></span><span><img src="../assets/products/chobani-c2.jpg" alt=""></span><span><img src="../assets/products/chobani-c3.jpg" alt=""></span><span><img src="../assets/products/chobani-c4.jpg" alt=""></span></div>
+              </div>
+              <div class="pp-info"><i class="t"></i><i style="width:55%"></i><i class="stars"></i><i></i><i style="width:88%"></i><i style="width:60%"></i><i style="width:72%"></i><i style="width:40%"></i><span class="pp-btn"></span></div>
             </div>
-            <div class="num">$<em>—,———,—</em>—</div>
-            <a class="cta" href="../demo.html">Request my custom audit →</a>
+                      </div>
+          <div class="pdp-score">
+            <span class="k">PDP Score</span>
+            <div class="dial"><div class="n">88</div></div>
+            <span class="k good">Vizit Certified</span>
           </div>
         </div>
+      </div>
+      <div class="copy reveal">
+        <h2 class="display">One score for your <em>entire product page</em>.</h2>
+        <p class="subhead">Point Vizit at any PDP on Amazon or any retailer. It analyzes the page top to bottom and returns a single Product Page Score, so you know exactly how well it converts and what to fix first.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════════════════════
-     FAQ
-     ════════════════════════════════════════════════════════════ -->
-<section class="panel" data-screen-label="07 FAQ">
+<section class="panel" data-screen-label="02b What's scored">
+  <div class="container">
+    <div class="copy reveal" style="max-width:60ch;margin:0 auto;text-align:center;">
+      <h2 class="display" style="margin-left:auto;margin-right:auto;">What feeds the <em>score</em>.</h2>
+      <p class="subhead" style="margin-left:auto;margin-right:auto;">Five visual inputs decide whether a product page converts. Vizit measures each one against the leaders in your category.</p>
+    </div>
+    <div class="feed-grid reveal">
+      <a class="feed-card" href="hero-images.html"><span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 16l5-5 4 4 3-3 6 6"/></svg></span><h4>Hero image</h4><p>Does the first image win the click from the search grid?</p></a>
+      <a class="feed-card" href="carousel-image-optimization.html"><span class="ic"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="6" height="12" rx="1.5"/><rect x="9" y="6" width="6" height="12" rx="1.5"/><rect x="16" y="6" width="6" height="12" rx="1.5"/></svg></span><h4>Carousel images</h4><p>Does each secondary image carry the shopper closer to buying?</p></a>
+      <div class="feed-card"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 6h10M4 12h16M4 18h7"/><path d="M18 4v6M15 7l3-3 3 3"/></svg></span><h4>Image order</h4><p>Do the strongest images appear first, where shoppers actually look?</p></div>
+      <div class="feed-card"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="4"/><rect x="13" y="4" width="8" height="8" rx="1.5"/><path d="M8 13l4 7H4z"/><rect x="13" y="14" width="8" height="6" rx="1.5"/></svg></span><h4>Image mix</h4><p>Does the set cover what your category expects: in use, scale, claims, lifestyle?</p></div>
+      <div class="feed-card"><span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="14" height="14" rx="2"/><path d="M7 3h14v14"/><path d="M8 12h4M10 10v4"/></svg></span><h4>Image count</h4><p>Are there enough images to answer every question, and none that repeat?</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="panel panel--paper" data-screen-label="03 Two images">
+  <div class="container">
+    <div class="copy reveal" style="max-width:60ch;margin:0 auto;text-align:center;">
+      <h2 class="display" style="margin-left:auto;margin-right:auto;">Two images decide the <em>sale</em>.</h2>
+      <p class="subhead" style="margin-left:auto;margin-right:auto;">The hero wins the click. The carousel wins the add to cart. Vizit scores and fixes both.</p>
+    </div>
+    <div class="explore-grid reveal">
+      <a class="explore-card" href="hero-images.html">
+        <div class="pic"><img src="../assets/products/snack-thatsit.webp" alt=""></div>
+        <div class="txt"><h4>Hero Image <em>Optimization</em></h4><p>Score the one image that decides whether shoppers click, and rebuild the ones that don't.</p><span class="go">Explore hero images <span class="arrow">→</span></span></div>
+      </a>
+      <a class="explore-card" href="carousel-image-optimization.html">
+        <div class="pic"><img src="../assets/products/ohnorman-slide2.jpg" alt="" style="object-fit:cover;padding:0;"></div>
+        <div class="txt"><h4>Carousel Image <em>Optimization</em></h4><p>Score every secondary image, order the carousel by what converts, and fill the gaps.</p><span class="go">Explore carousel images <span class="arrow">→</span></span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="panel" data-screen-label="04 Total visibility">
+  <div class="container">
+    <div class="copy reveal" style="max-width:none;width:100%;margin:0 auto;text-align:center;">
+      <h2 class="display" style="margin-left:auto;margin-right:auto;max-width:none;text-align:center;"><span style="white-space:nowrap;">Know which of your images</span><br><span style="white-space:nowrap;">are <em>winning</em>, and which</span><br>are costing you sales.</h2>
+      <p class="subhead" style="margin-left:auto;margin-right:auto;max-width:60ch;">Every visual scored against category leaders, from hero to last lifestyle shot. Spark AI regenerates the underperformers.</p>
+      <div class="cta-row" style="margin-top: var(--space-6);justify-content:center;"><a class="btn btn-secondary" href="carousel-image-optimization.html">Carousel Image Optimization <span class="arrow">→</span></a></div>
+    </div>
+  </div>
+</section>
+
+<section class="panel presyn" id="pre-syndication" data-screen-label="05 Pre-syndication scoring">
+  <div class="container">
+    <div class="two-up">
+      <div class="copy reveal">
+        <h2 class="display">Score every product <em>before it syndicates</em>.</h2>
+        <p class="subhead">Every new product gets Hero, Carousel, and PDP scores before it goes live. Anything below the standard is fixed first, so nothing reaches the shelf unready to sell.</p>
+        <div class="flowcmp">
+          <div class="flowcard old"><div class="lab">Before</div><div class="flowsteps"><span class="step">Publish</span><span class="arr">→</span><span class="step">Syndicate</span><span class="arr">→</span><span class="step">Measure</span><span class="arr">→</span><span class="step">React</span></div></div>
+          <div class="flowcard new"><div class="lab">With Vizit</div><div class="flowsteps"><span class="step">Score</span><span class="arr">→</span><span class="step">Fix</span><span class="arr">→</span><span class="step">Certify</span><span class="arr">→</span><span class="step">Syndicate</span></div></div>
+        </div>
+        <div class="cta-row" style="margin-top: var(--space-6);">
+          <a class="btn btn-on-dark" href="product-catalog-optimization.html">Optimize your entire catalog <span class="arrow">→</span></a>
+        </div>
+      </div>
+      <div class="reveal syn-wrap" aria-label="A staged product page is scored, then cleared to syndicate">
+        <div class="syn-stage">
+          <div class="syn-head"><span class="syn-stamp">Staged product</span><span class="syn-name">Vizzy V-Shaped Chips, Party Size</span></div>
+          <div class="syn-body">
+            <div class="syn-pic"><img src="../assets/products/vizzy.png" alt=""></div>
+            <div class="syn-side">
+              <span class="k">Product Page Score</span>
+              <div class="n"><span class="cnt">0</span></div>
+              <span class="k good">Vizit Certified</span>
+            </div>
+          </div>
+          <ul class="syn-rows">
+            <li><span>Hero Score</span><i></i><b data-to="91">0</b></li>
+            <li><span>Carousel Score</span><i></i><b data-to="86">0</b></li>
+            <li><span>Image order</span><i></i><b class="ck"></b></li>
+            <li><span>Image mix</span><i></i><b class="ck"></b></li>
+          </ul>
+        </div>
+      </div>
+    <script>(function(){var w=document.querySelector('.syn-wrap');if(!w)return;var n=w.querySelector('.cnt'),to=88,subs=[].slice.call(w.querySelectorAll('.syn-rows b[data-to]'));function go(){var t0=null;function st(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/1400,1),k=1-Math.pow(1-p,3);n.textContent=Math.round(k*to);subs.forEach(function(b){b.textContent=Math.round(k*+b.dataset.to)});if(p<1)requestAnimationFrame(st);else w.classList.add('scored')}requestAnimationFrame(st)}if(matchMedia('(prefers-reduced-motion:reduce)').matches){n.textContent=to;subs.forEach(function(b){b.textContent=b.dataset.to});w.classList.add('scored');return}var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();setTimeout(go,300)}},{threshold:.4});io.observe(w)})();</script>
+    </div>
+  </div>
+</section>
+
+<section class="panel panel--paper" data-screen-label="07 FAQ">
   <div class="container">
     <div class="faq-grid">
       <div class="reveal">
-        <span class="eyebrow">FAQ</span>
         <h2 class="display" style="margin-top: var(--space-3); font-size: clamp(1.75rem, 3vw, 2.5rem);">PDP conversion <em>questions</em>, answered.</h2>
-        <p class="subhead" style="margin-top: var(--space-4);">What ecommerce, brand, and Amazon teams ask us most about turning traffic into orders.</p>
       </div>
       <div class="reveal">
         <div class="faq-list">
-          <details class="faq-item">
-            <summary><span class="plus">+</span>How do I increase my product page conversion rate?</summary>
-            <div class="answer">The highest-ROI lever on a product page is the visual content, especially the hero and carousel. These assets are the biggest drivers of conversion. Auditing every image against the Visual Conversion Standard (Vizit uses an 80+ score threshold) and fixing the ones below it is the fastest path to lift. Brands that systematically optimize visual content see an average 16.5% conversion lift.</div>
-          </details>
-          <details class="faq-item">
-            <summary><span class="plus">+</span>What is a good ecommerce conversion rate?</summary>
-            <div class="answer">Ecommerce conversion rates vary by category, channel, and price point. Instead of asking "what's average for my category?", ask: "what's possible?" The truest benchmark for any PDP is the gap between your top-performing SKUs and the rest of your catalog. That gap is almost always explained by visual content losing the first-impression moment, and it's almost always closeable.</div>
-          </details>
-          <details class="faq-item">
-            <summary><span class="plus">+</span>Why isn't my Amazon listing converting?</summary>
-            <div class="answer">Most underperforming Amazon listings lose at the first impression: the hero image doesn't earn the tap, so shoppers scroll past before they ever see the title, price, or reviews. The fix is almost always visual: a hero that fails on Amazon's mobile thumbnail, a carousel missing the assets shoppers expect for the category, or imagery that doesn't communicate the product's value in the half-second the shopper gives it. Vizit identifies which specific visual elements are suppressing your conversion rate and generates the fixes automatically.</div>
-          </details>
-          <details class="faq-item">
-            <summary><span class="plus">+</span>What's the difference between PDP optimization and conversion rate optimization?</summary>
-            <div class="answer">Conversion rate optimization (CRO) is the broad practice of improving the percentage of visitors who take a desired action. PDP optimization is the subset focused on the product detail page itself: the surface where the actual purchase decision happens on a retail site. For ecommerce brands, PDP optimization is usually the highest-leverage CRO work, because the PDP is where most paid traffic lands and where most drop-off occurs.</div>
-          </details>
-          <details class="faq-item">
-            <summary><span class="plus">+</span>How long does it take to see results from PDP optimization?</summary>
-            <div class="answer">Visual fixes deploy fast. Once an updated image is live on the PDP, the conversion impact is observed right away because every new shopper sees the optimized version immediately. Most Vizit customers see measurable lift within days of deploying Vizit Certified image updates across their priority SKUs.</div>
-          </details>
-          <details class="faq-item">
-            <summary><span class="plus">+</span>How do I optimize my Amazon listing for higher conversion?</summary>
-            <div class="answer">Amazon listing optimization usually focuses on keywords, pricing, and reviews, but the largest untapped lever is visual. The hero image and image carousel determine whether shoppers tap the listing on the search results page and whether they engage once they land on the page. Vizit scores every image on the listing, identifies which ones are suppressing conversion, and generates optimized versions that are mobile-ready.</div>
-          </details>
+          <details class="faq-item"><summary><span class="plus">+</span>How do I increase my product page conversion rate?</summary><div class="answer">The highest-ROI lever on a product page is the visual content, especially the hero and carousel. Auditing every image against the Visual Conversion Standard (Vizit uses an 80+ score threshold) and fixing the ones below it is the fastest path to lift. Brands that systematically optimize visual content see an average 16.5% conversion lift.</div></details>
+          <details class="faq-item"><summary><span class="plus">+</span>Why isn't my Amazon listing converting?</summary><div class="answer">Most underperforming Amazon listings lose at the first impression: the hero image doesn't earn the tap, so shoppers scroll past before they ever see the title, price, or reviews. The fix is almost always visual. Vizit identifies which specific visual elements are suppressing your conversion rate and generates the fixes automatically.</div></details>
+          <details class="faq-item"><summary><span class="plus">+</span>How does pre-syndication scoring fit into our PIM workflow?</summary><div class="answer">Your PIM calls the Vizit API when new images attach to a product record. Vizit returns Hero, Carousel, and PDP scores in seconds, benchmarked against the Content Conversion Standard, with diagnostics on what's limiting conversion. Vizit doesn't replace your PIM or syndication platform — it's a quality gate on top of your stack.</div></details>
+          <details class="faq-item"><summary><span class="plus">+</span>How long does it take to see results from PDP optimization?</summary><div class="answer">Visual fixes deploy fast. Once an updated image is live, every new shopper sees the optimized version immediately. Most Vizit customers see measurable lift within days of deploying Vizit Certified image updates across their priority SKUs.</div></details>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════════════════════
-     FINAL CTA
-     ════════════════════════════════════════════════════════════ -->
-<section class="final-cta" data-screen-label="08 Final CTA">
-  <div class="container final-cta-inner">
-    <span class="eyebrow on-dark reveal">Ecommerce CRO for product pages</span>
-    <h2 class="display on-dark reveal">Stop paying for traffic that <em>doesn't convert</em>.</h2>
-    <p class="subhead on-dark reveal">Find the SKUs leaking revenue. Fix the exact images costing you the click. Recover the traffic you already paid for.</p>
-    <div class="cta-row reveal">
-      <a class="btn btn-on-dark btn-lg" href="../demo.html">Request my audit <span class="arrow">→</span></a>
-      <a class="btn btn-ghost" style="color:var(--blue-200);" href="../vizit-next-gen-platform.html">See the platform</a>
-    </div>
-  </div>
-</section>
-
-<vizit-footer></vizit-footer>
+<vizit-footer data-cta-headline="Stop paying for traffic|that *doesn't convert*."></vizit-footer>
 
 <script>
   (function(){
@@ -530,6 +357,5 @@
     els.forEach(function(e){ io.observe(e); });
   })();
 </script>
-
 </body>
 </html>

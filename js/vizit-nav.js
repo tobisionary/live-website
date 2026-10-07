@@ -14,8 +14,9 @@
      home · ci · solutions · platform · api · spark · spark-studio
      · partners · why · results
      · resources · company · demo · about · leadership · careers · newsroom
-     · hero-images · product-page-optimization · retail-media-roas
-     · answer-engine-optimization · accessibility
+     · hero-images · mobile-ai-readiness · carousel-image-optimization
+     · product-page-optimization · product-catalog-optimization
+     · retail-media-roas · answer-engine-optimization · accessibility
 
    Styles live in vizit-theme.css so the nav has its shape even
    before this script executes.
@@ -53,6 +54,37 @@
   // prefixes '../' as needed so the same nav works on root pages AND
   // subdirectory pages (e.g. /solutions/*). '#' = page not built yet.
   var NAV = [
+    {
+      id: 'solutions', label: 'Solutions', href: 'solutions/hero-images.html',
+      head: 'Powered by Industry-Leading Visual Intelligence',
+      big: true,
+      grid: 3,   // Optimize images | Optimize pages & catalog | Media & integration
+      cols: [
+        {
+          title: 'Optimize every image',
+          items: [
+            { href: 'solutions/hero-images.html', label: 'Hero Image Optimization',
+              children: [ { href: 'solutions/mobile-ai-readiness.html', label: 'Mobile & AI Readiness' } ] },
+            { href: 'solutions/carousel-image-optimization.html', label: 'Carousel Image Optimization' }
+          ]
+        },
+        {
+          title: 'Optimize pages & catalogs',
+          items: [
+            { href: 'solutions/product-page-optimization.html', label: 'Product Page Optimization',
+              children: [ { href: 'solutions/product-page-optimization.html#pre-syndication', label: 'Pre-Syndication Scoring' } ] },
+            { href: 'solutions/product-catalog-optimization.html', label: 'Product Catalog Optimization' }
+          ]
+        },
+        {
+          title: 'Media & integration',
+          items: [
+            { href: 'solutions/retail-media-roas.html', label: 'Retail Media ROAS' },
+            { href: 'vizit-api.html', label: 'Vizit API' }
+          ]
+        }
+      ]
+    },
     {
       id: 'platform', label: 'Platform', href: 'vizit-next-gen-platform.html',
       head: 'The Agentic Platform for Content Optimization',
@@ -119,12 +151,17 @@
   var LOGIN = { href: 'https://app.vizit.com/login', label: 'Sign in' };
 
   // Display order of the top-level tabs (carries across every page).
-  var NAV_ORDER = ['platform', 'results', 'resources', 'company'];
+  var NAV_ORDER = ['platform', 'solutions', 'results', 'resources', 'company'];
   NAV.sort(function (a, b) { return NAV_ORDER.indexOf(a.id) - NAV_ORDER.indexOf(b.id); });
 
   // Which page ids light up which top-level item.
   var CURRENT_MAP = {
     how: 'how', ci: 'how',
+    solutions: 'solutions',
+    'hero-images': 'solutions', 'mobile-ai-readiness': 'solutions', accessibility: 'solutions',
+    'carousel-image-optimization': 'solutions', 'product-page-optimization': 'solutions',
+    'pre-syndication-conversion-scoring': 'solutions',
+    'product-catalog-optimization': 'solutions', 'retail-media-roas': 'solutions',
     platform: 'platform', api: 'platform',
     spark: 'platform', 'spark-ai': 'platform', 'spark-studio': 'platform',
     'vizit-agents': 'platform', 'vizit-ip': 'platform',

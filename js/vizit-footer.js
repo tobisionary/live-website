@@ -5,6 +5,8 @@
    Optional attributes:
      data-cta="off"   — hide the "Get chosen" conversion band
                         (use on demo.html / pages that are the CTA)
+     data-cta-headline — replace the band headline; "|" breaks the
+                        line, *text* is highlighted
    Styles live in vizit-theme.css.
    ════════════════════════════════════════════════════════════ */
 (function () {
@@ -32,6 +34,17 @@
         { href: 'spark-studio.html',            label: 'Spark Studio' },
         { href: 'vizit-api.html',               label: 'Vizit API' },
         { href: 'partner-ecosystem.html',       label: 'Partner Ecosystem' }
+      ]
+    },
+    {
+      title: 'Solutions',
+      links: [
+        { href: 'solutions/hero-images.html',                  label: 'Hero Image Optimization' },
+        { href: 'solutions/mobile-ai-readiness.html',          label: 'Mobile & AI Readiness' },
+        { href: 'solutions/carousel-image-optimization.html',  label: 'Carousel Image Optimization' },
+        { href: 'solutions/product-page-optimization.html',    label: 'Product Page Optimization' },
+        { href: 'solutions/product-catalog-optimization.html', label: 'Product Catalog Optimization' },
+        { href: 'solutions/retail-media-roas.html',            label: 'Retail Media ROAS' }
       ]
     },
     {
@@ -98,12 +111,20 @@
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   }
 
-  function ctaHTML() {
+  // data-cta-headline overrides the band headline per page: "|" breaks the
+  // line and *text* takes the highlight color.
+  function ctaHTML(headline) {
+    var h = 'Don\u2019t get scrolled over.<br><span class="hl">Get chosen.</span> With Vizit.';
+    var plain = 'Don\u2019t get scrolled over. Get chosen. With Vizit.';
+    if (headline) {
+      h = esc(headline).replace(/\*([^*]+)\*/g, '<span class="hl">$1</span>').replace(/\|/g, '<br>');
+      plain = headline.replace(/\*/g, '').replace(/\|/g, ' ');
+    }
     return '<div class="vz-foot-cta vz-foot-cta--band">' +
-             '<a class="vz-foot-band" href="' + resolve('demo.html') + '" aria-label="Don\u2019t get scrolled over. Get chosen. With Vizit. \u2014 Get your Vizit Score">' +
+             '<a class="vz-foot-band" href="' + resolve('demo.html') + '" aria-label="' + esc(plain).replace(/"/g, '&quot;') + ' \u2014 Get your Vizit Score">' +
                '<span class="vz-foot-band-visual"><img src="' + ((window.__resources && window.__resources.ctaShelf) || resolve('assets/img/cta-shelf.webp')) + '" onerror="this.onerror=null;this.src=\'/assets/img/cta-shelf.webp\'" alt="" /></span>' +
                '<span class="vz-foot-band-copy">' +
-                 '<span class="vz-foot-band-h">Don\u2019t get scrolled over.<br><span class="hl">Get chosen.</span> With Vizit.</span>' +
+                 '<span class="vz-foot-band-h">' + h + '</span>' +
                  '<span class="vz-foot-btn">Score your content</span>' +
                '</span>' +
              '</a>' +
@@ -128,10 +149,10 @@
     }).join('');
   }
 
-  function render(showCta) {
+  function render(showCta, headline) {
     var year = new Date().getFullYear();
     return (
-      (showCta ? ctaHTML() : '') +
+      (showCta ? ctaHTML(headline) : '') +
       '<div class="vz-foot-main">' +
         '<div class="vz-foot-brand">' +
           '<a href="' + resolve('index.html') + '" class="vz-foot-logo" aria-label="Vizit home">' + LOGO_SVG + '</a>' +
@@ -150,7 +171,7 @@
   class VizitFooter extends HTMLElement {
     connectedCallback() {
       var showCta = (this.getAttribute('data-cta') || '').toLowerCase() !== 'off';
-      this.innerHTML = render(showCta);
+      this.innerHTML = render(showCta, this.getAttribute('data-cta-headline') || '');
       this.setAttribute('role', 'contentinfo');
       var btn = this.querySelector('.vz-foot-btn');
       if (btn) {

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carousel Image Optimization | Score & Fix Secondary Product Images</title>
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+  <meta name="description" content="The hero wins the click. The carousel wins the sale. Vizit scores every secondary image for conversion power, sorts the carousel by what moves shoppers, and rebuilds the images that don't.">
+  <link rel="stylesheet" href="../css/ci-styles.css?v=f1658c0b">
+  <link rel="stylesheet" href="../css/company-styles.css?v=9f190d0e">
+  <link rel="stylesheet" href="../css/solutions-styles.css?v=155c03c9">
+  <link rel="stylesheet" href="../css/vizit-theme.css?v=9b79a492">
+  <link rel="stylesheet" href="../css/vizit-elevate.css?v=d82ed54b">
+  <script src="../js/solutions-home.js?v=366904da" defer></script>
+  <link rel="stylesheet" href="../css/vizit-effects.css?v=6c552f6d">
+  <script src="../js/vizit-effects.js?v=eb476814" defer></script>
+  <script src="../js/vizit-nav.js?v=4aaba305" defer></script>
+  <script src="../js/vizit-footer.js?v=ff40bd6c" defer></script>
+  <script src="../js/shop-loop.js?v=0608dcb1" data-root="../" defer></script>
+  <style>.sol-hero-grid>:last-child:not(.fx)>[data-shop-loop]{background:#fff!important}.sl .img:not(.dull){background:#fff!important}.sl .main{aspect-ratio:1!important;flex:none!important}.sl .main .alt img{object-fit:contain!important;background:#fff}.sl .th.pic img{object-fit:contain!important}.sl .pdp{align-items:start}</style>
+<style>
+  .car-stage{position:relative;background:var(--blue-1000);color:#fff;aspect-ratio:1/1.05;overflow:hidden;display:grid;grid-template-rows:36px 1fr}
+  .car-stage::before{content:'';position:absolute;inset:0;background:radial-gradient(110% 60% at 80% 0%,rgba(52,160,254,.32),transparent 60%),radial-gradient(80% 80% at 0% 100%,rgba(1,116,217,.25),transparent 65%);pointer-events:none}
+  .car-stage .hs-chrome{position:relative;z-index:1;height:36px;background:rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:10px;padding:0 14px;font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;color:var(--blue-200);text-transform:uppercase}
+  .car-stage .hs-chrome .pulse{width:6px;height:6px;border-radius:999px;background:var(--cyan);box-shadow:0 0 0 3px rgba(52,160,254,.25)}
+  .car-stage .body{position:relative;z-index:1;padding:var(--space-6);display:grid;grid-template-rows:1fr auto;gap:var(--space-4)}
+  .car-stage .heads{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;color:var(--blue-200);text-transform:uppercase}
+  .slots{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-3);align-content:center}
+  .slot{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);padding:10px;display:flex;flex-direction:column;gap:8px}
+  .slot .pic{aspect-ratio:1/1;background:#fff;position:relative;overflow:hidden}
+  .slot .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:10%;box-sizing:border-box}
+  .slot .pic.ls{background:linear-gradient(160deg,#e6f3ff,#b3dbff)}
+  .slot .pic.ls::after{content:'';position:absolute;inset:24% 18% 18%;background:var(--prod,#0174d9);border-radius:12%;opacity:.85}
+  .slot .k{font-family:var(--font-mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--blue-200)}
+  .slot .row{display:flex;justify-content:space-between;align-items:baseline}
+  .slot .v{font-family:var(--font-display);font-size:1.25rem;letter-spacing:-.02em;color:var(--cyan)}
+  .slot.low .v{color:#ff8b7e}
+  .slot.low{border-color:rgba(200,69,58,.4)}
+  .slot .bar{height:3px;background:rgba(255,255,255,.1);position:relative}
+  .slot .bar::after{content:'';position:absolute;left:0;top:0;bottom:0;width:var(--w,60%);background:linear-gradient(90deg,var(--blue-300),var(--cyan))}
+  .slot.low .bar::after{background:#ff8b7e}
+  .car-stage .verdict{display:flex;justify-content:space-between;padding-top:var(--space-3);border-top:1px solid rgba(255,255,255,.1);font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;color:var(--blue-200);text-transform:uppercase}
+  .car-stage .verdict .v{color:var(--cyan)}
+  .job-list{list-style:none;margin:var(--space-6) 0 0;padding:0;display:grid;gap:0;border-top:1px solid var(--border)}
+  .job-list li{display:grid;grid-template-columns:44px 1fr;gap:var(--space-4);align-items:baseline;padding:var(--space-4) 0;border-bottom:1px solid var(--border)}
+  .job-list .n{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;color:var(--accent)}
+  .job-list .t{font-family:var(--font-display);font-size:clamp(1.1rem,1.6vw,1.35rem);letter-spacing:-.015em;color:var(--blue-1000)}
+  .job-list .t small{display:block;font-family:var(--font-sans);font-size:.95rem;color:var(--muted);margin-top:4px;letter-spacing:0}
+  .job-list .q{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+  @media (max-width:640px){.job-list li{grid-template-columns:44px 1fr}.job-list .q{display:none}}
+  .vz-foot-btn{border-radius:999px}
+  .vz-foot-band-copy{align-items:flex-start!important;text-align:left!important}
+  .rico{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#eef6ff,#dbeeff);border:1px solid var(--blue-100,#b3dbff);margin-bottom:var(--space-3)}
+  .rico svg{width:20px;height:20px;fill:none;stroke:var(--accent);stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+  .sort-cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--space-4);margin-top:var(--space-7)}
+  @media (max-width:900px){.sort-cards{grid-template-columns:repeat(3,minmax(0,1fr))}}@media (max-width:560px){.sort-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  .scard{background:#fff;border:1px solid var(--sf-line,#e5e7eb);border-radius:var(--sf-r,16px);padding:12px;display:flex;flex-direction:column;gap:10px;box-shadow:0 1px 2px rgba(14,27,42,.04),0 24px 48px -28px rgba(14,27,42,.25);min-width:0}
+  .scard .type{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .scard .pic{aspect-ratio:1;border-radius:10px;position:relative;overflow:hidden;background:linear-gradient(160deg,#e6f3ff,#b3dbff)}
+  .scard .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .scard .row{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:10px}
+  .scard .bar{position:relative;display:block;height:6px;border-radius:3px;background:#eef0f3;overflow:hidden}
+  .scard .bar i{position:absolute;left:0;top:0;bottom:0;width:var(--w);border-radius:3px;background:#1f9d55}
+  .scard .v{font-family:var(--font-sans);font-weight:600;font-size:16px;letter-spacing:-.02em;color:#1f9d55;font-variant-numeric:tabular-nums}
+  .scard .note{flex:1;display:flex;align-items:center;justify-content:flex-start;min-height:26px;font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--text,#0e1b2a)}
+  .scard.low .bar i{background:var(--risk-red,#d2452f)}.scard.low .v{color:var(--risk-red,#d2452f)}
+  .spark-callout{display:grid!important;grid-template-columns:minmax(0,1.4fr) auto;gap:var(--space-6);align-items:center;padding:clamp(32px,5vw,64px)}
+  .spark-callout::after{display:none}
+  .spark-callout .copy,.spark-callout .cta-row{position:relative;z-index:1}
+  .spark-callout .display{max-width:22ch;font-size:clamp(1.9rem,3vw,2.75rem)}
+  .spark-callout .subhead{margin-top:var(--space-4);max-width:52ch}
+  .spark-callout .cta-row{justify-content:flex-end}
+  @media (max-width:880px){.spark-callout{grid-template-columns:1fr}.spark-callout .cta-row{justify-content:flex-start}}
+</style>
+<link rel="stylesheet" href="../css/solutions-home.css?v=9dbf9ddb">
+<link rel="stylesheet" href="../css/solutions-facelift.css?v=6ea946d6">
+<link rel="stylesheet" href="../css/solutions-clean.css?v=0fbef6fb">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vizit">
+<meta property="og:title" content="Carousel Image Optimization | Score & Fix Secondary Product Images">
+<meta property="og:image" content="https://vizit.com/assets/og-cover.jpg">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="1000">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Carousel Image Optimization | Score & Fix Secondary Product Images">
+<meta name="twitter:image" content="https://vizit.com/assets/og-cover.jpg">
+<script defer src="/_vercel/insights/script.js"></script>
+<script>
+  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;family=Inter:wght@300;400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;family=Inter:wght@300;400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap"></noscript>
+</head>
+<body>
+
+<vizit-nav data-current="carousel-image-optimization"></vizit-nav>
+
+<section class="sol-hero" data-screen-label="01 Carousel standard">
+  <div class="container">
+    <div class="sol-hero-grid">
+      <div class="reveal">
+        <h1 class="display">The hero wins the click. The carousel wins the <em>sale</em>.</h1>
+        <p class="subhead">Vizit scores every image, orders the carousel by what converts, and rebuilds what doesn't.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary btn-lg" href="../demo.html">Score my carousel <span class="arrow">→</span></a>
+          <a class="btn btn-ghost btn-lg" href="hero-images.html">Start with the hero</a>
+        </div>
+      </div>
+      <div class="reveal" aria-label="A shopper searches, opens the PDP, browses the carousel, and adds to cart">
+        <div data-shop-loop data-query="cat treats" data-search="assets/products/cat-catit.webp,*assets/products/ohnorman-hero.jpg,assets/products/cat-vital.webp,assets/products/cat-pethonesty.webp" data-carousel="assets/products/ohnorman-slide1.jpg,assets/products/ohnorman-slide2.jpg,assets/products/ohnorman-slide3.jpg"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="panel panel--paper" data-screen-label="02 Carousel's job">
+  <div class="container">
+    <div class="two-up">
+      <div class="copy reveal">
+        <h2 class="display">Shoppers swipe for answers. Does your carousel <em>have them</em>?</h2>
+        <p class="subhead">Shoppers swipe looking for answers: what's in it, how big, how it works. The carousel that answers in order converts.</p>
+      </div>
+      <div class="reveal">
+        <ul class="job-list">
+          <li><span class="n">01</span><span class="t">Show the product in use<small>The image that lets a shopper picture themselves with it.</small></span></li>
+          <li><span class="n">02</span><span class="t">Communicate scale<small>Size, count, and proportion made obvious at a glance.</small></span></li>
+          <li><span class="n">03</span><span class="t">Prove the claim<small>Ingredients, materials, or benefits that justify the price.</small></span></li>
+          <li><span class="n">04</span><span class="t">Fit the category's visual language<small>What top performers in your category show — and in what order.</small></span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="panel" data-screen-label="03 Self-sorting carousel">
+  <div class="container">
+    <div class="copy reveal" style="max-width:60ch;margin:0 auto;text-align:center;">
+      <h2 class="display" style="margin-left:auto;margin-right:auto;">Your most performant images <em>come first</em>.</h2>
+      <p class="subhead" style="margin-left:auto;margin-right:auto;">Every image is scored against your category's top performers, and the carousel re-orders so the strongest come first, re-merchandising as performance shifts.</p>
+    </div>
+    <div class="sort-cards reveal" aria-label="Carousel images ranked by score, strongest first">
+      <div class="scard"><span class="type">Feature benefits</span><div class="pic"><img src="../assets/products/huma-feature.jpg" alt=""></div><div class="row"><span class="v">88</span><span class="bar"><i style="--w:88%"></i></span></div></div>
+      <div class="scard"><span class="type">Lifestyle</span><div class="pic"><img src="../assets/products/huma-lifestyle.jpg" alt=""></div><div class="row"><span class="v">86</span><span class="bar"><i style="--w:86%"></i></span></div></div>
+      <div class="scard"><span class="type">Product family</span><div class="pic"><img src="../assets/products/huma-family.webp" alt=""></div><div class="row"><span class="v">84</span><span class="bar"><i style="--w:84%"></i></span></div></div>
+      <div class="scard low"><span class="type">Claims</span><div class="pic"><img src="../assets/products/huma-informational.jpg" alt=""></div><span class="note">Informational</span></div>
+      <div class="scard low"><span class="type">Ingredients</span><div class="pic"><img src="../assets/products/huma-ingredients.jpg" alt=""></div><span class="note">Informational</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="panel panel--paper" data-screen-label="04 Fix the gaps">
+  <div class="container">
+    <div class="copy reveal" style="max-width:60ch;">
+      <h2 class="display">Don't know what to put in your carousel? Vizit <em>tells you</em>.</h2>
+      <p class="subhead">Vizit analyzes your entire category and tells you the content mix your PDP needs to win. If an image is missing, Spark AI generates a version you can use as a placeholder or publish as is.</p>
+    </div>
+    <div class="roas-cards reveal">
+      <div class="roas-card"><span class="rico"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.2-4.2M11 8v3l2 2"/></svg></span><h4>Analyze the category</h4><p>Spark maps what top-performing PDPs in your category show, and in what order.</p></div>
+      <div class="roas-card"><span class="rico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="7" height="14" rx="1.5"/><rect x="14" y="5" width="7" height="14" rx="1.5" stroke-dasharray="2.5 2.5"/><path d="M17.5 9.5v5M15 12h5"/></svg></span><h4>Flag the gaps</h4><p>Any image your carousel is missing or scoring below standard is called out.</p></div>
+      <div class="roas-card"><span class="rico"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg></span><h4>Generate the image</h4><p>Spark produces the missing asset, ready to use as a placeholder or publish.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="panel" data-screen-label="05 Proven">
+  <div class="container">
+    <div class="copy reveal" style="max-width:60ch;margin:0 auto;text-align:center;">
+      <h2 class="display" style="margin-left:auto;margin-right:auto;">Carousels that answer shopper questions <em>convert</em>.</h2>
+      <p class="subhead" style="margin-left:auto;margin-right:auto;">Scored at item setup through the API, so no carousel syndicates below standard.</p>
+    </div>
+    <div class="stat-strip reveal">
+      <div class="stat"><div class="n">16.5<em>%</em></div><div class="l">average conversion lift on visual content optimization</div></div>
+      <div class="stat"><div class="n"><em>4</em>%</div><div class="l">conversion improvement per 10-point Vizit Score gain</div></div>
+      <div class="stat"><div class="n"><em>95</em>%</div><div class="l">of optimized PDPs show measurable lift in the first 30 days</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="panel panel--paper" data-screen-label="05b Spark">
+  <div class="container">
+    <div class="big-callout spark-callout reveal">
+      <div class="copy">
+        <h2 class="display on-dark">Low-scoring carousel? Spark AI turns it into a <em>conversion engine</em>.</h2>
+        <p class="subhead on-dark">Spark AI takes your underperforming images and generates the carousel assets your category rewards: in use, scale, claims, lifestyle. Ready to review, approve, and publish.</p>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-on-dark btn-lg" href="../spark-ai.html">Learn more about Spark AI <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="panel panel--paper" data-screen-label="06 FAQ">
+  <div class="container">
+    <div class="faq-grid">
+      <div class="reveal">
+        <h2 class="display" style="margin-top: var(--space-3); font-size: clamp(1.75rem, 3vw, 2.5rem);">Carousel <em>questions</em>, answered.</h2>
+      </div>
+      <div class="reveal">
+        <div class="faq-list">
+          <details class="faq-item"><summary><span class="plus">+</span>What is the Vizit Carousel Score?</summary><div class="answer">A 0–100 rating of how effectively a product's secondary images carry a shopper from interest to purchase, benchmarked against the top performers in its category. It accounts for each image's individual conversion power, whether the carousel covers the content shoppers in the category expect, and the order the images appear in.</div></details>
+          <details class="faq-item"><summary><span class="plus">+</span>How many carousel images should an Amazon listing have?</summary><div class="answer">Amazon allows up to seven images visible on the listing. More images aren't automatically better — the carousel that converts covers the questions shoppers in your category ask, in the order they ask them, with no redundant images. Vizit identifies which images are missing, which are redundant, and which are underperforming.</div></details>
+          <details class="faq-item"><summary><span class="plus">+</span>Does Vizit re-order the carousel automatically?</summary><div class="answer">Yes. Vizit monitors each image's score and re-orders the carousel so the highest-converting images come first, re-merchandising as performance shifts. Teams can also review and approve recommendations before they go live.</div></details>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<vizit-footer data-cta-headline="Every carousel image scored, built to *win the sale*."></vizit-footer>
+
+<script>
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) { els.forEach(function(e){ e.classList.add('in'); }); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    els.forEach(function(e){ io.observe(e); });
+  })();
+</script>
+</body>
+</html>

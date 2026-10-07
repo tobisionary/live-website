@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Catalog Optimization | Score Every SKU, Fix What Pays Back First</title>
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+  <meta name="description" content="Optimize product content across your whole catalog, not one listing at a time. Vizit scores every SKU, ranks the fixes by revenue upside, and keeps every page certified, continuously.">
+  <link rel="stylesheet" href="../css/ci-styles.css?v=f1658c0b">
+  <link rel="stylesheet" href="../css/company-styles.css?v=9f190d0e">
+  <link rel="stylesheet" href="../css/solutions-styles.css?v=155c03c9">
+  <link rel="stylesheet" href="../css/vizit-theme.css?v=9b79a492">
+  <link rel="stylesheet" href="../css/vizit-elevate.css?v=d82ed54b">
+  <script src="../js/solutions-home.js?v=366904da" defer></script>
+  <script src="../js/vizit-nav.js?v=4aaba305" defer></script>
+  <script src="../js/vizit-footer.js?v=ff40bd6c" defer></script>
+<style>
+  .cat-stage{position:relative;background:#fff!important;color:#0e1b2a;aspect-ratio:1/1.05;overflow:hidden;display:grid;grid-template-rows:1fr}
+  .cat-stage .hs-chrome{display:none!important}
+  .cgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;align-content:center}
+  .ct{position:relative;background:#f6f7f9;border:none;border-radius:10px;padding:6px;min-width:0}
+  .ct .pic{aspect-ratio:1;border-radius:6px;background:#fff;position:relative;overflow:hidden}
+  .ct .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:8%}
+  
+  .ct .sc{position:absolute;top:9px;right:9px;font-family:var(--font-sans);font-size:10px;font-weight:600;padding:2px 6px;border-radius:999px;color:#fff;background:var(--accent)}
+  .ct.w .sc{background:#d99b27}.ct.r .sc{background:#c8453a}
+  .ct.g{box-shadow:0 0 0 1px rgba(1,116,217,.5)}
+  .cat-stage::before{display:none;content:'';position:absolute;inset:0;background:radial-gradient(110% 60% at 80% 0%,rgba(52,160,254,.32),transparent 60%),radial-gradient(80% 80% at 0% 100%,rgba(1,116,217,.25),transparent 65%);pointer-events:none}
+  .cat-stage .hs-chrome{position:relative;z-index:1;height:36px;background:#fafbfc;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;gap:10px;padding:0 14px;font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;color:var(--blue-200);text-transform:uppercase}
+  .cat-stage .hs-chrome .pulse{width:6px;height:6px;border-radius:999px;background:var(--cyan);box-shadow:0 0 0 3px rgba(52,160,254,.25);animation:pulse-dot 1.8s ease-in-out infinite}
+  .cat-stage .body{position:relative;z-index:1;padding:clamp(18px,2.6vw,28px);display:grid;grid-template-rows:1fr auto;gap:var(--space-5)}
+  .cat-stage .heads{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;color:var(--blue-200);text-transform:uppercase}
+  .heat{display:grid;grid-template-columns:repeat(12,1fr);gap:4px;align-content:center}
+  .heat i{display:block;aspect-ratio:1/1;background:rgba(52,160,254,.22);border:1px solid rgba(255,255,255,.06)}
+  .heat i.g{background:var(--accent)}
+  .heat i.w{background:rgba(217,155,39,.75)}
+  .heat i.r{background:rgba(200,69,58,.8)}
+  .cat-stage .legend{display:flex;gap:var(--space-4);font-family:var(--font-mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--blue-200)}
+  .cat-stage .legend span{display:inline-flex;align-items:center;gap:6px}
+  .cat-stage .legend i{width:8px;height:8px;display:inline-block}
+  .sol-hero-grid>:last-child:not(.fx)>.cat-stage{background:#fff!important}
+  .dist{display:flex;flex-direction:column;gap:12px;padding-top:var(--space-3);border-top:1px solid #e5e7eb}
+  .dist-bar{display:flex;gap:4px;height:44px;border-radius:10px;overflow:hidden}
+  .dist-bar .seg{flex:0 0 var(--w);display:flex;align-items:center;justify-content:center;gap:4px;font-family:var(--font-sans);font-size:13px;font-weight:500;letter-spacing:0;text-transform:none;color:#fff;white-space:nowrap;overflow:hidden;transform-origin:left;transform:scaleX(0);transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+  .dist-bar .seg b{font-size:17px;font-weight:700;margin-right:2px}
+  .dist-bar .seg.g{background:#1f9d55}.dist-bar .seg.w{background:#d99b27;transition-delay:.25s}.dist-bar .seg.r{background:#c8453a;transition-delay:.5s}
+  .dist.in .dist-bar .seg{transform:none}
+  .dist-note{margin:0;font-size:15px;line-height:1.45;color:#4a5a6a}.dist-note b{color:#0e1b2a;font-weight:600}
+  .ct{opacity:0;transform:translateY(6px);transition:opacity .4s,transform .4s}.cat-stage.in .ct{opacity:1;transform:none}
+  .ct.g .sc{background:#1f9d55}
+  .scale-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-4);margin-top:var(--space-7)}
+  @media (max-width:860px){.scale-grid{grid-template-columns:1fr}}
+  .scale-card{background:#fff;border:1px solid var(--border);padding:var(--space-6)}
+  .scale-card .k{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:var(--space-4)}
+  .scale-card .n{font-family:var(--font-display);font-size:clamp(2.2rem,3.6vw,3rem);line-height:1;letter-spacing:-.03em;color:var(--blue-1000)}
+  .scale-card .n em{font-style:normal;color:var(--accent)}
+  .scale-card p{margin:var(--space-4) 0 0;color:var(--muted);line-height:1.5;font-size:var(--text-sm)}
+  .vz-foot-btn{border-radius:999px}
+  .pdp-callout{display:grid!important;grid-template-columns:minmax(0,1.4fr) auto;gap:var(--space-6);align-items:center;padding:clamp(32px,5vw,64px)}
+  .pdp-callout::after{display:none}
+  .pdp-callout .copy,.pdp-callout .cta-row{position:relative;z-index:1}
+  .pdp-callout .display{max-width:22ch;font-size:clamp(1.9rem,3vw,2.75rem)}
+  .pdp-callout .subhead{margin-top:var(--space-4);max-width:52ch}
+  .pdp-callout .cta-row{justify-content:flex-end}
+  @media (max-width:880px){.pdp-callout{grid-template-columns:1fr}.pdp-callout .cta-row{justify-content:flex-start}}
+  .roas-cards{grid-template-columns:repeat(4,minmax(0,1fr))}
+  @media (max-width:900px){.roas-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media (max-width:520px){.roas-cards{grid-template-columns:1fr}}
+  .pay-wrap{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:stretch}
+  .pay-list{display:flex;flex-direction:column;gap:10px}
+  .pay-rail{display:grid;grid-template-rows:auto 1fr auto;align-items:start;gap:8px;padding:12px 0;max-width:120px}
+  .pay-rail span{display:flex;align-items:flex-start;gap:6px;font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;line-height:1.4;color:#0e1b2a}
+  .pay-rail span.top{color:#1f9d55}.pay-rail span.bot{color:#c8453a;align-self:end}
+  .pay-rail span em{font-style:normal;font-size:14px;line-height:1;flex:none}
+  .pay-rail i{width:3px;border-radius:2px;margin-left:5px;background:linear-gradient(180deg,#1f9d55,#d99b27 55%,#c8453a)}
+  @media (max-width:560px){.pay-wrap{grid-template-columns:1fr}.pay-rail{display:none}}
+  .pay-row{display:grid;grid-template-columns:56px minmax(0,1fr) auto auto;gap:14px;align-items:center;padding:10px 14px;background:#fff;border:1px solid var(--sf-line,#e5e7eb);border-radius:14px}
+  .pay-row.muted{opacity:.55}
+  .pay-thumb{width:56px;aspect-ratio:1;border-radius:8px;background:#fff;position:relative;overflow:hidden;border:1px solid #eef0f3}
+  .pay-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:4%}
+  .pay-info{min-width:0;display:flex;flex-direction:column;gap:5px}
+  .pay-name{font-weight:600;font-size:15px;letter-spacing:-.01em;color:#0e1b2a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .pay-meta{font-size:12.5px;color:#6b7a89}
+  .pay-bar{height:6px;border-radius:3px;background:#eef0f3;overflow:hidden;margin-top:2px}
+  .pay-bar i{display:block;height:100%;width:var(--w);border-radius:3px;background:#1f9d55;transform-origin:left;transform:scaleX(0);transition:transform .9s cubic-bezier(.2,.8,.2,1) .2s}
+  .reveal.in .pay-bar i{transform:none}
+  .pay-score{display:flex;flex-direction:column;align-items:center;justify-content:center;width:54px;height:54px;border-radius:12px;color:#fff;line-height:1}
+  .pay-score span{font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;opacity:.85;font-family:var(--font-mono)}
+  .pay-score b{font-size:21px;font-weight:700;letter-spacing:-.03em}
+  .pay-score.r{background:#c8453a}.pay-score.w{background:#d99b27}.pay-score.g{background:#1f9d55}
+  .pay-up{text-align:right;min-width:86px}
+  .pay-up span{display:none;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#6b7a89;font-family:var(--font-mono)}
+  .pay-up b{display:block;font-family:var(--font-sans);font-size:clamp(1.3rem,2vw,1.7rem);font-weight:700;letter-spacing:-.03em;color:#1f9d55;margin-top:2px;font-variant-numeric:tabular-nums}
+  .pay-row.muted .pay-up b{color:#6b7a89}
+  @media (max-width:560px){.pay-row{grid-template-columns:52px 1fr auto}.pay-up{grid-column:1/-1;text-align:left}.pay-thumb{width:52px}}
+  .rico{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#eef6ff,#dbeeff);border:1px solid var(--blue-100,#b3dbff);margin-bottom:var(--space-2)}
+  .rico svg{width:24px;height:24px;fill:none;stroke:var(--accent);stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+  .report{background:#fff;border:1px solid var(--sf-line,#e5e7eb);border-radius:var(--sf-r,16px);padding:20px;display:flex;flex-direction:column;gap:14px;box-shadow:0 1px 2px rgba(14,27,42,.04),0 24px 48px -32px rgba(14,27,42,.25)}
+  .rp-head{display:flex;justify-content:space-between;align-items:center}
+  .rp-k{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#6b7a89}
+  .rp-t{font-size:12.5px;color:#4a5a6a}
+  .rp-sum{display:flex;align-items:baseline;gap:8px}.rp-sum b{font-family:var(--font-sans);font-size:2.6rem;font-weight:700;letter-spacing:-.04em;line-height:1;color:#0e1b2a}.rp-sum span{font-size:14px;color:#4a5a6a}
+  .rp-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .rp-tile{border-radius:12px;padding:12px 12px 10px;color:#fff;display:flex;flex-direction:column;gap:2px}
+  .rp-tile b{font-size:24px;font-weight:700;letter-spacing:-.03em;line-height:1}.rp-tile span{font-size:12px;font-weight:500;opacity:.9}
+  .rp-tile.r{background:#c8453a}.rp-tile.w{background:#d99b27}.rp-tile.g{background:#1f9d55}
+  .rp-top{display:flex;flex-direction:column}
+  .rp-row{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:12px;align-items:center;padding:8px 0;border-top:1px solid #eef0f3}
+  .rp-row img{width:44px;height:44px;object-fit:contain;border-radius:6px;background:#fff;border:1px solid #eef0f3}
+  .rp-row .n{font-size:14px;font-weight:500;color:#0e1b2a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .rp-row b{font-family:var(--font-sans);font-size:18px;font-weight:700;letter-spacing:-.03em;color:#1f9d55;font-variant-numeric:tabular-nums}
+  .roas-cards.steps{position:relative}
+  .roas-cards.steps::before{content:'';position:absolute;left:6%;right:6%;top:46px;height:2px;background:linear-gradient(90deg,var(--blue-100,#b3dbff),var(--accent));transform:scaleX(0);transform-origin:left;transition:transform 1.4s cubic-bezier(.2,.8,.2,1) .2s;z-index:0}
+  .roas-cards.steps.in::before{transform:none}
+  .roas-cards.steps .roas-card{position:relative;z-index:1;opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s;transition-delay:calc(.25s + var(--i)*.28s)}
+  .roas-cards.steps.in .roas-card{opacity:1;transform:none}
+  .roas-cards.steps .rico{position:relative;transition:box-shadow .4s;transition-delay:calc(.4s + var(--i)*.28s)}
+  .roas-cards.steps.in .rico{box-shadow:0 0 0 6px #fff,0 0 0 7px var(--blue-100,#b3dbff)}
+  .step-n{display:block;font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+  @media (max-width:860px){.roas-cards.steps::before{display:none}}
+  @media (prefers-reduced-motion:reduce){.roas-cards.steps .roas-card,.roas-cards.steps::before{transition:none;opacity:1;transform:none}}
+  .pay-row{opacity:0;transform:translateX(-14px);transition:opacity .5s,transform .5s;transition-delay:calc(var(--i)*.18s)}
+  .reveal.in .pay-row{opacity:1;transform:none}
+  .pay-rail i{transform:scaleY(0);transform-origin:top;transition:transform 1s cubic-bezier(.2,.8,.2,1) .5s}
+  .reveal.in .pay-rail i{transform:none}
+  .pay-rail span{opacity:0;transition:opacity .4s}.pay-rail span.top{transition-delay:.4s}.pay-rail span.bot{transition-delay:1.3s}
+  .reveal.in .pay-rail span{opacity:1}
+  @media (prefers-reduced-motion:reduce){.pay-row,.pay-rail i,.pay-rail span{transition:none;opacity:1;transform:none}}
+</style>
+<link rel="stylesheet" href="../css/solutions-home.css?v=9dbf9ddb">
+<link rel="stylesheet" href="../css/solutions-facelift.css?v=6ea946d6">
+<link rel="stylesheet" href="../css/solutions-clean.css?v=0fbef6fb">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vizit">
+<meta property="og:title" content="Product Catalog Optimization | Score Every SKU, Fix What Pays Back First">
+<meta property="og:image" content="https://vizit.com/assets/og-cover.jpg">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="1000">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Product Catalog Optimization | Score Every SKU, Fix What Pays Back First">
+<meta name="twitter:image" content="https://vizit.com/assets/og-cover.jpg">
+<script defer src="/_vercel/insights/script.js"></script>
+<script>
+  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;family=Inter:wght@300;400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;family=Inter:wght@300;400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap"></noscript>
+</head>
+<body>
+
+<vizit-nav data-current="product-catalog-optimization"></vizit-nav>
+
+<section class="sol-hero" data-screen-label="01 Catalog standard">
+  <div class="container">
+    <div class="sol-hero-grid">
+      <div class="reveal">
+        <h1 class="display">Score every product page and know what to <em>fix first</em>.</h1>
+        <p class="subhead">Ingest your entire catalog. Vizit returns a Product Page Score and a revenue impact estimate for every product, so you optimize in the order that makes the most money.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary btn-lg" href="../demo.html">Score my catalog <span class="arrow">→</span></a>
+          <a class="btn btn-ghost btn-lg" href="product-page-optimization.html">See the Product Page Score</a>
+        </div>
+      </div>
+      <div class="reveal" aria-label="Catalog-wide conversion scan heatmap">
+        <div class="cat-stage">
+          <div class="hs-chrome"><span class="pulse"></span><span>Catalog scan</span></div>
+          <div class="body">
+            <div>
+              <div class="cgrid" aria-hidden="true"><div class="ct g"><div class="pic"><img src="../assets/products/olipop-12.webp" alt=""></div><span class="sc">93</span></div><div class="ct g"><div class="pic"><img src="../assets/products/olipop-01.webp" alt=""></div><span class="sc">91</span></div><div class="ct g"><div class="pic"><img src="../assets/products/olipop-15.webp" alt=""></div><span class="sc">90</span></div><div class="ct g"><div class="pic"><img src="../assets/products/olipop-06.jpg" alt=""></div><span class="sc">88</span></div><div class="ct g"><div class="pic"><img src="../assets/products/olipop-10.webp" alt=""></div><span class="sc">86</span></div><div class="ct g"><div class="pic"><img src="../assets/products/olipop-08.jpg" alt=""></div><span class="sc">84</span></div><div class="ct w"><div class="pic"><img src="../assets/products/olipop-14.webp" alt=""></div><span class="sc">79</span></div><div class="ct w"><div class="pic"><img src="../assets/products/olipop-07.jpg" alt=""></div><span class="sc">72</span></div><div class="ct w"><div class="pic"><img src="../assets/products/olipop-11.webp" alt=""></div><span class="sc">67</span></div><div class="ct w"><div class="pic"><img src="../assets/products/olipop-16.webp" alt=""></div><span class="sc">63</span></div><div class="ct w"><div class="pic"><img src="../assets/products/olipop-05.webp" alt=""></div><span class="sc">61</span></div><div class="ct r"><div class="pic"><img src="../assets/products/olipop-03.webp" alt=""></div><span class="sc">58</span></div><div class="ct r"><div class="pic"><img src="../assets/products/olipop-09.webp" alt=""></div><span class="sc">52</span></div><div class="ct r"><div class="pic"><img src="../assets/products/olipop-13.webp" alt=""></div><span class="sc">47</span></div><div class="ct r"><div class="pic"><img src="../assets/products/olipop-02.webp" alt=""></div><span class="sc">44</span></div><div class="ct r"><div class="pic"><img src="../assets/products/olipop-04.webp" alt=""></div><span class="sc">39</span></div></div>
+            </div>
+            <div class="dist" data-dist>
+              <div class="dist-bar"><span class="seg g" style="--w:37.5%"><b>6</b> optimized</span><span class="seg w" style="--w:31.25%"><b>5</b> at risk</span><span class="seg r" style="--w:31.25%"><b>5</b> failing</span></div>
+              <p class="dist-note"><b>$18.4M</b> in revenue sitting on below-standard images across <b>11,248</b> products.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+<script>(function(){var s=document.querySelector('.cat-stage');if(!s)return;s.querySelectorAll('.ct').forEach(function(t,i){t.style.transitionDelay=(i*45)+'ms'});new IntersectionObserver(function(e){if(e[0].isIntersecting){s.classList.add('in');setTimeout(function(){s.querySelector('[data-dist]').classList.add('in')},700)}},{threshold:.3}).observe(s)})();</script>
+</section>
+
+<section class="panel panel--paper" data-screen-label="02 Prioritize by revenue">
+  <div class="container">
+    <div class="two-up">
+      <div class="copy reveal">
+        <h2 class="display">Not every low score is worth the same. Vizit tells you which ones <em>pay</em>.</h2>
+        <p class="subhead">Score, traffic, and revenue combine into one number: what fixing each page is worth.</p>
+      </div>
+      <div class="reveal">
+        <div class="pay-wrap"><div class="pay-list" aria-label="Catalog ranked by revenue impact">
+          <div class="pay-row" style="--i:0">
+            <div class="pay-thumb"><img src="../assets/products/olipop-02.webp" alt=""></div>
+            <div class="pay-info"><div class="pay-name">Ginger Lemon 12-pack</div></div>
+            <div class="pay-score r"><b>44</b></div>
+            <div class="pay-up"><span>Fix it, earn</span><b data-money="3.1" data-unit="M">+$0.0M</b></div>
+          </div>
+          <div class="pay-row" style="--i:1">
+            <div class="pay-thumb"><img src="../assets/products/olipop-04.webp" alt=""></div>
+            <div class="pay-info"><div class="pay-name">Crisp Apple 12-pack</div></div>
+            <div class="pay-score w"><b>58</b></div>
+            <div class="pay-up"><span>Fix it, earn</span><b data-money="1.8" data-unit="M">+$0.0M</b></div>
+          </div>
+          <div class="pay-row" style="--i:2">
+            <div class="pay-thumb"><img src="../assets/products/olipop-10.webp" alt=""></div>
+            <div class="pay-info"><div class="pay-name">Cherry Cola 12-pack</div></div>
+            <div class="pay-score w"><b>61</b></div>
+            <div class="pay-up"><span>Fix it, earn</span><b data-money="940" data-unit="K">+$0K</b></div>
+          </div>
+          <div class="pay-row" style="--i:3">
+            <div class="pay-thumb"><img src="../assets/products/olipop-05.webp" alt=""></div>
+            <div class="pay-info"><div class="pay-name">Caramel Apple, single</div></div>
+            <div class="pay-score r"><b>39</b></div>
+            <div class="pay-up"><span>Fix it, earn</span><b data-money="120" data-unit="K">+$0K</b></div>
+          </div>
+        </div><div class="pay-rail" aria-hidden="true"><span class="top"><em>←</em>Highest revenue opportunity</span><i></i><span class="bot"><em>←</em>Lowest revenue opportunity</span></div></div>
+      </div>
+    </div>
+  </div>
+<script>(function(){var w=document.querySelector('.pay-wrap');if(!w)return;var els=w.querySelectorAll('[data-money]'),done=false;function run(){if(done)return;done=true;els.forEach(function(e,i){var to=parseFloat(e.dataset.money),u=e.dataset.unit,dec=u==='M'?1:0,t0=null,dur=1100,delay=300+i*180;function f(ts){if(!t0)t0=ts;var p=Math.min((ts-t0-delay)/dur,1);if(p<0){requestAnimationFrame(f);return}var v=to*(1-Math.pow(1-p,3));e.textContent='+$'+v.toFixed(dec)+u;if(p<1)requestAnimationFrame(f)}requestAnimationFrame(f)})}if(matchMedia('(prefers-reduced-motion:reduce)').matches){els.forEach(function(e){e.textContent='+$'+e.dataset.money+e.dataset.unit});return}new IntersectionObserver(function(en){if(en[0].isIntersecting)run()},{threshold:.35}).observe(w)})();</script>
+</section>
+
+<section class="panel" data-screen-label="03 At catalog scale">
+  <div class="container">
+    <div class="copy reveal" style="max-width:60ch;margin:0 auto;text-align:center;">
+      <h2 class="display" style="margin-left:auto;margin-right:auto;">Your whole catalog, scored and <em>ranked</em>.</h2>
+      <p class="subhead" style="margin-left:auto;margin-right:auto;">Done in hours, not quarters.</p>
+    </div>
+    <div class="roas-cards steps reveal">
+      <div class="roas-card" style="--i:0"><span class="step-n">Step 1</span><span class="rico"><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg></span><h4>Ingest the catalog</h4><p>Pull in every product page from Amazon or any retailer, at any catalog size.</p></div>
+      <div class="roas-card" style="--i:1"><span class="step-n">Step 2</span><span class="rico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v4.5l3 2"/></svg></span><h4>Score every page</h4><p>Each page gets a Product Page Score, benchmarked against your category's leaders.</p></div>
+      <div class="roas-card" style="--i:2"><span class="step-n">Step 3</span><span class="rico"><svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M16.5 7.5c0-1.7-2-3-4.5-3s-4.5 1.3-4.5 3 2 3 4.5 3 4.5 1.3 4.5 3-2 3-4.5 3-4.5-1.3-4.5-3"/></svg></span><h4>Estimate the impact</h4><p>Score, traffic, and revenue combine into what fixing each page is worth.</p></div>
+      <div class="roas-card" style="--i:3"><span class="step-n">Step 4</span><span class="rico"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h11M4 18h6"/><path d="M18 11v8M15 16l3 3 3-3"/></svg></span><h4>Prioritize the work</h4><p>Your catalog ranked by revenue upside, so you start where it pays most.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="panel panel--paper" data-screen-label="04 Prioritized">
+  <div class="container">
+    <div class="two-up">
+      <div class="copy reveal">
+        <h2 class="display">Not a list of problems. A list of <em>paybacks</em>.</h2>
+        <p class="subhead">Not 7,000 flags. A ranked roadmap: which products to fix, what to change on each page, and what the fix is worth.</p>
+      </div>
+      <div class="reveal">
+        <div class="report" aria-label="Catalog report: status breakdown and top opportunities">
+          <div class="rp-head"><span class="rp-k">Catalog report</span><span class="rp-t">Olipop · Amazon US</span></div>
+          <div class="rp-sum"><b>150</b><span>PDPs scored</span></div>
+          <div class="rp-tiles"><div class="rp-tile r"><b>5</b><span>Failing</span></div><div class="rp-tile w"><b>5</b><span>At risk</span></div><div class="rp-tile g"><b>140</b><span>Optimized</span></div></div>
+          <div class="rp-k" style="margin-top:4px">Biggest potential</div>
+          <div class="rp-top">
+            <div class="rp-row"><img src="../assets/products/olipop-02.webp" alt=""><span class="n">Ginger Lemon 12-pack</span><b>+$3.1M</b></div>
+            <div class="rp-row"><img src="../assets/products/olipop-04.webp" alt=""><span class="n">Crisp Apple 12-pack</span><b>+$1.8M</b></div>
+            <div class="rp-row"><img src="../assets/products/olipop-10.webp" alt=""><span class="n">Cherry Cola 12-pack</span><b>+$940K</b></div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="panel" data-screen-label="05 Fix the page">
+  <div class="container">
+    <div class="big-callout pdp-callout reveal">
+      <div class="copy">
+        <h2 class="display on-dark">Finding the pages worth fixing is one thing. <em>Fixing them</em> is another.</h2>
+        <p class="subhead on-dark">The catalog view tells you where the money is. Product Page Optimization shows you what's wrong with each page and what to change: the hero, the carousel, the order, the mix.</p>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-on-dark btn-lg" href="product-page-optimization.html">Learn about Product Page Optimization <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="panel panel--paper" data-screen-label="06 FAQ">
+  <div class="container">
+    <div class="faq-grid">
+      <div class="reveal">
+        <h2 class="display" style="margin-top: var(--space-3); font-size: clamp(1.75rem, 3vw, 2.5rem);">Catalog optimization <em>questions</em>, answered.</h2>
+      </div>
+      <div class="reveal">
+        <div class="faq-list">
+          <details class="faq-item"><summary><span class="plus">+</span>How does Vizit score an entire catalog?</summary><div class="answer">Vizit ingests every product page in your catalog, from Amazon or any retailer, and scores each one against the Content Conversion Standard for its category. A typical catalog of 10,000+ SKUs is scored in hours, with every product ranked by its estimated revenue impact.</div></details>
+          <details class="faq-item"><summary><span class="plus">+</span>How does Vizit estimate revenue impact?</summary><div class="answer">Each product's Product Page Score is combined with its traffic and revenue to estimate how much more it would sell at the standard. A low score on a high-traffic product ranks far above a low score on a product few shoppers visit, so the list reflects what the fix is actually worth.</div></details>
+          <details class="faq-item"><summary><span class="plus">+</span>Do we have to fix everything Vizit flags?</summary><div class="answer">No. Most of the upside sits in a small share of products. Start at the top of the ranked list and work down as far as your team's capacity allows; the estimate on each row tells you when the return stops justifying the effort.</div></details>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<vizit-footer data-cta-headline="Every product scored.|Fix the ones that *pay*."></vizit-footer>
+
+<script>
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) { els.forEach(function(e){ e.classList.add('in'); }); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    els.forEach(function(e){ io.observe(e); });
+  })();
+</script>
+</body>
+</html>

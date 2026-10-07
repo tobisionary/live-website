@@ -156,6 +156,16 @@
       "permanent": true
     },
     {
+      "source": "/solutions/accessibility",
+      "destination": "/solutions/mobile-ai-readiness",
+      "permanent": true
+    },
+    {
+      "source": "/solutions/pre-syndication-conversion-scoring",
+      "destination": "/solutions/product-page-optimization#pre-syndication",
+      "permanent": true
+    },
+    {
       "source": "/:path(.+)\\.html",
       "destination": "/:path",
       "permanent": true

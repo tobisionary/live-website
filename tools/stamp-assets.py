@@ -21,7 +21,8 @@ import re
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-REF = re.compile(r'((?:href|src)=")((?:css|js)/[^"?]+\.(?:css|js))(?:\?v=[0-9a-f]+)?(")')
+# Root pages say "css/x.css"; pages one folder down (solutions/) say "../css/x.css".
+REF = re.compile(r'((?:href|src)="(?:\.\./)?)((?:css|js)/[^"?]+\.(?:css|js))(?:\?v=[0-9a-f]+)?(")')
 
 def digest(path: pathlib.Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()[:8]
@@ -31,7 +32,7 @@ def main() -> int:
     missing: list[str] = []
     changed: list[str] = []
 
-    for page in sorted(ROOT.glob("*.html")):
+    for page in sorted([*ROOT.glob("*.html"), *ROOT.glob("solutions/*.html")]):
         src = page.read_text()
 
         def stamp(m: re.Match) -> str:
@@ -39,7 +40,7 @@ def main() -> int:
             if rel not in cache:
                 target = ROOT / rel
                 if not target.exists():
-                    missing.append(f"{page.name} -> {rel}")
+                    missing.append(f"{page.relative_to(ROOT)} -> {rel}")
                     cache[rel] = ""
                 else:
                     cache[rel] = digest(target)
@@ -49,7 +50,7 @@ def main() -> int:
         out = REF.sub(stamp, src)
         if out != src:
             page.write_text(out)
-            changed.append(page.name)
+            changed.append(str(page.relative_to(ROOT)))
 
     for m in missing:
         print(f"  WARNING missing asset: {m}", file=sys.stderr)
