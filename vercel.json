@@ -156,6 +156,31 @@
       "permanent": true
     },
     {
+      "source": "/case-study/cpg-manufacturer",
+      "destination": "/cpg-manufacturer-case-study",
+      "permanent": true
+    },
+    {
+      "source": "/case-study/food-beverage",
+      "destination": "/food-beverage-case-study",
+      "permanent": true
+    },
+    {
+      "source": "/case-study/candy-snacks",
+      "destination": "/candy-snacks-case-study",
+      "permanent": true
+    },
+    {
+      "source": "/case-study/household-goods",
+      "destination": "/household-goods-case-study",
+      "permanent": true
+    },
+    {
+      "source": "/case-study/baby-products",
+      "destination": "/baby-products-case-study",
+      "permanent": true
+    },
+    {
       "source": "/solutions/accessibility",
       "destination": "/solutions/mobile-ai-readiness",
       "permanent": true
