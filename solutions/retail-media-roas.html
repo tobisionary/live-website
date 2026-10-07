@@ -314,12 +314,12 @@
   .pf-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:10%}
   .preflight-row.fail .pf-thumb img{filter:grayscale(1) contrast(.8);opacity:.75}
   .vz-foot-band-copy{align-items:flex-start!important;text-align:left!important}
-  .rm-callout{display:grid!important;grid-template-columns:minmax(0,1.4fr) auto;gap:var(--space-6);align-items:center;padding:clamp(32px,5vw,64px)}
+  .rm-callout{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(260px,300px);gap:var(--space-6);align-items:center;padding:clamp(32px,5vw,64px)}
   .rm-callout::after{display:none}
   .rm-callout .copy,.rm-callout .cta-row{position:relative;z-index:1}
   .rm-callout .display{max-width:22ch;font-size:clamp(1.9rem,3vw,2.75rem)}
   .rm-callout .subhead{margin-top:var(--space-4);max-width:52ch}
-  .rm-callout .cta-row{flex-direction:column;align-items:stretch;flex-wrap:nowrap}
+  .rm-callout .cta-row{display:flex;flex-direction:column;align-items:stretch;flex-wrap:nowrap;gap:var(--space-3);margin:0}
   .rm-callout .cta-row .btn{width:100%;justify-content:center}
   .rm-callout .btn-ghost{color:#fff!important;border-color:rgba(255,255,255,.28)!important;background:rgba(255,255,255,.1)!important}
   @media (max-width:880px){.rm-callout{grid-template-columns:1fr}.rm-callout .cta-row{align-items:stretch}}
